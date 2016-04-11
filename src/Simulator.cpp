@@ -1,3 +1,18 @@
+/*The MIT License (MIT)
+
+Copyright (c) 2016 Lucas Borsatto Simão
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+*/
+
 #include "Simulator.h"
 
 Simulator::Simulator(){
@@ -100,9 +115,11 @@ void* Simulator::runStrategies(){
             if(!gameState->sameState){
                 updateWorld();
 
-                //Copy to not overload values in each strategy
+                /*Copy to not overload values in each strategy
                 //--------------MÉTODO CUSTOSO PARA A CPU!! --------------
-                /*for(int j = 0; j < numRobotsTeam;j++){
+                vector<RobotStrategy*> cpRbStrategyTeam;
+                vector<RobotStrategy*> cpRbStrategyAdv;
+                for(int j = 0; j < numRobotsTeam;j++){
                     RobotStrategy* cpStrategy = new RobotStrategy(0);
                     *cpStrategy = *(gameState->robotStrategiesTeam.at(j));
                     cpRbStrategyTeam.push_back(cpStrategy);
@@ -113,13 +130,12 @@ void* Simulator::runStrategies(){
                 if(strategies.size() > 0){
                     btVector3 ballPos = calcRelativePosition(physics->getBallPosition(),strategies[0]->getAttackDir());
                     calcRelativeWorld(gameState->robotStrategiesTeam,strategies[0]->getAttackDir());
-                    calcRelativeWorld(gameState->robotStrategiesAdv,strategies[0]->getAttackDir());
 
                     strategies[0]->runStrategy(gameState->robotStrategiesTeam,gameState->robotStrategiesTeam,ballPos);
                     if(strategies.size() == 2){
                         btVector3 ballPos = calcRelativePosition(physics->getBallPosition(),strategies[1]->getAttackDir());
                         calcRelativeWorld(gameState->robotStrategiesAdv,strategies[1]->getAttackDir());
-                        calcRelativeWorld(gameState->robotStrategiesTeam,strategies[1]->getAttackDir());
+                        calcRelativeWorld(gameState->robotStrategiesTeam,strategies[0]->getAttackDir());
                         strategies[1]->runStrategy(gameState->robotStrategiesAdv,gameState->robotStrategiesTeam,ballPos);
                     }
                 }else{
@@ -190,9 +206,10 @@ void Simulator::calcRelativeWorld(vector<RobotStrategy*> robotStrategiesTeam,int
 
 btVector3 Simulator::calcRelativePosition(btVector3 absPos, int attackDir){
     float relX = absPos.getX();
-
+cout << attackDir;
     float relZ = absPos.getZ();
     if(attackDir == -1){
+
         relZ = SIZE_DEPTH - absPos.getZ();
         relX = SIZE_WIDTH - absPos.getX();
     } 

@@ -9,6 +9,8 @@
  * It is provided "as is" without express or implied warranty.
 */
 
+//Modified by Lucas Borsatto Simão lucasborsattosimao@hotmail.com
+
 #include "LinearMath/btVector3.h"
 #include "btRaycastVehicle.h"
 
