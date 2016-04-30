@@ -167,8 +167,6 @@ void Scenario::displayEvent(){
 
     physics->startDebug();
 
-
-
     if(debugMode == 0)drawPhysicObjects();
 
 	glutSwapBuffers();

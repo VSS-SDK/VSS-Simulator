@@ -28,7 +28,7 @@ copies or substantial portions of the Software.
 #include <math.h>
 #include <vector>
 #include <string>
-#include <pthread.h>
+#include "thread"
 #include <ctime>
 
 using namespace std;

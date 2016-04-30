@@ -43,6 +43,10 @@ private:
 	Physics* physics;
 	vector<ModelStrategy*> strategies;
 
+    thread *thread_physics;
+    thread *thread_graphics;
+    thread *thread_strategies;
+
 	void updateWorld();
 	btVector3 calcRelativePosition(btVector3 absPos, int attackDir);
 	void calcRelativeWorld(vector<RobotStrategy*> robotStrategiesTeam, int attackDir);
@@ -51,22 +55,9 @@ public:
 	Simulator();
 	void runSimulator(int argc, char *argv[], ModelStrategy* strategyTeam, ModelStrategy* strategyAdv);
 
-	void *runPhysics();
-	void *runGraphics();
-	void* runStrategies();
-
-	static void* runGraphics_thread(void* simulator){
-        return ((Simulator*)simulator)->runGraphics();
-	}
-
-    static void* runPhysics_thread(void* simulator){
-        return ((Simulator*)simulator)->runPhysics();
-    }
-
-    static void* runStrategies_thread(void* simulator){
-        return ((Simulator*)simulator)->runStrategies();
-    }
-
+	void runPhysics();
+	void runGraphics();
+	void runStrategies();
 };
 
 #endif

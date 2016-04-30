@@ -55,24 +55,23 @@ void Simulator::runSimulator(int argc, char *argv[], ModelStrategy *stratBlueTea
         gameState->robotStrategiesAdv = robotStrategiesTeam;
     }
 
-    pthread_t thread[3];
-	pthread_create(&(thread[0]), NULL, &Simulator::runPhysics_thread, this);
-    pthread_create(&(thread[1]), NULL, &Simulator::runGraphics_thread, this);
-    pthread_create(&(thread[2]), NULL, &Simulator::runStrategies_thread, this);
+    thread_graphics = new thread(bind(&Simulator::runGraphics, this));
+    thread_physics = new thread(bind(&Simulator::runPhysics, this));
+    thread_strategies = new thread(bind(&Simulator::runStrategies, this));
 
-    pthread_join(thread[0], NULL);
-    pthread_join(thread[1], NULL);
-    pthread_join(thread[2], NULL);
+    thread_graphics->join();
+    thread_physics->join();
+    thread_strategies->join();
 }
 
-void* Simulator::runGraphics(){
+void Simulator::runGraphics(){
     while(!runningPhysics){
         usleep(1000000.f*timeStep/handTime);
     }
 	HandleGraphics::runGraphics();
 }
 
-void* Simulator::runPhysics(){
+void Simulator::runPhysics(){
     int subStep = 1;
     float standStep = 1.f/60.f;
 
@@ -90,10 +89,9 @@ void* Simulator::runPhysics(){
         }
 
     }
-    return(NULL);
 }
 
-void* Simulator::runStrategies(){
+void Simulator::runStrategies(){
     btVector3 posTargets[] = {btVector3(SIZE_WIDTH,0,SIZE_DEPTH/2),btVector3(0,0,SIZE_DEPTH/2)};
     int attackDir = 0;
     int framesSec = (int)(1/timeStep);
@@ -163,7 +161,6 @@ void* Simulator::runStrategies(){
             }
         }
     }
-    return(NULL);
 }
 
 void Simulator::updateWorld(){
