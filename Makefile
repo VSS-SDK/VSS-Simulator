@@ -1,36 +1,54 @@
-CC = g++
+CCX = g++ -std=c++11 -w
+
 
 INCLUDES = -Ibullet/ -Iutils/ -Isrc -Isrc/strategies
-LIBRARIES = -lGL -lGLU -lGL -lstdc++ -lc -lm -lglut -lGLU -pthread
 
-SRC := $(shell find src/ -name '*.cpp')
+LIBRARIES_GLUT = -lGL -lGLU -lGL -lstdc++ -lglut
+LIBRARIES_PROTO = `pkg-config --cflags --libs protobuf`
+
+LIBRARIES = $(LIBRARIES_PROTO) $(LIBRARIES_GLUT) -lzmq -pthread -lm -lc -lm -w
+
+
+
+SRC := $(shell find -name '*.cpp')
 FILE_NAMES_SRC = $(SRC:.cpp=.o)
 
-UTILS := $(wildcard utils/*.cpp)
-FILE_NAMES_UTILS = $(UTILS:.cpp=.o)
+PROTOS := $(shell find -name '*.cc')
+FILE_NAMES_PROTOS = $(PROTOS:.cc=.o)
 
-SRCBULLET = bullet/
-SOURCES := $(shell find $(SRCBULLET) -name '*.cpp')
-FILE_NAMES_BULLET = $(SOURCES:.cpp=.o)
+FILE_NAMES = $(FILE_NAMES_SRC) $(FILE_NAMES_PROTOS) 
 
-EXEC = Simulator
 
+
+EXEC = VSS-Simulation
 
 .cpp.o:
-	$(CC) $(INCLUDES) $(LIBRARIES) -c -Wall -ffast-math -o $@ $< -w
+	@$(CCX) $(INCLUDES) $(LIBRARIES) -Wall -Wformat -c -o $@ $< -w
 
-all: $(EXEC)
-	@echo Executando... Aguarde.
+.cc.o:
+	@$(CCX) $(INCLUDES) $(LIBRARIES) -Wall -Wformat -c -o $@ $< -w
+
+all: message_compiling $(EXEC)
+	@echo Done ...
+	
+message_compiling:
+	@echo Compiling VSS-Simulator ...
+
+message_cleaning:
+	@echo Cleaning VSS-Simulator ...
 
 run:
-	./Simulator
+	./$(EXEC)
 
-$(EXEC): $(FILE_NAMES_SRC) $(FILE_NAMES_BULLET) $(FILE_NAMES_UTILS)
-	@$(CC) -Wall -fexceptions -g -ffast-math -m64 -fno-rtti -w  $(LIBRARIES) -o $(EXEC) $(FILE_NAMES_SRC) $(FILE_NAMES_BULLET) $(FILE_NAMES_UTILS) $(INCLUDES)
+$(EXEC): $(FILE_NAMES)
+	@$(CCX) -o $(EXEC) $(FILE_NAMES) $(LIBRARIES) $(INCLUDES)
 
-clean:
-	rm $(EXEC) $(FILE_NAMES_SRC) $(FILE_NAMES_BULLET) $(FILE_NAMES_UTILS)
+clean: message_cleaning
+	@rm $(EXEC) $(FILE_NAMES)
 
+#proto:
+#	cd Utils/interface/protos && make -f protos.make
 
-
+#teste: 
+#	$(SRC)
 
