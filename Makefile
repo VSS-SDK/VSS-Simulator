@@ -23,10 +23,10 @@ FILE_NAMES = $(FILE_NAMES_SRC) $(FILE_NAMES_PROTOS)
 EXEC = VSS-Simulation
 
 .cpp.o:
-	@$(CCX) $(INCLUDES) $(LIBRARIES) -Wall -Wformat -c -o $@ $< -w
+	@$(CCX) $(INCLUDES) $(LIBRARIES) -Wall -Wformat -ffast-math -c -o $@ $< -w
 
 .cc.o:
-	@$(CCX) $(INCLUDES) $(LIBRARIES) -Wall -Wformat -c -o $@ $< -w
+	@$(CCX) $(INCLUDES) $(LIBRARIES) -Wall -Wformat -ffast-math -c -o $@ $< -w
 
 all: message_compiling $(EXEC)
 	@echo Done ...
