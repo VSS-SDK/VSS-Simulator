@@ -58,10 +58,51 @@ void Simulator::runSimulator(int argc, char *argv[], ModelStrategy *stratBlueTea
     thread_graphics = new thread(bind(&Simulator::runGraphics, this));
     thread_physics = new thread(bind(&Simulator::runPhysics, this));
     thread_strategies = new thread(bind(&Simulator::runStrategies, this));
+    thread_send = new thread(bind(&Simulator::runSender, this));
 
     thread_graphics->join();
     thread_physics->join();
     thread_strategies->join();
+    thread_send->join();
+}
+
+void Simulator::runSender(){
+    Interface interface;
+    vss_state::Global_State global_state;
+    interface.createSocketSendState(&global_state);
+
+    while(1){
+            //cout << "teste" << endl;
+        global_state = vss_state::Global_State();
+        global_state.set_id(0);
+
+        vss_state::Ball_State *ball_s = global_state.add_balls();
+        ball_s->set_x(physics->getBallPosition().getX());
+        ball_s->set_y(physics->getBallPosition().getY());
+
+        vector<RobotPhysics*> listRobots = physics->getAllRobots();
+        for(int i = 0 ; i < 3 ; i++){
+            vss_state::Robot_State *robot_s = global_state.add_robots_blue();
+            btVector3 posRobot = getRobotPosition(listRobots.at(i));
+            robot_s->set_x(posRobot.getX());
+            robot_s->set_y(posRobot.getZ());
+            float rads = atan2(getRobotOrientation(listRobots.at(i)).getY(),getRobotOrientation(listRobots.at(i)).getX());
+            robot_s->set_yaw(rads);
+        }
+
+        for(int i = 0 ; i < 3 ; i++){
+            vss_state::Robot_State *robot_s = global_state.add_robots_yellow();
+            btVector3 posRobot = getRobotPosition(listRobots.at(i+3));
+            robot_s->set_x(posRobot.getX());
+            robot_s->set_y(posRobot.getZ());
+            float rads = atan2(getRobotOrientation(listRobots.at(i+3)).getY(),getRobotOrientation(listRobots.at(i+3)).getX());
+            robot_s->set_yaw(rads);
+            //cout << posRobot.getX() << " : " << posRobot.getY() << endl;
+        }
+
+        interface.sendState();
+        usleep(33333);
+    }
 }
 
 void Simulator::runGraphics(){
@@ -211,4 +252,16 @@ cout << attackDir;
         relX = SIZE_WIDTH - absPos.getX();
     } 
     return btVector3(relX,0,relZ);
+}
+
+btVector3 Simulator::getRobotPosition(RobotPhysics* robot){
+    btTransform  transTemp;
+    robot->getRigidBody()->getMotionState()->getWorldTransform(transTemp);
+    return transTemp.getOrigin();
+}
+
+btVector3 Simulator::getRobotOrientation(RobotPhysics* robot){
+    btVector3 forwardVec = robot->getRaycast()->getForwardVector();
+
+    return forwardVec;
 }

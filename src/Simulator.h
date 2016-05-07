@@ -19,6 +19,7 @@ copies or substantial portions of the Software.
 #include "Header.h"
 #include "Scenario.h"
 #include "strategies/ModelStrategy.h"
+#include "interface/interface.h"
 
 class Simulator{
     struct GameState{
@@ -46,11 +47,16 @@ private:
     thread *thread_physics;
     thread *thread_graphics;
     thread *thread_strategies;
+    thread *thread_send;
 
 	void updateWorld();
 	btVector3 calcRelativePosition(btVector3 absPos, int attackDir);
 	void calcRelativeWorld(vector<RobotStrategy*> robotStrategiesTeam, int attackDir);
 	RobotStrategy* updateLocalPhysics(int id, RobotPhysics* bdRobot);
+
+
+    btVector3 getRobotOrientation(RobotPhysics* robot);
+    btVector3 getRobotPosition(RobotPhysics* robot);
 public:
 	Simulator();
 	void runSimulator(int argc, char *argv[], ModelStrategy* strategyTeam, ModelStrategy* strategyAdv);
@@ -58,6 +64,9 @@ public:
 	void runPhysics();
 	void runGraphics();
 	void runStrategies();
+    void runSender();
+
+    btVector3 getBallPosition();
 };
 
 #endif
