@@ -62,6 +62,7 @@ public:
     int getNumTeams(){ return numTeams; }
 	btDynamicsWorld* getWorldPhysics() { return world; }
 	btVector3 getBallPosition();
+	void setBallPosition(btVector3);
 	vector<BulletObject*> getAllBtObj() { return bodies; }
 	vector<RobotPhysics*> getAllRobots() { return genRobots; }
 };

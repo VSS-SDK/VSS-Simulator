@@ -75,10 +75,11 @@ void Simulator::runSender(){
             //cout << "teste" << endl;
         global_state = vss_state::Global_State();
         global_state.set_id(0);
+        global_state.set_origin(false);
 
         vss_state::Ball_State *ball_s = global_state.add_balls();
         ball_s->set_x(physics->getBallPosition().getX());
-        ball_s->set_y(physics->getBallPosition().getY());
+        ball_s->set_y(physics->getBallPosition().getZ());
 
         vector<RobotPhysics*> listRobots = physics->getAllRobots();
         for(int i = 0 ; i < 3 ; i++){
@@ -86,7 +87,7 @@ void Simulator::runSender(){
             btVector3 posRobot = getRobotPosition(listRobots.at(i));
             robot_s->set_x(posRobot.getX());
             robot_s->set_y(posRobot.getZ());
-            float rads = atan2(getRobotOrientation(listRobots.at(i)).getY(),getRobotOrientation(listRobots.at(i)).getX());
+            float rads = atan2(getRobotOrientation(listRobots.at(i)).getZ(),getRobotOrientation(listRobots.at(i)).getX());
             robot_s->set_yaw(rads);
         }
 
@@ -95,7 +96,7 @@ void Simulator::runSender(){
             btVector3 posRobot = getRobotPosition(listRobots.at(i+3));
             robot_s->set_x(posRobot.getX());
             robot_s->set_y(posRobot.getZ());
-            float rads = atan2(getRobotOrientation(listRobots.at(i+3)).getY(),getRobotOrientation(listRobots.at(i+3)).getX());
+            float rads = atan2(getRobotOrientation(listRobots.at(i+3)).getZ(),getRobotOrientation(listRobots.at(i+3)).getX());
             robot_s->set_yaw(rads);
             //cout << posRobot.getX() << " : " << posRobot.getY() << endl;
         }
@@ -127,6 +128,9 @@ void Simulator::runPhysics(){
             gameState->sameState = false;
             runningPhysics = true;
             HandleGraphics::getScenario()->setSingleStep(false);
+            /*if(physics->getBallPosition().getX() > 150 || physics->getBallPosition().getX() < 0){
+                physics->setBallPosition(btVector3(SIZE_WIDTH/2.0, 2.0, SIZE_DEPTH/2.0));
+            }*/
         }
 
     }

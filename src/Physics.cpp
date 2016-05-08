@@ -56,7 +56,7 @@ void Physics::deleteWorldObj(){
 void Physics::registBodies(){
     addFloor();
 
-    addBall(2.5,btVector3(SIZE_WIDTH/1.5,0,SIZE_DEPTH/1.5),0.08);
+    addBall(2.5, btVector3(SIZE_WIDTH/2.0, 0, SIZE_DEPTH/2.0), 0.08);
 
     btVector3 posTeam1[] = {btVector3(15,4,SIZE_DEPTH- 55),btVector3(35,4,30),btVector3(55,4,45)};
     btVector3 posTeam2[] = {btVector3(SIZE_WIDTH-15,4,55),btVector3(SIZE_WIDTH-25,4,SIZE_DEPTH - SIZE_DEPTH/2.5 + 20),btVector3(SIZE_WIDTH-55,4,85)};
@@ -115,7 +115,6 @@ bool Physics::callBackHitFunc(btManifoldPoint& cp,const btCollisionObjectWrapper
     return false;
 }
 
-
 btVector3 Physics::getBallPosition(){
 	btVector3 ballPos;
 	for(int i=0;i<bodies.size();i++){
@@ -127,6 +126,19 @@ btVector3 Physics::getBallPosition(){
 		}
 	}
 	return ballPos;
+}
+
+void Physics::setBallPosition(btVector3 newPos){
+    for(int i=0;i<bodies.size();i++){
+        if(bodies[i]->name.compare("ball") == 0){
+            btTransform t;
+            bodies[i]->body->getMotionState()->getWorldTransform(t);
+
+            t.setOrigin(newPos);
+            bodies[i]->body->getMotionState()->setWorldTransform(t);
+            break;
+        }
+    }
 }
 
 void Physics::startDebug(){
