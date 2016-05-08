@@ -19,6 +19,18 @@ void Interface::createSocketSendState(vss_state::Global_State *global_state){
 
 	std::cout << "Connecting Server Multicast Sender: " << addr_server_multicast << std::endl;
 	socket->bind(addr_server_multicast);
+
+	/*while (true) {
+		usleep (100000);
+
+		std::string msg_str;
+	    global_state->SerializeToString(&msg_str);
+
+	    zmq::message_t request (msg_str.size());
+	    memcpy ((void *) request.data (), msg_str.c_str(), msg_str.size());
+	    std::cout << "Sending State data ..." << std::endl;
+	    socket.send(request);
+	}*/
 }
 
 void Interface::sendState(){
@@ -41,6 +53,17 @@ void Interface::createSocketReceiveState(vss_state::Global_State *global_state){
 	socket->connect(addr_client_multicast);
 
 	socket->setsockopt(ZMQ_SUBSCRIBE, "", 0);
+
+	/*int request_nbr;
+	while(true){
+		zmq::message_t request;
+        socket.recv (&request, 0); //  Wait for next request from client
+        std::cout << "Received" << std::endl;
+        std::string msg_str(static_cast<char*>(request.data()), request.size());
+        global_state->ParseFromString(msg_str);
+        printState();
+	}
+	socket.close();*/
 }
 
 void Interface::receiveState(){

@@ -46,8 +46,8 @@ $(EXEC): $(FILE_NAMES)
 clean: message_cleaning
 	@rm $(EXEC) $(FILE_NAMES)
 
-#proto:
-#	cd Utils/interface/protos && make -f protos.make
+proto:
+	cd src/interface/protos && make -f protos.make
 
 #teste: 
 #	$(SRC)
