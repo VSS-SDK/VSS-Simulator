@@ -46,7 +46,6 @@ int main(int argc, char *argv[]){
     int time_step;                          // how fast 1x, 10x, 100x "if possible"
     int qtd_matchs;                         // 1, ..., 10
 
-
     if(argParse(argc, argv, &strategy_team1, &strategy_team2, &time_step, &qtd_matchs)){
         cout << "OK" << endl;
         return 0;
@@ -54,14 +53,6 @@ int main(int argc, char *argv[]){
         cout << "ERROR: Something happen" << endl;
         return -1;
     }
-    /*if (argParse(argc, argv, &runTime, &plannerType, &objectiveType, &outputFile)){
-        plan(runTime, plannerType, objectiveType, outputFile);
-        return 0;
-    }else{
-        // Return with error
-        return -1;
-    }*/
-
 
 	Strategy *stratYellowTeam = new Strategy(); //Original strategy
 	Strategy *stratBlueTeam = new Strategy(); //Strategy for tests
