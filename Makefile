@@ -51,6 +51,8 @@ clean: message_cleaning
 proto:
 	cd src/interface/protos && make -f protos.make
 
+help: 
+	./$(EXEC) -h
 #teste: 
 #	$(SRC)
 
