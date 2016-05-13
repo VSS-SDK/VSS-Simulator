@@ -39,14 +39,15 @@ public:
     }
 };
 
-bool argParse(int argc, char** argv, string *strategy_team1, string *strategy_team2, int *time_step, int *qtd_matchs);
+bool argParse(int argc, char** argv, string *strategy_team1, string *strategy_team2, int *time_step, int *qtd_matchs, string *report);
 
 int main(int argc, char *argv[]){
     string strategy_team1, strategy_team2;  // Strategies in pattern VSS-SampleStrategy
     int time_step;                          // how fast 1x, 10x, 100x "if possible"
     int qtd_matchs;                         // 1, ..., 10
+    string report;                          // report of match
 
-    if(argParse(argc, argv, &strategy_team1, &strategy_team2, &time_step, &qtd_matchs)){
+    if(argParse(argc, argv, &strategy_team1, &strategy_team2, &time_step, &qtd_matchs, &report)){
         cout << "OK" << endl;
         return 0;
     }else{
@@ -63,7 +64,7 @@ int main(int argc, char *argv[]){
 	return 0;
 }
 
-bool argParse(int argc, char** argv, string *strategy_team1, string *strategy_team2, int *time_step, int *qtd_matchs)
+bool argParse(int argc, char** argv, string *strategy_team1, string *strategy_team2, int *time_step, int *qtd_matchs, string *report)
 {
     namespace bpo = boost::program_options;
 
@@ -74,7 +75,8 @@ bool argParse(int argc, char** argv, string *strategy_team1, string *strategy_te
         ("team1,t1", bpo::value<std::string>()->default_value("default"), "(Required) Specify the name of executable from team 1.") 
         ("team2,t2", bpo::value<std::string>()->default_value("default"), "(Required) Specify the name of executable from team 2.")
         ("time_step,ts", bpo::value<unsigned int>()->default_value(1), "(Optional) Specify the time step (1x, 10x, 100x). Default value it's 1x.")
-        ("qtd_matchs,m", bpo::value<unsigned int>()->default_value(1), "(Optional) Specify the number of matchs between team 1 and team 2 (1, ..., 10). Default value it's 1.");
+        ("qtd_matchs,m", bpo::value<unsigned int>()->default_value(1), "(Optional) Specify the number of matchs between team 1 and team 2 (1, ..., 10). Default value it's 1.")
+        ("report,r", bpo::value<std::string>()->default_value(""), "(Required) Specify the name of executable from team 1.");
     bpo::variables_map vm;
     bpo::store(bpo::parse_command_line(argc, argv, desc), vm);
     bpo::notify(vm);
@@ -98,6 +100,7 @@ bool argParse(int argc, char** argv, string *strategy_team1, string *strategy_te
 
     *strategy_team1 = vm["team1"].as<string>();
     *strategy_team2 = vm["team2"].as<string>();
+    *report = vm["report"].as<string>();
 
     return true;
 }

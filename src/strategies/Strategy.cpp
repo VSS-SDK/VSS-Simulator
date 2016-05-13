@@ -49,7 +49,6 @@ void Strategy::runStrategy(vector<RobotStrategy*> robotStrategiesTeam,vector<Rob
     this->ballPos = ballPos;
 
 
-
     if(strategyHistory.size() == numFramesPerSec){
         updateDynamics();
         calcBallTarget();
