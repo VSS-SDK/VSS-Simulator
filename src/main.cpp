@@ -18,7 +18,7 @@ copies or substantial portions of the Software.
 #include "strategies/ModelStrategy.h"
 #include "strategies/Strategy.h"
 #include "strategies/StrategyBasic.h"
-
+#include "../utils/includes/boost.h"
 
 //Exemplo de estratégia
 class StrategyTest : public ModelStrategy{
@@ -40,6 +40,10 @@ public:
 };
 
 int main(int argc, char *argv[]){
+    string strategy_team1, strategy_team2;  // Strategies in pattern VSS-SampleStrategy
+    int time_step;                          // how fast 1x, 10x, 100x "if possible"
+    int qtd_matchs;                         // 1, ..., 10
+
 	Strategy *stratYellowTeam = new Strategy(); //Original strategy
 	Strategy *stratBlueTeam = new Strategy(); //Strategy for tests
 
