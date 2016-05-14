@@ -158,18 +158,6 @@ void Simulator::runStrategies(){
             if(!gameState->sameState){
                 updateWorld();
 
-                /*Copy to not overload values in each strategy
-                //--------------MÉTODO CUSTOSO PARA A CPU!! --------------
-                vector<RobotStrategy*> cpRbStrategyTeam;
-                vector<RobotStrategy*> cpRbStrategyAdv;
-                for(int j = 0; j < numRobotsTeam;j++){
-                    RobotStrategy* cpStrategy = new RobotStrategy(0);
-                    *cpStrategy = *(gameState->robotStrategiesTeam.at(j));
-                    cpRbStrategyTeam.push_back(cpStrategy);
-                    *cpStrategy = *(gameState->robotStrategiesAdv.at(j));
-                    cpRbStrategyAdv.push_back(cpStrategy);
-                }*/
-
                 if(strategies.size() > 0){
                     btVector3 ballPos = calcRelativePosition(physics->getBallPosition(),strategies[0]->getAttackDir());
                     calcRelativeWorld(gameState->robotStrategiesTeam,strategies[0]->getAttackDir());
@@ -206,6 +194,14 @@ void Simulator::runStrategies(){
             }
         }
     }
+}
+
+void Simulator::runReceiveTeam1(){
+
+}
+
+void Simulator::runReceiveTeam2(){
+
 }
 
 void Simulator::updateWorld(){

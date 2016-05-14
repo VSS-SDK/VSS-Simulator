@@ -48,6 +48,8 @@ private:
     thread *thread_graphics;
     thread *thread_strategies;
     thread *thread_send;
+    thread *thread_receive_team1;
+    thread *thread_receive_team2;
 
 	void updateWorld();
 	btVector3 calcRelativePosition(btVector3 absPos, int attackDir);
@@ -65,6 +67,8 @@ public:
 	void runGraphics();
 	void runStrategies();
     void runSender();
+    void runReceiveTeam1();
+    void runReceiveTeam2();
 
     btVector3 getBallPosition();
 };
