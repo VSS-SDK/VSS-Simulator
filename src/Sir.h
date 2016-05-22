@@ -39,4 +39,20 @@ struct BulletObject{
     BulletObject(btRigidBody* b,string n,Color clr0) : name(n),body(b),clr(clr0),id(-1),hit(false),halfExt(btVector3(0,0,0)) {}
 };
 
+struct Command{
+    float left;
+    float right;
+    Command(){
+        left = right = 0;
+    };
+    Command(float left, float right){
+        this->left = left;
+        this->right = right;
+    };
+    Command(Command *cmd){
+        left = cmd->left;
+        right = cmd->right;
+    };
+};
+
 #endif

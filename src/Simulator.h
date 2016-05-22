@@ -35,6 +35,10 @@ private:
     const float handTime = 1.f;
     int numRobotsTeam;
     bool runningPhysics;
+    vector<Command> commands;
+
+    vss_state::Global_State global_state;
+    vss_command::Global_Commands global_commands;
 
     GameState* gameState;
     int stratStep;

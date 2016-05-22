@@ -95,6 +95,44 @@ void Physics::registBodies(){
     addCorner(Color(0,0,0),btVector3(10,7.5,SIZE_DEPTH-10),30,15,btVector3(0,-45,0));
 }
 
+void Physics::resetRobotPositions(){
+    btVector3 posTeam1[] = {btVector3(15,4,SIZE_DEPTH- 55),btVector3(35,4,30),btVector3(55,4,45)};
+    btVector3 posTeam2[] = {btVector3(SIZE_WIDTH-15,4,55),btVector3(SIZE_WIDTH-25,4,SIZE_DEPTH - SIZE_DEPTH/2.5 + 20),btVector3(SIZE_WIDTH-55,4,85)};
+
+    /*
+    btVector3 axis = rotation.normalize();
+        btQuaternion quat(axis,rad);
+        t.setRotation(quat);
+    */
+    for(int i=0;i<genRobots.size()/2;i++){
+        btTransform t;
+        genRobots[i]->getRigidBody()->getMotionState()->getWorldTransform(t);
+
+        t.setIdentity();
+        t.setOrigin(posTeam1[i]);
+        
+        btMotionState* motion = new btDefaultMotionState(t);
+        
+        genRobots[i]->getRigidBody()->setMotionState(motion);
+        genRobots[i]->getRigidBody()->setLinearVelocity(btVector3(0,0,0));
+        genRobots[i]->getRigidBody()->setAngularVelocity(btVector3(0,0,0));
+    }
+
+    for(int i=genRobots.size()/2;i<genRobots.size();i++){
+        btTransform t;
+        genRobots[i]->getRigidBody()->getMotionState()->getWorldTransform(t);
+
+        t.setIdentity();
+        t.setOrigin(posTeam2[i-genRobots.size()/2]);
+        
+        btMotionState* motion = new btDefaultMotionState(t);
+        
+        genRobots[i]->getRigidBody()->setMotionState(motion);
+        genRobots[i]->getRigidBody()->setLinearVelocity(btVector3(0,0,0));
+        genRobots[i]->getRigidBody()->setAngularVelocity(btVector3(0,0,0));
+    }
+}
+
 void Physics::stepSimulation(float timeW,float subStep, float timeStep){
     world-> stepSimulation(timeW, subStep, timeStep);
 }
@@ -134,8 +172,14 @@ void Physics::setBallPosition(btVector3 newPos){
             btTransform t;
             bodies[i]->body->getMotionState()->getWorldTransform(t);
 
+            t.setIdentity();
             t.setOrigin(newPos);
-            bodies[i]->body->getMotionState()->setWorldTransform(t);
+            
+            btMotionState* motion = new btDefaultMotionState(t);
+            
+            bodies[i]->body->setMotionState(motion);
+            bodies[i]->body->setLinearVelocity(btVector3(0,0,0));
+            bodies[i]->body->setAngularVelocity(btVector3(0,0,0));
             break;
         }
     }

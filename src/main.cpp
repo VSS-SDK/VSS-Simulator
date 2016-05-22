@@ -39,7 +39,7 @@ public:
     }
 };
 
-bool argParse(int argc, char** argv, string *strategy_team1, string *strategy_team2, int *time_step, int *qtd_matchs, string *report);
+//bool argParse(int argc, char** argv, string *strategy_team1, string *strategy_team2, int *time_step, int *qtd_matchs, string *report);
 
 int main(int argc, char *argv[]){
     string strategy_team1, strategy_team2;  // Strategies in pattern VSS-SampleStrategy
@@ -64,7 +64,7 @@ int main(int argc, char *argv[]){
 	return 0;
 }
 
-bool argParse(int argc, char** argv, string *strategy_team1, string *strategy_team2, int *time_step, int *qtd_matchs, string *report)
+/*bool argParse(int argc, char** argv, string *strategy_team1, string *strategy_team2, int *time_step, int *qtd_matchs, string *report)
 {
     namespace bpo = boost::program_options;
 
@@ -104,3 +104,4 @@ bool argParse(int argc, char** argv, string *strategy_team1, string *strategy_te
 
     return true;
 }
+*/

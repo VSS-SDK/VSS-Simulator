@@ -22,6 +22,11 @@ Simulator::Simulator(){
 
 	gameState = new GameState();
     runningPhysics = false;
+
+    for(int i = 0 ; i < 6 ; i++){
+        Command cmd(0, 0);
+        commands.push_back(cmd);
+    }
 }
 
 void Simulator::runSimulator(int argc, char *argv[], ModelStrategy *stratBlueTeam, ModelStrategy *stratYellowTeam){
@@ -59,16 +64,38 @@ void Simulator::runSimulator(int argc, char *argv[], ModelStrategy *stratBlueTea
     thread_physics = new thread(bind(&Simulator::runPhysics, this));
     thread_strategies = new thread(bind(&Simulator::runStrategies, this));
     thread_send = new thread(bind(&Simulator::runSender, this));
+    thread_receive_team1 = new thread(bind(&Simulator::runReceiveTeam1, this));
+    thread_receive_team2 = new thread(bind(&Simulator::runReceiveTeam2, this));
 
     thread_graphics->join();
     thread_physics->join();
     thread_strategies->join();
     thread_send->join();
+    thread_receive_team1->join();
+    thread_receive_team2->join();
+}
+
+
+void Simulator::runReceiveTeam1(){
+    while(true){
+        for(int i = 0 ; i < 3 ; i++){
+            commands.at(i) = Command(10, 10);
+        }
+        usleep(33333);
+    }
+}
+
+void Simulator::runReceiveTeam2(){
+    while(true){
+        for(int i = 0 ; i < 3 ; i++){
+            commands.at(i+3) = Command(10, 10);
+        }
+        usleep(33333);
+    }
 }
 
 void Simulator::runSender(){
     Interface interface;
-    vss_state::Global_State global_state;
     interface.createSocketSendState(&global_state);
 
     while(1){
@@ -128,9 +155,10 @@ void Simulator::runPhysics(){
             gameState->sameState = false;
             runningPhysics = true;
             HandleGraphics::getScenario()->setSingleStep(false);
-            /*if(physics->getBallPosition().getX() > 150 || physics->getBallPosition().getX() < 0){
+            if(physics->getBallPosition().getX() > 150 || physics->getBallPosition().getX() < 0){
                 physics->setBallPosition(btVector3(SIZE_WIDTH/2.0, 2.0, SIZE_DEPTH/2.0));
-            }*/
+                physics->resetRobotPositions();
+            }
         }
 
     }
@@ -175,17 +203,27 @@ void Simulator::runStrategies(){
                 }
 
                 for(int i = 0; i < physics->getNumTeams(); i++){
-                    for(int j = 0; j < numRobotsTeam;j++){
+                    for(int j = 0; j < numRobotsTeam; j++){
                         int id = i*numRobotsTeam + j;
                         if(strategies[i]->getAttackDir() == 1){
-                            physics->getAllRobots()[id]->updateRobot(strategies[i]->getRobotStrategiesTeam()[j]->getCommand());
+                            /*float command[2];
+                            command[0] = 10;
+                            command[1] = 10;*/
+
+                            float command[2] = { commands.at(i).left, commands.at(i).right };
+
+                            //physics->getAllRobots()[id]->updateRobot(strategies[i]->getRobotStrategiesTeam()[j]->getCommand());
+                            physics->getAllRobots()[id]->updateRobot(command);
                         }
                         else{
-                            float invCommand[2];
-                            invCommand[0] = strategies[i]->getRobotStrategiesTeam()[j]->getCommand()[1];
-                            invCommand[1] = strategies[i]->getRobotStrategiesTeam()[j]->getCommand()[0];
+                            float command[2] = { commands.at(i+3).left, commands.at(i+3).right };
+                            //float invCommand[2];
+                            //invCommand[0] = strategies[i]->getRobotStrategiesTeam()[j]->getCommand()[1];
+                            //invCommand[1] = strategies[i]->getRobotStrategiesTeam()[j]->getCommand()[0];
+                            //invCommand[0] = 10;
+                            //invCommand[1] = 10;
 
-                            physics->getAllRobots()[id]->updateRobot(invCommand);
+                            physics->getAllRobots()[id]->updateRobot(command);
                         } 
                     }
                 }
@@ -194,14 +232,6 @@ void Simulator::runStrategies(){
             }
         }
     }
-}
-
-void Simulator::runReceiveTeam1(){
-
-}
-
-void Simulator::runReceiveTeam2(){
-
 }
 
 void Simulator::updateWorld(){

@@ -59,6 +59,8 @@ public:
 	void startDebug();
 	void setDebugWorld(int debugMode);
 
+	void resetRobotPositions();
+
     int getNumTeams(){ return numTeams; }
 	btDynamicsWorld* getWorldPhysics() { return world; }
 	btVector3 getBallPosition();
