@@ -18,6 +18,8 @@ copies or substantial portions of the Software.
 
 #include "Header.h"
 
+enum { NONE = 0, GOAL = 1, FAULT = 2, PENALTY = 3 };
+
 //Standard colors of the simulator
 struct Color{
 	float r;

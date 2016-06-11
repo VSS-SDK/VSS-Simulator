@@ -31,6 +31,8 @@ class Simulator{
     };
 
 private:
+    Arbiter arbiter;
+    
     const float timeStep = 1.f/60.f;
     const float handTime = 1.f;
     int numRobotsTeam;
