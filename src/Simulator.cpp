@@ -97,9 +97,10 @@ void Simulator::runReceiveTeam2(){
 void Simulator::runSender(){
     Interface interface;
     interface.createSocketSendState(&global_state);
+    arbiter.allocateState(&global_state);
 
     while(1){
-            //cout << "teste" << endl;
+        //cout << "teste" << endl;
         global_state = vss_state::Global_State();
         global_state.set_id(0);
         global_state.set_origin(false);
@@ -143,6 +144,7 @@ void Simulator::runGraphics(){
 void Simulator::runPhysics(){
     int subStep = 1;
     float standStep = 1.f/60.f;
+    int caseWorld = NONE;
 
     while(!HandleGraphics::getScenario()->getQuitStatus()){
         usleep(1000000.f*timeStep/handTime);
@@ -155,6 +157,8 @@ void Simulator::runPhysics(){
             gameState->sameState = false;
             runningPhysics = true;
             HandleGraphics::getScenario()->setSingleStep(false);
+
+            caseWorld = arbiter.checkWorld();
             if(physics->getBallPosition().getX() > 150 || physics->getBallPosition().getX() < 0){
                 physics->setBallPosition(btVector3(SIZE_WIDTH/2.0, 2.0, SIZE_DEPTH/2.0));
                 physics->resetRobotPositions();

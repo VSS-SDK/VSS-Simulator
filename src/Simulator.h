@@ -20,6 +20,7 @@ copies or substantial portions of the Software.
 #include "Scenario.h"
 #include "strategies/ModelStrategy.h"
 #include "interface/interface.h"
+#include "Arbiter.h"
 
 class Simulator{
     struct GameState{
@@ -32,7 +33,7 @@ class Simulator{
 
 private:
     Arbiter arbiter;
-    
+
     const float timeStep = 1.f/60.f;
     const float handTime = 1.f;
     int numRobotsTeam;

@@ -11,6 +11,7 @@ void Arbiter::allocateState(vss_state::Global_State *global_state){
 int Arbiter::checkWorld(){
 	if(false){
 		return GOAL;
+		cerr << "Goal" << endl;
 	}else{
 		return NONE;
 	}

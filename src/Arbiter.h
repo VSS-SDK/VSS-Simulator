@@ -1,8 +1,11 @@
 #ifndef _ARBITER_H_
 #define _ARBITER_H_
 
+#include "iostream"
 #include "interface/interface.h"
 #include "Sir.h"
+
+using namespace std; 
 
 class Arbiter{
 protected:
