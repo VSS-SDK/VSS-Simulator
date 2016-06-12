@@ -150,21 +150,28 @@ void Simulator::runPhysics(){
         usleep(1000000.f*timeStep/handTime);
 
         if(HandleGraphics::getScenario()->getSingleStep() && gameState->sameState ){
-            cout << endl << endl << endl;
+            //cout << endl << endl << endl;
             loopBullet++;
-            cout << "--------Ciclo Atual:\t" << loopBullet << "--------" << endl;
+            //cout << "--------Ciclo Atual:\t" << loopBullet << "--------" << endl;
             physics->stepSimulation(timeStep,subStep,standStep);
             gameState->sameState = false;
             runningPhysics = true;
             HandleGraphics::getScenario()->setSingleStep(false);
 
             caseWorld = arbiter.checkWorld();
-            if(physics->getBallPosition().getX() > 150 || physics->getBallPosition().getX() < 0){
-                physics->setBallPosition(btVector3(SIZE_WIDTH/2.0, 2.0, SIZE_DEPTH/2.0));
-                physics->resetRobotPositions();
+            switch(caseWorld){
+                case GOAL:{
+                    //physics->resetRobotPositions();
+                    physics->setBallPosition(btVector3(SIZE_WIDTH/2.0, 2.0, SIZE_DEPTH/2.0));
+                }break;
+                case NONE:{
+
+                }break;
+                default:{
+                    cerr << "ERROR" << endl;
+                }break;
             }
         }
-
     }
 }
 
@@ -216,18 +223,19 @@ void Simulator::runStrategies(){
 
                             float command[2] = { commands.at(i).left, commands.at(i).right };
 
-                            //physics->getAllRobots()[id]->updateRobot(strategies[i]->getRobotStrategiesTeam()[j]->getCommand());
-                            physics->getAllRobots()[id]->updateRobot(command);
+                            physics->getAllRobots()[id]->updateRobot(strategies[i]->getRobotStrategiesTeam()[j]->getCommand());
+                            //physics->getAllRobots()[id]->updateRobot(command);
                         }
                         else{
-                            float command[2] = { commands.at(i+3).left, commands.at(i+3).right };
-                            //float invCommand[2];
-                            //invCommand[0] = strategies[i]->getRobotStrategiesTeam()[j]->getCommand()[1];
-                            //invCommand[1] = strategies[i]->getRobotStrategiesTeam()[j]->getCommand()[0];
+                            //float command[2] = { commands.at(i+3).left, commands.at(i+3).right };
+                            float invCommand[2];
+                            invCommand[0] = strategies[i]->getRobotStrategiesTeam()[j]->getCommand()[1];
+                            invCommand[1] = strategies[i]->getRobotStrategiesTeam()[j]->getCommand()[0];
                             //invCommand[0] = 10;
                             //invCommand[1] = 10;
 
-                            physics->getAllRobots()[id]->updateRobot(command);
+                            //physics->getAllRobots()[id]->updateRobot(command);
+                            physics->getAllRobots()[id]->updateRobot(invCommand);
                         } 
                     }
                 }
@@ -278,7 +286,7 @@ void Simulator::calcRelativeWorld(vector<RobotStrategy*> robotStrategiesTeam,int
 
 btVector3 Simulator::calcRelativePosition(btVector3 absPos, int attackDir){
     float relX = absPos.getX();
-cout << attackDir;
+    //cout << attackDir;
     float relZ = absPos.getZ();
     if(attackDir == -1){
 

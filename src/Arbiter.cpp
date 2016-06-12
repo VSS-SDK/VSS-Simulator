@@ -9,10 +9,15 @@ void Arbiter::allocateState(vss_state::Global_State *global_state){
 }
 
 int Arbiter::checkWorld(){
-	if(false){
+	if(global_state->balls(0).x() > 150){
+		cerr << "Goal Team 1" << endl;
 		return GOAL;
-		cerr << "Goal" << endl;
+	}else
+	if(global_state->balls(0).x() < 0){
+		cerr << "Goal Team 2" << endl;
+		return GOAL;
 	}else{
+		//cerr << "None" << endl;
 		return NONE;
 	}
 }
