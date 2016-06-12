@@ -39,7 +39,7 @@ public:
     }
 };
 
-//bool argParse(int argc, char** argv, string *strategy_team1, string *strategy_team2, int *time_step, int *qtd_matchs, string *report);
+bool argParse(int argc, char** argv, string *strategy_team1, string *strategy_team2, int *time_step, int *qtd_matchs, string *report);
 
 int main(int argc, char *argv[]){
     string strategy_team1, strategy_team2;  // Strategies in pattern VSS-SampleStrategy
@@ -47,13 +47,13 @@ int main(int argc, char *argv[]){
     int qtd_matchs;                         // 1, ..., 10
     string report;                          // report of match
 
-    /*if(argParse(argc, argv, &strategy_team1, &strategy_team2, &time_step, &qtd_matchs, &report)){
-        cout << "OK" << endl;
+    if(argParse(argc, argv, &strategy_team1, &strategy_team2, &time_step, &qtd_matchs, &report)){
+        cerr << "OK" << endl;
         return 0;
     }else{
-        cout << "ERROR: Something happen" << endl;
+        cerr << "ERROR: Something happen" << endl;
         return -1;
-    }*/
+    }
 
 	Strategy *stratYellowTeam = new Strategy(); //Original strategy
 	Strategy *stratBlueTeam = new Strategy(); //Strategy for tests
@@ -64,8 +64,7 @@ int main(int argc, char *argv[]){
 	return 0;
 }
 
-/*bool argParse(int argc, char** argv, string *strategy_team1, string *strategy_team2, int *time_step, int *qtd_matchs, string *report)
-{
+bool argParse(int argc, char** argv, string *strategy_team1, string *strategy_team2, int *time_step, int *qtd_matchs, string *report){
     namespace bpo = boost::program_options;
 
     // Declare the supported options.
@@ -104,4 +103,3 @@ int main(int argc, char *argv[]){
 
     return true;
 }
-*/

@@ -220,22 +220,21 @@ void Simulator::runStrategies(){
                             /*float command[2];
                             command[0] = 10;
                             command[1] = 10;*/
+                            //physics->getAllRobots()[id]->updateRobot(strategies[i]->getRobotStrategiesTeam()[j]->getCommand());
 
                             float command[2] = { commands.at(i).left, commands.at(i).right };
-
-                            physics->getAllRobots()[id]->updateRobot(strategies[i]->getRobotStrategiesTeam()[j]->getCommand());
-                            //physics->getAllRobots()[id]->updateRobot(command);
+                            physics->getAllRobots()[id]->updateRobot(command);
                         }
                         else{
-                            //float command[2] = { commands.at(i+3).left, commands.at(i+3).right };
-                            float invCommand[2];
-                            invCommand[0] = strategies[i]->getRobotStrategiesTeam()[j]->getCommand()[1];
-                            invCommand[1] = strategies[i]->getRobotStrategiesTeam()[j]->getCommand()[0];
+                            //float invCommand[2];
+                            //invCommand[0] = strategies[i]->getRobotStrategiesTeam()[j]->getCommand()[1];
+                            //invCommand[1] = strategies[i]->getRobotStrategiesTeam()[j]->getCommand()[0];
                             //invCommand[0] = 10;
                             //invCommand[1] = 10;
-
-                            //physics->getAllRobots()[id]->updateRobot(command);
-                            physics->getAllRobots()[id]->updateRobot(invCommand);
+                            ////physics->getAllRobots()[id]->updateRobot(invCommand);
+                            float command[2] = { commands.at(i+3).left, commands.at(i+3).right };
+                            physics->getAllRobots()[id]->updateRobot(command);
+                            
                         } 
                     }
                 }
