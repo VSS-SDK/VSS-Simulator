@@ -19,3 +19,8 @@ License
 This code is licensed under the MIT License, of which a textual copy is available at [LICENSE.txt](LICENSE).
 
 You are allowed and encouraged to use this software on the IEEE Very Small Size Soccer competitions.  If you do, please let us know.
+
+[vss-vision]: https://github.com/SIRLab/VSS-Vision
+[vss-simulator]: https://github.com/SIRLab/VSS-Simulator
+[vss-viewer]: https://github.com/SIRLab/VSS-Viewer
+[vss-sample]: https://github.com/SIRLab/VSS-SampleStrategy
