@@ -83,6 +83,7 @@ void Simulator::runReceiveTeam1(){
     Interface interface;
     interface.createReceiveCommandsTeam1(&global_commands_team_1);
     while(true){
+        global_commands_team_1 = vss_command::Global_Commands();
         interface.receiveCommandTeam1();
         
         for(int i = 0 ; i < 3 ; i++){
@@ -128,20 +129,20 @@ void Simulator::runSender(){
         vector<RobotPhysics*> listRobots = physics->getAllRobots();
         for(int i = 0 ; i < 3 ; i++){
             vss_state::Robot_State *robot_s = global_state.add_robots_blue();
-            btVector3 posRobot = getRobotPosition(listRobots.at(i));
+            btVector3 posRobot = getRobotPosition(listRobots.at(i+3));
 
             robot_s->mutable_pose()->set_x(posRobot.getX());
             robot_s->mutable_pose()->set_y(posRobot.getZ());
-            float rads = atan2(getRobotOrientation(listRobots.at(i)).getZ(),getRobotOrientation(listRobots.at(i)).getX());
+            float rads = atan2(getRobotOrientation(listRobots.at(i+3)).getZ(),getRobotOrientation(listRobots.at(i+3)).getX());
             robot_s->mutable_pose()->set_yaw(rads);
         }
 
         for(int i = 0 ; i < 3 ; i++){
             vss_state::Robot_State *robot_s = global_state.add_robots_yellow();
-            btVector3 posRobot = getRobotPosition(listRobots.at(i+3));
+            btVector3 posRobot = getRobotPosition(listRobots.at(i));
             robot_s->mutable_pose()->set_x(posRobot.getX());
             robot_s->mutable_pose()->set_y(posRobot.getZ());
-            float rads = atan2(getRobotOrientation(listRobots.at(i+3)).getZ(),getRobotOrientation(listRobots.at(i+3)).getX());
+            float rads = atan2(getRobotOrientation(listRobots.at(i)).getZ(),getRobotOrientation(listRobots.at(i)).getX());
             robot_s->mutable_pose()->set_yaw(rads);
             //cout << posRobot.getX() << " : " << posRobot.getY() << endl;
         }
@@ -234,7 +235,10 @@ void Simulator::runStrategies(){
                     for(int j = 0; j < numRobotsTeam; j++){
                         int id = i*numRobotsTeam + j;
                         if(strategies[i]->getAttackDir() == 1){
-                            float command[2] = { commands.at(i).left, commands.at(i).right };
+                            //cout << id << endl;
+                            float command[2] = { commands.at(id).left, commands.at(id).right };
+                            //if(id == 0)
+                                //cout << command[0] << " - " << command[1] << endl;
 
                             //command[1] = strategies[i]->getRobotStrategiesTeam()[j]->getCommand()[1];
                             //command[0] = strategies[i]->getRobotStrategiesTeam()[j]->getCommand()[0];
