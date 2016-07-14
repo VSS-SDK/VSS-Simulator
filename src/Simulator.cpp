@@ -27,6 +27,9 @@ Simulator::Simulator(){
         Command cmd(0, 0);
         commands.push_back(cmd);
     }
+
+    team_1_already = false;
+    team_2_already = false;
 }
 
 void Simulator::runSimulator(int argc, char *argv[], ModelStrategy *stratBlueTeam, ModelStrategy *stratYellowTeam){
@@ -77,11 +80,14 @@ void Simulator::runSimulator(int argc, char *argv[], ModelStrategy *stratBlueTea
 
 
 void Simulator::runReceiveTeam1(){
+    Interface interface;
+    interface.createReceiveCommandsTeam1(&global_commands_team_1);
     while(true){
+        interface.receiveCommandTeam1();
+        
         for(int i = 0 ; i < 3 ; i++){
-            commands.at(i) = Command(10, 10);
+            commands.at(i) = Command(global_commands_team_1.robot_commands(i).left_vel(), global_commands_team_1.robot_commands(i).right_vel());
         }
-        usleep(33333);
     }
 }
 
@@ -228,18 +234,18 @@ void Simulator::runStrategies(){
                     for(int j = 0; j < numRobotsTeam; j++){
                         int id = i*numRobotsTeam + j;
                         if(strategies[i]->getAttackDir() == 1){
-                            float command[2];
+                            float command[2] = { commands.at(i).left, commands.at(i).right };
 
-                            command[1] = strategies[i]->getRobotStrategiesTeam()[j]->getCommand()[1];
-                            command[0] = strategies[i]->getRobotStrategiesTeam()[j]->getCommand()[0];
+                            //command[1] = strategies[i]->getRobotStrategiesTeam()[j]->getCommand()[1];
+                            //command[0] = strategies[i]->getRobotStrategiesTeam()[j]->getCommand()[0];
 
                             physics->getAllRobots()[id]->updateRobot(command);
                         }
                         else{
-                            float invCommand[2];
+                            float invCommand[2] = {0, 0};
 
-                            invCommand[0] = strategies[i]->getRobotStrategiesTeam()[j]->getCommand()[1];
-                            invCommand[1] = strategies[i]->getRobotStrategiesTeam()[j]->getCommand()[0];
+                            //invCommand[0] = strategies[i]->getRobotStrategiesTeam()[j]->getCommand()[1];
+                            //invCommand[1] = strategies[i]->getRobotStrategiesTeam()[j]->getCommand()[0];
 
                             physics->getAllRobots()[id]->updateRobot(invCommand);
                         } 
