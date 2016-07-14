@@ -106,26 +106,37 @@ void Simulator::runSender(){
         global_state.set_origin(false);
 
         vss_state::Ball_State *ball_s = global_state.add_balls();
-        ball_s->set_x(physics->getBallPosition().getX());
-        ball_s->set_y(physics->getBallPosition().getZ());
+        ball_s->mutable_pose()->set_x(physics->getBallPosition().getX());
+        ball_s->mutable_pose()->set_y(physics->getBallPosition().getZ());
+
+        ball_s->mutable_v_pose()->set_x(0);
+        ball_s->mutable_v_pose()->set_y(0);
+
+        ball_s->mutable_k_pose()->set_x(0);
+        ball_s->mutable_k_pose()->set_y(0);
+
+        ball_s->mutable_k_v_pose()->set_x(0);
+        ball_s->mutable_k_v_pose()->set_y(0);
+
 
         vector<RobotPhysics*> listRobots = physics->getAllRobots();
         for(int i = 0 ; i < 3 ; i++){
             vss_state::Robot_State *robot_s = global_state.add_robots_blue();
             btVector3 posRobot = getRobotPosition(listRobots.at(i));
-            robot_s->set_x(posRobot.getX());
-            robot_s->set_y(posRobot.getZ());
+
+            robot_s->mutable_pose()->set_x(posRobot.getX());
+            robot_s->mutable_pose()->set_y(posRobot.getZ());
             float rads = atan2(getRobotOrientation(listRobots.at(i)).getZ(),getRobotOrientation(listRobots.at(i)).getX());
-            robot_s->set_yaw(rads);
+            robot_s->mutable_pose()->set_yaw(rads);
         }
 
         for(int i = 0 ; i < 3 ; i++){
             vss_state::Robot_State *robot_s = global_state.add_robots_yellow();
             btVector3 posRobot = getRobotPosition(listRobots.at(i+3));
-            robot_s->set_x(posRobot.getX());
-            robot_s->set_y(posRobot.getZ());
+            robot_s->mutable_pose()->set_x(posRobot.getX());
+            robot_s->mutable_pose()->set_y(posRobot.getZ());
             float rads = atan2(getRobotOrientation(listRobots.at(i+3)).getZ(),getRobotOrientation(listRobots.at(i+3)).getX());
-            robot_s->set_yaw(rads);
+            robot_s->mutable_pose()->set_yaw(rads);
             //cout << posRobot.getX() << " : " << posRobot.getY() << endl;
         }
 
@@ -217,24 +228,20 @@ void Simulator::runStrategies(){
                     for(int j = 0; j < numRobotsTeam; j++){
                         int id = i*numRobotsTeam + j;
                         if(strategies[i]->getAttackDir() == 1){
-                            /*float command[2];
-                            command[0] = 10;
-                            command[1] = 10;*/
-                            //physics->getAllRobots()[id]->updateRobot(strategies[i]->getRobotStrategiesTeam()[j]->getCommand());
+                            float command[2];
 
-                            float command[2] = { commands.at(i).left, commands.at(i).right };
+                            command[1] = strategies[i]->getRobotStrategiesTeam()[j]->getCommand()[1];
+                            command[0] = strategies[i]->getRobotStrategiesTeam()[j]->getCommand()[0];
+
                             physics->getAllRobots()[id]->updateRobot(command);
                         }
                         else{
-                            //float invCommand[2];
-                            //invCommand[0] = strategies[i]->getRobotStrategiesTeam()[j]->getCommand()[1];
-                            //invCommand[1] = strategies[i]->getRobotStrategiesTeam()[j]->getCommand()[0];
-                            //invCommand[0] = 10;
-                            //invCommand[1] = 10;
-                            ////physics->getAllRobots()[id]->updateRobot(invCommand);
-                            float command[2] = { commands.at(i+3).left, commands.at(i+3).right };
-                            physics->getAllRobots()[id]->updateRobot(command);
-                            
+                            float invCommand[2];
+
+                            invCommand[0] = strategies[i]->getRobotStrategiesTeam()[j]->getCommand()[1];
+                            invCommand[1] = strategies[i]->getRobotStrategiesTeam()[j]->getCommand()[0];
+
+                            physics->getAllRobots()[id]->updateRobot(invCommand);
                         } 
                     }
                 }
