@@ -83,6 +83,7 @@ void Simulator::runReceiveTeam1(){
     Interface interface;
     interface.createReceiveCommandsTeam1(&global_commands_team_1);
     while(true){
+        global_commands_team_1 = vss_command::Global_Commands();
         interface.receiveCommandTeam1();
         
         for(int i = 0 ; i < 3 ; i++){
@@ -236,6 +237,8 @@ void Simulator::runStrategies(){
                         if(strategies[i]->getAttackDir() == 1){
                             //cout << id << endl;
                             float command[2] = { commands.at(id).left, commands.at(id).right };
+                            //if(id == 0)
+                                //cout << command[0] << " - " << command[1] << endl;
 
                             //command[1] = strategies[i]->getRobotStrategiesTeam()[j]->getCommand()[1];
                             //command[0] = strategies[i]->getRobotStrategiesTeam()[j]->getCommand()[0];
