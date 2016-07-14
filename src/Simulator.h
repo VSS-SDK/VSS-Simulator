@@ -41,7 +41,7 @@ private:
     vector<Command> commands;
 
     vss_state::Global_State global_state;
-    vss_command::Global_Commands global_commands;
+    vss_command::Global_Commands global_commands_team_1, global_commands_team_2;
 
     GameState* gameState;
     int stratStep;
@@ -57,6 +57,8 @@ private:
     thread *thread_send;
     thread *thread_receive_team1;
     thread *thread_receive_team2;
+
+    bool team_1_already, team_2_already;
 
 	void updateWorld();
 	btVector3 calcRelativePosition(btVector3 absPos, int attackDir);

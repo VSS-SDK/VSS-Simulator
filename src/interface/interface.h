@@ -21,9 +21,14 @@
 
 class Interface{
 private:
-	zmq::message_t request;
 	zmq::context_t *context;
     zmq::socket_t *socket;
+
+	zmq::context_t *context_command_yellow;
+    zmq::socket_t *socket_command_yellow;
+
+	zmq::context_t *context_command_blue;
+    zmq::socket_t *socket_command_blue;
     
 	vss_state::Global_State *global_state;
 	vss_command::Global_Commands *global_commands;
@@ -47,12 +52,16 @@ public:
 	void createSocketReceiveState(vss_state::Global_State*);
 	void receiveState();
 
-	void createLoopSendCommandsTeam1(vss_command::Global_Commands*);
-	void createLoopReceiveCommandsTeam1(vss_command::Global_Commands*);
+	void createSendCommandsTeam1(vss_command::Global_Commands*);
+	void sendCommandTeam1();
+	void createReceiveCommandsTeam1(vss_command::Global_Commands*);
+	void receiveCommandTeam1();
 
-	void createLoopSendCommandsTeam2(vss_command::Global_Commands*);
-	void createLoopReceiveCommandsTeam2(vss_command::Global_Commands*);	
-	
+	void createSendCommandsTeam2(vss_command::Global_Commands*);
+	void sendCommandTeam2();
+	void createReceiveCommandsTeam2(vss_command::Global_Commands*);	
+	void receiveCommandTeam2();
+
 	void printState();
 	void printCommand();
 };
