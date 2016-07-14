@@ -47,13 +47,13 @@ int main(int argc, char *argv[]){
     int qtd_matchs;                         // 1, ..., 10
     string report;                          // report of match
 
-    if(argParse(argc, argv, &strategy_team1, &strategy_team2, &time_step, &qtd_matchs, &report)){
+    /*if(argParse(argc, argv, &strategy_team1, &strategy_team2, &time_step, &qtd_matchs, &report)){
         cerr << "OK" << endl;
         return 0;
     }else{
         cerr << "ERROR: Something happen" << endl;
         return -1;
-    }
+    }*/
 
 	Strategy *stratYellowTeam = new Strategy(); //Original strategy
 	Strategy *stratBlueTeam = new Strategy(); //Strategy for tests
