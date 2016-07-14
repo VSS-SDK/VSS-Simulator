@@ -234,7 +234,7 @@ void Simulator::runStrategies(){
                     for(int j = 0; j < numRobotsTeam; j++){
                         int id = i*numRobotsTeam + j;
                         if(strategies[i]->getAttackDir() == 1){
-                            cout << id << endl;
+                            //cout << id << endl;
                             float command[2] = { commands.at(id).left, commands.at(id).right };
 
                             //command[1] = strategies[i]->getRobotStrategiesTeam()[j]->getCommand()[1];
