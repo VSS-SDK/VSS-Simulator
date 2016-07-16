@@ -46,7 +46,8 @@ private:
     GameState* gameState;
     int stratStep;
     int loopBullet;
-
+    int caseWorld;
+    
 	HandleGraphics* handleGraphics;
 	Physics* physics;
 	vector<ModelStrategy*> strategies;

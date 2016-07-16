@@ -18,7 +18,7 @@ copies or substantial portions of the Software.
 
 #include "Header.h"
 
-enum { NONE = 0, GOAL = 1, FAULT = 2, PENALTY = 3 };
+enum { NONE = 0, GOAL_TEAM1 = 1, GOAL_TEAM2 = 2, FAULT_TEAM1 = 3, FAULT_TEAM2 = 4, PENALTY_TEAM1 = 5, PENALTY_TEAM2 = 6 };
 
 //Standard colors of the simulator
 struct Color{

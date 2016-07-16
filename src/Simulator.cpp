@@ -21,6 +21,7 @@ Simulator::Simulator(){
 	numRobotsTeam = NUM_ROBOTS_TEAM;
 
 	gameState = new GameState();
+    caseWorld = NONE;
     runningPhysics = false;
 
     for(int i = 0 ; i < 6 ; i++){
@@ -110,6 +111,7 @@ void Simulator::runSender(){
         //cout << "teste" << endl;
         global_state = vss_state::Global_State();
         global_state.set_id(0);
+        global_state.set_situation(caseWorld);
         global_state.set_origin(false);
 
         vss_state::Ball_State *ball_s = global_state.add_balls();
@@ -162,7 +164,6 @@ void Simulator::runGraphics(){
 void Simulator::runPhysics(){
     int subStep = 1;
     float standStep = 1.f/60.f;
-    int caseWorld = NONE;
 
     while(!HandleGraphics::getScenario()->getQuitStatus()){
         usleep(1000000.f*timeStep/handTime);
@@ -176,18 +177,39 @@ void Simulator::runPhysics(){
             runningPhysics = true;
             HandleGraphics::getScenario()->setSingleStep(false);
 
-            caseWorld = arbiter.checkWorld();
-            switch(caseWorld){
-                case GOAL:{
-                    //physics->resetRobotPositions();
-                    physics->setBallPosition(btVector3(SIZE_WIDTH/2.0, 2.0, SIZE_DEPTH/2.0));
-                }break;
-                case NONE:{
+            if(caseWorld == NONE){
+                caseWorld = arbiter.checkWorld();
+                switch(caseWorld){
+                    case GOAL_TEAM1:{
+                        physics->setBallPosition(btVector3(SIZE_WIDTH/2.0, 2.0, SIZE_DEPTH/2.0));
+                    }break;
+                    case GOAL_TEAM2:{
+                        physics->setBallPosition(btVector3(SIZE_WIDTH/2.0, 2.0, SIZE_DEPTH/2.0));
+                    }break;
+                    case FAULT_TEAM1:{
 
-                }break;
-                default:{
-                    cerr << "ERROR" << endl;
-                }break;
+                    }break;
+                    case FAULT_TEAM2:{
+
+                    }break;
+                    case PENALTY_TEAM1:{
+
+                    }break;
+                    case PENALTY_TEAM2:{
+
+                    }break;
+                    case NONE:{
+
+                    }break;
+                    default:{
+                        cerr << "ERROR" << endl;
+                    }break;
+                }
+            }else{
+                // CHECK IF HAS TO BACK TO NONE 
+                // Ex: All robots re-organized them after a goal occurs
+                if(global_commands_team_1.situation() == NONE)
+                    caseWorld = NONE;
             }
         }
     }
