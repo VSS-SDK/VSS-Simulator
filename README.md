@@ -31,3 +31,4 @@ You are allowed and encouraged to use this software on the IEEE Very Small Size 
 [sirlab_site]: http://sirlab.github.io/vss.html
 [youtube]: https://www.youtube.com/watch?v=PZ5toHCb7KY
 [travis]: https://travis-ci.org/SIRLab/VSS-Simulator
+[mit]: https://raw.githubusercontent.com/hyperium/hyper/master/LICENSE
