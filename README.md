@@ -1,5 +1,8 @@
 VSS-Simulator
 =============
+[![MIT licensed](https://img.shields.io/badge/license-MIT-blue.svg)][mit]
+[![Build Status](https://travis-ci.org/SIRLab/VSS-Simulator.svg?branch=master)][travis]
+[![Link: Youtube](https://img.shields.io/badge/Link-Youtube-red.svg)][youtube]
 
 O VSS-Simulator é uma das partes de um framework que está sendo desenvolvido para a categoria de futebol de robôs [IEEE Very Small Size Soccer (VSSS)][vss], que consiste em:
 
@@ -26,3 +29,5 @@ You are allowed and encouraged to use this software on the IEEE Very Small Size 
 [vss-sample]: https://github.com/SIRLab/VSS-SampleStrategy
 [vss]: http://www.cbrobotica.org/
 [sirlab_site]: http://sirlab.github.io/vss.html
+[youtube]: https://www.youtube.com/watch?v=PZ5toHCb7KY
+[travis]: https://travis-ci.org/SIRLab/VSS-Simulator
