@@ -16,6 +16,17 @@ O VSS-Simulator é uma das partes de um framework que está sendo desenvolvido p
 
 Mais informações podem ser encontradas em [sirlab.github.io][sirlab_site].
 
+Installation
+------------
+[INSTALL][install]
+
+Development and Use
+-------------------
+```
+$ make
+$ make run
+```
+
 License
 -------
 
@@ -29,6 +40,8 @@ You are allowed and encouraged to use this software on the IEEE Very Small Size 
 [vss-sample]: https://github.com/SIRLab/VSS-SampleStrategy
 [vss]: http://www.cbrobotica.org/
 [sirlab_site]: http://sirlab.github.io/vss.html
+[install]: https://github.com/SIRLab/VSS-Simulator/blob/master/INSTALL.md
+
 [youtube]: https://www.youtube.com/watch?v=PZ5toHCb7KY
 [travis]: https://travis-ci.org/SIRLab/VSS-Simulator
 [mit]: https://raw.githubusercontent.com/hyperium/hyper/master/LICENSE
