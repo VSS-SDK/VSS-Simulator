@@ -180,6 +180,7 @@ void Physics::setBallPosition(btVector3 newPos){
             bodies[i]->body->setMotionState(motion);
             bodies[i]->body->setLinearVelocity(btVector3(0,0,0));
             bodies[i]->body->setAngularVelocity(btVector3(0,0,0));
+
             break;
         }
     }

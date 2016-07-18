@@ -31,6 +31,7 @@ Simulator::Simulator(){
 
     team_1_already = false;
     team_2_already = false;
+    count_situation = 0;
 }
 
 void Simulator::runSimulator(int argc, char *argv[], ModelStrategy *stratBlueTeam, ModelStrategy *stratYellowTeam){
@@ -87,6 +88,7 @@ void Simulator::runReceiveTeam1(){
         global_commands_team_1 = vss_command::Global_Commands();
         interface.receiveCommandTeam1();
         
+        situation_team1 = global_commands_team_1.situation();
         for(int i = 0 ; i < 3 ; i++){
             commands.at(i) = Command(global_commands_team_1.robot_commands(i).left_vel(), global_commands_team_1.robot_commands(i).right_vel());
         }
@@ -108,7 +110,6 @@ void Simulator::runSender(){
     arbiter.allocateState(&global_state);
 
     while(1){
-        //cout << "teste" << endl;
         global_state = vss_state::Global_State();
         global_state.set_id(0);
         global_state.set_situation(caseWorld);
@@ -168,6 +169,7 @@ void Simulator::runPhysics(){
     while(!HandleGraphics::getScenario()->getQuitStatus()){
         usleep(1000000.f*timeStep/handTime);
 
+
         if(HandleGraphics::getScenario()->getSingleStep() && gameState->sameState ){
             //cout << endl << endl << endl;
             loopBullet++;
@@ -177,39 +179,51 @@ void Simulator::runPhysics(){
             runningPhysics = true;
             HandleGraphics::getScenario()->setSingleStep(false);
 
+            //cout << "send: " << caseWorld << endl;
             if(caseWorld == NONE){
                 caseWorld = arbiter.checkWorld();
-                switch(caseWorld){
-                    case GOAL_TEAM1:{
-                        physics->setBallPosition(btVector3(SIZE_WIDTH/2.0, 2.0, SIZE_DEPTH/2.0));
-                    }break;
-                    case GOAL_TEAM2:{
-                        physics->setBallPosition(btVector3(SIZE_WIDTH/2.0, 2.0, SIZE_DEPTH/2.0));
-                    }break;
-                    case FAULT_TEAM1:{
 
-                    }break;
-                    case FAULT_TEAM2:{
-
-                    }break;
-                    case PENALTY_TEAM1:{
-
-                    }break;
-                    case PENALTY_TEAM2:{
-
-                    }break;
-                    case NONE:{
-
-                    }break;
-                    default:{
-                        cerr << "ERROR" << endl;
-                    }break;
+                if(caseWorld != NONE){
+                    cout << "NONE !" << endl;
+                    physics->setBallPosition(btVector3(SIZE_WIDTH/2.0, 50.0, SIZE_DEPTH/3.0));
+                    count_situation++;
                 }
+
             }else{
-                // CHECK IF HAS TO BACK TO NONE 
-                // Ex: All robots re-organized them after a goal occurs
-                if(global_commands_team_1.situation() == NONE)
-                    caseWorld = NONE;
+                //cout << "Not normal" << endl;
+                cout << "receive: " << situation_team1 << endl;
+
+                if(situation_team1 == NONE && count_situation > 100){
+                    switch(caseWorld){
+                        case GOAL_TEAM1:{
+                            caseWorld = NONE;
+                            physics->setBallPosition(btVector3(SIZE_WIDTH/2.0, 2.0, SIZE_DEPTH/2.0));
+                        }break;
+                        case GOAL_TEAM2:{
+                            //physics->setBallPosition(btVector3(SIZE_WIDTH/2.0, 2.0, SIZE_DEPTH/2.0));
+                        }break;
+                        case FAULT_TEAM1:{
+
+                        }break;
+                        case FAULT_TEAM2:{
+
+                        }break;
+                        case PENALTY_TEAM1:{
+
+                        }break;
+                        case PENALTY_TEAM2:{
+
+                        }break;
+                        case NONE:{
+
+                        }break;
+                        default:{
+                            cerr << "ERROR" << endl;
+                        }break;
+                    }
+                    count_situation = 0;
+                }
+                count_situation++;
             }
         }
     }
