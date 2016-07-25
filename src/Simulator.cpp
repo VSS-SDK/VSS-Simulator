@@ -32,6 +32,7 @@ Simulator::Simulator(){
     team_1_already = false;
     team_2_already = false;
     count_situation = 0;
+    situation_team1 = situation_team2 = 0;
 }
 
 void Simulator::runSimulator(int argc, char *argv[], ModelStrategy *stratBlueTeam, ModelStrategy *stratYellowTeam){
@@ -96,11 +97,17 @@ void Simulator::runReceiveTeam1(){
 }
 
 void Simulator::runReceiveTeam2(){
+    Interface interface;
+    interface.createReceiveCommandsTeam2(&global_commands_team_2);
     while(true){
+        global_commands_team_2 = vss_command::Global_Commands();
+        interface.receiveCommandTeam2();
+        interface.printCommand();
+        
+        situation_team2 = global_commands_team_2.situation();
         for(int i = 0 ; i < 3 ; i++){
-            commands.at(i+3) = Command(10, 10);
+            commands.at(i+3) = Command(global_commands_team_2.robot_commands(i).left_vel(), global_commands_team_2.robot_commands(i).right_vel());
         }
-        usleep(33333);
     }
 }
 
@@ -147,7 +154,6 @@ void Simulator::runSender(){
             robot_s->mutable_pose()->set_y(posRobot.getZ());
             float rads = atan2(getRobotOrientation(listRobots.at(i)).getZ(),getRobotOrientation(listRobots.at(i)).getX());
             robot_s->mutable_pose()->set_yaw(rads);
-            //cout << posRobot.getX() << " : " << posRobot.getY() << endl;
         }
 
         interface.sendState();
@@ -282,7 +288,7 @@ void Simulator::runStrategies(){
                             physics->getAllRobots()[id]->updateRobot(command);
                         }
                         else{
-                            float invCommand[2] = {0, 0};
+                            float invCommand[2] = { commands.at(id).left, commands.at(id).right };
 
                             //invCommand[0] = strategies[i]->getRobotStrategiesTeam()[j]->getCommand()[1];
                             //invCommand[1] = strategies[i]->getRobotStrategiesTeam()[j]->getCommand()[0];

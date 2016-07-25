@@ -19,18 +19,6 @@ void Interface::createSocketSendState(vss_state::Global_State *global_state){
 
 	std::cout << "Connecting Server Multicast Sender: " << addr_server_multicast << std::endl;
 	socket->bind(addr_server_multicast);
-
-	/*while (true) {
-		usleep (100000);
-
-		std::string msg_str;
-	    global_state->SerializeToString(&msg_str);
-
-	    zmq::message_t request (msg_str.size());
-	    memcpy ((void *) request.data (), msg_str.c_str(), msg_str.size());
-	    std::cout << "Sending State data ..." << std::endl;
-	    socket.send(request);
-	}*/
 }
 
 void Interface::sendState(){
@@ -53,26 +41,15 @@ void Interface::createSocketReceiveState(vss_state::Global_State *global_state){
 	socket->connect(addr_client_multicast);
 
 	socket->setsockopt(ZMQ_SUBSCRIBE, "", 0);
-
-	/*int request_nbr;
-	while(true){
-		zmq::message_t request;
-        socket.recv (&request, 0); //  Wait for next request from client
-        std::cout << "Received" << std::endl;
-        std::string msg_str(static_cast<char*>(request.data()), request.size());
-        global_state->ParseFromString(msg_str);
-        printState();
-	}
-	socket.close();*/
 }
 
 void Interface::receiveState(){
 	zmq::message_t request;
 	socket->recv(&request, 0); //  Wait for next request from client
-	std::cout << "Received" << std::endl;
+	//std::cout << "Received" << std::endl;
 	std::string msg_str(static_cast<char*>(request.data()), request.size());
 	global_state->ParseFromString(msg_str);
-	printState();
+	//printState();
 }
 
 void Interface::createSendCommandsTeam1(vss_command::Global_Commands* global_commands){
@@ -81,7 +58,7 @@ void Interface::createSendCommandsTeam1(vss_command::Global_Commands* global_com
 	context_command_yellow = new zmq::context_t(1);
 	socket_command_yellow = new zmq::socket_t(*context_command_yellow, ZMQ_PAIR);
 
-	std::cout << "Connecting Client Sender Team 1: " << addr_client_simulator_team1 << std::endl;
+	std::cout << "Connecting Client Sender Team 1: " << addr_client_simulator_team1 << "(yellow team)" << std::endl << std::endl;
 	socket_command_yellow->connect(addr_client_simulator_team1);
 }
 
@@ -98,23 +75,21 @@ void Interface::sendCommandTeam1(){
 void Interface::createSendCommandsTeam2(vss_command::Global_Commands* global_commands){
 	this->global_commands = global_commands;
 	
-	zmq::context_t context(1);
-	zmq::socket_t socket (context, ZMQ_PAIR);
+	context_command_blue = new zmq::context_t(1);
+	socket_command_blue = new zmq::socket_t(*context_command_blue, ZMQ_PAIR);
 
-	std::cout << "Connecting Client Sender Team 2: " << addr_client_simulator_team2 << std::endl;
-	socket.connect(addr_client_simulator_team2);
+	std::cout << "Connecting Client Sender Team 2: " << addr_client_simulator_team2 << "(blue team)" << std::endl << std::endl;
+	socket_command_blue->connect(addr_client_simulator_team2);
+}
 
-	while (true) {
-		usleep (100000);
+void Interface::sendCommandTeam2(){
+	std::string msg_str;
+	global_commands->SerializeToString(&msg_str);
 
-		std::string msg_str;
-	    global_commands->SerializeToString(&msg_str);
-
-	    zmq::message_t request (msg_str.size());
-	    memcpy ((void *) request.data (), msg_str.c_str(), msg_str.size());
-	    std::cout << "Sending State data ..." << std::endl;
-	    socket.send(request);
-	}
+	zmq::message_t request (msg_str.size());
+	memcpy ((void *) request.data (), msg_str.c_str(), msg_str.size());
+	//std::cout << "Sending State data ..." << std::endl;
+	socket_command_blue->send(request);
 }
 
 void Interface::createReceiveCommandsTeam1(vss_command::Global_Commands* global_commands){
@@ -140,23 +115,20 @@ void Interface::receiveCommandTeam1(){
 void Interface::createReceiveCommandsTeam2(vss_command::Global_Commands* global_commands){
 	this->global_commands = global_commands;
 
-	zmq::context_t context (1);
-	zmq::socket_t socket (context, ZMQ_PAIR);
+	context_command_blue = new zmq::context_t(1);
+	socket_command_blue = new zmq::socket_t(*context_command_blue, ZMQ_PAIR);
 
 	std::cout << "Connecting Server Receiver Team 2: " << addr_server_simulator_team2 << std::endl;
-	socket.bind(addr_server_simulator_team2);
+	socket_command_blue->bind(addr_server_simulator_team2);
+}
 
-
-	int request_nbr;
-	while(true){
-		zmq::message_t request;
-        socket.recv(&request);
-        std::cout << "Received" << std::endl;
-        std::string msg_str(static_cast<char*>(request.data()), request.size());
-        global_commands->ParseFromString(msg_str);
-        printCommand();
-	}
-	socket.close();
+void Interface::receiveCommandTeam2(){
+	zmq::message_t request;
+	socket_command_blue->recv(&request);
+	//std::cout << "Received" << std::endl;
+	std::string msg_str(static_cast<char*>(request.data()), request.size());
+	global_commands->ParseFromString(msg_str);
+	//printCommand();
 }
 
 void Interface::printState(){

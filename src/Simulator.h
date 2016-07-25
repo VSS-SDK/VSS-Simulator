@@ -60,7 +60,7 @@ private:
     thread *thread_receive_team2;
 
     bool team_1_already, team_2_already;
-    int count_situation, situation_team1;
+    int count_situation, situation_team1, situation_team2;
 
 	void updateWorld();
 	btVector3 calcRelativePosition(btVector3 absPos, int attackDir);
