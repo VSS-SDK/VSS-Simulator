@@ -118,15 +118,13 @@ void Simulator::runSender(){
 
     while(1){
         global_state = vss_state::Global_State();
-        global_state.set_team_attack_dir(-1);
         global_state.set_id(0);
         global_state.set_situation(caseWorld);
         global_state.set_origin(false);
 
         vss_state::Ball_State *ball_s = global_state.add_balls();
-        btVector3 ballPos = physics->getBallPosition();
-        ball_s->mutable_pose()->set_x(ballPos.getX());
-        ball_s->mutable_pose()->set_y(ballPos.getZ());
+        ball_s->mutable_pose()->set_x(physics->getBallPosition().getX());
+        ball_s->mutable_pose()->set_y(physics->getBallPosition().getZ());
 
         ball_s->mutable_v_pose()->set_x(0);
         ball_s->mutable_v_pose()->set_y(0);
@@ -137,29 +135,24 @@ void Simulator::runSender(){
         ball_s->mutable_k_v_pose()->set_x(0);
         ball_s->mutable_k_v_pose()->set_y(0);
 
+
         vector<RobotPhysics*> listRobots = physics->getAllRobots();
         for(int i = 0 ; i < 3 ; i++){
             vss_state::Robot_State *robot_s = global_state.add_robots_blue();
-            btVector3 posRobot = getRobotPosition(listRobots.at(i+3));            
+            btVector3 posRobot = getRobotPosition(listRobots.at(i+3));
 
             robot_s->mutable_pose()->set_x(posRobot.getX());
             robot_s->mutable_pose()->set_y(posRobot.getZ());
-
-            btVector3 frontVec = getRobotOrientation(listRobots.at(i+3));
-            float rads = atan2(frontVec.getZ(),frontVec.getX());
+            float rads = atan2(getRobotOrientation(listRobots.at(i+3)).getZ(),getRobotOrientation(listRobots.at(i+3)).getX());
             robot_s->mutable_pose()->set_yaw(rads);
         }
 
         for(int i = 0 ; i < 3 ; i++){
             vss_state::Robot_State *robot_s = global_state.add_robots_yellow();
             btVector3 posRobot = getRobotPosition(listRobots.at(i));
-
             robot_s->mutable_pose()->set_x(posRobot.getX());
             robot_s->mutable_pose()->set_y(posRobot.getZ());
-
-            btVector3 frontVec = getRobotOrientation(listRobots.at(i));
-            float rads = atan2(frontVec.getZ(),frontVec.getX());
-            robot_s->mutable_pose()->set_yaw(rads);
+            float rads = atan2(getRobotOrientation(listRobots.at(i)).getZ(),getRobotOrientation(listRobots.at(i)).getX());
             robot_s->mutable_pose()->set_yaw(rads);
         }
 
