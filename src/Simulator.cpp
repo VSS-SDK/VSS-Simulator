@@ -90,7 +90,7 @@ void Simulator::runReceiveTeam1(){
         interface.receiveCommandTeam1();
         
         situation_team1 = global_commands_team_1.situation();
-        for(int i = 0 ; i < 3 ; i++){
+        for(int i = 0 ; i < global_commands_team_1.robot_commands_size() ; i++){
             commands.at(i) = Command(global_commands_team_1.robot_commands(i).left_vel(), global_commands_team_1.robot_commands(i).right_vel());
         }
     }
@@ -105,7 +105,7 @@ void Simulator::runReceiveTeam2(){
         interface.printCommand();
         
         situation_team2 = global_commands_team_2.situation();
-        for(int i = 0 ; i < 3 ; i++){
+        for(int i = 0 ; i < global_commands_team_2.robot_commands_size() ; i++){
             commands.at(i+3) = Command(global_commands_team_2.robot_commands(i).left_vel(), global_commands_team_2.robot_commands(i).right_vel());
         }
     }
