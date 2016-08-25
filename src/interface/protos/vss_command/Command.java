@@ -8,10 +8,10 @@ public final class Command {
   public static void registerAllExtensions(
       com.google.protobuf.ExtensionRegistry registry) {
   }
-  public interface Robot_CommandOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:vss_command.Robot_Command)
-      com.google.protobuf.MessageOrBuilder {
+  public interface Robot_CommandOrBuilder
+      extends com.google.protobuf.MessageOrBuilder {
 
+    // required uint32 id = 1;
     /**
      * <code>required uint32 id = 1;</code>
      */
@@ -21,6 +21,7 @@ public final class Command {
      */
     int getId();
 
+    // required float left_vel = 2;
     /**
      * <code>required float left_vel = 2;</code>
      */
@@ -30,6 +31,7 @@ public final class Command {
      */
     float getLeftVel();
 
+    // required float right_vel = 3;
     /**
      * <code>required float right_vel = 3;</code>
      */
@@ -42,30 +44,36 @@ public final class Command {
   /**
    * Protobuf type {@code vss_command.Robot_Command}
    */
-  public  static final class Robot_Command extends
-      com.google.protobuf.GeneratedMessage implements
-      // @@protoc_insertion_point(message_implements:vss_command.Robot_Command)
-      Robot_CommandOrBuilder {
+  public static final class Robot_Command extends
+      com.google.protobuf.GeneratedMessage
+      implements Robot_CommandOrBuilder {
     // Use Robot_Command.newBuilder() to construct.
     private Robot_Command(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
+      this.unknownFields = builder.getUnknownFields();
     }
-    private Robot_Command() {
-      id_ = 0;
-      leftVel_ = 0F;
-      rightVel_ = 0F;
+    private Robot_Command(boolean noInit) { this.unknownFields = com.google.protobuf.UnknownFieldSet.getDefaultInstance(); }
+
+    private static final Robot_Command defaultInstance;
+    public static Robot_Command getDefaultInstance() {
+      return defaultInstance;
     }
 
+    public Robot_Command getDefaultInstanceForType() {
+      return defaultInstance;
+    }
+
+    private final com.google.protobuf.UnknownFieldSet unknownFields;
     @java.lang.Override
     public final com.google.protobuf.UnknownFieldSet
-    getUnknownFields() {
+        getUnknownFields() {
       return this.unknownFields;
     }
     private Robot_Command(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
-      this();
+      initFields();
       int mutable_bitField0_ = 0;
       com.google.protobuf.UnknownFieldSet.Builder unknownFields =
           com.google.protobuf.UnknownFieldSet.newBuilder();
@@ -105,7 +113,7 @@ public final class Command {
         throw e.setUnfinishedMessage(this);
       } catch (java.io.IOException e) {
         throw new com.google.protobuf.InvalidProtocolBufferException(
-            e).setUnfinishedMessage(this);
+            e.getMessage()).setUnfinishedMessage(this);
       } finally {
         this.unknownFields = unknownFields.build();
         makeExtensionsImmutable();
@@ -123,7 +131,23 @@ public final class Command {
               vss_command.Command.Robot_Command.class, vss_command.Command.Robot_Command.Builder.class);
     }
 
+    public static com.google.protobuf.Parser<Robot_Command> PARSER =
+        new com.google.protobuf.AbstractParser<Robot_Command>() {
+      public Robot_Command parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return new Robot_Command(input, extensionRegistry);
+      }
+    };
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<Robot_Command> getParserForType() {
+      return PARSER;
+    }
+
     private int bitField0_;
+    // required uint32 id = 1;
     public static final int ID_FIELD_NUMBER = 1;
     private int id_;
     /**
@@ -139,6 +163,7 @@ public final class Command {
       return id_;
     }
 
+    // required float left_vel = 2;
     public static final int LEFT_VEL_FIELD_NUMBER = 2;
     private float leftVel_;
     /**
@@ -154,6 +179,7 @@ public final class Command {
       return leftVel_;
     }
 
+    // required float right_vel = 3;
     public static final int RIGHT_VEL_FIELD_NUMBER = 3;
     private float rightVel_;
     /**
@@ -169,11 +195,15 @@ public final class Command {
       return rightVel_;
     }
 
+    private void initFields() {
+      id_ = 0;
+      leftVel_ = 0F;
+      rightVel_ = 0F;
+    }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
-      if (isInitialized == 1) return true;
-      if (isInitialized == 0) return false;
+      if (isInitialized != -1) return isInitialized == 1;
 
       if (!hasId()) {
         memoizedIsInitialized = 0;
@@ -193,6 +223,7 @@ public final class Command {
 
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
+      getSerializedSize();
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
         output.writeUInt32(1, id_);
       }
@@ -202,11 +233,12 @@ public final class Command {
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
         output.writeFloat(3, rightVel_);
       }
-      unknownFields.writeTo(output);
+      getUnknownFields().writeTo(output);
     }
 
+    private int memoizedSerializedSize = -1;
     public int getSerializedSize() {
-      int size = memoizedSize;
+      int size = memoizedSerializedSize;
       if (size != -1) return size;
 
       size = 0;
@@ -222,70 +254,16 @@ public final class Command {
         size += com.google.protobuf.CodedOutputStream
           .computeFloatSize(3, rightVel_);
       }
-      size += unknownFields.getSerializedSize();
-      memoizedSize = size;
+      size += getUnknownFields().getSerializedSize();
+      memoizedSerializedSize = size;
       return size;
     }
 
     private static final long serialVersionUID = 0L;
     @java.lang.Override
-    public boolean equals(final java.lang.Object obj) {
-      if (obj == this) {
-       return true;
-      }
-      if (!(obj instanceof vss_command.Command.Robot_Command)) {
-        return super.equals(obj);
-      }
-      vss_command.Command.Robot_Command other = (vss_command.Command.Robot_Command) obj;
-
-      boolean result = true;
-      result = result && (hasId() == other.hasId());
-      if (hasId()) {
-        result = result && (getId()
-            == other.getId());
-      }
-      result = result && (hasLeftVel() == other.hasLeftVel());
-      if (hasLeftVel()) {
-        result = result && (
-            java.lang.Float.floatToIntBits(getLeftVel())
-            == java.lang.Float.floatToIntBits(
-                other.getLeftVel()));
-      }
-      result = result && (hasRightVel() == other.hasRightVel());
-      if (hasRightVel()) {
-        result = result && (
-            java.lang.Float.floatToIntBits(getRightVel())
-            == java.lang.Float.floatToIntBits(
-                other.getRightVel()));
-      }
-      result = result && unknownFields.equals(other.unknownFields);
-      return result;
-    }
-
-    @java.lang.Override
-    public int hashCode() {
-      if (memoizedHashCode != 0) {
-        return memoizedHashCode;
-      }
-      int hash = 41;
-      hash = (19 * hash) + getDescriptorForType().hashCode();
-      if (hasId()) {
-        hash = (37 * hash) + ID_FIELD_NUMBER;
-        hash = (53 * hash) + getId();
-      }
-      if (hasLeftVel()) {
-        hash = (37 * hash) + LEFT_VEL_FIELD_NUMBER;
-        hash = (53 * hash) + java.lang.Float.floatToIntBits(
-            getLeftVel());
-      }
-      if (hasRightVel()) {
-        hash = (37 * hash) + RIGHT_VEL_FIELD_NUMBER;
-        hash = (53 * hash) + java.lang.Float.floatToIntBits(
-            getRightVel());
-      }
-      hash = (29 * hash) + unknownFields.hashCode();
-      memoizedHashCode = hash;
-      return hash;
+    protected java.lang.Object writeReplace()
+        throws java.io.ObjectStreamException {
+      return super.writeReplace();
     }
 
     public static vss_command.Command.Robot_Command parseFrom(
@@ -311,53 +289,42 @@ public final class Command {
     }
     public static vss_command.Command.Robot_Command parseFrom(java.io.InputStream input)
         throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessage
-          .parseWithIOException(PARSER, input);
+      return PARSER.parseFrom(input);
     }
     public static vss_command.Command.Robot_Command parseFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessage
-          .parseWithIOException(PARSER, input, extensionRegistry);
+      return PARSER.parseFrom(input, extensionRegistry);
     }
     public static vss_command.Command.Robot_Command parseDelimitedFrom(java.io.InputStream input)
         throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessage
-          .parseDelimitedWithIOException(PARSER, input);
+      return PARSER.parseDelimitedFrom(input);
     }
     public static vss_command.Command.Robot_Command parseDelimitedFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessage
-          .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
+      return PARSER.parseDelimitedFrom(input, extensionRegistry);
     }
     public static vss_command.Command.Robot_Command parseFrom(
         com.google.protobuf.CodedInputStream input)
         throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessage
-          .parseWithIOException(PARSER, input);
+      return PARSER.parseFrom(input);
     }
     public static vss_command.Command.Robot_Command parseFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessage
-          .parseWithIOException(PARSER, input, extensionRegistry);
+      return PARSER.parseFrom(input, extensionRegistry);
     }
 
+    public static Builder newBuilder() { return Builder.create(); }
     public Builder newBuilderForType() { return newBuilder(); }
-    public static Builder newBuilder() {
-      return DEFAULT_INSTANCE.toBuilder();
-    }
     public static Builder newBuilder(vss_command.Command.Robot_Command prototype) {
-      return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
+      return newBuilder().mergeFrom(prototype);
     }
-    public Builder toBuilder() {
-      return this == DEFAULT_INSTANCE
-          ? new Builder() : new Builder().mergeFrom(this);
-    }
+    public Builder toBuilder() { return newBuilder(this); }
 
     @java.lang.Override
     protected Builder newBuilderForType(
@@ -369,9 +336,8 @@ public final class Command {
      * Protobuf type {@code vss_command.Robot_Command}
      */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:vss_command.Robot_Command)
-        vss_command.Command.Robot_CommandOrBuilder {
+        com.google.protobuf.GeneratedMessage.Builder<Builder>
+       implements vss_command.Command.Robot_CommandOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
         return vss_command.Command.internal_static_vss_command_Robot_Command_descriptor;
@@ -398,6 +364,10 @@ public final class Command {
         if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
         }
       }
+      private static Builder create() {
+        return new Builder();
+      }
+
       public Builder clear() {
         super.clear();
         id_ = 0;
@@ -407,6 +377,10 @@ public final class Command {
         rightVel_ = 0F;
         bitField0_ = (bitField0_ & ~0x00000004);
         return this;
+      }
+
+      public Builder clone() {
+        return create().mergeFrom(buildPartial());
       }
 
       public com.google.protobuf.Descriptors.Descriptor
@@ -467,19 +441,21 @@ public final class Command {
         if (other.hasRightVel()) {
           setRightVel(other.getRightVel());
         }
-        this.mergeUnknownFields(other.unknownFields);
-        onChanged();
+        this.mergeUnknownFields(other.getUnknownFields());
         return this;
       }
 
       public final boolean isInitialized() {
         if (!hasId()) {
+          
           return false;
         }
         if (!hasLeftVel()) {
+          
           return false;
         }
         if (!hasRightVel()) {
+          
           return false;
         }
         return true;
@@ -494,7 +470,7 @@ public final class Command {
           parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
         } catch (com.google.protobuf.InvalidProtocolBufferException e) {
           parsedMessage = (vss_command.Command.Robot_Command) e.getUnfinishedMessage();
-          throw e.unwrapIOException();
+          throw e;
         } finally {
           if (parsedMessage != null) {
             mergeFrom(parsedMessage);
@@ -504,6 +480,7 @@ public final class Command {
       }
       private int bitField0_;
 
+      // required uint32 id = 1;
       private int id_ ;
       /**
        * <code>required uint32 id = 1;</code>
@@ -536,6 +513,7 @@ public final class Command {
         return this;
       }
 
+      // required float left_vel = 2;
       private float leftVel_ ;
       /**
        * <code>required float left_vel = 2;</code>
@@ -568,6 +546,7 @@ public final class Command {
         return this;
       }
 
+      // required float right_vel = 3;
       private float rightVel_ ;
       /**
        * <code>required float right_vel = 3;</code>
@@ -603,45 +582,18 @@ public final class Command {
       // @@protoc_insertion_point(builder_scope:vss_command.Robot_Command)
     }
 
-    // @@protoc_insertion_point(class_scope:vss_command.Robot_Command)
-    private static final vss_command.Command.Robot_Command DEFAULT_INSTANCE;
     static {
-      DEFAULT_INSTANCE = new vss_command.Command.Robot_Command();
+      defaultInstance = new Robot_Command(true);
+      defaultInstance.initFields();
     }
 
-    public static vss_command.Command.Robot_Command getDefaultInstance() {
-      return DEFAULT_INSTANCE;
-    }
-
-    @java.lang.Deprecated public static final com.google.protobuf.Parser<Robot_Command>
-        PARSER = new com.google.protobuf.AbstractParser<Robot_Command>() {
-      public Robot_Command parsePartialFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws com.google.protobuf.InvalidProtocolBufferException {
-          return new Robot_Command(input, extensionRegistry);
-      }
-    };
-
-    public static com.google.protobuf.Parser<Robot_Command> parser() {
-      return PARSER;
-    }
-
-    @java.lang.Override
-    public com.google.protobuf.Parser<Robot_Command> getParserForType() {
-      return PARSER;
-    }
-
-    public vss_command.Command.Robot_Command getDefaultInstanceForType() {
-      return DEFAULT_INSTANCE;
-    }
-
+    // @@protoc_insertion_point(class_scope:vss_command.Robot_Command)
   }
 
-  public interface Global_CommandsOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:vss_command.Global_Commands)
-      com.google.protobuf.MessageOrBuilder {
+  public interface Global_CommandsOrBuilder
+      extends com.google.protobuf.MessageOrBuilder {
 
+    // optional uint32 id = 1;
     /**
      * <code>optional uint32 id = 1;</code>
      */
@@ -651,6 +603,7 @@ public final class Command {
      */
     int getId();
 
+    // required bool is_team_yellow = 2;
     /**
      * <code>required bool is_team_yellow = 2;</code>
      */
@@ -660,6 +613,7 @@ public final class Command {
      */
     boolean getIsTeamYellow();
 
+    // repeated .vss_command.Robot_Command robot_commands = 3;
     /**
      * <code>repeated .vss_command.Robot_Command robot_commands = 3;</code>
      */
@@ -684,7 +638,10 @@ public final class Command {
     vss_command.Command.Robot_CommandOrBuilder getRobotCommandsOrBuilder(
         int index);
 
+    // required uint32 situation = 4;
     /**
+     * <code>required uint32 situation = 4;</code>
+     *
      * <pre>
      * SITUATIONS
      *0 = Normal Game
@@ -696,11 +653,11 @@ public final class Command {
      *6 = Re-organize (PENALITY_TEAM2)
      *99 = Finish
      * </pre>
-     *
-     * <code>required uint32 situation = 4;</code>
      */
     boolean hasSituation();
     /**
+     * <code>required uint32 situation = 4;</code>
+     *
      * <pre>
      * SITUATIONS
      *0 = Normal Game
@@ -712,39 +669,42 @@ public final class Command {
      *6 = Re-organize (PENALITY_TEAM2)
      *99 = Finish
      * </pre>
-     *
-     * <code>required uint32 situation = 4;</code>
      */
     int getSituation();
   }
   /**
    * Protobuf type {@code vss_command.Global_Commands}
    */
-  public  static final class Global_Commands extends
-      com.google.protobuf.GeneratedMessage implements
-      // @@protoc_insertion_point(message_implements:vss_command.Global_Commands)
-      Global_CommandsOrBuilder {
+  public static final class Global_Commands extends
+      com.google.protobuf.GeneratedMessage
+      implements Global_CommandsOrBuilder {
     // Use Global_Commands.newBuilder() to construct.
     private Global_Commands(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
+      this.unknownFields = builder.getUnknownFields();
     }
-    private Global_Commands() {
-      id_ = 0;
-      isTeamYellow_ = false;
-      robotCommands_ = java.util.Collections.emptyList();
-      situation_ = 0;
+    private Global_Commands(boolean noInit) { this.unknownFields = com.google.protobuf.UnknownFieldSet.getDefaultInstance(); }
+
+    private static final Global_Commands defaultInstance;
+    public static Global_Commands getDefaultInstance() {
+      return defaultInstance;
     }
 
+    public Global_Commands getDefaultInstanceForType() {
+      return defaultInstance;
+    }
+
+    private final com.google.protobuf.UnknownFieldSet unknownFields;
     @java.lang.Override
     public final com.google.protobuf.UnknownFieldSet
-    getUnknownFields() {
+        getUnknownFields() {
       return this.unknownFields;
     }
     private Global_Commands(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
-      this();
+      initFields();
       int mutable_bitField0_ = 0;
       com.google.protobuf.UnknownFieldSet.Builder unknownFields =
           com.google.protobuf.UnknownFieldSet.newBuilder();
@@ -778,8 +738,7 @@ public final class Command {
                 robotCommands_ = new java.util.ArrayList<vss_command.Command.Robot_Command>();
                 mutable_bitField0_ |= 0x00000004;
               }
-              robotCommands_.add(
-                  input.readMessage(vss_command.Command.Robot_Command.PARSER, extensionRegistry));
+              robotCommands_.add(input.readMessage(vss_command.Command.Robot_Command.PARSER, extensionRegistry));
               break;
             }
             case 32: {
@@ -793,7 +752,7 @@ public final class Command {
         throw e.setUnfinishedMessage(this);
       } catch (java.io.IOException e) {
         throw new com.google.protobuf.InvalidProtocolBufferException(
-            e).setUnfinishedMessage(this);
+            e.getMessage()).setUnfinishedMessage(this);
       } finally {
         if (((mutable_bitField0_ & 0x00000004) == 0x00000004)) {
           robotCommands_ = java.util.Collections.unmodifiableList(robotCommands_);
@@ -814,7 +773,23 @@ public final class Command {
               vss_command.Command.Global_Commands.class, vss_command.Command.Global_Commands.Builder.class);
     }
 
+    public static com.google.protobuf.Parser<Global_Commands> PARSER =
+        new com.google.protobuf.AbstractParser<Global_Commands>() {
+      public Global_Commands parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return new Global_Commands(input, extensionRegistry);
+      }
+    };
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<Global_Commands> getParserForType() {
+      return PARSER;
+    }
+
     private int bitField0_;
+    // optional uint32 id = 1;
     public static final int ID_FIELD_NUMBER = 1;
     private int id_;
     /**
@@ -830,6 +805,7 @@ public final class Command {
       return id_;
     }
 
+    // required bool is_team_yellow = 2;
     public static final int IS_TEAM_YELLOW_FIELD_NUMBER = 2;
     private boolean isTeamYellow_;
     /**
@@ -845,6 +821,7 @@ public final class Command {
       return isTeamYellow_;
     }
 
+    // repeated .vss_command.Robot_Command robot_commands = 3;
     public static final int ROBOT_COMMANDS_FIELD_NUMBER = 3;
     private java.util.List<vss_command.Command.Robot_Command> robotCommands_;
     /**
@@ -880,9 +857,12 @@ public final class Command {
       return robotCommands_.get(index);
     }
 
+    // required uint32 situation = 4;
     public static final int SITUATION_FIELD_NUMBER = 4;
     private int situation_;
     /**
+     * <code>required uint32 situation = 4;</code>
+     *
      * <pre>
      * SITUATIONS
      *0 = Normal Game
@@ -894,13 +874,13 @@ public final class Command {
      *6 = Re-organize (PENALITY_TEAM2)
      *99 = Finish
      * </pre>
-     *
-     * <code>required uint32 situation = 4;</code>
      */
     public boolean hasSituation() {
       return ((bitField0_ & 0x00000004) == 0x00000004);
     }
     /**
+     * <code>required uint32 situation = 4;</code>
+     *
      * <pre>
      * SITUATIONS
      *0 = Normal Game
@@ -912,18 +892,21 @@ public final class Command {
      *6 = Re-organize (PENALITY_TEAM2)
      *99 = Finish
      * </pre>
-     *
-     * <code>required uint32 situation = 4;</code>
      */
     public int getSituation() {
       return situation_;
     }
 
+    private void initFields() {
+      id_ = 0;
+      isTeamYellow_ = false;
+      robotCommands_ = java.util.Collections.emptyList();
+      situation_ = 0;
+    }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
-      if (isInitialized == 1) return true;
-      if (isInitialized == 0) return false;
+      if (isInitialized != -1) return isInitialized == 1;
 
       if (!hasIsTeamYellow()) {
         memoizedIsInitialized = 0;
@@ -945,6 +928,7 @@ public final class Command {
 
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
+      getSerializedSize();
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
         output.writeUInt32(1, id_);
       }
@@ -957,11 +941,12 @@ public final class Command {
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
         output.writeUInt32(4, situation_);
       }
-      unknownFields.writeTo(output);
+      getUnknownFields().writeTo(output);
     }
 
+    private int memoizedSerializedSize = -1;
     public int getSerializedSize() {
-      int size = memoizedSize;
+      int size = memoizedSerializedSize;
       if (size != -1) return size;
 
       size = 0;
@@ -981,71 +966,16 @@ public final class Command {
         size += com.google.protobuf.CodedOutputStream
           .computeUInt32Size(4, situation_);
       }
-      size += unknownFields.getSerializedSize();
-      memoizedSize = size;
+      size += getUnknownFields().getSerializedSize();
+      memoizedSerializedSize = size;
       return size;
     }
 
     private static final long serialVersionUID = 0L;
     @java.lang.Override
-    public boolean equals(final java.lang.Object obj) {
-      if (obj == this) {
-       return true;
-      }
-      if (!(obj instanceof vss_command.Command.Global_Commands)) {
-        return super.equals(obj);
-      }
-      vss_command.Command.Global_Commands other = (vss_command.Command.Global_Commands) obj;
-
-      boolean result = true;
-      result = result && (hasId() == other.hasId());
-      if (hasId()) {
-        result = result && (getId()
-            == other.getId());
-      }
-      result = result && (hasIsTeamYellow() == other.hasIsTeamYellow());
-      if (hasIsTeamYellow()) {
-        result = result && (getIsTeamYellow()
-            == other.getIsTeamYellow());
-      }
-      result = result && getRobotCommandsList()
-          .equals(other.getRobotCommandsList());
-      result = result && (hasSituation() == other.hasSituation());
-      if (hasSituation()) {
-        result = result && (getSituation()
-            == other.getSituation());
-      }
-      result = result && unknownFields.equals(other.unknownFields);
-      return result;
-    }
-
-    @java.lang.Override
-    public int hashCode() {
-      if (memoizedHashCode != 0) {
-        return memoizedHashCode;
-      }
-      int hash = 41;
-      hash = (19 * hash) + getDescriptorForType().hashCode();
-      if (hasId()) {
-        hash = (37 * hash) + ID_FIELD_NUMBER;
-        hash = (53 * hash) + getId();
-      }
-      if (hasIsTeamYellow()) {
-        hash = (37 * hash) + IS_TEAM_YELLOW_FIELD_NUMBER;
-        hash = (53 * hash) + com.google.protobuf.Internal.hashBoolean(
-            getIsTeamYellow());
-      }
-      if (getRobotCommandsCount() > 0) {
-        hash = (37 * hash) + ROBOT_COMMANDS_FIELD_NUMBER;
-        hash = (53 * hash) + getRobotCommandsList().hashCode();
-      }
-      if (hasSituation()) {
-        hash = (37 * hash) + SITUATION_FIELD_NUMBER;
-        hash = (53 * hash) + getSituation();
-      }
-      hash = (29 * hash) + unknownFields.hashCode();
-      memoizedHashCode = hash;
-      return hash;
+    protected java.lang.Object writeReplace()
+        throws java.io.ObjectStreamException {
+      return super.writeReplace();
     }
 
     public static vss_command.Command.Global_Commands parseFrom(
@@ -1071,53 +1001,42 @@ public final class Command {
     }
     public static vss_command.Command.Global_Commands parseFrom(java.io.InputStream input)
         throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessage
-          .parseWithIOException(PARSER, input);
+      return PARSER.parseFrom(input);
     }
     public static vss_command.Command.Global_Commands parseFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessage
-          .parseWithIOException(PARSER, input, extensionRegistry);
+      return PARSER.parseFrom(input, extensionRegistry);
     }
     public static vss_command.Command.Global_Commands parseDelimitedFrom(java.io.InputStream input)
         throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessage
-          .parseDelimitedWithIOException(PARSER, input);
+      return PARSER.parseDelimitedFrom(input);
     }
     public static vss_command.Command.Global_Commands parseDelimitedFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessage
-          .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
+      return PARSER.parseDelimitedFrom(input, extensionRegistry);
     }
     public static vss_command.Command.Global_Commands parseFrom(
         com.google.protobuf.CodedInputStream input)
         throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessage
-          .parseWithIOException(PARSER, input);
+      return PARSER.parseFrom(input);
     }
     public static vss_command.Command.Global_Commands parseFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessage
-          .parseWithIOException(PARSER, input, extensionRegistry);
+      return PARSER.parseFrom(input, extensionRegistry);
     }
 
+    public static Builder newBuilder() { return Builder.create(); }
     public Builder newBuilderForType() { return newBuilder(); }
-    public static Builder newBuilder() {
-      return DEFAULT_INSTANCE.toBuilder();
-    }
     public static Builder newBuilder(vss_command.Command.Global_Commands prototype) {
-      return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
+      return newBuilder().mergeFrom(prototype);
     }
-    public Builder toBuilder() {
-      return this == DEFAULT_INSTANCE
-          ? new Builder() : new Builder().mergeFrom(this);
-    }
+    public Builder toBuilder() { return newBuilder(this); }
 
     @java.lang.Override
     protected Builder newBuilderForType(
@@ -1129,9 +1048,8 @@ public final class Command {
      * Protobuf type {@code vss_command.Global_Commands}
      */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:vss_command.Global_Commands)
-        vss_command.Command.Global_CommandsOrBuilder {
+        com.google.protobuf.GeneratedMessage.Builder<Builder>
+       implements vss_command.Command.Global_CommandsOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
         return vss_command.Command.internal_static_vss_command_Global_Commands_descriptor;
@@ -1159,6 +1077,10 @@ public final class Command {
           getRobotCommandsFieldBuilder();
         }
       }
+      private static Builder create() {
+        return new Builder();
+      }
+
       public Builder clear() {
         super.clear();
         id_ = 0;
@@ -1174,6 +1096,10 @@ public final class Command {
         situation_ = 0;
         bitField0_ = (bitField0_ & ~0x00000008);
         return this;
+      }
+
+      public Builder clone() {
+        return create().mergeFrom(buildPartial());
       }
 
       public com.google.protobuf.Descriptors.Descriptor
@@ -1269,20 +1195,22 @@ public final class Command {
         if (other.hasSituation()) {
           setSituation(other.getSituation());
         }
-        this.mergeUnknownFields(other.unknownFields);
-        onChanged();
+        this.mergeUnknownFields(other.getUnknownFields());
         return this;
       }
 
       public final boolean isInitialized() {
         if (!hasIsTeamYellow()) {
+          
           return false;
         }
         if (!hasSituation()) {
+          
           return false;
         }
         for (int i = 0; i < getRobotCommandsCount(); i++) {
           if (!getRobotCommands(i).isInitialized()) {
+            
             return false;
           }
         }
@@ -1298,7 +1226,7 @@ public final class Command {
           parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
         } catch (com.google.protobuf.InvalidProtocolBufferException e) {
           parsedMessage = (vss_command.Command.Global_Commands) e.getUnfinishedMessage();
-          throw e.unwrapIOException();
+          throw e;
         } finally {
           if (parsedMessage != null) {
             mergeFrom(parsedMessage);
@@ -1308,6 +1236,7 @@ public final class Command {
       }
       private int bitField0_;
 
+      // optional uint32 id = 1;
       private int id_ ;
       /**
        * <code>optional uint32 id = 1;</code>
@@ -1340,6 +1269,7 @@ public final class Command {
         return this;
       }
 
+      // required bool is_team_yellow = 2;
       private boolean isTeamYellow_ ;
       /**
        * <code>required bool is_team_yellow = 2;</code>
@@ -1372,6 +1302,7 @@ public final class Command {
         return this;
       }
 
+      // repeated .vss_command.Robot_Command robot_commands = 3;
       private java.util.List<vss_command.Command.Robot_Command> robotCommands_ =
         java.util.Collections.emptyList();
       private void ensureRobotCommandsIsMutable() {
@@ -1381,7 +1312,7 @@ public final class Command {
          }
       }
 
-      private com.google.protobuf.RepeatedFieldBuilderV3<
+      private com.google.protobuf.RepeatedFieldBuilder<
           vss_command.Command.Robot_Command, vss_command.Command.Robot_Command.Builder, vss_command.Command.Robot_CommandOrBuilder> robotCommandsBuilder_;
 
       /**
@@ -1513,8 +1444,7 @@ public final class Command {
           java.lang.Iterable<? extends vss_command.Command.Robot_Command> values) {
         if (robotCommandsBuilder_ == null) {
           ensureRobotCommandsIsMutable();
-          com.google.protobuf.AbstractMessageLite.Builder.addAll(
-              values, robotCommands_);
+          super.addAll(values, robotCommands_);
           onChanged();
         } else {
           robotCommandsBuilder_.addAllMessages(values);
@@ -1597,11 +1527,11 @@ public final class Command {
            getRobotCommandsBuilderList() {
         return getRobotCommandsFieldBuilder().getBuilderList();
       }
-      private com.google.protobuf.RepeatedFieldBuilderV3<
+      private com.google.protobuf.RepeatedFieldBuilder<
           vss_command.Command.Robot_Command, vss_command.Command.Robot_Command.Builder, vss_command.Command.Robot_CommandOrBuilder> 
           getRobotCommandsFieldBuilder() {
         if (robotCommandsBuilder_ == null) {
-          robotCommandsBuilder_ = new com.google.protobuf.RepeatedFieldBuilderV3<
+          robotCommandsBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
               vss_command.Command.Robot_Command, vss_command.Command.Robot_Command.Builder, vss_command.Command.Robot_CommandOrBuilder>(
                   robotCommands_,
                   ((bitField0_ & 0x00000004) == 0x00000004),
@@ -1612,8 +1542,11 @@ public final class Command {
         return robotCommandsBuilder_;
       }
 
+      // required uint32 situation = 4;
       private int situation_ ;
       /**
+       * <code>required uint32 situation = 4;</code>
+       *
        * <pre>
        * SITUATIONS
        *0 = Normal Game
@@ -1625,13 +1558,13 @@ public final class Command {
        *6 = Re-organize (PENALITY_TEAM2)
        *99 = Finish
        * </pre>
-       *
-       * <code>required uint32 situation = 4;</code>
        */
       public boolean hasSituation() {
         return ((bitField0_ & 0x00000008) == 0x00000008);
       }
       /**
+       * <code>required uint32 situation = 4;</code>
+       *
        * <pre>
        * SITUATIONS
        *0 = Normal Game
@@ -1643,13 +1576,13 @@ public final class Command {
        *6 = Re-organize (PENALITY_TEAM2)
        *99 = Finish
        * </pre>
-       *
-       * <code>required uint32 situation = 4;</code>
        */
       public int getSituation() {
         return situation_;
       }
       /**
+       * <code>required uint32 situation = 4;</code>
+       *
        * <pre>
        * SITUATIONS
        *0 = Normal Game
@@ -1661,8 +1594,6 @@ public final class Command {
        *6 = Re-organize (PENALITY_TEAM2)
        *99 = Finish
        * </pre>
-       *
-       * <code>required uint32 situation = 4;</code>
        */
       public Builder setSituation(int value) {
         bitField0_ |= 0x00000008;
@@ -1671,6 +1602,8 @@ public final class Command {
         return this;
       }
       /**
+       * <code>required uint32 situation = 4;</code>
+       *
        * <pre>
        * SITUATIONS
        *0 = Normal Game
@@ -1682,8 +1615,6 @@ public final class Command {
        *6 = Re-organize (PENALITY_TEAM2)
        *99 = Finish
        * </pre>
-       *
-       * <code>required uint32 situation = 4;</code>
        */
       public Builder clearSituation() {
         bitField0_ = (bitField0_ & ~0x00000008);
@@ -1695,49 +1626,22 @@ public final class Command {
       // @@protoc_insertion_point(builder_scope:vss_command.Global_Commands)
     }
 
-    // @@protoc_insertion_point(class_scope:vss_command.Global_Commands)
-    private static final vss_command.Command.Global_Commands DEFAULT_INSTANCE;
     static {
-      DEFAULT_INSTANCE = new vss_command.Command.Global_Commands();
+      defaultInstance = new Global_Commands(true);
+      defaultInstance.initFields();
     }
 
-    public static vss_command.Command.Global_Commands getDefaultInstance() {
-      return DEFAULT_INSTANCE;
-    }
-
-    @java.lang.Deprecated public static final com.google.protobuf.Parser<Global_Commands>
-        PARSER = new com.google.protobuf.AbstractParser<Global_Commands>() {
-      public Global_Commands parsePartialFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws com.google.protobuf.InvalidProtocolBufferException {
-          return new Global_Commands(input, extensionRegistry);
-      }
-    };
-
-    public static com.google.protobuf.Parser<Global_Commands> parser() {
-      return PARSER;
-    }
-
-    @java.lang.Override
-    public com.google.protobuf.Parser<Global_Commands> getParserForType() {
-      return PARSER;
-    }
-
-    public vss_command.Command.Global_Commands getDefaultInstanceForType() {
-      return DEFAULT_INSTANCE;
-    }
-
+    // @@protoc_insertion_point(class_scope:vss_command.Global_Commands)
   }
 
-  private static final com.google.protobuf.Descriptors.Descriptor
+  private static com.google.protobuf.Descriptors.Descriptor
     internal_static_vss_command_Robot_Command_descriptor;
-  private static final 
+  private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_vss_command_Robot_Command_fieldAccessorTable;
-  private static final com.google.protobuf.Descriptors.Descriptor
+  private static com.google.protobuf.Descriptors.Descriptor
     internal_static_vss_command_Global_Commands_descriptor;
-  private static final 
+  private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_vss_command_Global_Commands_fieldAccessorTable;
 
@@ -1745,7 +1649,7 @@ public final class Command {
       getDescriptor() {
     return descriptor;
   }
-  private static  com.google.protobuf.Descriptors.FileDescriptor
+  private static com.google.protobuf.Descriptors.FileDescriptor
       descriptor;
   static {
     java.lang.String[] descriptorData = {
@@ -1757,29 +1661,29 @@ public final class Command {
       "d\022\021\n\tsituation\030\004 \002(\r"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
-        new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
-          public com.google.protobuf.ExtensionRegistry assignDescriptors(
-              com.google.protobuf.Descriptors.FileDescriptor root) {
-            descriptor = root;
-            return null;
-          }
-        };
+      new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
+        public com.google.protobuf.ExtensionRegistry assignDescriptors(
+            com.google.protobuf.Descriptors.FileDescriptor root) {
+          descriptor = root;
+          internal_static_vss_command_Robot_Command_descriptor =
+            getDescriptor().getMessageTypes().get(0);
+          internal_static_vss_command_Robot_Command_fieldAccessorTable = new
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+              internal_static_vss_command_Robot_Command_descriptor,
+              new java.lang.String[] { "Id", "LeftVel", "RightVel", });
+          internal_static_vss_command_Global_Commands_descriptor =
+            getDescriptor().getMessageTypes().get(1);
+          internal_static_vss_command_Global_Commands_fieldAccessorTable = new
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+              internal_static_vss_command_Global_Commands_descriptor,
+              new java.lang.String[] { "Id", "IsTeamYellow", "RobotCommands", "Situation", });
+          return null;
+        }
+      };
     com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
         new com.google.protobuf.Descriptors.FileDescriptor[] {
         }, assigner);
-    internal_static_vss_command_Robot_Command_descriptor =
-      getDescriptor().getMessageTypes().get(0);
-    internal_static_vss_command_Robot_Command_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-        internal_static_vss_command_Robot_Command_descriptor,
-        new java.lang.String[] { "Id", "LeftVel", "RightVel", });
-    internal_static_vss_command_Global_Commands_descriptor =
-      getDescriptor().getMessageTypes().get(1);
-    internal_static_vss_command_Global_Commands_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-        internal_static_vss_command_Global_Commands_descriptor,
-        new java.lang.String[] { "Id", "IsTeamYellow", "RobotCommands", "Situation", });
   }
 
   // @@protoc_insertion_point(outer_class_scope)

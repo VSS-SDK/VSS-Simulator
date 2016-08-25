@@ -186,7 +186,38 @@ void Simulator::runPhysics(){
             HandleGraphics::getScenario()->setSingleStep(false);
 
             //cout << "send: " << caseWorld << endl;
-            if(caseWorld == NONE){
+            caseWorld = arbiter.checkWorld();
+
+            switch(caseWorld){
+                case GOAL_TEAM1:{
+                    caseWorld = NONE;
+                    physics->setBallPosition(btVector3(SIZE_WIDTH/2.0, 2.0, SIZE_DEPTH/2.0));
+                }break;
+                case GOAL_TEAM2:{
+                    caseWorld = NONE;
+                    physics->setBallPosition(btVector3(SIZE_WIDTH/2.0, 2.0, SIZE_DEPTH/2.0));
+                }break;
+                case FAULT_TEAM1:{
+                    caseWorld = NONE;
+                }break;
+                case FAULT_TEAM2:{
+                    caseWorld = NONE;
+                }break;
+                case PENALTY_TEAM1:{
+                    caseWorld = NONE;
+                }break;
+                case PENALTY_TEAM2:{
+                    caseWorld = NONE;
+                }break;
+                case NONE:{
+                    caseWorld = NONE;
+                }break;
+                default:{
+                    cerr << "ERROR" << endl;
+                }break;
+            }
+
+            /*if(caseWorld == NONE){
                 caseWorld = arbiter.checkWorld();
 
                 if(caseWorld != NONE){
@@ -230,7 +261,7 @@ void Simulator::runPhysics(){
                     count_situation = 0;
                 }
                 count_situation++;
-            }
+            }*/
         }
     }
 }
