@@ -20,6 +20,12 @@ Installation
 ------------
 [INSTALL][install]
 
+Cloning
+-------
+```
+$ git clone --recursive https://github.com/SIRLab/VSS-Simulator.git
+```
+
 Development and Use
 -------------------
 ```
