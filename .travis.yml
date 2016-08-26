@@ -36,6 +36,5 @@ addons:
       - libzmq3-dev
       - libboost-all-dev
 script:
-
   - make proto
   - make

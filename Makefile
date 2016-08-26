@@ -49,7 +49,7 @@ clean: message_cleaning
 	@rm $(EXEC) $(FILE_NAMES)
 
 proto:
-	cd src/interface/protos && make -f protos.make
+	cd src/VSS-Interface/protos && make -f protos.make
 
 help: 
 	./$(EXEC) -h

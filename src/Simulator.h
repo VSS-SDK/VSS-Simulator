@@ -19,7 +19,7 @@ copies or substantial portions of the Software.
 #include "Header.h"
 #include "Scenario.h"
 #include "strategies/ModelStrategy.h"
-#include "interface/interface.h"
+#include "VSS-Interface/interface.h"
 #include "Arbiter.h"
 
 class Simulator{
