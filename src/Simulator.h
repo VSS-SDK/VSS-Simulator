@@ -17,7 +17,12 @@ copies or substantial portions of the Software.
 #define SIMULATOR_H_
 
 #include "Header.h"
-#include "Scenario.h"
+
+#include "Physics.h"
+#include "RobotStrategy.h"
+#include "RobotPhysics.h"
+#include "strategies/Strategy.h"
+
 #include "strategies/ModelStrategy.h"
 #include "VSS-Interface/interface.h"
 #include "Arbiter.h"
@@ -48,12 +53,10 @@ private:
     int loopBullet;
     int caseWorld;
     
-	HandleGraphics* handleGraphics;
 	Physics* physics;
 	vector<ModelStrategy*> strategies;
 
     thread *thread_physics;
-    thread *thread_graphics;
     thread *thread_strategies;
     thread *thread_send;
     thread *thread_receive_team1;
@@ -75,7 +78,6 @@ public:
 	void runSimulator(int argc, char *argv[], ModelStrategy* strategyTeam, ModelStrategy* strategyAdv);
 
 	void runPhysics();
-	void runGraphics();
 	void runStrategies();
     void runSender();
     void runReceiveTeam1();

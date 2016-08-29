@@ -52,7 +52,6 @@ void Simulator::runSimulator(int argc, char *argv[], ModelStrategy *stratBlueTea
 	}
 
 	physics = new Physics(numTeams);
-	HandleGraphics::initGraphics(physics,strategies,argc,argv);
 
     vector<RobotPhysics*> gRobots = physics->getAllRobots();
 
@@ -66,14 +65,12 @@ void Simulator::runSimulator(int argc, char *argv[], ModelStrategy *stratBlueTea
         gameState->robotStrategiesAdv = robotStrategiesTeam;
     }
 
-    thread_graphics = new thread(bind(&Simulator::runGraphics, this));
     thread_physics = new thread(bind(&Simulator::runPhysics, this));
     thread_strategies = new thread(bind(&Simulator::runStrategies, this));
     thread_send = new thread(bind(&Simulator::runSender, this));
     thread_receive_team1 = new thread(bind(&Simulator::runReceiveTeam1, this));
     thread_receive_team2 = new thread(bind(&Simulator::runReceiveTeam2, this));
 
-    thread_graphics->join();
     thread_physics->join();
     thread_strategies->join();
     thread_send->join();
@@ -161,108 +158,96 @@ void Simulator::runSender(){
     }
 }
 
-void Simulator::runGraphics(){
-    while(!runningPhysics){
-        usleep(1000000.f*timeStep/handTime);
-    }
-	HandleGraphics::runGraphics();
-}
-
 void Simulator::runPhysics(){
     int subStep = 1;
     float standStep = 1.f/60.f;
 
-    while(!HandleGraphics::getScenario()->getQuitStatus()){
+    while(true){
         usleep(1000000.f*timeStep/handTime);
 
+        loopBullet++;
+        //cout << "--------Ciclo Atual:\t" << loopBullet << "--------" << endl;
+        physics->stepSimulation(timeStep,subStep,standStep);
+        gameState->sameState = false;
+        runningPhysics = true;
 
-        if(HandleGraphics::getScenario()->getSingleStep() && gameState->sameState ){
-            //cout << endl << endl << endl;
-            loopBullet++;
-            //cout << "--------Ciclo Atual:\t" << loopBullet << "--------" << endl;
-            physics->stepSimulation(timeStep,subStep,standStep);
-            gameState->sameState = false;
-            runningPhysics = true;
-            HandleGraphics::getScenario()->setSingleStep(false);
+        //cout << "send: " << caseWorld << endl;
+        caseWorld = arbiter.checkWorld();
 
-            //cout << "send: " << caseWorld << endl;
+        switch(caseWorld){
+            case GOAL_TEAM1:{
+                caseWorld = NONE;
+                physics->setBallPosition(btVector3(SIZE_WIDTH/2.0, 2.0, SIZE_DEPTH/2.0));
+            }break;
+            case GOAL_TEAM2:{
+                caseWorld = NONE;
+                physics->setBallPosition(btVector3(SIZE_WIDTH/2.0, 2.0, SIZE_DEPTH/2.0));
+            }break;
+            case FAULT_TEAM1:{
+                caseWorld = NONE;
+            }break;
+            case FAULT_TEAM2:{
+                caseWorld = NONE;
+            }break;
+            case PENALTY_TEAM1:{
+                caseWorld = NONE;
+            }break;
+            case PENALTY_TEAM2:{
+                caseWorld = NONE;
+            }break;
+            case NONE:{
+                caseWorld = NONE;
+            }break;
+            default:{
+                cerr << "ERROR" << endl;
+            }break;
+        }
+
+        /*if(caseWorld == NONE){
             caseWorld = arbiter.checkWorld();
 
-            switch(caseWorld){
-                case GOAL_TEAM1:{
-                    caseWorld = NONE;
-                    physics->setBallPosition(btVector3(SIZE_WIDTH/2.0, 2.0, SIZE_DEPTH/2.0));
-                }break;
-                case GOAL_TEAM2:{
-                    caseWorld = NONE;
-                    physics->setBallPosition(btVector3(SIZE_WIDTH/2.0, 2.0, SIZE_DEPTH/2.0));
-                }break;
-                case FAULT_TEAM1:{
-                    caseWorld = NONE;
-                }break;
-                case FAULT_TEAM2:{
-                    caseWorld = NONE;
-                }break;
-                case PENALTY_TEAM1:{
-                    caseWorld = NONE;
-                }break;
-                case PENALTY_TEAM2:{
-                    caseWorld = NONE;
-                }break;
-                case NONE:{
-                    caseWorld = NONE;
-                }break;
-                default:{
-                    cerr << "ERROR" << endl;
-                }break;
+            if(caseWorld != NONE){
+                cout << "NONE !" << endl;
+                physics->setBallPosition(btVector3(SIZE_WIDTH/2.0, 50.0, SIZE_DEPTH/3.0));
+                count_situation++;
             }
 
-            /*if(caseWorld == NONE){
-                caseWorld = arbiter.checkWorld();
+        }else{
+            //cout << "Not normal" << endl;
+            cout << "receive: " << situation_team1 << endl;
 
-                if(caseWorld != NONE){
-                    cout << "NONE !" << endl;
-                    physics->setBallPosition(btVector3(SIZE_WIDTH/2.0, 50.0, SIZE_DEPTH/3.0));
-                    count_situation++;
+            if(situation_team1 == NONE && count_situation > 100){
+                switch(caseWorld){
+                    case GOAL_TEAM1:{
+                        caseWorld = NONE;
+                        physics->setBallPosition(btVector3(SIZE_WIDTH/2.0, 2.0, SIZE_DEPTH/2.0));
+                    }break;
+                    case GOAL_TEAM2:{
+                        //physics->setBallPosition(btVector3(SIZE_WIDTH/2.0, 2.0, SIZE_DEPTH/2.0));
+                    }break;
+                    case FAULT_TEAM1:{
+
+                    }break;
+                    case FAULT_TEAM2:{
+
+                    }break;
+                    case PENALTY_TEAM1:{
+
+                    }break;
+                    case PENALTY_TEAM2:{
+
+                    }break;
+                    case NONE:{
+
+                    }break;
+                    default:{
+                        cerr << "ERROR" << endl;
+                    }break;
                 }
-
-            }else{
-                //cout << "Not normal" << endl;
-                cout << "receive: " << situation_team1 << endl;
-
-                if(situation_team1 == NONE && count_situation > 100){
-                    switch(caseWorld){
-                        case GOAL_TEAM1:{
-                            caseWorld = NONE;
-                            physics->setBallPosition(btVector3(SIZE_WIDTH/2.0, 2.0, SIZE_DEPTH/2.0));
-                        }break;
-                        case GOAL_TEAM2:{
-                            //physics->setBallPosition(btVector3(SIZE_WIDTH/2.0, 2.0, SIZE_DEPTH/2.0));
-                        }break;
-                        case FAULT_TEAM1:{
-
-                        }break;
-                        case FAULT_TEAM2:{
-
-                        }break;
-                        case PENALTY_TEAM1:{
-
-                        }break;
-                        case PENALTY_TEAM2:{
-
-                        }break;
-                        case NONE:{
-
-                        }break;
-                        default:{
-                            cerr << "ERROR" << endl;
-                        }break;
-                    }
-                    count_situation = 0;
-                }
-                count_situation++;
-            }*/
-        }
+                count_situation = 0;
+            }
+            count_situation++;
+        }*/
     }
 }
 
@@ -270,6 +255,7 @@ void Simulator::runStrategies(){
     btVector3 posTargets[] = {btVector3(SIZE_WIDTH,0,SIZE_DEPTH/2),btVector3(0,0,SIZE_DEPTH/2)};
     int attackDir = 0;
     int framesSec = (int)(1/timeStep);
+
     for(int i = 0; i < physics->getNumTeams();i++){
         if(posTargets[i].getX() > 0)  attackDir = 1;
         else attackDir = -1;
@@ -282,55 +268,55 @@ void Simulator::runStrategies(){
         }
             
     }
-    while(!HandleGraphics::getScenario()->getQuitStatus()){
+
+    while(true){
         usleep(1000000.f*timeStep/handTime);
-        if(HandleGraphics::getScenario()->getSingleStep()){
-            if(!gameState->sameState){
-                updateWorld();
 
-                if(strategies.size() > 0){
-                    btVector3 ballPos = calcRelativePosition(physics->getBallPosition(),strategies[0]->getAttackDir());
+        if(!gameState->sameState){
+            updateWorld();
+
+            if(strategies.size() > 0){
+                btVector3 ballPos = calcRelativePosition(physics->getBallPosition(),strategies[0]->getAttackDir());
+                calcRelativeWorld(gameState->robotStrategiesTeam,strategies[0]->getAttackDir());
+
+                strategies[0]->runStrategy(gameState->robotStrategiesTeam,gameState->robotStrategiesTeam,ballPos);
+                if(strategies.size() == 2){
+                    btVector3 ballPos = calcRelativePosition(physics->getBallPosition(),strategies[1]->getAttackDir());
+                    calcRelativeWorld(gameState->robotStrategiesAdv,strategies[1]->getAttackDir());
                     calcRelativeWorld(gameState->robotStrategiesTeam,strategies[0]->getAttackDir());
-
-                    strategies[0]->runStrategy(gameState->robotStrategiesTeam,gameState->robotStrategiesTeam,ballPos);
-                    if(strategies.size() == 2){
-                        btVector3 ballPos = calcRelativePosition(physics->getBallPosition(),strategies[1]->getAttackDir());
-                        calcRelativeWorld(gameState->robotStrategiesAdv,strategies[1]->getAttackDir());
-                        calcRelativeWorld(gameState->robotStrategiesTeam,strategies[0]->getAttackDir());
-                        strategies[1]->runStrategy(gameState->robotStrategiesAdv,gameState->robotStrategiesTeam,ballPos);
-                    }
-                }else{
-                    cout << "You must set a strategy to run the simulator!\n" << endl;
-                    exit(0);
+                    strategies[1]->runStrategy(gameState->robotStrategiesAdv,gameState->robotStrategiesTeam,ballPos);
                 }
-
-                for(int i = 0; i < physics->getNumTeams(); i++){
-                    for(int j = 0; j < numRobotsTeam; j++){
-                        int id = i*numRobotsTeam + j;
-                        if(strategies[i]->getAttackDir() == 1){
-                            //cout << id << endl;
-                            float command[2] = { commands.at(id).left, commands.at(id).right };
-                            //if(id == 0)
-                                //cout << command[0] << " - " << command[1] << endl;
-
-                            //command[1] = strategies[i]->getRobotStrategiesTeam()[j]->getCommand()[1];
-                            //command[0] = strategies[i]->getRobotStrategiesTeam()[j]->getCommand()[0];
-
-                            physics->getAllRobots()[id]->updateRobot(command);
-                        }
-                        else{
-                            float invCommand[2] = { commands.at(id).left, commands.at(id).right };
-
-                            //invCommand[0] = strategies[i]->getRobotStrategiesTeam()[j]->getCommand()[1];
-                            //invCommand[1] = strategies[i]->getRobotStrategiesTeam()[j]->getCommand()[0];
-
-                            physics->getAllRobots()[id]->updateRobot(invCommand);
-                        } 
-                    }
-                }
-
-                gameState->sameState = true;
+            }else{
+                cout << "You must set a strategy to run the simulator!\n" << endl;
+                exit(0);
             }
+
+            for(int i = 0; i < physics->getNumTeams(); i++){
+                for(int j = 0; j < numRobotsTeam; j++){
+                    int id = i*numRobotsTeam + j;
+                    if(strategies[i]->getAttackDir() == 1){
+                        //cout << id << endl;
+                        float command[2] = { commands.at(id).left, commands.at(id).right };
+                        //if(id == 0)
+                            //cout << command[0] << " - " << command[1] << endl;
+
+                        //command[1] = strategies[i]->getRobotStrategiesTeam()[j]->getCommand()[1];
+                        //command[0] = strategies[i]->getRobotStrategiesTeam()[j]->getCommand()[0];
+
+                        physics->getAllRobots()[id]->updateRobot(command);
+                    }
+                    else{
+                        float invCommand[2] = { commands.at(id).left, commands.at(id).right };
+
+                        //invCommand[0] = strategies[i]->getRobotStrategiesTeam()[j]->getCommand()[1];
+                        //invCommand[1] = strategies[i]->getRobotStrategiesTeam()[j]->getCommand()[0];
+
+                        physics->getAllRobots()[id]->updateRobot(invCommand);
+                    } 
+                }
+            }
+
+            gameState->sameState = true;
         }
     }
 }
