@@ -24,6 +24,8 @@
 
 # Junk files
 .vscode/.browse.VC*
+*.pb.cc
+*.pb.h
 
 # Executables
 *.exe
