@@ -83,6 +83,7 @@ void Simulator::runReceiveTeam1(){
     Interface interface;
     interface.createReceiveCommandsTeam1(&global_commands_team_1);
     while(true){
+        cout << "team1" << endl;
         global_commands_team_1 = vss_command::Global_Commands();
         interface.receiveCommandTeam1();
         
@@ -97,6 +98,7 @@ void Simulator::runReceiveTeam2(){
     Interface interface;
     interface.createReceiveCommandsTeam2(&global_commands_team_2);
     while(true){
+        cout << "team2" << endl;
         global_commands_team_2 = vss_command::Global_Commands();
         interface.receiveCommandTeam2();
         interface.printCommand();
@@ -111,9 +113,10 @@ void Simulator::runReceiveTeam2(){
 void Simulator::runSender(){
     Interface interface;
     interface.createSocketSendState(&global_state);
-    arbiter.allocateState(&global_state);
+    //arbiter.allocateState(&global_state);
 
     while(1){
+        //cout << "send" << endl;
         global_state = vss_state::Global_State();
         global_state.set_id(0);
         global_state.set_situation(caseWorld);
@@ -142,15 +145,40 @@ void Simulator::runSender(){
             robot_s->mutable_pose()->set_y(posRobot.getZ());
             float rads = atan2(getRobotOrientation(listRobots.at(i+3)).getZ(),getRobotOrientation(listRobots.at(i+3)).getX());
             robot_s->mutable_pose()->set_yaw(rads);
+
+            robot_s->mutable_v_pose()->set_x(0);
+            robot_s->mutable_v_pose()->set_y(0);
+            robot_s->mutable_v_pose()->set_yaw(0);
+
+            robot_s->mutable_k_pose()->set_x(0);
+            robot_s->mutable_k_pose()->set_y(0);
+            robot_s->mutable_k_pose()->set_yaw(0);
+
+            robot_s->mutable_k_v_pose()->set_x(0);
+            robot_s->mutable_k_v_pose()->set_y(0);
+            robot_s->mutable_k_v_pose()->set_yaw(0);
         }
 
         for(int i = 0 ; i < 3 ; i++){
             vss_state::Robot_State *robot_s = global_state.add_robots_yellow();
             btVector3 posRobot = getRobotPosition(listRobots.at(i));
+
             robot_s->mutable_pose()->set_x(posRobot.getX());
             robot_s->mutable_pose()->set_y(posRobot.getZ());
             float rads = atan2(getRobotOrientation(listRobots.at(i)).getZ(),getRobotOrientation(listRobots.at(i)).getX());
             robot_s->mutable_pose()->set_yaw(rads);
+
+            robot_s->mutable_v_pose()->set_x(0);
+            robot_s->mutable_v_pose()->set_y(0);
+            robot_s->mutable_v_pose()->set_yaw(0);
+
+            robot_s->mutable_k_pose()->set_x(0);
+            robot_s->mutable_k_pose()->set_y(0);
+            robot_s->mutable_k_pose()->set_yaw(0);
+
+            robot_s->mutable_k_v_pose()->set_x(0);
+            robot_s->mutable_k_v_pose()->set_y(0);
+            robot_s->mutable_k_v_pose()->set_yaw(0);
         }
 
         interface.sendState();
