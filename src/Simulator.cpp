@@ -83,7 +83,7 @@ void Simulator::runReceiveTeam1(){
     Interface interface;
     interface.createReceiveCommandsTeam1(&global_commands_team_1);
     while(true){
-        cout << "team1" << endl;
+        //cout << "team1" << endl;
         global_commands_team_1 = vss_command::Global_Commands();
         interface.receiveCommandTeam1();
         
@@ -98,10 +98,10 @@ void Simulator::runReceiveTeam2(){
     Interface interface;
     interface.createReceiveCommandsTeam2(&global_commands_team_2);
     while(true){
-        cout << "team2" << endl;
+        //cout << "team2" << endl;
         global_commands_team_2 = vss_command::Global_Commands();
         interface.receiveCommandTeam2();
-        interface.printCommand();
+        //interface.printCommand();
         
         situation_team2 = global_commands_team_2.situation();
         for(int i = 0 ; i < global_commands_team_2.robot_commands_size() ; i++){
