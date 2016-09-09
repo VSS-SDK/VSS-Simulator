@@ -80,6 +80,7 @@ void Simulator::runSimulator(int argc, char *argv[], ModelStrategy *stratBlueTea
 
 
 void Simulator::runReceiveTeam1(){
+    // YELLOW
     Interface interface;
     interface.createReceiveCommandsTeam1(&global_commands_team_1);
     while(true){
@@ -95,6 +96,7 @@ void Simulator::runReceiveTeam1(){
 }
 
 void Simulator::runReceiveTeam2(){
+    // BLUE
     Interface interface;
     interface.createReceiveCommandsTeam2(&global_commands_team_2);
     while(true){
