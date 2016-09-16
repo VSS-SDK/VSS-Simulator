@@ -18,4 +18,5 @@ copies or substantial portions of the Software.
 #define SCALE_WORLD 100 //Defines the centimeter as unit of measurement in the world. Used in non-linear equations to convert centimeter in meter (SI)
 
 #define SIZE_WIDTH 150
+#define GOAL_WIDTH 10
 #define SIZE_DEPTH 130

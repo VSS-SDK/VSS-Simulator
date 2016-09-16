@@ -65,6 +65,8 @@ public:
 	btDynamicsWorld* getWorldPhysics() { return world; }
 	btVector3 getBallPosition();
 	void setBallPosition(btVector3);
+	void setBallVelocity(btVector3);
+
 	vector<BulletObject*> getAllBtObj() { return bodies; }
 	vector<RobotPhysics*> getAllRobots() { return genRobots; }
 };

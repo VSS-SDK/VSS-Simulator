@@ -204,6 +204,8 @@ void Simulator::runPhysics(){
         //cout << "send: " << caseWorld << endl;
         caseWorld = arbiter.checkWorld();
 
+        physics->setBallVelocity(btVector3(0.025, 0, -1));
+
         switch(caseWorld){
             case GOAL_TEAM1:{
                 caseWorld = NONE;
