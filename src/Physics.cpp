@@ -56,7 +56,7 @@ void Physics::deleteWorldObj(){
 void Physics::registBodies(){
     addFloor();
 
-    addBall(2.5, btVector3(10, 0, 65), 0.08);
+    addBall(2.5, btVector3(85, 0, 65), 0.08);
 
     btVector3 posTeam1[] = {btVector3(25,4,SIZE_DEPTH- 55),btVector3(35,4,30),btVector3(55,4,45)};
     btVector3 posTeam2[] = {btVector3(SIZE_WIDTH-15,4,55),btVector3(SIZE_WIDTH-25,4,SIZE_DEPTH - SIZE_DEPTH/2.5 + 20),btVector3(SIZE_WIDTH-55,4,85)};
@@ -101,22 +101,16 @@ void Physics::registBodies(){
     // PAREDE DE BAIXO DENTRO DO GOL DIREITO
     addWall(Color(0,0,0), btVector3(SIZE_WIDTH + (2.0*GOAL_WIDTH)-(GOAL_WIDTH/2.0), 0, SIZE_DEPTH/2.0+(45/2.0)), GOAL_WIDTH, 5, 2.5, 0);
 
-    /*addWall(Color(0,0,0),btVector3(-1.6,7.5,SIZE_DEPTH/6),5,15,SIZE_DEPTH/3,0);
-    addWall(Color(0,0,0),btVector3(-1.6,7.5,SIZE_DEPTH-SIZE_DEPTH/6),5,15,SIZE_DEPTH/3,0);
-    addWall(Color(0,0,0),btVector3(-12.5,7.5, SIZE_DEPTH/2),5,15,SIZE_DEPTH/3,0);
-    addWall(Color(0,0,0),btVector3(-7,7.5,SIZE_DEPTH/3),15,15,5,0);
-    addWall(Color(0,0,0),btVector3(-7,7.5,2*SIZE_DEPTH/3+2.5),15,15,5,0);
-
-    addWall(Color(0,0,0),btVector3(SIZE_WIDTH+3.5,7.5,SIZE_DEPTH/6),5,15,SIZE_DEPTH/3,0);
-    addWall(Color(0,0,0),btVector3(SIZE_WIDTH+3.5,7.5,SIZE_DEPTH-SIZE_DEPTH/6),5,15,SIZE_DEPTH/3,0);
-    addWall(Color(0,0,0),btVector3(SIZE_WIDTH+13.5,7.5, SIZE_DEPTH/2),5,15,SIZE_DEPTH/3,0);
-    addWall(Color(0,0,0),btVector3(SIZE_WIDTH+8.5,7.5,SIZE_DEPTH/3),15,15,5,0);
-    addWall(Color(0,0,0),btVector3(SIZE_WIDTH+8.5,7.5,2*SIZE_DEPTH/3+2.5),15,15,5,0);
-
-    addCorner(Color(0,0,0),btVector3(10,7.5,10),30,15,btVector3(0,45,0));
-    addCorner(Color(0,0,0),btVector3(SIZE_WIDTH-9,7.5,10),30,15,btVector3(0,-45,0));
-    addCorner(Color(0,0,0),btVector3(SIZE_WIDTH-9,7.5,SIZE_DEPTH-10),30,15,btVector3(0,45,0));
-    addCorner(Color(0,0,0),btVector3(10,7.5,SIZE_DEPTH-10),30,15,btVector3(0,-45,0));*/
+    // TRIANGULO SUPERIOR ESQUERDO
+    addCorner(Color(0,0,0),btVector3(SIZE_WIDTH + (GOAL_WIDTH), 0, GOAL_WIDTH+1.25), 45, 5, btVector3(0,-45,0));
+    // TRIANGULO SUPERIOR DIREITO
+    addCorner(Color(0,0,0),btVector3(GOAL_WIDTH, 0, GOAL_WIDTH+1.25), 45, 5, btVector3(0,45,0));
+    
+    // TRIANGULO INFERIOR ESQUERDO
+    addCorner(Color(0,0,0),btVector3(GOAL_WIDTH+1.25, 0, SIZE_DEPTH-GOAL_WIDTH+1.25), 45, 5, btVector3(0,-45,0));
+    // TRIANGULO INFERIOR DIREITO
+    addCorner(Color(0,0,0),btVector3(SIZE_WIDTH + GOAL_WIDTH-1.25, 0, SIZE_DEPTH-GOAL_WIDTH-1.25), 45, 5, btVector3(0,45,0));
+    
 }
 
 void Physics::resetRobotPositions(){
