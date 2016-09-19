@@ -202,18 +202,18 @@ void Simulator::runPhysics(){
         runningPhysics = true;
 
         //cout << "send: " << caseWorld << endl;
-        caseWorld = arbiter.checkWorld();
+        caseWorld = arbiter.checkWorld(global_state);
 
         //physics->setBallVelocity(btVector3(-1, 0, 1));
 
         switch(caseWorld){
             case GOAL_TEAM1:{
                 caseWorld = NONE;
-                physics->setBallPosition(btVector3(SIZE_WIDTH/2.0, 2.0, SIZE_DEPTH/2.0));
+                physics->setBallPosition(btVector3( (SIZE_WIDTH/2.0)+10 , 2.0, SIZE_DEPTH/2.0));
             }break;
             case GOAL_TEAM2:{
                 caseWorld = NONE;
-                physics->setBallPosition(btVector3(SIZE_WIDTH/2.0, 2.0, SIZE_DEPTH/2.0));
+                physics->setBallPosition(btVector3( (SIZE_WIDTH/2.0)+10 , 2.0, SIZE_DEPTH/2.0));
             }break;
             case FAULT_TEAM1:{
                 caseWorld = NONE;
@@ -234,52 +234,6 @@ void Simulator::runPhysics(){
                 cerr << "ERROR" << endl;
             }break;
         }
-
-        /*if(caseWorld == NONE){
-            caseWorld = arbiter.checkWorld();
-
-            if(caseWorld != NONE){
-                cout << "NONE !" << endl;
-                physics->setBallPosition(btVector3(SIZE_WIDTH/2.0, 50.0, SIZE_DEPTH/3.0));
-                count_situation++;
-            }
-
-        }else{
-            //cout << "Not normal" << endl;
-            cout << "receive: " << situation_team1 << endl;
-
-            if(situation_team1 == NONE && count_situation > 100){
-                switch(caseWorld){
-                    case GOAL_TEAM1:{
-                        caseWorld = NONE;
-                        physics->setBallPosition(btVector3(SIZE_WIDTH/2.0, 2.0, SIZE_DEPTH/2.0));
-                    }break;
-                    case GOAL_TEAM2:{
-                        //physics->setBallPosition(btVector3(SIZE_WIDTH/2.0, 2.0, SIZE_DEPTH/2.0));
-                    }break;
-                    case FAULT_TEAM1:{
-
-                    }break;
-                    case FAULT_TEAM2:{
-
-                    }break;
-                    case PENALTY_TEAM1:{
-
-                    }break;
-                    case PENALTY_TEAM2:{
-
-                    }break;
-                    case NONE:{
-
-                    }break;
-                    default:{
-                        cerr << "ERROR" << endl;
-                    }break;
-                }
-                count_situation = 0;
-            }
-            count_situation++;
-        }*/
     }
 }
 
