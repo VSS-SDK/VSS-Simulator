@@ -202,7 +202,7 @@ void Simulator::runPhysics(){
         runningPhysics = true;
 
         //cout << "send: " << caseWorld << endl;
-        caseWorld = arbiter.checkWorld(global_state);
+        caseWorld = arbiter.checkWorld(physics->getBallPosition());
 
         //physics->setBallVelocity(btVector3(-1, 0, 1));
 

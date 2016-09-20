@@ -11,7 +11,7 @@ class Arbiter{
 public:
 	Arbiter();
 
-	int checkWorld(vss_state::Global_State);
+	int checkWorld(btVector3);
 };
 
 #endif // _ARBITER_H_
