@@ -192,6 +192,8 @@ void Simulator::runPhysics(){
     int subStep = 1;
     float standStep = 1.f/60.f;
 
+    arbiter.allocPhysics(physics);
+
     while(true){
         usleep(1000000.f*timeStep/handTime);
 
@@ -201,39 +203,7 @@ void Simulator::runPhysics(){
         gameState->sameState = false;
         runningPhysics = true;
 
-        //cout << "send: " << caseWorld << endl;
-        caseWorld = arbiter.checkWorld(physics->getBallPosition());
-
-        //physics->setBallVelocity(btVector3(-1, 0, 1));
-
-        switch(caseWorld){
-            case GOAL_TEAM1:{
-                caseWorld = NONE;
-                physics->setBallPosition(btVector3( (SIZE_WIDTH/2.0)+10 , 2.0, SIZE_DEPTH/2.0));
-            }break;
-            case GOAL_TEAM2:{
-                caseWorld = NONE;
-                physics->setBallPosition(btVector3( (SIZE_WIDTH/2.0)+10 , 2.0, SIZE_DEPTH/2.0));
-            }break;
-            case FAULT_TEAM1:{
-                caseWorld = NONE;
-            }break;
-            case FAULT_TEAM2:{
-                caseWorld = NONE;
-            }break;
-            case PENALTY_TEAM1:{
-                caseWorld = NONE;
-            }break;
-            case PENALTY_TEAM2:{
-                caseWorld = NONE;
-            }break;
-            case NONE:{
-                caseWorld = NONE;
-            }break;
-            default:{
-                cerr << "ERROR" << endl;
-            }break;
-        }
+        caseWorld = arbiter.checkWorld();
     }
 }
 

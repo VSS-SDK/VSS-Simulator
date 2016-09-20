@@ -69,6 +69,7 @@ public:
 
 	vector<BulletObject*> getAllBtObj() { return bodies; }
 	vector<RobotPhysics*> getAllRobots() { return genRobots; }
+	void setRobotsPosition(vector<btVector3>);
 };
 
 #endif

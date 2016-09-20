@@ -205,26 +205,36 @@ void Physics::setBallPosition(btVector3 newPos){
 }
 
 void Physics::setBallVelocity(btVector3 newVel){
-    cout << "vel" << endl;
     for(int i=0;i<bodies.size();i++){
         if(bodies[i]->name.compare("ball") == 0){
             btTransform t;
-            //bodies[i]->body->getMotionState()->getWorldTransform(t);
 
             bodies[i]->body->applyForce(newVel, newVel);
-
-            /*t.setIdentity();
-            //t.setOrigin(getBallPosition());
-            
-            btMotionState* motion = new btDefaultMotionState(t);
-            
-            bodies[i]->body->setMotionState(motion);
-            bodies[i]->body->setLinearVelocity(newVel);
-            bodies[i]->body->setAngularVelocity(newVel);*/
 
             break;
         }
     }
+}
+
+void Physics::setRobotsPosition(vector<btVector3> new_poses){
+     /*for(int i=0;i<bodies.size();i++){
+        if(bodies[i]->name.compare("robot") == 0){
+            cout << "robot: " << i << endl;
+            btTransform t;
+            bodies[i]->body->getMotionState()->getWorldTransform(t);
+
+            t.setIdentity();
+            t.setOrigin(new_poses.at(i));
+            
+            btMotionState* motion = new btDefaultMotionState(t);
+            
+            bodies[i]->body->setMotionState(motion);
+            bodies[i]->body->setLinearVelocity(btVector3(0,0,0));
+            bodies[i]->body->setAngularVelocity(btVector3(0,0,0));
+
+            break;
+        }
+    }*/
 }
 
 void Physics::startDebug(){
