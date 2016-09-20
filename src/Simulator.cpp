@@ -128,8 +128,8 @@ void Simulator::runSender(){
         ball_s->mutable_pose()->set_x(physics->getBallPosition().getX());
         ball_s->mutable_pose()->set_y(physics->getBallPosition().getZ());
 
-        ball_s->mutable_v_pose()->set_x(0);
-        ball_s->mutable_v_pose()->set_y(0);
+        ball_s->mutable_v_pose()->set_x(physics->getBallVelocity().getX());
+        ball_s->mutable_v_pose()->set_y(physics->getBallVelocity().getZ());
 
         ball_s->mutable_k_pose()->set_x(0);
         ball_s->mutable_k_pose()->set_y(0);

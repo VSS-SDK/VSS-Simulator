@@ -64,6 +64,7 @@ public:
     int getNumTeams(){ return numTeams; }
 	btDynamicsWorld* getWorldPhysics() { return world; }
 	btVector3 getBallPosition();
+	btVector3 getBallVelocity();
 	void setBallPosition(btVector3);
 	void setBallVelocity(btVector3);
 

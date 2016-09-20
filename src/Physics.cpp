@@ -184,6 +184,20 @@ btVector3 Physics::getBallPosition(){
 	return ballPos;
 }
 
+btVector3 Physics::getBallVelocity(){
+    btVector3 ballVel;
+	for(int i=0;i<bodies.size();i++){
+		if(bodies[i]->name.compare("ball") == 0){
+			btTransform t;
+			//bodies[i]->body->getMotionState()->getWorldTransform(t);
+            ballVel = bodies[i]->body->getLinearVelocity();
+			break;
+		}
+	}
+    //cout << ballVel.getX() << ", " << ballVel.getY() << ", " << ballVel.getZ() << endl;
+	return ballVel;
+}
+
 void Physics::setBallPosition(btVector3 newPos){
     for(int i=0;i<bodies.size();i++){
         if(bodies[i]->name.compare("ball") == 0){
