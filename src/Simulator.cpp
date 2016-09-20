@@ -203,7 +203,7 @@ void Simulator::runPhysics(){
         gameState->sameState = false;
         runningPhysics = true;
 
-        caseWorld = arbiter.checkWorld();
+        arbiter.checkWorld();
     }
 }
 
