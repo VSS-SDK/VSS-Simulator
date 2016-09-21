@@ -39,8 +39,10 @@ class Simulator{
 private:
     Arbiter arbiter;
 
-    const float timeStep = 1.f/60.f;
-    const float handTime = 1.f;
+    float timeStep;
+    float handTime;
+    bool fast_travel;
+    int qtd_of_goals;
     int numRobotsTeam;
     bool runningPhysics;
     vector<Command> commands;
@@ -76,7 +78,7 @@ private:
     btVector3 getRobotVelocity(RobotPhysics* robot);
 public:
 	Simulator();
-	void runSimulator(int argc, char *argv[], ModelStrategy* strategyTeam, ModelStrategy* strategyAdv);
+	void runSimulator(int argc, char *argv[], ModelStrategy* strategyTeam, ModelStrategy* strategyAdv, bool fast_travel, int qtd_goal);
 
 	void runPhysics();
 	void runStrategies();

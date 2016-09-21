@@ -39,43 +39,34 @@ public:
     }
 };
 
-bool argParse(int argc, char** argv, string *strategy_team1, string *strategy_team2, int *time_step, int *qtd_matchs, string *report);
+bool argParse(int argc, char** argv, bool *fast_travel, int *qtd_of_goals);
 
 int main(int argc, char *argv[]){
-    string strategy_team1, strategy_team2;  // Strategies in pattern VSS-SampleStrategy
-    int time_step;                          // how fast 1x, 10x, 100x "if possible"
-    int qtd_matchs;                         // 1, ..., 10
-    string report;                          // report of match
+    bool fast_travel = false;
+    int qtd_of_goals = 10;
 
-    /*if(argParse(argc, argv, &strategy_team1, &strategy_team2, &time_step, &qtd_matchs, &report)){
-        cerr << "OK" << endl;
-        return 0;
+    if(argParse(argc, argv, &fast_travel, &qtd_of_goals)){
+        Strategy *stratYellowTeam = new Strategy(); //Original strategy
+        Strategy *stratBlueTeam = new Strategy(); //Strategy for tests
+
+        Simulator* simulator = new Simulator();
+        simulator->runSimulator(argc, argv, stratBlueTeam, stratYellowTeam, fast_travel, qtd_of_goals);
     }else{
-        cerr << "ERROR: Something happen" << endl;
         return -1;
-    }*/
-
-	Strategy *stratYellowTeam = new Strategy(); //Original strategy
-	Strategy *stratBlueTeam = new Strategy(); //Strategy for tests
-
-	Simulator* simulator = new Simulator();
-	simulator->runSimulator(argc, argv, stratBlueTeam,stratYellowTeam);
+    }
 
 	return 0;
 }
 
-bool argParse(int argc, char** argv, string *strategy_team1, string *strategy_team2, int *time_step, int *qtd_matchs, string *report){
+bool argParse(int argc, char** argv, bool *fast_travel, int *qtd_of_goals){
     namespace bpo = boost::program_options;
 
     // Declare the supported options.
     bpo::options_description desc("Allowed options");
     desc.add_options()
         ("help,h", "(Optional) produce help message")
-        ("team1,t1", bpo::value<std::string>()->default_value("default"), "(Required) Specify the name of executable from team 1.") 
-        ("team2,t2", bpo::value<std::string>()->default_value("default"), "(Required) Specify the name of executable from team 2.")
-        ("time_step,ts", bpo::value<unsigned int>()->default_value(1), "(Optional) Specify the time step (1x, 10x, 100x). Default value it's 1x.")
-        ("qtd_matchs,m", bpo::value<unsigned int>()->default_value(1), "(Optional) Specify the number of matchs between team 1 and team 2 (1, ..., 10). Default value it's 1.")
-        ("report,r", bpo::value<std::string>()->default_value(""), "(Required) Specify the name of executable from team 1.");
+        ("fast,f", "(Optional) specify if the time must go 10x faster.")
+        ("qtd_of_goals,g", bpo::value<std::string>()->default_value("10"), "(Optional) specify the qtd of goals to end the game. 10 to 100");
     bpo::variables_map vm;
     bpo::store(bpo::parse_command_line(argc, argv, desc), vm);
     bpo::notify(vm);
@@ -85,21 +76,20 @@ bool argParse(int argc, char** argv, string *strategy_team1, string *strategy_te
         return false;
     }
 
-    *time_step = vm["time_step"].as<unsigned int>();
-    if(*time_step < 1 || *time_step > 100){
-        cout << "Invalid time_step " << *time_step << endl;
-        return false;
+    if (vm.count("fast")){
+        *fast_travel = true;
     }
 
-    *qtd_matchs = vm["qtd_matchs"].as<unsigned int>();
-    if(*qtd_matchs < 1 || *qtd_matchs > 10){
-        cout << "Invalid qtd_matchs " << *qtd_matchs << endl;
-        return false;
-    }
+    stringstream ss;
+    ss << vm["qtd_of_goals"].as<string>();
+    ss >> *qtd_of_goals;
 
-    *strategy_team1 = vm["team1"].as<string>();
-    *strategy_team2 = vm["team2"].as<string>();
-    *report = vm["report"].as<string>();
+    if(*qtd_of_goals < 10){
+        *qtd_of_goals = 10;
+    }else
+    if(*qtd_of_goals > 100){
+        *qtd_of_goals = 100;
+    }
 
     return true;
 }

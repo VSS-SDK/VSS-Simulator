@@ -33,9 +33,23 @@ Simulator::Simulator(){
     team_2_already = false;
     count_situation = 0;
     situation_team1 = situation_team2 = 0;
+
+    fast_travel = false;
+    qtd_of_goals = 10;
 }
 
-void Simulator::runSimulator(int argc, char *argv[], ModelStrategy *stratBlueTeam, ModelStrategy *stratYellowTeam){
+void Simulator::runSimulator(int argc, char *argv[], ModelStrategy *stratBlueTeam, ModelStrategy *stratYellowTeam, bool fast_travel, int qtd_of_goals){
+    this->fast_travel = fast_travel;
+    this->qtd_of_goals = qtd_of_goals;
+
+    if(!fast_travel){
+        timeStep = 1.f/60.f;
+        handTime = 1.f;
+    }else{
+        timeStep = 1.f/60.f;
+        handTime = 1.f;
+    }
+
     int numTeams = 0;
 	if(stratBlueTeam) {
 		this->strategies.push_back(stratBlueTeam);

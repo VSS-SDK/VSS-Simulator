@@ -6,7 +6,6 @@ INCLUDES = -Ibullet/ -Iutils/ -Isrc -Isrc/strategies
 LIBRARIES_GLUT = -lGL -lGLU -lGL -lstdc++ -lglut
 LIBRARIES_PROTO = `pkg-config --cflags --libs protobuf`
 LIBRARIES_BOOST = -lboost_system -lboost_filesystem -lboost_program_options -lboost_thread
-#LIBRARIES_BOOST = -pthread
 
 LIBRARIES = $(LIBRARIES_PROTO) $(LIBRARIES_GLUT) $(LIBRARIES_BOOST) -lzmq -pthread -lm -lc -lm -w
 
