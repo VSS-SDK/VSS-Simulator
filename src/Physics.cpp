@@ -188,7 +188,7 @@ btVector3 Physics::getBallVelocity(){
     btVector3 ballVel;
 	for(int i=0;i<bodies.size();i++){
 		if(bodies[i]->name.compare("ball") == 0){
-			btTransform t;
+			//btTransform t;
 			//bodies[i]->body->getMotionState()->getWorldTransform(t);
             ballVel = bodies[i]->body->getLinearVelocity();
 			break;

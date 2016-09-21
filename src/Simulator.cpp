@@ -142,14 +142,15 @@ void Simulator::runSender(){
         for(int i = 0 ; i < 3 ; i++){
             vss_state::Robot_State *robot_s = global_state.add_robots_blue();
             btVector3 posRobot = getRobotPosition(listRobots.at(i+3));
+            btVector3 velRobot = getRobotVelocity(listRobots.at(i+3));
 
             robot_s->mutable_pose()->set_x(posRobot.getX());
             robot_s->mutable_pose()->set_y(posRobot.getZ());
             float rads = atan2(getRobotOrientation(listRobots.at(i+3)).getZ(),getRobotOrientation(listRobots.at(i+3)).getX());
             robot_s->mutable_pose()->set_yaw(rads);
 
-            robot_s->mutable_v_pose()->set_x(0);
-            robot_s->mutable_v_pose()->set_y(0);
+            robot_s->mutable_v_pose()->set_x(velRobot.getX());
+            robot_s->mutable_v_pose()->set_y(velRobot.getZ());
             robot_s->mutable_v_pose()->set_yaw(0);
 
             robot_s->mutable_k_pose()->set_x(0);
@@ -164,14 +165,15 @@ void Simulator::runSender(){
         for(int i = 0 ; i < 3 ; i++){
             vss_state::Robot_State *robot_s = global_state.add_robots_yellow();
             btVector3 posRobot = getRobotPosition(listRobots.at(i));
+            btVector3 velRobot = getRobotVelocity(listRobots.at(i));
 
             robot_s->mutable_pose()->set_x(posRobot.getX());
             robot_s->mutable_pose()->set_y(posRobot.getZ());
             float rads = atan2(getRobotOrientation(listRobots.at(i)).getZ(),getRobotOrientation(listRobots.at(i)).getX());
             robot_s->mutable_pose()->set_yaw(rads);
 
-            robot_s->mutable_v_pose()->set_x(0);
-            robot_s->mutable_v_pose()->set_y(0);
+            robot_s->mutable_v_pose()->set_x(velRobot.getX());
+            robot_s->mutable_v_pose()->set_y(velRobot.getZ());
             robot_s->mutable_v_pose()->set_yaw(0);
 
             robot_s->mutable_k_pose()->set_x(0);
@@ -197,6 +199,7 @@ void Simulator::runPhysics(){
     while(true){
         usleep(1000000.f*timeStep/handTime);
 
+        //physics->setBallVelocity(btVector3(0.1, 0, 0));
         loopBullet++;
         //cout << "--------Ciclo Atual:\t" << loopBullet << "--------" << endl;
         physics->stepSimulation(timeStep,subStep,standStep);
@@ -335,6 +338,9 @@ btVector3 Simulator::getRobotPosition(RobotPhysics* robot){
 
 btVector3 Simulator::getRobotOrientation(RobotPhysics* robot){
     btVector3 forwardVec = robot->getRaycast()->getForwardVector();
-
     return forwardVec;
+}
+
+btVector3 Simulator::getRobotVelocity(RobotPhysics* robot){
+    return robot->getRigidBody()->getLinearVelocity();
 }

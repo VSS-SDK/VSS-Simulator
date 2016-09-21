@@ -73,6 +73,7 @@ private:
 
     btVector3 getRobotOrientation(RobotPhysics* robot);
     btVector3 getRobotPosition(RobotPhysics* robot);
+    btVector3 getRobotVelocity(RobotPhysics* robot);
 public:
 	Simulator();
 	void runSimulator(int argc, char *argv[], ModelStrategy* strategyTeam, ModelStrategy* strategyAdv);
