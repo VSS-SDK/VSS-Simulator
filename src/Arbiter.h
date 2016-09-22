@@ -15,7 +15,7 @@ public:
 	Arbiter();
 
 	void allocPhysics(Physics*);
-	void checkWorld();
+	int checkWorld();
 
 	void position_objects_after_goal_team_1();
 	void position_objects_after_goal_team_2();

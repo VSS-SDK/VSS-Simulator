@@ -8,16 +8,21 @@ void Arbiter::allocPhysics(Physics *physics){
 	this->physics = physics;
 }
 
-void Arbiter::checkWorld(){
+int Arbiter::checkWorld(){
+	int situation = NONE;
 	btVector3 ball = physics->getBallPosition();
 	if(ball.getX() > 160){
-		cerr << "Goal Team 1" << endl;
+		situation = GOAL_TEAM1;
+		//cerr << "Goal Team 1" << endl;
 		position_objects_after_goal_team_1();
 	}else
 	if(ball.getX() < 10){
-		cerr << "Goal Team 2" << endl;
+		situation = GOAL_TEAM2;
+		//cerr << "Goal Team 2" << endl;
 		position_objects_after_goal_team_2();
 	}
+
+	return situation;
 }    
 
 void Arbiter::position_objects_after_goal_team_1(){

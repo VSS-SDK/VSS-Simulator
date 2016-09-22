@@ -39,6 +39,8 @@ class Simulator{
 private:
     Arbiter arbiter;
 
+    int goal_team1, goal_team2;
+    bool finish_match;
     float timeStep;
     float handTime;
     bool fast_travel;
@@ -49,6 +51,7 @@ private:
 
     vss_state::Global_State global_state;
     vss_command::Global_Commands global_commands_team_1, global_commands_team_2;
+    Interface interface_sender;
 
     GameState* gameState;
     int stratStep;

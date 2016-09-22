@@ -36,6 +36,10 @@ Simulator::Simulator(){
 
     fast_travel = false;
     qtd_of_goals = 10;
+
+    goal_team1 = 0;
+    goal_team2 = 0;
+    finish_match = false;
 }
 
 void Simulator::runSimulator(int argc, char *argv[], ModelStrategy *stratBlueTeam, ModelStrategy *stratYellowTeam, bool fast_travel, int qtd_of_goals){
@@ -47,7 +51,7 @@ void Simulator::runSimulator(int argc, char *argv[], ModelStrategy *stratBlueTea
         handTime = 1.f;
     }else{
         timeStep = 1.f/60.f;
-        handTime = 1.f;
+        handTime = 100.f;
     }
 
     int numTeams = 0;
@@ -81,15 +85,18 @@ void Simulator::runSimulator(int argc, char *argv[], ModelStrategy *stratBlueTea
 
     thread_physics = new thread(bind(&Simulator::runPhysics, this));
     thread_strategies = new thread(bind(&Simulator::runStrategies, this));
-    thread_send = new thread(bind(&Simulator::runSender, this));
+    //thread_send = new thread(bind(&Simulator::runSender, this));
     thread_receive_team1 = new thread(bind(&Simulator::runReceiveTeam1, this));
     thread_receive_team2 = new thread(bind(&Simulator::runReceiveTeam2, this));
 
     thread_physics->join();
     thread_strategies->join();
-    thread_send->join();
+    //thread_send->join();
     thread_receive_team1->join();
     thread_receive_team2->join();
+
+    cout << "goal_team1=" << goal_team1 << endl;
+    cout << "goal_team2=" << goal_team2 << endl;
 }
 
 
@@ -97,7 +104,7 @@ void Simulator::runReceiveTeam1(){
     // YELLOW
     Interface interface;
     interface.createReceiveCommandsTeam1(&global_commands_team_1);
-    while(true){
+    while(!finish_match){
         //cout << "team1" << endl;
         global_commands_team_1 = vss_command::Global_Commands();
         interface.receiveCommandTeam1();
@@ -107,13 +114,16 @@ void Simulator::runReceiveTeam1(){
             commands.at(i) = Command(global_commands_team_1.robot_commands(i).left_vel(), global_commands_team_1.robot_commands(i).right_vel());
         }
     }
+
+      cout << "team1" << endl;
 }
 
 void Simulator::runReceiveTeam2(){
     // BLUE
     Interface interface;
     interface.createReceiveCommandsTeam2(&global_commands_team_2);
-    while(true){
+
+    while(!finish_match){
         //cout << "team2" << endl;
         global_commands_team_2 = vss_command::Global_Commands();
         interface.receiveCommandTeam2();
@@ -123,15 +133,16 @@ void Simulator::runReceiveTeam2(){
         for(int i = 0 ; i < global_commands_team_2.robot_commands_size() ; i++){
             commands.at(i+3) = Command(global_commands_team_2.robot_commands(i).left_vel(), global_commands_team_2.robot_commands(i).right_vel());
         }
+
     }
+
+    cout << "team2" << endl;
 }
 
 void Simulator::runSender(){
-    Interface interface;
-    interface.createSocketSendState(&global_state);
     //arbiter.allocateState(&global_state);
 
-    while(1){
+   //while(1){
         //cout << "send" << endl;
         global_state = vss_state::Global_State();
         global_state.set_id(0);
@@ -199,9 +210,9 @@ void Simulator::runSender(){
             robot_s->mutable_k_v_pose()->set_yaw(0);
         }
 
-        interface.sendState();
-        usleep(33333);
-    }
+        interface_sender.sendState();
+        //usleep(33333);
+    //}
 }
 
 void Simulator::runPhysics(){
@@ -209,8 +220,9 @@ void Simulator::runPhysics(){
     float standStep = 1.f/60.f;
 
     arbiter.allocPhysics(physics);
+    interface_sender.createSocketSendState(&global_state);
 
-    while(true){
+    while(!finish_match){
         usleep(1000000.f*timeStep/handTime);
 
         //physics->setBallVelocity(btVector3(0.1, 0, 0));
@@ -220,8 +232,21 @@ void Simulator::runPhysics(){
         gameState->sameState = false;
         runningPhysics = true;
 
-        arbiter.checkWorld();
+        int situ = arbiter.checkWorld();
+        if(situ == GOAL_TEAM1)
+            goal_team1++;
+        else
+        if(situ == GOAL_TEAM2)
+            goal_team2++;
+        
+        if(goal_team1 >= qtd_of_goals || goal_team2 >= qtd_of_goals){
+            finish_match = true;
+        }
+
+        runSender();
     }
+
+    cout << "phy" << endl;
 }
 
 void Simulator::runStrategies(){
@@ -242,7 +267,7 @@ void Simulator::runStrategies(){
             
     }
 
-    while(true){
+    while(!finish_match){
         usleep(1000000.f*timeStep/handTime);
 
         if(!gameState->sameState){
@@ -292,6 +317,8 @@ void Simulator::runStrategies(){
             gameState->sameState = true;
         }
     }
+
+      cout << "strat" << endl;
 }
 
 void Simulator::updateWorld(){
