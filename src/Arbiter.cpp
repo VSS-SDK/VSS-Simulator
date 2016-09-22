@@ -13,14 +13,15 @@ int Arbiter::checkWorld(){
 	btVector3 ball = physics->getBallPosition();
 	if(ball.getX() > 160){
 		situation = GOAL_TEAM1;
-		//cerr << "Goal Team 1" << endl;
+		cerr << "---Goal Team 1---" << endl;
 		position_objects_after_goal_team_1();
 	}else
 	if(ball.getX() < 10){
 		situation = GOAL_TEAM2;
-		//cerr << "Goal Team 2" << endl;
+		cerr << "---Goal Team 2---" << endl;
 		position_objects_after_goal_team_2();
 	}
+	
 
 	return situation;
 }    

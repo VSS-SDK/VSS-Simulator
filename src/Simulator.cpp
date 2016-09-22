@@ -37,8 +37,6 @@ Simulator::Simulator(){
     fast_travel = false;
     qtd_of_goals = 10;
 
-    goal_team1 = 0;
-    goal_team2 = 0;
     finish_match = false;
 }
 
@@ -51,7 +49,7 @@ void Simulator::runSimulator(int argc, char *argv[], ModelStrategy *stratBlueTea
         handTime = 1.f;
     }else{
         timeStep = 1.f/60.f;
-        handTime = 100.f;
+        handTime = 15.f;
     }
 
     int numTeams = 0;
@@ -95,8 +93,7 @@ void Simulator::runSimulator(int argc, char *argv[], ModelStrategy *stratBlueTea
     thread_receive_team1->join();
     thread_receive_team2->join();
 
-    cout << "goal_team1=" << goal_team1 << endl;
-    cout << "goal_team2=" << goal_team2 << endl;
+    report.show();
 }
 
 
@@ -114,8 +111,6 @@ void Simulator::runReceiveTeam1(){
             commands.at(i) = Command(global_commands_team_1.robot_commands(i).left_vel(), global_commands_team_1.robot_commands(i).right_vel());
         }
     }
-
-      cout << "team1" << endl;
 }
 
 void Simulator::runReceiveTeam2(){
@@ -135,8 +130,6 @@ void Simulator::runReceiveTeam2(){
         }
 
     }
-
-    cout << "team2" << endl;
 }
 
 void Simulator::runSender(){
@@ -234,19 +227,17 @@ void Simulator::runPhysics(){
 
         int situ = arbiter.checkWorld();
         if(situ == GOAL_TEAM1)
-            goal_team1++;
+           report.total_of_goals_team[0]++;
         else
         if(situ == GOAL_TEAM2)
-            goal_team2++;
+            report.total_of_goals_team[1]++;
         
-        if(goal_team1 >= qtd_of_goals || goal_team2 >= qtd_of_goals){
+        if(report.total_of_goals_team[0] >= qtd_of_goals || report.total_of_goals_team[1] >= qtd_of_goals){
             finish_match = true;
         }
 
         runSender();
     }
-
-    cout << "phy" << endl;
 }
 
 void Simulator::runStrategies(){
@@ -317,8 +308,6 @@ void Simulator::runStrategies(){
             gameState->sameState = true;
         }
     }
-
-      cout << "strat" << endl;
 }
 
 void Simulator::updateWorld(){

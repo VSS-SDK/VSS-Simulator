@@ -39,7 +39,7 @@ class Simulator{
 private:
     Arbiter arbiter;
 
-    int goal_team1, goal_team2;
+    Report report;
     bool finish_match;
     float timeStep;
     float handTime;

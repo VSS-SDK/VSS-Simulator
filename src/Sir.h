@@ -57,4 +57,52 @@ struct Command{
     };
 };
 
+struct Report{
+    int total_of_goals_team[2];
+    int qtd_of_goals_team[2][3];
+    int qtd_of_own_goals_team[2][3];
+    int collisions_in_high_speed_team[2][3];
+    float ball_possession_team[2][3];
+    float travelled_distance_team[2][3];
+    float time_lost_stuck_team[2][3];
+    Report(){
+        for(int h = 0; h < 2 ; h++){
+            for(int i = 0 ; i < 3 ; i++){
+                total_of_goals_team[h] = 0;
+                qtd_of_goals_team[h][i] = 0;
+                qtd_of_own_goals_team[h][i] = 0;
+                collisions_in_high_speed_team[h][i] = 0;
+                ball_possession_team[h][i] = 0;
+                travelled_distance_team[h][i] = 0;
+                time_lost_stuck_team[h][i] = 0;
+            }
+        }
+    };
+    void show(){
+        cout << "---REPORT---" << endl;
+        for(int h = 0 ; h < 2 ; h++){
+            cout << "---TEAM_" << h << "---" << endl;
+            cout << "+total_of_goals_team=" << total_of_goals_team[h] << endl;
+            for(int i = 0 ; i < 3 ; i++){
+                cout << "+qtd_goals_" << i << "=" << qtd_of_goals_team[h][i] << endl; 
+            }
+            for(int i = 0 ; i < 3 ; i++){
+                cout << "+qtd_own_goals_" << i << "=" << qtd_of_own_goals_team[h][i] << endl; 
+            }
+            for(int i = 0 ; i < 3 ; i++){
+                cout << "+collision_in_high_speed_" << i << "=" << collisions_in_high_speed_team[h][i] << endl; 
+            }
+            for(int i = 0 ; i < 3 ; i++){
+                cout << "+ball_possesion_" << i << "=" << ball_possession_team[h][i] << endl; 
+            }
+            for(int i = 0 ; i < 3 ; i++){
+                cout << "+travelled_distance_" << i << "=" << travelled_distance_team[h][i] << endl; 
+            }
+            for(int i = 0 ; i < 3 ; i++){
+                cout << "+time_lost_stuck" << i << "=" << time_lost_stuck_team[h][i] << endl; 
+            }
+        }
+    };
+};
+
 #endif
