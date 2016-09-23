@@ -213,6 +213,7 @@ void Simulator::runPhysics(){
     float standStep = 1.f/60.f;
 
     arbiter.allocPhysics(physics);
+    arbiter.allocReport(&report);
     interface_sender.createSocketSendState(&global_state);
 
     while(!finish_match){
@@ -225,13 +226,8 @@ void Simulator::runPhysics(){
         gameState->sameState = false;
         runningPhysics = true;
 
-        int situ = arbiter.checkWorld();
-        if(situ == GOAL_TEAM1)
-           report.total_of_goals_team[0]++;
-        else
-        if(situ == GOAL_TEAM2)
-            report.total_of_goals_team[1]++;
-        
+        arbiter.checkWorld();
+
         if(report.total_of_goals_team[0] >= qtd_of_goals || report.total_of_goals_team[1] >= qtd_of_goals){
             finish_match = true;
         }

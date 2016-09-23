@@ -58,6 +58,7 @@ struct Command{
 };
 
 struct Report{
+    int qtd_of_steps;
     int total_of_goals_team[2];
     int qtd_of_goals_team[2][3];
     int qtd_of_own_goals_team[2][3];
@@ -66,6 +67,7 @@ struct Report{
     float travelled_distance_team[2][3];
     float time_lost_stuck_team[2][3];
     Report(){
+        qtd_of_steps = 0;
         for(int h = 0; h < 2 ; h++){
             for(int i = 0 ; i < 3 ; i++){
                 total_of_goals_team[h] = 0;
@@ -80,6 +82,7 @@ struct Report{
     };
     void show(){
         cout << "---REPORT---" << endl;
+        cout << "+qtd_of_steps=" << qtd_of_steps << endl;
         for(int h = 0 ; h < 2 ; h++){
             cout << "---TEAM_" << h << "---" << endl;
             cout << "+total_of_goals_team=" << total_of_goals_team[h] << endl;
@@ -93,7 +96,7 @@ struct Report{
                 cout << "+collision_in_high_speed_" << i << "=" << collisions_in_high_speed_team[h][i] << endl; 
             }
             for(int i = 0 ; i < 3 ; i++){
-                cout << "+ball_possesion_" << i << "=" << ball_possession_team[h][i] << endl; 
+                cout << "+ball_possession_" << i << "=" << ball_possession_team[h][i] << endl; 
             }
             for(int i = 0 ; i < 3 ; i++){
                 cout << "+travelled_distance_" << i << "=" << travelled_distance_team[h][i] << endl; 

@@ -11,10 +11,12 @@ using namespace std;
 class Arbiter{
 protected:
 	Physics *physics;
+	Report *report;
 public:
 	Arbiter();
 
 	void allocPhysics(Physics*);
+	void allocReport(Report*);
 	int checkWorld();
 
 	void position_objects_after_goal_team_1();
