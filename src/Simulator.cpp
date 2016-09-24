@@ -16,6 +16,7 @@ copies or substantial portions of the Software.
 #include "Simulator.h"
 
 Simulator::Simulator(){
+    contDebug = 0;
     stratStep = 0;
 	loopBullet = 0;
 	numRobotsTeam = NUM_ROBOTS_TEAM;
@@ -108,7 +109,7 @@ void Simulator::runReceiveTeam1(){
         
         situation_team1 = global_commands_team_1.situation();
         for(int i = 0 ; i < global_commands_team_1.robot_commands_size() ; i++){
-            commands.at(i) = Command(global_commands_team_1.robot_commands(i).left_vel(), global_commands_team_1.robot_commands(i).right_vel());
+            commands.at(i) = Command((float)global_commands_team_1.robot_commands(i).left_vel()+0.001, (float)global_commands_team_1.robot_commands(i).right_vel()+0.001);
         }
     }
 }
@@ -126,9 +127,8 @@ void Simulator::runReceiveTeam2(){
         
         situation_team2 = global_commands_team_2.situation();
         for(int i = 0 ; i < global_commands_team_2.robot_commands_size() ; i++){
-            commands.at(i+3) = Command(global_commands_team_2.robot_commands(i).left_vel(), global_commands_team_2.robot_commands(i).right_vel());
+            commands.at(i+3) = Command((float)global_commands_team_2.robot_commands(i).left_vel()+0.001, (float)global_commands_team_2.robot_commands(i).right_vel()+0.001);
         }
-
     }
 }
 
@@ -222,13 +222,23 @@ void Simulator::runPhysics(){
         //physics->setBallVelocity(btVector3(0.1, 0, 0));
         loopBullet++;
         //cout << "--------Ciclo Atual:\t" << loopBullet << "--------" << endl;
-        physics->stepSimulation(timeStep,subStep,standStep);
-        gameState->sameState = false;
+        if(gameState->sameState){
+            
+            physics->stepSimulation(timeStep,subStep,standStep);
+            gameState->sameState = false;
+
+            if(arbiter.refresh){
+                /*if(contDebug == 50)
+                    
+                else
+                    contDebug++;*/
+            }
+        }
         runningPhysics = true;
 
         arbiter.checkWorld();
 
-        if(report.total_of_goals_team[0] >= qtd_of_goals || report.total_of_goals_team[1] >= qtd_of_goals){
+        if(report.total_of_goals_team[0] >= qtd_of_goals || report.total_of_goals_team[1] >= qtd_of_goals || report.qtd_of_steps > 3500*qtd_of_goals){
             finish_match = true;
         }
 

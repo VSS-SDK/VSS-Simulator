@@ -231,24 +231,19 @@ void Physics::setBallVelocity(btVector3 newVel){
 }
 
 void Physics::setRobotsPosition(vector<btVector3> new_poses){
-     /*for(int i=0;i<bodies.size();i++){
-        if(bodies[i]->name.compare("robot") == 0){
-            cout << "robot: " << i << endl;
-            btTransform t;
-            bodies[i]->body->getMotionState()->getWorldTransform(t);
+    for(int i=0;i<genRobots.size();i++){
+        btTransform t;
+        genRobots[i]->getRigidBody()->getMotionState()->getWorldTransform(t);
 
-            t.setIdentity();
-            t.setOrigin(new_poses.at(i));
-            
-            btMotionState* motion = new btDefaultMotionState(t);
-            
-            bodies[i]->body->setMotionState(motion);
-            bodies[i]->body->setLinearVelocity(btVector3(0,0,0));
-            bodies[i]->body->setAngularVelocity(btVector3(0,0,0));
-
-            break;
-        }
-    }*/
+        t.setIdentity();
+        t.setOrigin(new_poses[i]);
+        
+        btMotionState* motion = new btDefaultMotionState(t);
+        
+        genRobots[i]->getRigidBody()->setMotionState(motion);
+        genRobots[i]->getRigidBody()->setLinearVelocity(btVector3(0,0,0));
+        genRobots[i]->getRigidBody()->setAngularVelocity(btVector3(0,0,0));
+    }
 }
 
 void Physics::startDebug(){

@@ -12,7 +12,10 @@ class Arbiter{
 protected:
 	Physics *physics;
 	Report *report;
+	btVector3 history_ball;
+	int ball_count;
 public:
+	bool refresh;
 	Arbiter();
 
 	void allocPhysics(Physics*);

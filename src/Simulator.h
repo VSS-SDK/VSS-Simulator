@@ -38,6 +38,7 @@ class Simulator{
 
 private:
     Arbiter arbiter;
+    int contDebug;
 
     Report report;
     bool finish_match;

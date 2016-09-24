@@ -58,7 +58,7 @@ struct Command{
 };
 
 struct Report{
-    int qtd_of_steps;
+    long int qtd_of_steps;
     int total_of_goals_team[2];
     int qtd_of_goals_team[2][3];
     int qtd_of_own_goals_team[2][3];

@@ -1,6 +1,7 @@
 #include "Arbiter.h"
 
 Arbiter::Arbiter(){
+	refresh = false;
 
 }
 
@@ -17,29 +18,27 @@ int Arbiter::checkWorld(){
 	btVector3 ball = physics->getBallPosition();
 
 	if(ball.getX() > 160){
+		refresh = true;
 		situation = GOAL_TEAM1;
 		report->total_of_goals_team[0]++;
-		cerr << "---Goal Team 1---" << endl;
+		cerr << "---Goal RIGHT---" << endl;
 		position_objects_after_goal_team_1();
 	}else
 	if(ball.getX() < 10){
+		refresh = true;
 		situation = GOAL_TEAM2;
 		report->total_of_goals_team[1]++;
-		cerr << "---Goal Team 2---" << endl;
+		cerr << "---Goal LEFT---" << endl;
 		position_objects_after_goal_team_2();
 	}
 
 	vector<RobotPhysics*> listRobots = physics->getAllRobots();
-	/*float dist_min = 1024;
-	int id_min = 0;
-	for(int i = 0 ; i < listRobots.size() ; i++){
-		/*if(ball - listRobots.at(i)->getPosition()){
 
-		}
-		cout << ball - listRobots.at(i)->getPosition() << endl;
-	}*/
+	if(report->qtd_of_steps % 3500 == 0){
+		cout << "---" << report->qtd_of_steps / 3500 << " MIN---" << endl;
+	}
 
-	report->qtd_of_steps++;        
+	report->qtd_of_steps++;     
  
 	return situation;
 }    
@@ -47,9 +46,12 @@ int Arbiter::checkWorld(){
 void Arbiter::position_objects_after_goal_team_1(){
 	vector<btVector3> robots;
 
-	for(int i = 0 ; i < 6 ; i++){
-		robots.push_back(btVector3(i*20, 80, 0));
-	}
+	robots.push_back(btVector3(55,4,45));
+	robots.push_back(btVector3(35,4,30));	
+	robots.push_back(btVector3(15,4,SIZE_DEPTH- 55));
+	robots.push_back(btVector3(SIZE_WIDTH-55,4,85));
+	robots.push_back(btVector3(SIZE_WIDTH-25,4,SIZE_DEPTH - SIZE_DEPTH/2.5 + 20));
+	robots.push_back(btVector3(SIZE_WIDTH-15,4,55));
 
 	physics->setBallPosition(btVector3( (SIZE_WIDTH/2.0)+10 , 2.0, SIZE_DEPTH/2.0));
 	physics->setRobotsPosition(robots);
@@ -58,9 +60,13 @@ void Arbiter::position_objects_after_goal_team_1(){
 void Arbiter::position_objects_after_goal_team_2(){
 	vector<btVector3> robots;
 	
-	for(int i = 0 ; i < 6 ; i++){
-		robots.push_back(btVector3(i*20, 80, 0));
-	}
+	robots.push_back(btVector3(55,4,45));
+	robots.push_back(btVector3(35,4,30));	
+	robots.push_back(btVector3(15,4,SIZE_DEPTH- 55));
+	robots.push_back(btVector3(SIZE_WIDTH-55,4,85));
+	robots.push_back(btVector3(SIZE_WIDTH-25,4,SIZE_DEPTH - SIZE_DEPTH/2.5 + 20));
+	robots.push_back(btVector3(SIZE_WIDTH-15,4,55));
+
 	
 	physics->setBallPosition(btVector3( (SIZE_WIDTH/2.0)+10 , 2.0, SIZE_DEPTH/2.0));
 	physics->setRobotsPosition(robots);
