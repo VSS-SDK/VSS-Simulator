@@ -30,8 +30,15 @@ Development and Use
 -------------------
 ```
 $ make
+$ make proto
 $ make run
 ```
+
+
+Gallery
+-------
+![screenshot 1](https://raw.githubusercontent.com/SIRLab/VSS-Simulator/master/images/top.png)
+
 
 License
 -------
