@@ -58,6 +58,7 @@ void Simulator::runSimulator(int argc, char *argv[], ModelStrategy *stratBlueTea
 		this->strategies.push_back(stratBlueTeam);
 		numTeams++;
 	}
+
 	if(stratYellowTeam){
 		this->strategies.push_back(stratYellowTeam);
 		numTeams++;
@@ -223,17 +224,13 @@ void Simulator::runPhysics(){
         loopBullet++;
         //cout << "--------Ciclo Atual:\t" << loopBullet << "--------" << endl;
         if(gameState->sameState){
-            
             physics->stepSimulation(timeStep,subStep,standStep);
             gameState->sameState = false;
 
-            if(arbiter.refresh){
-                /*if(contDebug == 50)
-                    
-                else
-                    contDebug++;*/
-            }
+            report.qtd_of_steps++;
         }
+
+        updateReport();
         runningPhysics = true;
 
         arbiter.checkWorld();
@@ -243,6 +240,60 @@ void Simulator::runPhysics(){
         }
 
         runSender();
+    }
+}
+
+void Simulator::updateReport(){
+    vector<BulletObject*> listRobots = physics->getAllBtRobots();
+
+    float minDist = 9999;
+    int idDist = -1;
+    for(int i = 0; i < listRobots.size(); i++){
+        if(listRobots.at(i)->hitRobot){
+            if(i >= listRobots.size()/2){
+                int id = i- listRobots.size()/2;
+                report.collisions_in_high_speed_team[1][id]++;
+                //cout << "testeeeee-1" << endl;
+            }else{
+                report.collisions_in_high_speed_team[0][i]++;
+            }
+        }
+
+        btTransform transTemp;
+        listRobots.at(i)->body->getMotionState()->getWorldTransform(transTemp);
+
+        btVector3 rbPos = transTemp.getOrigin();
+        btVector3 ballPos = physics->getBallPosition();
+
+        btVector3 dBallRbDist = rbPos - ballPos;
+
+        btVector3 velRobot = listRobots.at(i)->body->getLinearVelocity()*timeStep;
+        cout << "traveled:\t" << velRobot.length() << endl;
+        float modDist = dBallRbDist.length();
+
+        if(i >= listRobots.size()/2){
+                int id = i- listRobots.size()/2;
+                report.travelled_distance_team[1][id] += velRobot.length();
+                //cout << "testeeeee-1" << endl;
+            }else{
+                report.travelled_distance_team[0][i] += velRobot.length();
+            }
+
+        
+        if(minDist > modDist){
+            minDist = modDist;
+            idDist = i;
+        }
+    }
+
+    if(idDist > listRobots.size()/2){
+        report.ball_possession_team[1]++;
+    }else{
+        report.ball_possession_team[0]++;
+    }
+
+    if(report.qtd_of_steps > 0){
+        
     }
 }
 

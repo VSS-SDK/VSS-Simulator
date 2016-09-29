@@ -72,6 +72,7 @@ private:
     int count_situation, situation_team1, situation_team2;
 
 	void updateWorld();
+    void updateReport();
 	btVector3 calcRelativePosition(btVector3 absPos, int attackDir);
 	void calcRelativeWorld(vector<RobotStrategy*> robotStrategiesTeam, int attackDir);
 	RobotStrategy* updateLocalPhysics(int id, RobotPhysics* bdRobot);
