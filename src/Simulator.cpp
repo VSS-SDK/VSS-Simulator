@@ -268,7 +268,7 @@ void Simulator::updateReport(){
         btVector3 dBallRbDist = rbPos - ballPos;
 
         btVector3 velRobot = listRobots.at(i)->body->getLinearVelocity()*timeStep;
-        cout << "traveled:\t" << velRobot.length() << endl;
+        //cout << "traveled:\t" << velRobot.length() << endl;
         float modDist = dBallRbDist.length();
 
         if(i >= listRobots.size()/2){
