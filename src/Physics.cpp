@@ -64,13 +64,13 @@ void Physics::registBodies(){
     //Team 1
     for(int i = 0;i < numRobotsTeam;i++){
         if(numTeams >= 1){
-            addRobot(Color(0.3,0.3,0.3),posTeam1[i],btVector3(0,90,0),8,0.25,clrPlayers[i],clrTeams[0]);
+            addRobot(Color(0.3,0.3,0.3),posTeam1[i],btVector3(0,90,0),8,0.25,clrPlayers[i],clrTeams[0], i);
         }
     }
 
     for(int i = 0;i < numRobotsTeam;i++){
         if(numTeams == 2){
-            addRobot(Color(0.3,0.3,0.3),posTeam2[i],btVector3(0,-100,0),8,0.25,clrPlayers[i],clrTeams[1]);
+            addRobot(Color(0.3,0.3,0.3),posTeam2[i],btVector3(0,-100,0),8,0.25,clrPlayers[i],clrTeams[1], numRobotsTeam+i);
         }
     }
 
@@ -152,7 +152,28 @@ void Physics::resetRobotPositions(){
 }
 
 void Physics::stepSimulation(float timeW,float subStep, float timeStep){
-    world-> stepSimulation(timeW, subStep, timeStep);
+    setupBodiesProp();
+    world->stepSimulation(timeW, subStep, timeStep);
+}
+
+void Physics::setupBodiesProp(){
+    for(int i = 0; i < genRobots.size(); i++){
+        bodies.at(i)->hitRobot = false;
+        bodies.at(i)->hit = false;
+    }
+}
+
+vector<BulletObject*> Physics::getAllBtRobots(){
+    vector<BulletObject*> listRobots;
+    string prefix = "robot";
+    for(int i = 0; i < bodies.size();i++){
+        string name = bodies.at(i)->name;
+        if(!name.compare(0, prefix.size(), prefix)){
+            listRobots.push_back(bodies.at(i));
+        }
+    }
+
+    return listRobots;
 }
 
 bool Physics::callBackHitFunc(btManifoldPoint& cp,const btCollisionObjectWrapper* obj1,int id1,int index1,const btCollisionObjectWrapper* obj2,int id2,int index2){
@@ -160,14 +181,28 @@ bool Physics::callBackHitFunc(btManifoldPoint& cp,const btCollisionObjectWrapper
 
     const btCollisionObjectWrapper* wrappers[] = {obj1, obj2};
 
+    vector<BulletObject*> vecObj;
+
+    int contAgent = 0;
     for(int i = 0; i < 2; i++){
         BulletObject* btObj = (BulletObject*)wrappers[i]->getCollisionObject()->getUserPointer();
 
+        vecObj.push_back(btObj);
+
         string name = btObj->name;
         if (!name.compare(0, prefix.size(), prefix) || name == "ball")
-           btObj->hit = true;
+            btObj->hit = true;
+
+        if(!name.compare(0, prefix.size(), prefix)){
+            contAgent++;
+        }
     }
 
+    if(contAgent == 2){
+        vecObj.at(0)->hitRobot = true;
+        vecObj.at(1)->hitRobot = true;
+    }
+        
     return false;
 }
 
@@ -223,7 +258,7 @@ void Physics::setBallVelocity(btVector3 newVel){
         if(bodies[i]->name.compare("ball") == 0){
             btTransform t;
 
-            bodies[i]->body->applyForce(newVel, newVel);
+            bodies[i]->body->applyLinearVelocity(newVel);
 
             break;
         }
@@ -304,7 +339,7 @@ btRigidBody* Physics::addCorner(Color clr, btVector3 pos,float width, float heig
     return body;
 }
 
-RobotPhysics* Physics::addRobot(Color clr, btVector3 pos, btVector3 rotation,float sizeRobot, float mass,Color colorPlayer,Color colorTeam){
+RobotPhysics* Physics::addRobot(Color clr, btVector3 pos, btVector3 rotation,float sizeRobot, float mass,Color colorPlayer,Color colorTeam, int id){
     btBoxShape* modelShape = new btBoxShape(btVector3(sizeRobot/2,sizeRobot/2,sizeRobot/2));
     btCompoundShape* compound = new btCompoundShape();
 
@@ -343,7 +378,12 @@ RobotPhysics* Physics::addRobot(Color clr, btVector3 pos, btVector3 rotation,flo
 
     bdRobot->setIdDebug(1);
 
-    bodies.push_back(new BulletObject(bdRobot,"robot",clr));
+    stringstream st;
+    st << "robot-";
+    st << id;
+    string nameRobot = st.str();
+
+    bodies.push_back(new BulletObject(bdRobot,nameRobot,clr));
     bodies[bodies.size()-1]->halfExt = modelShape->getHalfExtentsWithMargin();
     bdRobot->setUserPointer(bodies[bodies.size()-1]);
 

@@ -40,6 +40,7 @@ private:
 	vector<RobotPhysics*> genRobots;
 
     void registBodies();
+	void setupBodiesProp();
 
 	btRigidBody* addGenericBody(btCollisionShape* shape,string name, Color clr, btVector3 pos, float mass, btVector3 rotation = btVector3(0,0,0));
     static bool callBackHitFunc(btManifoldPoint& cp,const btCollisionObjectWrapper* obj1,int id1,int index1,const btCollisionObjectWrapper* obj2,int id2,int index2);
@@ -52,7 +53,7 @@ public:
 	btRigidBody* addBall(float rad,btVector3 pos,float mass);
 	btRigidBody* addWall(Color clr, btVector3 pos,float width, float height, float depth, float mass);
 	btRigidBody* addCorner(Color clr, btVector3 pos,float width, float height,btVector3 rotation = btVector3(0,0,0));
-	RobotPhysics* addRobot(Color clr, btVector3 pos,btVector3 rotation,float sizeRobot, float mass,Color clrPlayer,Color clrTeam);
+	RobotPhysics* addRobot(Color clr, btVector3 pos,btVector3 rotation,float sizeRobot, float mass,Color clrPlayer,Color clrTeam, int id);
 
 	void stepSimulation(float time,float subStep, float timeStep);
 
@@ -70,6 +71,7 @@ public:
 
 	vector<BulletObject*> getAllBtObj() { return bodies; }
 	vector<RobotPhysics*> getAllRobots() { return genRobots; }
+	vector<BulletObject*> getAllBtRobots();
 	void setRobotsPosition(vector<btVector3>);
 };
 

@@ -36,9 +36,10 @@ struct BulletObject{
     string name;
     Color clr;
     bool hit;
+    bool hitRobot;
     btRigidBody* body;
     btVector3 halfExt; //Used only for compound shapes
-    BulletObject(btRigidBody* b,string n,Color clr0) : name(n),body(b),clr(clr0),id(-1),hit(false),halfExt(btVector3(0,0,0)) {}
+    BulletObject(btRigidBody* b,string n,Color clr0) : name(n),body(b),clr(clr0),id(-1),hit(false),hitRobot(false),halfExt(btVector3(0,0,0)) {}
 };
 
 struct Command{
@@ -60,21 +61,19 @@ struct Command{
 struct Report{
     long int qtd_of_steps;
     int total_of_goals_team[2];
-    int qtd_of_goals_team[2][3];
-    int qtd_of_own_goals_team[2][3];
+    int total_of_own_goals_team[2];
     int collisions_in_high_speed_team[2][3];
-    float ball_possession_team[2][3];
+    float ball_possession_team[2];
     float travelled_distance_team[2][3];
     float time_lost_stuck_team[2][3];
     Report(){
         qtd_of_steps = 0;
         for(int h = 0; h < 2 ; h++){
+            ball_possession_team[h] = 0;
+            total_of_goals_team[h] = 0;
+            total_of_own_goals_team[h] = 0;
             for(int i = 0 ; i < 3 ; i++){
-                total_of_goals_team[h] = 0;
-                qtd_of_goals_team[h][i] = 0;
-                qtd_of_own_goals_team[h][i] = 0;
                 collisions_in_high_speed_team[h][i] = 0;
-                ball_possession_team[h][i] = 0;
                 travelled_distance_team[h][i] = 0;
                 time_lost_stuck_team[h][i] = 0;
             }
@@ -86,17 +85,10 @@ struct Report{
         for(int h = 0 ; h < 2 ; h++){
             cout << "---TEAM_" << h << "---" << endl;
             cout << "+total_of_goals_team=" << total_of_goals_team[h] << endl;
-            for(int i = 0 ; i < 3 ; i++){
-                cout << "+qtd_goals_" << i << "=" << qtd_of_goals_team[h][i] << endl; 
-            }
-            for(int i = 0 ; i < 3 ; i++){
-                cout << "+qtd_own_goals_" << i << "=" << qtd_of_own_goals_team[h][i] << endl; 
-            }
+            cout << "+total_of_own_goals_team=" << total_of_own_goals_team[h] << endl;
+            cout << "+ball_possession" << "=" << ball_possession_team[h] << endl; 
             for(int i = 0 ; i < 3 ; i++){
                 cout << "+collision_in_high_speed_" << i << "=" << collisions_in_high_speed_team[h][i] << endl; 
-            }
-            for(int i = 0 ; i < 3 ; i++){
-                cout << "+ball_possession_" << i << "=" << ball_possession_team[h][i] << endl; 
             }
             for(int i = 0 ; i < 3 ; i++){
                 cout << "+travelled_distance_" << i << "=" << travelled_distance_team[h][i] << endl; 
