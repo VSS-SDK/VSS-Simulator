@@ -8,12 +8,14 @@
 
 using namespace std; 
 
+//! Classe responsável por verificar ocorrencias como: gol, penalti e falta. Também é responsável por monitorar o tempo e reposicionar os objetos em campo.
 class Arbiter{
 protected:
 	Physics *physics;
 	Report *report;
 	btVector3 history_ball;
 	int ball_count;
+	int relative_qtd_steps;
 public:
 	bool refresh;
 	Arbiter();

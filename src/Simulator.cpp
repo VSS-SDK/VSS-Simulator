@@ -30,8 +30,8 @@ Simulator::Simulator(){
         commands.push_back(cmd);
     }
 
-    team_1_already = false;
-    team_2_already = false;
+    status_team_1 = status_team_2 = -1;
+
     count_situation = 0;
     situation_team1 = situation_team2 = 0;
 
@@ -41,9 +41,10 @@ Simulator::Simulator(){
     finish_match = false;
 }
 
-void Simulator::runSimulator(int argc, char *argv[], ModelStrategy *stratBlueTeam, ModelStrategy *stratYellowTeam, bool fast_travel, int qtd_of_goals){
+void Simulator::runSimulator(int argc, char *argv[], ModelStrategy *stratBlueTeam, ModelStrategy *stratYellowTeam, bool fast_travel, int qtd_of_goals, bool develop_mode){
     this->fast_travel = fast_travel;
     this->qtd_of_goals = qtd_of_goals;
+    this->develop_mode = develop_mode;
 
     if(!fast_travel){
         timeStep = 1.f/60.f;
@@ -103,10 +104,15 @@ void Simulator::runReceiveTeam1(){
     // YELLOW
     Interface interface;
     interface.createReceiveCommandsTeam1(&global_commands_team_1);
+
     while(!finish_match){
-        //cout << "team1" << endl;
         global_commands_team_1 = vss_command::Global_Commands();
         interface.receiveCommandTeam1();
+
+        if(status_team_1 == -1){
+            status_team_1 = 0;
+            cout << "---Time amarelo conectado---" << endl;
+        }
         
         situation_team1 = global_commands_team_1.situation();
         for(int i = 0 ; i < global_commands_team_1.robot_commands_size() ; i++){
@@ -121,11 +127,14 @@ void Simulator::runReceiveTeam2(){
     interface.createReceiveCommandsTeam2(&global_commands_team_2);
 
     while(!finish_match){
-        //cout << "team2" << endl;
         global_commands_team_2 = vss_command::Global_Commands();
         interface.receiveCommandTeam2();
-        //interface.printCommand();
-        
+
+        if(status_team_2 == -1){
+            status_team_2 = 0;
+            cout << "---Time azul conectado---" << endl;
+        }
+
         situation_team2 = global_commands_team_2.situation();
         for(int i = 0 ; i < global_commands_team_2.robot_commands_size() ; i++){
             commands.at(i+3) = Command((float)global_commands_team_2.robot_commands(i).left_vel()+0.001, (float)global_commands_team_2.robot_commands(i).right_vel()+0.001);
@@ -235,8 +244,10 @@ void Simulator::runPhysics(){
 
         arbiter.checkWorld();
 
-        if(report.total_of_goals_team[0] >= qtd_of_goals || report.total_of_goals_team[1] >= qtd_of_goals || report.qtd_of_steps > 3500*qtd_of_goals){
-            finish_match = true;
+        if(!develop_mode){
+            if(report.total_of_goals_team[0] >= qtd_of_goals || report.total_of_goals_team[1] >= qtd_of_goals || report.qtd_of_steps > 3500*qtd_of_goals){
+                finish_match = true;
+            }
         }
 
         runSender();
@@ -290,10 +301,6 @@ void Simulator::updateReport(){
         report.ball_possession_team[1]++;
     }else{
         report.ball_possession_team[0]++;
-    }
-
-    if(report.qtd_of_steps > 0){
-        
     }
 }
 

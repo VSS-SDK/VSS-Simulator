@@ -39,18 +39,19 @@ public:
     }
 };
 
-bool argParse(int argc, char** argv, bool *fast_travel, int *qtd_of_goals);
+bool argParse(int argc, char** argv, bool *fast_travel, int *qtd_of_goals, bool *develop_mode);
 
 int main(int argc, char *argv[]){
     bool fast_travel = false;
     int qtd_of_goals = 10;
+    bool develop_mode = false;
 
-    if(argParse(argc, argv, &fast_travel, &qtd_of_goals)){
+    if(argParse(argc, argv, &fast_travel, &qtd_of_goals, &develop_mode)){
         Strategy *stratYellowTeam = new Strategy(); //Original strategy
         Strategy *stratBlueTeam = new Strategy(); //Strategy for tests
 
         Simulator* simulator = new Simulator();
-        simulator->runSimulator(argc, argv, stratBlueTeam, stratYellowTeam, fast_travel, qtd_of_goals);
+        simulator->runSimulator(argc, argv, stratBlueTeam, stratYellowTeam, fast_travel, qtd_of_goals, develop_mode);
     }else{
         return -1;
     }
@@ -58,14 +59,15 @@ int main(int argc, char *argv[]){
 	return 0;
 }
 
-bool argParse(int argc, char** argv, bool *fast_travel, int *qtd_of_goals){
+bool argParse(int argc, char** argv, bool *fast_travel, int *qtd_of_goals, bool *develop_mode){
     namespace bpo = boost::program_options;
 
     // Declare the supported options.
     bpo::options_description desc("Allowed options");
     desc.add_options()
         ("help,h", "(Optional) produce help message")
-        ("fast,f", "(Optional) specify if the time must go 10x faster.")
+        ("fast,f", "(Optional) specify if the time must go 15x faster.")
+        ("develop,d", "(Optional) turn on the develop mode. the time doesn't count.")
         ("qtd_of_goals,g", bpo::value<std::string>()->default_value("10"), "(Optional) specify the qtd of goals to end the game. 10 to 100");
     bpo::variables_map vm;
     bpo::store(bpo::parse_command_line(argc, argv, desc), vm);
@@ -78,6 +80,10 @@ bool argParse(int argc, char** argv, bool *fast_travel, int *qtd_of_goals){
 
     if (vm.count("fast")){
         *fast_travel = true;
+    }
+
+    if (vm.count("develop")){
+        *develop_mode = true;
     }
 
     stringstream ss;

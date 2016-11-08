@@ -40,12 +40,16 @@ private:
     Arbiter arbiter;
     int contDebug;
 
+    bool fast_travel;
+    int qtd_of_goals;
+    bool develop_mode;
+    int status_team_1;
+    int status_team_2;
+
     Report report;
     bool finish_match;
     float timeStep;
     float handTime;
-    bool fast_travel;
-    int qtd_of_goals;
     int numRobotsTeam;
     bool runningPhysics;
     vector<Command> commands;
@@ -83,7 +87,7 @@ private:
     btVector3 getRobotVelocity(RobotPhysics* robot);
 public:
 	Simulator();
-	void runSimulator(int argc, char *argv[], ModelStrategy* strategyTeam, ModelStrategy* strategyAdv, bool fast_travel, int qtd_goal);
+	void runSimulator(int argc, char *argv[], ModelStrategy* strategyTeam, ModelStrategy* strategyAdv, bool fast_travel, int qtd_goal, bool develop_mode);
 
 	void runPhysics();
 	void runStrategies();
