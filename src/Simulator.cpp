@@ -39,6 +39,11 @@ Simulator::Simulator(){
     qtd_of_goals = 10;
 
     finish_match = false;
+
+    goals_team_1 = 0;
+    goals_team_2 = 0;
+    has_new_name_team_1 = false;
+    has_new_name_team_2 = false;
 }
 
 void Simulator::runSimulator(int argc, char *argv[], ModelStrategy *stratBlueTeam, ModelStrategy *stratYellowTeam, bool fast_travel, int qtd_of_goals, bool develop_mode){
@@ -118,6 +123,11 @@ void Simulator::runReceiveTeam1(){
         for(int i = 0 ; i < global_commands_team_1.robot_commands_size() ; i++){
             commands.at(i) = Command((float)global_commands_team_1.robot_commands(i).left_vel()+0.001, (float)global_commands_team_1.robot_commands(i).right_vel()+0.001);
         }
+
+        if(global_commands_team_1.has_name()){
+            name_team_1 = global_commands_team_1.name();
+            has_new_name_team_1 = true;
+        }
     }
 }
 
@@ -139,83 +149,101 @@ void Simulator::runReceiveTeam2(){
         for(int i = 0 ; i < global_commands_team_2.robot_commands_size() ; i++){
             commands.at(i+3) = Command((float)global_commands_team_2.robot_commands(i).left_vel()+0.001, (float)global_commands_team_2.robot_commands(i).right_vel()+0.001);
         }
+
+        if(global_commands_team_2.has_name()){
+            name_team_2 = global_commands_team_2.name();
+            has_new_name_team_2 = true;
+        }
     }
 }
 
 void Simulator::runSender(){
-    //arbiter.allocateState(&global_state);
+    global_state = vss_state::Global_State();
+    global_state.set_id(0);
+    global_state.set_situation(caseWorld);
+    global_state.set_origin(false);
 
-   //while(1){
-        //cout << "send" << endl;
-        global_state = vss_state::Global_State();
-        global_state.set_id(0);
-        global_state.set_situation(caseWorld);
-        global_state.set_origin(false);
+    if(report.total_of_goals_team[0] != goals_team_1){
+        goals_team_1 = report.total_of_goals_team[0];    
+        global_state.set_goals_yellow(goals_team_1);
+    }
 
-        vss_state::Ball_State *ball_s = global_state.add_balls();
-        ball_s->mutable_pose()->set_x(physics->getBallPosition().getX());
-        ball_s->mutable_pose()->set_y(physics->getBallPosition().getZ());
+    if(report.total_of_goals_team[1] != goals_team_2){
+        goals_team_2 = report.total_of_goals_team[1];    
+        global_state.set_goals_blue(goals_team_2);
+    }
 
-        ball_s->mutable_v_pose()->set_x(physics->getBallVelocity().getX());
-        ball_s->mutable_v_pose()->set_y(physics->getBallVelocity().getZ());
+    if(has_new_name_team_1){
+        has_new_name_team_1 = false;
+        global_state.set_name_yellow(name_team_1);
+    }
 
-        ball_s->mutable_k_pose()->set_x(0);
-        ball_s->mutable_k_pose()->set_y(0);
+    if(has_new_name_team_2){
+        has_new_name_team_2 = false;
+        global_state.set_name_blue(name_team_2);
+    }
 
-        ball_s->mutable_k_v_pose()->set_x(0);
-        ball_s->mutable_k_v_pose()->set_y(0);
+    vss_state::Ball_State *ball_s = global_state.add_balls();
+    ball_s->mutable_pose()->set_x(physics->getBallPosition().getX());
+    ball_s->mutable_pose()->set_y(physics->getBallPosition().getZ());
 
+    ball_s->mutable_v_pose()->set_x(physics->getBallVelocity().getX());
+    ball_s->mutable_v_pose()->set_y(physics->getBallVelocity().getZ());
 
-        vector<RobotPhysics*> listRobots = physics->getAllRobots();
-        for(int i = 0 ; i < 3 ; i++){
-            vss_state::Robot_State *robot_s = global_state.add_robots_blue();
-            btVector3 posRobot = getRobotPosition(listRobots.at(i+3));
-            btVector3 velRobot = getRobotVelocity(listRobots.at(i+3));
+    ball_s->mutable_k_pose()->set_x(0);
+    ball_s->mutable_k_pose()->set_y(0);
 
-            robot_s->mutable_pose()->set_x(posRobot.getX());
-            robot_s->mutable_pose()->set_y(posRobot.getZ());
-            float rads = atan2(getRobotOrientation(listRobots.at(i+3)).getZ(),getRobotOrientation(listRobots.at(i+3)).getX());
-            robot_s->mutable_pose()->set_yaw(rads);
+    ball_s->mutable_k_v_pose()->set_x(0);
+    ball_s->mutable_k_v_pose()->set_y(0);
 
-            robot_s->mutable_v_pose()->set_x(velRobot.getX());
-            robot_s->mutable_v_pose()->set_y(velRobot.getZ());
-            robot_s->mutable_v_pose()->set_yaw(0);
+    vector<RobotPhysics*> listRobots = physics->getAllRobots();
+    for(int i = 0 ; i < 3 ; i++){
+        vss_state::Robot_State *robot_s = global_state.add_robots_blue();
+        btVector3 posRobot = getRobotPosition(listRobots.at(i+3));
+        btVector3 velRobot = getRobotVelocity(listRobots.at(i+3));
 
-            robot_s->mutable_k_pose()->set_x(0);
-            robot_s->mutable_k_pose()->set_y(0);
-            robot_s->mutable_k_pose()->set_yaw(0);
+        robot_s->mutable_pose()->set_x(posRobot.getX());
+        robot_s->mutable_pose()->set_y(posRobot.getZ());
+        float rads = atan2(getRobotOrientation(listRobots.at(i+3)).getZ(),getRobotOrientation(listRobots.at(i+3)).getX());
+        robot_s->mutable_pose()->set_yaw(rads);
 
-            robot_s->mutable_k_v_pose()->set_x(0);
-            robot_s->mutable_k_v_pose()->set_y(0);
-            robot_s->mutable_k_v_pose()->set_yaw(0);
-        }
+        robot_s->mutable_v_pose()->set_x(velRobot.getX());
+        robot_s->mutable_v_pose()->set_y(velRobot.getZ());
+        robot_s->mutable_v_pose()->set_yaw(0);
 
-        for(int i = 0 ; i < 3 ; i++){
-            vss_state::Robot_State *robot_s = global_state.add_robots_yellow();
-            btVector3 posRobot = getRobotPosition(listRobots.at(i));
-            btVector3 velRobot = getRobotVelocity(listRobots.at(i));
+        robot_s->mutable_k_pose()->set_x(0);
+        robot_s->mutable_k_pose()->set_y(0);
+        robot_s->mutable_k_pose()->set_yaw(0);
 
-            robot_s->mutable_pose()->set_x(posRobot.getX());
-            robot_s->mutable_pose()->set_y(posRobot.getZ());
-            float rads = atan2(getRobotOrientation(listRobots.at(i)).getZ(),getRobotOrientation(listRobots.at(i)).getX());
-            robot_s->mutable_pose()->set_yaw(rads);
+        robot_s->mutable_k_v_pose()->set_x(0);
+        robot_s->mutable_k_v_pose()->set_y(0);
+        robot_s->mutable_k_v_pose()->set_yaw(0);
+    }
 
-            robot_s->mutable_v_pose()->set_x(velRobot.getX());
-            robot_s->mutable_v_pose()->set_y(velRobot.getZ());
-            robot_s->mutable_v_pose()->set_yaw(0);
+    for(int i = 0 ; i < 3 ; i++){
+        vss_state::Robot_State *robot_s = global_state.add_robots_yellow();
+        btVector3 posRobot = getRobotPosition(listRobots.at(i));
+        btVector3 velRobot = getRobotVelocity(listRobots.at(i));
 
-            robot_s->mutable_k_pose()->set_x(0);
-            robot_s->mutable_k_pose()->set_y(0);
-            robot_s->mutable_k_pose()->set_yaw(0);
+        robot_s->mutable_pose()->set_x(posRobot.getX());
+        robot_s->mutable_pose()->set_y(posRobot.getZ());
+        float rads = atan2(getRobotOrientation(listRobots.at(i)).getZ(),getRobotOrientation(listRobots.at(i)).getX());
+        robot_s->mutable_pose()->set_yaw(rads);
 
-            robot_s->mutable_k_v_pose()->set_x(0);
-            robot_s->mutable_k_v_pose()->set_y(0);
-            robot_s->mutable_k_v_pose()->set_yaw(0);
-        }
+        robot_s->mutable_v_pose()->set_x(velRobot.getX());
+        robot_s->mutable_v_pose()->set_y(velRobot.getZ());
+        robot_s->mutable_v_pose()->set_yaw(0);
 
-        interface_sender.sendState();
-        //usleep(33333);
-    //}
+        robot_s->mutable_k_pose()->set_x(0);
+        robot_s->mutable_k_pose()->set_y(0);
+        robot_s->mutable_k_pose()->set_yaw(0);
+
+        robot_s->mutable_k_v_pose()->set_x(0);
+        robot_s->mutable_k_v_pose()->set_y(0);
+        robot_s->mutable_k_v_pose()->set_yaw(0);
+    }
+
+    interface_sender.sendState();
 }
 
 void Simulator::runPhysics(){

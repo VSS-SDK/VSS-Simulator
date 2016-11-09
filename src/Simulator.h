@@ -45,7 +45,13 @@ private:
     bool develop_mode;
     int status_team_1;
     int status_team_2;
-
+    int goals_team_1;
+    int goals_team_2;
+    string name_team_1;
+    string name_team_2;
+    bool has_new_name_team_1;
+    bool has_new_name_team_2;
+    
     Report report;
     bool finish_match;
     float timeStep;
@@ -72,7 +78,6 @@ private:
     thread *thread_receive_team1;
     thread *thread_receive_team2;
 
-    bool team_1_already, team_2_already;
     int count_situation, situation_team1, situation_team2;
 
 	void updateWorld();
