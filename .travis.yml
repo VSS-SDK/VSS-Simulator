@@ -41,6 +41,7 @@ addons:
       - libopencv-dev
       - libzmq3
       - libzmq3-dev
+      - freeglut3-dev
 
 script:
   - make proto
