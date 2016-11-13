@@ -5,6 +5,7 @@
 # v. 3.0. If a copy of the GPL was not distributed with this
 # file, You can obtain one at http://www.gnu.org/licenses/gpl-3.0/.
 #
+# Ubuntu 14.04 Trusty support
 
 sudo: true
 
@@ -20,7 +21,7 @@ before_install:
   - sudo add-apt-repository --yes ppa:ubuntu-sdk-team/ppa
   - sudo apt-get update -qq
   - sudo apt-get install -qq qt5-qmake qtbase5-dev qtdeclarative5-dev libqt5webkit5-dev libsqlite3-dev
-  
+
 install:
   - if [ "$CXX" = "g++" ]; then export CXX="g++-4.8" CC="gcc-4.8"; fi
 
@@ -34,17 +35,14 @@ addons:
       - cmake
       - gcc-4.8
       - g++-4.8
-      - freeglut3
-      - freeglut3-dev
-      - libbullet-dev
       - protobuf-compiler
       - libprotobuf-dev
+      - libopencv-dev
       - libzmq3
       - libzmq3-dev
-      - libboost-all-dev
       - rustc
       - cargo
-
+      
 script:
   - make proto
   - make
