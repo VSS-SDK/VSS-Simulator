@@ -41,7 +41,10 @@ addons:
       - libopencv-dev
       - libzmq3
       - libzmq3-dev
+      - freeglut3
       - freeglut3-dev
+      - libboost-all-dev
+      - libbullet-dev      
 
 script:
   - make proto
