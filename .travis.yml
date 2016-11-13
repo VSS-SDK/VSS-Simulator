@@ -13,7 +13,10 @@ before_install:
   - sudo add-apt-repository --yes ppa:ubuntu-sdk-team/ppa
   - sudo apt-get update -qq
   - sudo apt-get install -qq qt5-qmake qtbase5-dev qtdeclarative5-dev libqt5webkit5-dev libsqlite3-dev
-
+  - sudo apt-get install protobuf-compiler libprotobuf-dev rustc
+  - cargo install protobuf
+  - PATH="$HOME/.cargo/bin:$PATH"
+  
 install:
   - if [ "$CXX" = "g++" ]; then export CXX="g++-4.8" CC="gcc-4.8"; fi
 
@@ -30,11 +33,11 @@ addons:
       - freeglut3
       - freeglut3-dev
       - libbullet-dev
-      - protobuf-compiler
-      - libprotobuf-dev
+
       - libzmq3
       - libzmq3-dev
       - libboost-all-dev
+
 script:
   - make proto
   - make
