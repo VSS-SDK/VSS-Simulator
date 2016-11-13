@@ -24,7 +24,7 @@ copies or substantial portions of the Software.
 #include "strategies/Strategy.h"
 
 #include "strategies/ModelStrategy.h"
-#include "VSS-Interface/interface.h"
+#include "VSS-Interface/cpp/interface.h"
 #include "Arbiter.h"
 
 class Simulator{

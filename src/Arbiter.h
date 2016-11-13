@@ -2,7 +2,7 @@
 #define _ARBITER_H_
 
 #include "iostream"
-#include "VSS-Interface/interface.h"
+#include "VSS-Interface/cpp/interface.h"
 #include "Sir.h"
 #include "Physics.h"
 
