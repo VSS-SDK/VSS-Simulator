@@ -19,7 +19,6 @@ copies or substantial portions of the Software.
 //Classes from lib
 
 #include "Constants.h"
-#include <GL/glut.h>
 #include "btBulletDynamicsCommon.h"
 #include <stdio.h>
 #include <stdlib.h>
