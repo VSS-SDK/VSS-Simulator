@@ -36,7 +36,7 @@ This code is licensed under the MIT License, of which a textual copy is availabl
 
 You are allowed and encouraged to use this software on the IEEE Very Small Size Soccer competitions.  If you do, please let us know.
 
-[vss-sdk]: http://sirlab.github.io/vss.html
+[vss-sdk]: http://sirlab.github.io/VSS-SDK
 [install]: https://github.com/SIRLab/VSS-Simulator/blob/master/INSTALL.md
 [travis]: https://travis-ci.org/SIRLab/VSS-Simulator
 [mit]: https://raw.githubusercontent.com/hyperium/hyper/master/LICENSE
