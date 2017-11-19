@@ -17,7 +17,7 @@ subject to the following restrictions:
 
 
 #include "btPolyhedralConvexShape.h"
-#include "BulletCollision/BroadphaseCollision/btBroadphaseProxy.h" // for the types
+#include "../../BulletCollision/BroadphaseCollision/btBroadphaseProxy.h" // for the types
 
 
 /// The btConvexTriangleMeshShape is a convex hull of a triangle mesh, but the performance is not as good as btConvexHullShape.
@@ -72,6 +72,3 @@ public:
 
 
 #endif //BT_CONVEX_TRIANGLEMESH_SHAPE_H
-
-
-

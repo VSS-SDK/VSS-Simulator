@@ -24,7 +24,7 @@ copies or substantial portions of the Software.
 #include "strategies/Strategy.h"
 
 #include "strategies/ModelStrategy.h"
-#include "VSS-Interface/cpp/interface.h"
+#include "../VSS-Interface/interface.h"
 #include "Arbiter.h"
 
 class Simulator{
@@ -51,7 +51,7 @@ private:
     string name_team_2;
     bool has_new_name_team_1;
     bool has_new_name_team_2;
-    
+
     Report report;
     bool finish_match;
     float timeStep;
@@ -68,7 +68,7 @@ private:
     int stratStep;
     int loopBullet;
     int caseWorld;
-    
+
 	Physics* physics;
 	vector<ModelStrategy*> strategies;
 

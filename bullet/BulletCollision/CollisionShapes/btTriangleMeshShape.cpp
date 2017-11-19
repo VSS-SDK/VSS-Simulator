@@ -14,11 +14,11 @@ subject to the following restrictions:
 */
 
 #include "btTriangleMeshShape.h"
-#include "LinearMath/btVector3.h"
-#include "LinearMath/btQuaternion.h"
+#include "../../LinearMath/btVector3.h"
+#include "../../LinearMath/btQuaternion.h"
 #include "btStridingMeshInterface.h"
-#include "LinearMath/btAabbUtil2.h"
-#include "BulletCollision/CollisionShapes/btCollisionMargin.h"
+#include "../../LinearMath/btAabbUtil2.h"
+#include "../../BulletCollision/CollisionShapes/btCollisionMargin.h"
 
 
 btTriangleMeshShape::btTriangleMeshShape(btStridingMeshInterface* meshInterface)
@@ -203,5 +203,3 @@ btVector3 btTriangleMeshShape::localGetSupportingVertex(const btVector3& vec) co
 
 	return supportVertex;
 }
-
-

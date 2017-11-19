@@ -14,6 +14,7 @@ copies or substantial portions of the Software.
 */
 
 #include "Simulator.h"
+#include "functional"
 
 Simulator::Simulator(){
     contDebug = 0;
@@ -118,7 +119,7 @@ void Simulator::runReceiveTeam1(){
             status_team_1 = 0;
             cout << "---Time amarelo conectado---" << endl;
         }
-        
+
         situation_team1 = global_commands_team_1.situation();
         for(int i = 0 ; i < global_commands_team_1.robot_commands_size() ; i++){
             commands.at(i) = Command((float)global_commands_team_1.robot_commands(i).left_vel()+0.001, (float)global_commands_team_1.robot_commands(i).right_vel()+0.001);
@@ -164,12 +165,12 @@ void Simulator::runSender(){
     global_state.set_origin(false);
 
     if(report.total_of_goals_team[0] != goals_team_1){
-        goals_team_1 = report.total_of_goals_team[0];    
+        goals_team_1 = report.total_of_goals_team[0];
         global_state.set_goals_yellow(goals_team_1);
     }
 
     if(report.total_of_goals_team[1] != goals_team_2){
-        goals_team_2 = report.total_of_goals_team[1];    
+        goals_team_2 = report.total_of_goals_team[1];
         global_state.set_goals_blue(goals_team_2);
     }
 
@@ -318,7 +319,7 @@ void Simulator::updateReport(){
                 report.travelled_distance_team[0][i] += velRobot.length();
             }
 
-        
+
         if(minDist > modDist){
             minDist = modDist;
             idDist = i;
@@ -347,7 +348,7 @@ void Simulator::runStrategies(){
             int id = i*numRobotsTeam + j;
             physics->getAllRobots()[id]->setTimeStep(timeStep);
         }
-            
+
     }
 
     while(!finish_match){
@@ -393,7 +394,7 @@ void Simulator::runStrategies(){
                         //invCommand[1] = strategies[i]->getRobotStrategiesTeam()[j]->getCommand()[0];
 
                         physics->getAllRobots()[id]->updateRobot(invCommand);
-                    } 
+                    }
                 }
             }
 
@@ -433,7 +434,7 @@ RobotStrategy* Simulator::updateLocalPhysics(int id, RobotPhysics* physicRobot){
 }
 
 void Simulator::calcRelativeWorld(vector<RobotStrategy*> robotStrategiesTeam,int attackDir){
-        for(int i = 0; i < robotStrategiesTeam.size(); i++){
+        for(unsigned int i = 0; i < robotStrategiesTeam.size(); i++){
             robotStrategiesTeam[i]->setPosition(calcRelativePosition(robotStrategiesTeam[i]->getPosition(),attackDir));
             robotStrategiesTeam[i]->setLocalFront(attackDir*robotStrategiesTeam[i]->getLocalFront());
             robotStrategiesTeam[i]->setLocalRight(attackDir*robotStrategiesTeam[i]->getLocalRight());
@@ -448,7 +449,7 @@ btVector3 Simulator::calcRelativePosition(btVector3 absPos, int attackDir){
 
         relZ = SIZE_DEPTH - absPos.getZ();
         relX = SIZE_WIDTH - absPos.getX();
-    } 
+    }
     return btVector3(relX,0,relZ);
 }
 

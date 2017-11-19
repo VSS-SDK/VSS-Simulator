@@ -21,7 +21,7 @@ subject to the following restrictions:
 3. This notice may not be removed or altered from any source distribution.
 */
 #include "btGImpactBvh.h"
-#include "LinearMath/btQuickprof.h"
+#include "../../LinearMath/btQuickprof.h"
 
 #ifdef TRI_COLLISION_PROFILING
 
@@ -495,4 +495,3 @@ void btGImpactBvh::find_collision(btGImpactBvh * boxset0, const btTransform & tr
 #endif //TRI_COLLISION_PROFILING
 
 }
-

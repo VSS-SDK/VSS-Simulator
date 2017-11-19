@@ -16,8 +16,6 @@ copies or substantial portions of the Software.
 
 #include "GLDebugDrawer.h"
 
-
-
 #include <stdio.h> //printf debugging
 GLDebugDrawer::GLDebugDrawer()
 :drawScenario(true)
@@ -109,7 +107,7 @@ void	GLDebugDrawer::setDebugMode(vector<int> debugMode)
 	}
 }
 
-vector<int> GLDebugDrawer::getDebugMode() const{
+vector<int> GLDebugDrawer::getDebugMode2() const{
         return m_debugMode;
 }
 
@@ -151,8 +149,3 @@ void	GLDebugDrawer::drawContactPoint(const btVector3& pointOnB,const btVector3& 
 
 	}
 }
-
-
-
-
-

@@ -16,7 +16,7 @@ copies or substantial portions of the Software.
 #ifndef STRATEGYBASIC_H_
 #define STRATEGYBASIC_H_
 
-#include "Header.h"
+#include "../Header.h"
 #include "ModelStrategy.h"
 
 class StrategyBasic : public ModelStrategy{

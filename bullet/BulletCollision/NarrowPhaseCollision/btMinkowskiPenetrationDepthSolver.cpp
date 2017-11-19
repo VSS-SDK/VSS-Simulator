@@ -14,10 +14,10 @@ subject to the following restrictions:
 */
 
 #include "btMinkowskiPenetrationDepthSolver.h"
-#include "BulletCollision/NarrowPhaseCollision/btSubSimplexConvexCast.h"
-#include "BulletCollision/NarrowPhaseCollision/btVoronoiSimplexSolver.h"
-#include "BulletCollision/NarrowPhaseCollision/btGjkPairDetector.h"
-#include "BulletCollision/CollisionShapes/btConvexShape.h"
+#include "../../BulletCollision/NarrowPhaseCollision/btSubSimplexConvexCast.h"
+#include "../../BulletCollision/NarrowPhaseCollision/btVoronoiSimplexSolver.h"
+#include "../../BulletCollision/NarrowPhaseCollision/btGjkPairDetector.h"
+#include "../../BulletCollision/CollisionShapes/btConvexShape.h"
 
 #define NUM_UNITSPHERE_POINTS 42
 
@@ -357,5 +357,3 @@ btVector3*	btMinkowskiPenetrationDepthSolver::getPenetrationDirections()
 
 	return sPenetrationDirections;
 }
-
-

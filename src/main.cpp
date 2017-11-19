@@ -30,7 +30,7 @@ public:
 
         ModelStrategy::runStrategy();
 
-        for(int i = 0; i < robotStrategiesTeam.size(); i++){
+        for(unsigned int i = 0; i < robotStrategiesTeam.size(); i++){
             float leftWheel, rigthWheel;
             leftWheel = 0;
             rigthWheel = 0;

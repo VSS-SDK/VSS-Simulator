@@ -16,15 +16,15 @@ subject to the following restrictions:
 #ifndef BT_RIGIDBODY_H
 #define BT_RIGIDBODY_H
 
-#include "LinearMath/btAlignedObjectArray.h"
-#include "LinearMath/btTransform.h"
-#include "BulletCollision/BroadphaseCollision/btBroadphaseProxy.h"
-#include "BulletCollision/CollisionDispatch/btCollisionObject.h"
+#include "../../LinearMath/btAlignedObjectArray.h"
+#include "../../LinearMath/btTransform.h"
+#include "../../BulletCollision/BroadphaseCollision/btBroadphaseProxy.h"
+#include "../../BulletCollision/CollisionDispatch/btCollisionObject.h"
 #include <iostream>
 #include <string.h>
 #include <GL/glut.h>
-#include "Constants.h"
-#include "GLDebugDrawer.h"
+#include "../../../utils/Constants.h"
+#include "../../../utils/GLDebugDrawer.h"
 
 using namespace std;
 
@@ -633,4 +633,3 @@ struct	btRigidBodyDoubleData
 
 
 #endif //BT_RIGIDBODY_H
-

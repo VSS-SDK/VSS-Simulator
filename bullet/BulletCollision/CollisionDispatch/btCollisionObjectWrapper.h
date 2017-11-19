@@ -1,12 +1,12 @@
 #ifndef BT_COLLISION_OBJECT_WRAPPER_H
 #define BT_COLLISION_OBJECT_WRAPPER_H
 
-///btCollisionObjectWrapperis an internal data structure. 
+///btCollisionObjectWrapperis an internal data structure.
 ///Most users can ignore this and use btCollisionObject and btCollisionShape instead
 class btCollisionShape;
 class btCollisionObject;
 class btTransform;
-#include "LinearMath/btScalar.h" // for SIMD_FORCE_INLINE definition
+#include "../../LinearMath/btScalar.h" // for SIMD_FORCE_INLINE definition
 
 #define BT_DECLARE_STACK_ONLY_OBJECT \
 	private: \

@@ -18,7 +18,7 @@ subject to the following restrictions:
 
 
 
-#include "LinearMath/btVector3.h"
+#include "../../LinearMath/btVector3.h"
 #include "btTypedConstraint.h"
 #include "btGeneric6DofConstraint.h"
 
@@ -62,4 +62,3 @@ public:
 
 
 #endif // BT_UNIVERSAL_CONSTRAINT_H
-

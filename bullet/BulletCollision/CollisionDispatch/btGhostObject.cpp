@@ -15,8 +15,8 @@ subject to the following restrictions:
 
 #include "btGhostObject.h"
 #include "btCollisionWorld.h"
-#include "BulletCollision/CollisionShapes/btConvexShape.h"
-#include "LinearMath/btAabbUtil2.h"
+#include "../../BulletCollision/CollisionShapes/btConvexShape.h"
+#include "../../LinearMath/btAabbUtil2.h"
 
 btGhostObject::btGhostObject()
 {
@@ -168,4 +168,3 @@ void	btGhostObject::rayTest(const btVector3& rayFromWorld, const btVector3& rayT
 		}
 	}
 }
-

@@ -2,11 +2,11 @@
 #define _ARBITER_H_
 
 #include "iostream"
-#include "VSS-Interface/cpp/interface.h"
+#include "../VSS-Interface/interface.h"
 #include "Sir.h"
 #include "Physics.h"
 
-using namespace std; 
+using namespace std;
 
 //! Classe responsável por verificar ocorrencias como: gol, penalti e falta. Também é responsável por monitorar o tempo e reposicionar os objetos em campo.
 class Arbiter{

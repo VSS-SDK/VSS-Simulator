@@ -26,7 +26,7 @@ Physics::Physics(int numTeams){
     world = new btDiscreteDynamicsWorld(dispatcher,broadphase,solver,collisionConfig);
     world->setGravity(btVector3(0,-9.81*SCALE_WORLD,0));
 
-    glDebugDrawer = new GLDebugDrawer();
+    //glDebugDrawer = new GLDebugDrawer();
     world->setDebugDrawer(glDebugDrawer);
     gContactAddedCallback = callBackHitFunc;
 
@@ -105,12 +105,12 @@ void Physics::registBodies(){
     addCorner(Color(0,0,0),btVector3(SIZE_WIDTH + (GOAL_WIDTH), 0, GOAL_WIDTH+1.25), 45, 15, btVector3(0,-45,0));
     // TRIANGULO SUPERIOR DIREITO
     addCorner(Color(0,0,0),btVector3(GOAL_WIDTH, 0, GOAL_WIDTH+1.25), 45, 15, btVector3(0,45,0));
-    
+
     // TRIANGULO INFERIOR ESQUERDO
     addCorner(Color(0,0,0),btVector3(GOAL_WIDTH+1.25, 0, SIZE_DEPTH-GOAL_WIDTH+1.25), 45, 15, btVector3(0,-45,0));
     // TRIANGULO INFERIOR DIREITO
     addCorner(Color(0,0,0),btVector3(SIZE_WIDTH + GOAL_WIDTH-1.25, 0, SIZE_DEPTH-GOAL_WIDTH-1.25), 45, 15, btVector3(0,45,0));
-    
+
 }
 
 void Physics::resetRobotPositions(){
@@ -128,9 +128,9 @@ void Physics::resetRobotPositions(){
 
         t.setIdentity();
         t.setOrigin(posTeam1[i]);
-        
+
         btMotionState* motion = new btDefaultMotionState(t);
-        
+
         genRobots[i]->getRigidBody()->setMotionState(motion);
         genRobots[i]->getRigidBody()->setLinearVelocity(btVector3(0,0,0));
         genRobots[i]->getRigidBody()->setAngularVelocity(btVector3(0,0,0));
@@ -142,9 +142,9 @@ void Physics::resetRobotPositions(){
 
         t.setIdentity();
         t.setOrigin(posTeam2[i-genRobots.size()/2]);
-        
+
         btMotionState* motion = new btDefaultMotionState(t);
-        
+
         genRobots[i]->getRigidBody()->setMotionState(motion);
         genRobots[i]->getRigidBody()->setLinearVelocity(btVector3(0,0,0));
         genRobots[i]->getRigidBody()->setAngularVelocity(btVector3(0,0,0));
@@ -202,7 +202,7 @@ bool Physics::callBackHitFunc(btManifoldPoint& cp,const btCollisionObjectWrapper
         vecObj.at(0)->hitRobot = true;
         vecObj.at(1)->hitRobot = true;
     }
-        
+
     return false;
 }
 
@@ -241,9 +241,9 @@ void Physics::setBallPosition(btVector3 newPos){
 
             t.setIdentity();
             t.setOrigin(newPos);
-            
+
             btMotionState* motion = new btDefaultMotionState(t);
-            
+
             bodies[i]->body->setMotionState(motion);
             bodies[i]->body->setLinearVelocity(btVector3(0,0,0));
             bodies[i]->body->setAngularVelocity(btVector3(0,0,0));
@@ -272,9 +272,9 @@ void Physics::setRobotsPosition(vector<btVector3> new_poses){
 
         t.setIdentity();
         t.setOrigin(new_poses[i]);
-        
+
         btMotionState* motion = new btDefaultMotionState(t);
-        
+
         genRobots[i]->getRigidBody()->setMotionState(motion);
         genRobots[i]->getRigidBody()->setLinearVelocity(btVector3(0,0,0));
         genRobots[i]->getRigidBody()->setAngularVelocity(btVector3(0,0,0));
@@ -287,7 +287,7 @@ void Physics::startDebug(){
 
 void Physics::setDebugWorld(int debugMode){
     vector<int> debugDrawMode;
-    ((GLDebugDrawer*)world-> getDebugDrawer())->setDrawScenarioMode(true);
+    //((GLDebugDrawer*)world-> getDebugDrawer())->setDrawScenarioMode(true);
     switch (debugMode){
         case 0:{
             debugDrawMode.push_back(btIDebugDraw::DBG_NoDebug);
@@ -297,7 +297,7 @@ void Physics::setDebugWorld(int debugMode){
             debugDrawMode.push_back(btIDebugDraw::DBG_DrawLocalProperties);
             debugDrawMode.push_back(btIDebugDraw::DBG_DrawWireframe);
             world->getDebugDrawer()->setDebugMode(debugDrawMode);
-            ((GLDebugDrawer*)world-> getDebugDrawer())->setDrawScenarioMode(false);
+            //((GLDebugDrawer*)world-> getDebugDrawer())->setDrawScenarioMode(false);
         }break;
         case 2:{
             debugDrawMode.push_back(btIDebugDraw::DBG_DrawWireframe);

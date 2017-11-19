@@ -18,9 +18,9 @@ subject to the following restrictions:
 #endif
 
 #include "btMultiSphereShape.h"
-#include "BulletCollision/CollisionShapes/btCollisionMargin.h"
-#include "LinearMath/btQuaternion.h"
-#include "LinearMath/btSerializer.h"
+#include "../../BulletCollision/CollisionShapes/btCollisionMargin.h"
+#include "../../LinearMath/btQuaternion.h"
+#include "../../LinearMath/btSerializer.h"
 
 btMultiSphereShape::btMultiSphereShape (const btVector3* positions,const btScalar* radi,int numSpheres)
 :btConvexInternalAabbCachingShape ()
@@ -178,5 +178,3 @@ const char*	btMultiSphereShape::serialize(void* dataBuffer, btSerializer* serial
 
 	return "btMultiSphereShapeData";
 }
-
-

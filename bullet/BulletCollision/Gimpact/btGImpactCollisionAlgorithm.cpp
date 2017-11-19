@@ -18,18 +18,18 @@ subject to the following restrictions:
 3. This notice may not be removed or altered from any source distribution.
 */
 /*
-Author: Francisco Len Nßjera
+Author: Francisco Len Nï¿½jera
 Concave-Concave Collision
 
 */
 
-#include "BulletCollision/CollisionDispatch/btManifoldResult.h"
-#include "LinearMath/btIDebugDraw.h"
-#include "BulletCollision/CollisionDispatch/btCollisionObject.h"
-#include "BulletCollision/CollisionShapes/btBoxShape.h"
+#include "../../BulletCollision/CollisionDispatch/btManifoldResult.h"
+#include "../../LinearMath/btIDebugDraw.h"
+#include "../../BulletCollision/CollisionDispatch/btCollisionObject.h"
+#include "../../BulletCollision/CollisionShapes/btBoxShape.h"
 #include "btGImpactCollisionAlgorithm.h"
 #include "btContactProcessing.h"
-#include "LinearMath/btQuickprof.h"
+#include "../../LinearMath/btQuickprof.h"
 
 
 //! Class for accessing the plane equation

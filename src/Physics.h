@@ -18,7 +18,7 @@ copies or substantial portions of the Software.
 
 #include "Header.h"
 #include "RobotStrategy.h"
-#include "GLDebugDrawer.h"
+#include "../utils/GLDebugDrawer.h"
 #include "RobotPhysics.h"
 
 const Color clrTeams[] = {Color(1.0,1.0,0),Color(0,0,1)};

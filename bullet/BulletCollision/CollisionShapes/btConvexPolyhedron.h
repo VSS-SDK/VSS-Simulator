@@ -20,8 +20,8 @@ subject to the following restrictions:
 #ifndef _BT_POLYHEDRAL_FEATURES_H
 #define _BT_POLYHEDRAL_FEATURES_H
 
-#include "LinearMath/btTransform.h"
-#include "LinearMath/btAlignedObjectArray.h"
+#include "../../LinearMath/btTransform.h"
+#include "../../LinearMath/btAlignedObjectArray.h"
 
 #define TEST_INTERNAL_OBJECTS 1
 
@@ -61,5 +61,3 @@ ATTRIBUTE_ALIGNED16(class) btConvexPolyhedron
 
 
 #endif //_BT_POLYHEDRAL_FEATURES_H
-
-

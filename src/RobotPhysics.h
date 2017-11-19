@@ -19,7 +19,7 @@ copies or substantial portions of the Software.
 #define MAX_ACCELERATION 5.5*SCALE_WORLD
 
 #include "Header.h"
-#include "BulletDynamics/Vehicle/btRaycastVehicle.h"
+#include "../bullet/BulletDynamics/Vehicle/btRaycastVehicle.h"
 
 class RobotPhysics{
 private:

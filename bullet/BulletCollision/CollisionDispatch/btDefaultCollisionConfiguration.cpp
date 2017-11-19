@@ -4,8 +4,8 @@ Copyright (c) 2003-2006 Erwin Coumans  http://continuousphysics.com/Bullet/
 
 This software is provided 'as-is', without any express or implied warranty.
 In no event will the authors be held liable for any damages arising from the use of this software.
-Permission is granted to anyone to use this software for any purpose, 
-including commercial applications, and to alter it and redistribute it freely, 
+Permission is granted to anyone to use this software for any purpose,
+including commercial applications, and to alter it and redistribute it freely,
 subject to the following restrictions:
 
 1. The origin of this software must not be misrepresented; you must not claim that you wrote the original software. If you use this software in a product, an acknowledgment in the product documentation would be appreciated but is not required.
@@ -15,26 +15,26 @@ subject to the following restrictions:
 
 #include "btDefaultCollisionConfiguration.h"
 
-#include "BulletCollision/CollisionDispatch/btConvexConvexAlgorithm.h"
-#include "BulletCollision/CollisionDispatch/btEmptyCollisionAlgorithm.h"
-#include "BulletCollision/CollisionDispatch/btConvexConcaveCollisionAlgorithm.h"
-#include "BulletCollision/CollisionDispatch/btCompoundCollisionAlgorithm.h"
-#include "BulletCollision/CollisionDispatch/btCompoundCompoundCollisionAlgorithm.h"
+#include "../../BulletCollision/CollisionDispatch/btConvexConvexAlgorithm.h"
+#include "../../BulletCollision/CollisionDispatch/btEmptyCollisionAlgorithm.h"
+#include "../../BulletCollision/CollisionDispatch/btConvexConcaveCollisionAlgorithm.h"
+#include "../../BulletCollision/CollisionDispatch/btCompoundCollisionAlgorithm.h"
+#include "../../BulletCollision/CollisionDispatch/btCompoundCompoundCollisionAlgorithm.h"
 
-#include "BulletCollision/CollisionDispatch/btConvexPlaneCollisionAlgorithm.h"
-#include "BulletCollision/CollisionDispatch/btBoxBoxCollisionAlgorithm.h"
-#include "BulletCollision/CollisionDispatch/btSphereSphereCollisionAlgorithm.h"
+#include "../../BulletCollision/CollisionDispatch/btConvexPlaneCollisionAlgorithm.h"
+#include "../../BulletCollision/CollisionDispatch/btBoxBoxCollisionAlgorithm.h"
+#include "../../BulletCollision/CollisionDispatch/btSphereSphereCollisionAlgorithm.h"
 #ifdef USE_BUGGY_SPHERE_BOX_ALGORITHM
-#include "BulletCollision/CollisionDispatch/btSphereBoxCollisionAlgorithm.h"
+#include "../../BulletCollision/CollisionDispatch/btSphereBoxCollisionAlgorithm.h"
 #endif //USE_BUGGY_SPHERE_BOX_ALGORITHM
-#include "BulletCollision/CollisionDispatch/btSphereTriangleCollisionAlgorithm.h"
-#include "BulletCollision/NarrowPhaseCollision/btGjkEpaPenetrationDepthSolver.h"
-#include "BulletCollision/NarrowPhaseCollision/btMinkowskiPenetrationDepthSolver.h"
-#include "BulletCollision/NarrowPhaseCollision/btVoronoiSimplexSolver.h"
+#include "../../BulletCollision/CollisionDispatch/btSphereTriangleCollisionAlgorithm.h"
+#include "../../BulletCollision/NarrowPhaseCollision/btGjkEpaPenetrationDepthSolver.h"
+#include "../../BulletCollision/NarrowPhaseCollision/btMinkowskiPenetrationDepthSolver.h"
+#include "../../BulletCollision/NarrowPhaseCollision/btVoronoiSimplexSolver.h"
 
 
 
-#include "LinearMath/btPoolAllocator.h"
+#include "../../LinearMath/btPoolAllocator.h"
 
 
 
@@ -56,7 +56,7 @@ btDefaultCollisionConfiguration::btDefaultCollisionConfiguration(const btDefault
 		mem = btAlignedAlloc(sizeof(btMinkowskiPenetrationDepthSolver),16);
 		m_pdSolver = new (mem)btMinkowskiPenetrationDepthSolver;
 	}
-	
+
 	//default CreationFunctions, filling the m_doubleDispatch table
 	mem = btAlignedAlloc(sizeof(btConvexConvexAlgorithm::CreateFunc),16);
 	m_convexConvexCreateFunc = new(mem) btConvexConvexAlgorithm::CreateFunc(m_simplexSolver,m_pdSolver);
@@ -74,7 +74,7 @@ btDefaultCollisionConfiguration::btDefaultCollisionConfiguration(const btDefault
 	m_swappedCompoundCreateFunc = new (mem)btCompoundCollisionAlgorithm::SwappedCreateFunc;
 	mem = btAlignedAlloc(sizeof(btEmptyAlgorithm::CreateFunc),16);
 	m_emptyCreateFunc = new(mem) btEmptyAlgorithm::CreateFunc;
-	
+
 	mem = btAlignedAlloc(sizeof(btSphereSphereCollisionAlgorithm::CreateFunc),16);
 	m_sphereSphereCF = new(mem) btSphereSphereCollisionAlgorithm::CreateFunc;
 #ifdef USE_BUGGY_SPHERE_BOX_ALGORITHM
@@ -90,7 +90,7 @@ btDefaultCollisionConfiguration::btDefaultCollisionConfiguration(const btDefault
 	mem = btAlignedAlloc(sizeof(btSphereTriangleCollisionAlgorithm::CreateFunc),16);
 	m_triangleSphereCF = new (mem)btSphereTriangleCollisionAlgorithm::CreateFunc;
 	m_triangleSphereCF->m_swapped = true;
-	
+
 	mem = btAlignedAlloc(sizeof(btBoxBoxCollisionAlgorithm::CreateFunc),16);
 	m_boxBoxCF = new(mem)btBoxBoxCollisionAlgorithm::CreateFunc;
 
@@ -100,7 +100,7 @@ btDefaultCollisionConfiguration::btDefaultCollisionConfiguration(const btDefault
 	mem = btAlignedAlloc (sizeof(btConvexPlaneCollisionAlgorithm::CreateFunc),16);
 	m_planeConvexCF = new (mem) btConvexPlaneCollisionAlgorithm::CreateFunc;
 	m_planeConvexCF->m_swapped = true;
-	
+
 	///calculate maximum element size, big enough to fit any collision algorithm in the memory pool
 	int maxSize = sizeof(btConvexConvexAlgorithm);
 	int maxSize2 = sizeof(btConvexConcaveCollisionAlgorithm);
@@ -111,7 +111,7 @@ btDefaultCollisionConfiguration::btDefaultCollisionConfiguration(const btDefault
 	collisionAlgorithmMaxElementSize = btMax(collisionAlgorithmMaxElementSize,maxSize2);
 	collisionAlgorithmMaxElementSize = btMax(collisionAlgorithmMaxElementSize,maxSize3);
 
-		
+
 	if (constructionInfo.m_persistentManifoldPool)
 	{
 		m_ownsPersistentManifoldPool = false;
@@ -122,7 +122,7 @@ btDefaultCollisionConfiguration::btDefaultCollisionConfiguration(const btDefault
 		void* mem = btAlignedAlloc(sizeof(btPoolAllocator),16);
 		m_persistentManifoldPool = new (mem) btPoolAllocator(sizeof(btPersistentManifold),constructionInfo.m_defaultMaxPersistentManifoldPoolSize);
 	}
-	
+
 	if (constructionInfo.m_collisionAlgorithmPool)
 	{
 		m_ownsCollisionAlgorithmPool = false;
@@ -196,7 +196,7 @@ btDefaultCollisionConfiguration::~btDefaultCollisionConfiguration()
 	btAlignedFree(m_simplexSolver);
 
 	m_pdSolver->~btConvexPenetrationDepthSolver();
-	
+
 	btAlignedFree(m_pdSolver);
 
 
@@ -233,13 +233,13 @@ btCollisionAlgorithmCreateFunc* btDefaultCollisionConfiguration::getCollisionAlg
 	if ((proxyType0 == TRIANGLE_SHAPE_PROXYTYPE  ) && (proxyType1==SPHERE_SHAPE_PROXYTYPE))
 	{
 		return	m_triangleSphereCF;
-	} 
+	}
 
 	if ((proxyType0 == BOX_SHAPE_PROXYTYPE) && (proxyType1 == BOX_SHAPE_PROXYTYPE))
 	{
 		return m_boxBoxCF;
 	}
-	
+
 	if (btBroadphaseProxy::isConvex(proxyType0) && (proxyType1 == STATIC_PLANE_PROXYTYPE))
 	{
 		return m_convexPlaneCF;
@@ -249,7 +249,7 @@ btCollisionAlgorithmCreateFunc* btDefaultCollisionConfiguration::getCollisionAlg
 	{
 		return m_planeConvexCF;
 	}
-	
+
 
 
 	if (btBroadphaseProxy::isConvex(proxyType0) && btBroadphaseProxy::isConvex(proxyType1))
@@ -300,7 +300,7 @@ void	btDefaultCollisionConfiguration::setPlaneConvexMultipointIterations(int num
 	btConvexPlaneCollisionAlgorithm::CreateFunc* cpCF = (btConvexPlaneCollisionAlgorithm::CreateFunc*)m_convexPlaneCF;
 	cpCF->m_numPerturbationIterations = numPerturbationIterations;
 	cpCF->m_minimumPointsPerturbationThreshold = minimumPointsPerturbationThreshold;
-	
+
 	btConvexPlaneCollisionAlgorithm::CreateFunc* pcCF = (btConvexPlaneCollisionAlgorithm::CreateFunc*)m_planeConvexCF;
 	pcCF->m_numPerturbationIterations = numPerturbationIterations;
 	pcCF->m_minimumPointsPerturbationThreshold = minimumPointsPerturbationThreshold;

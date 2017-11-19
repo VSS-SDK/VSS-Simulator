@@ -16,8 +16,8 @@ copies or substantial portions of the Software.
 #ifndef ModelStrategy_H_
 #define ModelStrategy_H_
 
-#include "Header.h"
-#include "RobotStrategy.h"
+#include "../Header.h"
+#include "../RobotStrategy.h"
 
 #define TURN_ROBOT 2
 #define SIMULATOR_TO_VSS 1

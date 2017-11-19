@@ -18,8 +18,8 @@ copies or substantial portions of the Software.
 
 //Classes from lib
 
-#include "Constants.h"
-#include "btBulletDynamicsCommon.h"
+#include "../utils/Constants.h"
+#include "../bullet/btBulletDynamicsCommon.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <iostream>

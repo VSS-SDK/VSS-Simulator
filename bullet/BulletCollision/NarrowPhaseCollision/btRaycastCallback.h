@@ -16,8 +16,8 @@ subject to the following restrictions:
 #ifndef BT_RAYCAST_TRI_CALLBACK_H
 #define BT_RAYCAST_TRI_CALLBACK_H
 
-#include "BulletCollision/CollisionShapes/btTriangleCallback.h"
-#include "LinearMath/btTransform.h"
+#include "../../BulletCollision/CollisionShapes/btTriangleCallback.h"
+#include "../../LinearMath/btTransform.h"
 struct btBroadphaseProxy;
 class btConvexShape;
 
@@ -69,4 +69,3 @@ public:
 };
 
 #endif //BT_RAYCAST_TRI_CALLBACK_H
-

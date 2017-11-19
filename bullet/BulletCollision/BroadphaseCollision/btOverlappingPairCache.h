@@ -4,8 +4,8 @@ Copyright (c) 2003-2006 Erwin Coumans  http://continuousphysics.com/Bullet/
 
 This software is provided 'as-is', without any express or implied warranty.
 In no event will the authors be held liable for any damages arising from the use of this software.
-Permission is granted to anyone to use this software for any purpose, 
-including commercial applications, and to alter it and redistribute it freely, 
+Permission is granted to anyone to use this software for any purpose,
+including commercial applications, and to alter it and redistribute it freely,
 subject to the following restrictions:
 
 1. The origin of this software must not be misrepresented; you must not claim that you wrote the original software. If you use this software in a product, an acknowledgment in the product documentation would be appreciated but is not required.
@@ -21,7 +21,7 @@ subject to the following restrictions:
 #include "btBroadphaseProxy.h"
 #include "btOverlappingPairCallback.h"
 
-#include "LinearMath/btAlignedObjectArray.h"
+#include "../../LinearMath/btAlignedObjectArray.h"
 class btDispatcher;
 
 typedef btAlignedObjectArray<btBroadphasePair>	btBroadphasePairArray;
@@ -63,7 +63,7 @@ public:
 	virtual ~btOverlappingPairCache() {} // this is needed so we can get to the derived class destructor
 
 	virtual btBroadphasePair*	getOverlappingPairArrayPtr() = 0;
-	
+
 	virtual const btBroadphasePair*	getOverlappingPairArrayPtr() const = 0;
 
 	virtual btBroadphasePairArray&	getOverlappingPairArray() = 0;
@@ -97,7 +97,7 @@ class btHashedOverlappingPairCache : public btOverlappingPairCache
 	bool		m_blockedForChanges;
 
 protected:
-	
+
 	btAlignedObjectArray<int>	m_hashTable;
 	btAlignedObjectArray<int>	m_next;
 	btOverlappingPairCallback*	m_ghostPairCallback;
@@ -107,11 +107,11 @@ public:
 	btHashedOverlappingPairCache();
 	virtual ~btHashedOverlappingPairCache();
 
-	
+
 	void	removeOverlappingPairsContainingProxy(btBroadphaseProxy* proxy,btDispatcher* dispatcher);
 
 	virtual void*	removeOverlappingPair(btBroadphaseProxy* proxy0,btBroadphaseProxy* proxy1,btDispatcher* dispatcher);
-	
+
 	SIMD_FORCE_INLINE bool needsBroadphaseCollision(btBroadphaseProxy* proxy0,btBroadphaseProxy* proxy1) const
 	{
 		if (m_overlapFilterCallback)
@@ -119,7 +119,7 @@ public:
 
 		bool collides = (proxy0->m_collisionFilterGroup & proxy1->m_collisionFilterMask) != 0;
 		collides = collides && (proxy1->m_collisionFilterGroup & proxy0->m_collisionFilterMask);
-		
+
 		return collides;
 	}
 
@@ -135,11 +135,11 @@ public:
 		return internalAddPair(proxy0,proxy1);
 	}
 
-	
+
 
 	void	cleanProxyFromPairs(btBroadphaseProxy* proxy,btDispatcher* dispatcher);
 
-	
+
 	virtual void	processAllOverlappingPairs(btOverlapCallback*,btDispatcher* dispatcher);
 
 	virtual btBroadphasePair*	getOverlappingPairArrayPtr()
@@ -186,13 +186,13 @@ public:
 		return m_overlappingPairArray.size();
 	}
 private:
-	
+
 	btBroadphasePair* 	internalAddPair(btBroadphaseProxy* proxy0,btBroadphaseProxy* proxy1);
 
 	void	growTables();
 
 	SIMD_FORCE_INLINE bool equalsPair(const btBroadphasePair& pair, int proxyId1, int proxyId2)
-	{	
+	{
 		return pair.m_pProxy0->getUid() == proxyId1 && pair.m_pProxy1->getUid() == proxyId2;
 	}
 
@@ -213,7 +213,7 @@ private:
 	*/
 
 
-	
+
 	SIMD_FORCE_INLINE	unsigned int getHash(unsigned int proxyId1, unsigned int proxyId2)
 	{
 		int key = static_cast<int>(((unsigned int)proxyId1) | (((unsigned int)proxyId2) <<16));
@@ -227,7 +227,7 @@ private:
 		key ^=  (key >> 16);
 		return static_cast<unsigned int>(key);
 	}
-	
+
 
 
 
@@ -237,12 +237,12 @@ private:
 		int proxyId1 = proxy0->getUid();
 		int proxyId2 = proxy1->getUid();
 		#if 0 // wrong, 'equalsPair' use unsorted uids, copy-past devil striked again. Nat.
-		if (proxyId1 > proxyId2) 
+		if (proxyId1 > proxyId2)
 			btSwap(proxyId1, proxyId2);
 		#endif
 
 		int index = m_hashTable[hash];
-		
+
 		while( index != BT_NULL_PAIR && equalsPair(m_overlappingPairArray[index], proxyId1, proxyId2) == false)
 		{
 			index = m_next[index];
@@ -269,9 +269,9 @@ private:
 	}
 
 	virtual void	sortOverlappingPairs(btDispatcher* dispatcher);
-	
 
-	
+
+
 };
 
 
@@ -290,15 +290,15 @@ class	btSortedOverlappingPairCache : public btOverlappingPairCache
 
 		///by default, do the removal during the pair traversal
 		bool		m_hasDeferredRemoval;
-		
+
 		//if set, use the callback instead of the built in filter in needBroadphaseCollision
 		btOverlapFilterCallback* m_overlapFilterCallback;
 
 		btOverlappingPairCallback*	m_ghostPairCallback;
 
 	public:
-			
-		btSortedOverlappingPairCache();	
+
+		btSortedOverlappingPairCache();
 		virtual ~btSortedOverlappingPairCache();
 
 		virtual void	processAllOverlappingPairs(btOverlapCallback*,btDispatcher* dispatcher);
@@ -306,12 +306,12 @@ class	btSortedOverlappingPairCache : public btOverlappingPairCache
 		void*	removeOverlappingPair(btBroadphaseProxy* proxy0,btBroadphaseProxy* proxy1,btDispatcher* dispatcher);
 
 		void	cleanOverlappingPair(btBroadphasePair& pair,btDispatcher* dispatcher);
-		
+
 		btBroadphasePair*	addOverlappingPair(btBroadphaseProxy* proxy0,btBroadphaseProxy* proxy1);
 
 		btBroadphasePair*	findPair(btBroadphaseProxy* proxy0,btBroadphaseProxy* proxy1);
-			
-		
+
+
 		void	cleanProxyFromPairs(btBroadphaseProxy* proxy,btDispatcher* dispatcher);
 
 		void	removeOverlappingPairsContainingProxy(btBroadphaseProxy* proxy,btDispatcher* dispatcher);
@@ -324,10 +324,10 @@ class	btSortedOverlappingPairCache : public btOverlappingPairCache
 
 			bool collides = (proxy0->m_collisionFilterGroup & proxy1->m_collisionFilterMask) != 0;
 			collides = collides && (proxy1->m_collisionFilterGroup & proxy0->m_collisionFilterMask);
-			
+
 			return collides;
 		}
-		
+
 		btBroadphasePairArray&	getOverlappingPairArray()
 		{
 			return m_overlappingPairArray;
@@ -338,7 +338,7 @@ class	btSortedOverlappingPairCache : public btOverlappingPairCache
 			return m_overlappingPairArray;
 		}
 
-		
+
 
 
 		btBroadphasePair*	getOverlappingPairArrayPtr()
@@ -355,7 +355,7 @@ class	btSortedOverlappingPairCache : public btOverlappingPairCache
 		{
 			return m_overlappingPairArray.size();
 		}
-		
+
 		btOverlapFilterCallback* getOverlapFilterCallback()
 		{
 			return m_overlapFilterCallback;
@@ -377,7 +377,7 @@ class	btSortedOverlappingPairCache : public btOverlappingPairCache
 		}
 
 		virtual void	sortOverlappingPairs(btDispatcher* dispatcher);
-		
+
 
 };
 
@@ -403,7 +403,7 @@ public:
 	{
 		return m_overlappingPairArray;
 	}
-	
+
 	virtual	void	cleanOverlappingPair(btBroadphasePair& /*pair*/,btDispatcher* /*dispatcher*/)
 	{
 
@@ -455,7 +455,7 @@ public:
 	virtual void	removeOverlappingPairsContainingProxy(btBroadphaseProxy* /*proxy0*/,btDispatcher* /*dispatcher*/)
 	{
 	}
-	
+
 	virtual void	sortOverlappingPairs(btDispatcher* dispatcher)
 	{
         (void) dispatcher;
@@ -466,5 +466,3 @@ public:
 
 
 #endif //BT_OVERLAPPING_PAIR_CACHE_H
-
-

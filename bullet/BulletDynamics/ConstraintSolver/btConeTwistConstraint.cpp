@@ -17,9 +17,9 @@ Written by: Marcus Hennix
 
 
 #include "btConeTwistConstraint.h"
-#include "BulletDynamics/Dynamics/btRigidBody.h"
-#include "LinearMath/btTransformUtil.h"
-#include "LinearMath/btMinMax.h"
+#include "../../BulletDynamics/Dynamics/btRigidBody.h"
+#include "../../LinearMath/btTransformUtil.h"
+#include "../../LinearMath/btMinMax.h"
 #include <new>
 
 
@@ -1135,7 +1135,3 @@ void btConeTwistConstraint::setFrames(const btTransform & frameA, const btTransf
 	buildJacobian();
 	//calculateTransforms();
 }
-
-
-
-

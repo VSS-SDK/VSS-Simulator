@@ -21,8 +21,8 @@ subject to the following restrictions:
 #define BT_POLYHEDRAL_CONTACT_CLIPPING_H
 
 
-#include "LinearMath/btAlignedObjectArray.h"
-#include "LinearMath/btTransform.h"
+#include "../../LinearMath/btAlignedObjectArray.h"
+#include "../../LinearMath/btTransform.h"
 #include "btDiscreteCollisionDetectorInterface.h"
 
 class btConvexPolyhedron;
@@ -43,4 +43,3 @@ struct btPolyhedralContactClipping
 };
 
 #endif // BT_POLYHEDRAL_CONTACT_CLIPPING_H
-

@@ -14,10 +14,10 @@ subject to the following restrictions:
 */
 
 #include "btConvexTriangleMeshShape.h"
-#include "BulletCollision/CollisionShapes/btCollisionMargin.h"
+#include "../../BulletCollision/CollisionShapes/btCollisionMargin.h"
 
-#include "LinearMath/btQuaternion.h"
-#include "BulletCollision/CollisionShapes/btStridingMeshInterface.h"
+#include "../../LinearMath/btQuaternion.h"
+#include "../../BulletCollision/CollisionShapes/btStridingMeshInterface.h"
 
 
 btConvexTriangleMeshShape ::btConvexTriangleMeshShape (btStridingMeshInterface* meshInterface, bool calcAabb)
@@ -312,4 +312,3 @@ void btConvexTriangleMeshShape::calculatePrincipalAxisTransform(btTransform& pri
    inertia.setValue(i[0][0], i[1][1], i[2][2]);
    inertia /= volume;
 }
-

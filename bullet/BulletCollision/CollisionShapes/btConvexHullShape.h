@@ -17,8 +17,8 @@ subject to the following restrictions:
 #define BT_CONVEX_HULL_SHAPE_H
 
 #include "btPolyhedralConvexShape.h"
-#include "BulletCollision/BroadphaseCollision/btBroadphaseProxy.h" // for the types
-#include "LinearMath/btAlignedObjectArray.h"
+#include "../../BulletCollision/BroadphaseCollision/btBroadphaseProxy.h" // for the types
+#include "../../LinearMath/btAlignedObjectArray.h"
 
 
 ///The btConvexHullShape implements an implicit convex hull of an array of vertices.
@@ -119,4 +119,3 @@ SIMD_FORCE_INLINE	int	btConvexHullShape::calculateSerializeBufferSize() const
 
 
 #endif //BT_CONVEX_HULL_SHAPE_H
-

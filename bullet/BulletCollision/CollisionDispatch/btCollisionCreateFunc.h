@@ -4,8 +4,8 @@ Copyright (c) 2003-2006 Erwin Coumans  http://continuousphysics.com/Bullet/
 
 This software is provided 'as-is', without any express or implied warranty.
 In no event will the authors be held liable for any damages arising from the use of this software.
-Permission is granted to anyone to use this software for any purpose, 
-including commercial applications, and to alter it and redistribute it freely, 
+Permission is granted to anyone to use this software for any purpose,
+including commercial applications, and to alter it and redistribute it freely,
 subject to the following restrictions:
 
 1. The origin of this software must not be misrepresented; you must not claim that you wrote the original software. If you use this software in a product, an acknowledgment in the product documentation would be appreciated but is not required.
@@ -16,7 +16,7 @@ subject to the following restrictions:
 #ifndef BT_COLLISION_CREATE_FUNC
 #define BT_COLLISION_CREATE_FUNC
 
-#include "LinearMath/btAlignedObjectArray.h"
+#include "../../LinearMath/btAlignedObjectArray.h"
 class btCollisionAlgorithm;
 class btCollisionObject;
 struct btCollisionObjectWrapper;
@@ -26,7 +26,7 @@ struct btCollisionAlgorithmConstructionInfo;
 struct btCollisionAlgorithmCreateFunc
 {
 	bool m_swapped;
-	
+
 	btCollisionAlgorithmCreateFunc()
 		:m_swapped(false)
 	{
@@ -35,11 +35,10 @@ struct btCollisionAlgorithmCreateFunc
 
 	virtual	btCollisionAlgorithm* CreateCollisionAlgorithm(btCollisionAlgorithmConstructionInfo& , const btCollisionObjectWrapper* body0Wrap,const btCollisionObjectWrapper* body1Wrap)
 	{
-		
+
 		(void)body0Wrap;
 		(void)body1Wrap;
 		return 0;
 	}
 };
 #endif //BT_COLLISION_CREATE_FUNC
-

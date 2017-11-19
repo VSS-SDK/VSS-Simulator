@@ -19,7 +19,7 @@ copies or substantial portions of the Software.
 #define SIMULATOR_TO_VSS 1.0
 #define TURN_ROBOT 1.0
 
-#include "Header.h"
+#include "../Header.h"
 #include "ModelStrategy.h"
 
 class Strategy : public ModelStrategy{

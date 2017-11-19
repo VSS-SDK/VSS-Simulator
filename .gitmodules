@@ -1,3 +1,3 @@
-[submodule "src/VSS-Interface"]
-	path = src/VSS-Interface
-	url = https://github.com/SIRLab/VSS-Interface.git
+[submodule "VSS-Interface"]
+	path = VSS-Interface
+	url = git@github.com:SIRLab/VSS-Interface.git

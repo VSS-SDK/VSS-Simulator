@@ -15,7 +15,7 @@ subject to the following restrictions:
 
 
 #include "btPersistentManifold.h"
-#include "LinearMath/btTransform.h"
+#include "../../LinearMath/btTransform.h"
 
 
 btScalar					gContactBreakingThreshold = btScalar(0.02);
@@ -298,8 +298,3 @@ void btPersistentManifold::refreshContactPoints(const btTransform& trA,const btT
 	DebugPersistency();
 #endif //
 }
-
-
-
-
-

@@ -14,9 +14,9 @@ subject to the following restrictions:
 */
 
 #include "btConvexPointCloudShape.h"
-#include "BulletCollision/CollisionShapes/btCollisionMargin.h"
+#include "../../BulletCollision/CollisionShapes/btCollisionMargin.h"
 
-#include "LinearMath/btQuaternion.h"
+#include "../../LinearMath/btQuaternion.h"
 
 void btConvexPointCloudShape::setLocalScaling(const btVector3& scaling)
 {
@@ -136,4 +136,3 @@ bool btConvexPointCloudShape::isInside(const btVector3& ,btScalar ) const
 	btAssert(0);
 	return false;
 }
-

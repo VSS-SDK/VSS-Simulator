@@ -18,10 +18,10 @@ subject to the following restrictions:
 #endif
 
 #include "btConvexHullShape.h"
-#include "BulletCollision/CollisionShapes/btCollisionMargin.h"
+#include "../../BulletCollision/CollisionShapes/btCollisionMargin.h"
 
-#include "LinearMath/btQuaternion.h"
-#include "LinearMath/btSerializer.h"
+#include "../../LinearMath/btQuaternion.h"
+#include "../../LinearMath/btSerializer.h"
 
 btConvexHullShape ::btConvexHullShape (const btScalar* points,int numPoints,int stride) : btPolyhedralConvexAabbCachingShape ()
 {
@@ -246,5 +246,3 @@ void btConvexHullShape::project(const btTransform& trans, const btVector3& dir, 
 
 
 }
-
-

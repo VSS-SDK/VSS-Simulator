@@ -16,9 +16,10 @@ copies or substantial portions of the Software.
 #ifndef GL_DEBUG_DRAWER_H
 #define GL_DEBUG_DRAWER_H
 
-#include "LinearMath/btIDebugDraw.h"
+#include "../../bullet/LinearMath/btIDebugDraw.h"
 #include "GL/glut.h"
 #include <iostream>
+#include "vector"
 
 using namespace std;
 
@@ -48,7 +49,7 @@ public:
 
 	virtual void	setDebugMode(vector<int> debugMode);
 
-	virtual vector<int>	getDebugMode() const;
+	virtual vector<int>	getDebugMode2() const;
 
 	virtual void    setDrawScenarioMode(bool drawScenario);
 

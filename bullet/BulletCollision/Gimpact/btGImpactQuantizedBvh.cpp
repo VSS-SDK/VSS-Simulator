@@ -22,7 +22,7 @@ subject to the following restrictions:
 */
 
 #include "btGImpactQuantizedBvh.h"
-#include "LinearMath/btQuickprof.h"
+#include "../../LinearMath/btQuickprof.h"
 
 #ifdef TRI_COLLISION_PROFILING
 btClock g_q_tree_clock;
@@ -524,5 +524,3 @@ void btGImpactQuantizedBvh::find_collision(const btGImpactQuantizedBvh * boxset0
 #endif //TRI_COLLISION_PROFILING
 
 }
-
-

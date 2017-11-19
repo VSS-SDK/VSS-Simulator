@@ -1,7 +1,7 @@
 #ifndef STRAIGHT_H
 #define STRAIGHT_H
 
-#include "LinearMath/btVector3.h"
+#include "../LinearMath/btVector3.h"
 
 class btStraight{
 private:

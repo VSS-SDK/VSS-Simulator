@@ -17,7 +17,7 @@ subject to the following restrictions:
 #define BT_GENERIC_6DOF_SPRING_CONSTRAINT_H
 
 
-#include "LinearMath/btVector3.h"
+#include "../../LinearMath/btVector3.h"
 #include "btTypedConstraint.h"
 #include "btGeneric6DofConstraint.h"
 
@@ -118,4 +118,3 @@ SIMD_FORCE_INLINE	const char*	btGeneric6DofSpringConstraint::serialize(void* dat
 }
 
 #endif // BT_GENERIC_6DOF_SPRING_CONSTRAINT_H
-
