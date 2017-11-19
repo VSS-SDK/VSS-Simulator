@@ -14,8 +14,11 @@ copies or substantial portions of the Software.
 */
 
 #include "Physics.h"
+#include "../../bullet/BulletDynamics/Dynamics/btRigidBody.h"
+
 
 Physics::Physics(int numTeams){
+
     this->numTeams = numTeams;
     this->numRobotsTeam = NUM_ROBOTS_TEAM;
 
@@ -23,11 +26,12 @@ Physics::Physics(int numTeams){
     dispatcher = new btCollisionDispatcher(collisionConfig);
     broadphase = new btDbvtBroadphase();
     solver = new btSequentialImpulseConstraintSolver();
+    cout << "asd" << endl;
     world = new btDiscreteDynamicsWorld(dispatcher,broadphase,solver,collisionConfig);
     world->setGravity(btVector3(0,-9.81*SCALE_WORLD,0));
 
     //glDebugDrawer = new GLDebugDrawer();
-    world->setDebugDrawer(glDebugDrawer);
+    //world->setDebugDrawer(glDebugDrawer);
     gContactAddedCallback = callBackHitFunc;
 
     registBodies();
@@ -258,7 +262,9 @@ void Physics::setBallVelocity(btVector3 newVel){
         if(bodies[i]->name.compare("ball") == 0){
             btTransform t;
 
-            bodies[i]->body->applyLinearVelocity(newVel);
+            //bodies[i]->body->applyLinearVelocity(newVel); TODO: ver isso aqui
+            btVector3 teste = bodies[i]->body->getLinearVelocity();
+            teste += newVel;
 
             break;
         }
@@ -290,19 +296,19 @@ void Physics::setDebugWorld(int debugMode){
     //((GLDebugDrawer*)world-> getDebugDrawer())->setDrawScenarioMode(true);
     switch (debugMode){
         case 0:{
-            debugDrawMode.push_back(btIDebugDraw::DBG_NoDebug);
-            world->getDebugDrawer()->setDebugMode(debugDrawMode);
+            //debugDrawMode.push_back(btIDebugDraw::DBG_NoDebug);
+            //world->getDebugDrawer()->setDebugMode(debugDrawMode);
         }break;
         case 1:{
-            debugDrawMode.push_back(btIDebugDraw::DBG_DrawLocalProperties);
-            debugDrawMode.push_back(btIDebugDraw::DBG_DrawWireframe);
-            world->getDebugDrawer()->setDebugMode(debugDrawMode);
+            //debugDrawMode.push_back(btIDebugDraw::DBG_DrawLocalProperties);
+            //debugDrawMode.push_back(btIDebugDraw::DBG_DrawWireframe);
+            //world->getDebugDrawer()->setDebugMode(debugDrawMode);
             //((GLDebugDrawer*)world-> getDebugDrawer())->setDrawScenarioMode(false);
         }break;
         case 2:{
-            debugDrawMode.push_back(btIDebugDraw::DBG_DrawWireframe);
-            debugDrawMode.push_back(btIDebugDraw::DBG_DrawLocalProperties);
-            world-> getDebugDrawer()->setDebugMode(debugDrawMode);
+            //debugDrawMode.push_back(btIDebugDraw::DBG_DrawWireframe);
+            //debugDrawMode.push_back(btIDebugDraw::DBG_DrawLocalProperties);
+            //world-> getDebugDrawer()->setDebugMode(debugDrawMode);
         }break;
     }
 }
@@ -376,7 +382,7 @@ RobotPhysics* Physics::addRobot(Color clr, btVector3 pos, btVector3 rotation,flo
         world -> getDispatcher()
     );
 
-    bdRobot->setIdDebug(1);
+    //bdRobot->setIdDebug(1);
 
     stringstream st;
     st << "robot-";

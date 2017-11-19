@@ -20,7 +20,7 @@ subject to the following restrictions:
 
 #include "../../BulletCollision/CollisionShapes/btCollisionMargin.h"
 
-#include "../../LinearMath/btVector3.h"
+#include "LinearMath/btVector3.h"
 #include "btConvexCast.h"
 class btConvexShape;
 class btMinkowskiSumShape;

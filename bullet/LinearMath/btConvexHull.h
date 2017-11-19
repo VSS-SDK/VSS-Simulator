@@ -19,7 +19,7 @@ subject to the following restrictions:
 #ifndef BT_CD_HULL_H
 #define BT_CD_HULL_H
 
-#include "btVector3.h"
+#include "LinearMath/btVector3.h"
 #include "btAlignedObjectArray.h"
 
 typedef btAlignedObjectArray<unsigned int> TUIntArray;
@@ -238,4 +238,3 @@ private:
 
 
 #endif //BT_CD_HULL_H
-

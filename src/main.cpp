@@ -13,6 +13,7 @@ The above copyright notice and this permission notice shall be included in all
 copies or substantial portions of the Software.
 */
 
+#include "iostream"
 #include "Header.h"
 #include "Simulator.h"
 #include "strategies/ModelStrategy.h"
@@ -20,6 +21,7 @@ copies or substantial portions of the Software.
 #include "strategies/StrategyBasic.h"
 #include "../utils/includes/boost.h"
 
+using namespace std;
 //Exemplo de estratégia
 class StrategyTest : public ModelStrategy{
 public:
@@ -47,6 +49,7 @@ int main(int argc, char *argv[]){
     bool develop_mode = false;
 
     if(argParse(argc, argv, &fast_travel, &qtd_of_goals, &develop_mode)){
+
         Strategy *stratYellowTeam = new Strategy(); //Original strategy
         Strategy *stratBlueTeam = new Strategy(); //Strategy for tests
 

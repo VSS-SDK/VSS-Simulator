@@ -16,15 +16,15 @@ subject to the following restrictions:
 #ifndef BT_RIGIDBODY_H
 #define BT_RIGIDBODY_H
 
-#include "../../LinearMath/btAlignedObjectArray.h"
-#include "../../LinearMath/btTransform.h"
-#include "../../BulletCollision/BroadphaseCollision/btBroadphaseProxy.h"
-#include "../../BulletCollision/CollisionDispatch/btCollisionObject.h"
+#include "LinearMath/btAlignedObjectArray.h"
+#include "LinearMath/btTransform.h"
+#include "BulletCollision/BroadphaseCollision/btBroadphaseProxy.h"
+#include "BulletCollision/CollisionDispatch/btCollisionObject.h"
 #include <iostream>
 #include <string.h>
 #include <GL/glut.h>
 #include "../../../utils/Constants.h"
-#include "../../../utils/GLDebugDrawer.h"
+//#include "../../../utils/GLDebugDrawer.h"
 
 using namespace std;
 
@@ -120,8 +120,9 @@ protected:
 public:
 	int getIdDebug() { return idDebug; }
 	int setIdDebug(int idDebug) { this->idDebug = idDebug; }
+	void applyLinearVelocity(const btVector3& linVel);
 
-	void debugLocalProperties(btIDebugDraw* glDebugDrawer);
+	//void debugLocalProperties(btIDebugDraw* glDebugDrawer);
 
 	///The btRigidBodyConstructionInfo structure provides information to create a rigid body. Setting mass to zero creates a fixed (non-dynamic) rigid body.
 	///For dynamic objects, you can use the collision shape to approximate the local inertia tensor, otherwise use the zero vector (default argument)
@@ -198,7 +199,7 @@ public:
                 btAssert(m_constraintRefs.size()==0);
         }
 
-protected:
+public:
 
 	///setupRigidBody is only used internally by the constructor
 	void	setupRigidBody(const btRigidBodyConstructionInfo& constructionInfo);
@@ -356,10 +357,6 @@ public:
 				applyTorqueImpulse(rel_pos.cross(impulse*m_linearFactor));
 			}
 		}
-	}
-
-	void applyLinearVelocity(const btVector3& linVel){
-        m_linearVelocity += linVel;
 	}
 
 	void applyAngularVelocity(const btVector3& angVel){

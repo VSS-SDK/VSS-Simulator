@@ -1,12 +1,13 @@
 PROJECT(vss-simulator)
 CMAKE_MINIMUM_REQUIRED (VERSION 2.6)
-SET(CMAKE_CXX_FLAGS "-g -std=c++11")
+SET(CMAKE_CXX_FLAGS "-g -Wall -std=c++11")
 
 ADD_SUBDIRECTORY(VSS-Interface)
 
 INCLUDE_DIRECTORIES(${CMAKE_CURRENT_BINARY_DIR})
-find_package(PkgConfig)
-FIND_PACKAGE( Boost 1.40 COMPONENTS program_options REQUIRED )
+FIND_PACKAGE(PkgConfig)
+FIND_PACKAGE(Boost 1.40 COMPONENTS program_options REQUIRED)
+FIND_PACKAGE(Bullet)
 
 find_path(ZeroMQ_INCLUDE_DIR
         NAMES zmq.hpp
@@ -20,23 +21,24 @@ find_library(ZeroMQ_LIBRARY
 
 include_directories(${Boost_INCLUDE_DIR} ${BULLET_INCLUDE_DIR})
 
-file(GLOB_RECURSE SOURCES src/*.cpp)
-file(GLOB_RECURSE UTILS utils/*.cpp)
-file(GLOB_RECURSE BULLET bullet/*.cpp)
+file(GLOB_RECURSE SRCS_CPP src/*.cpp)
+file(GLOB_RECURSE UTILS_CPP utils/*.cpp)
+file(GLOB_RECURSE INTERFACE_CPP VSS-Interface/*.cpp)
+file(GLOB_RECURSE BULLET_CPP bullet/*.cpp)
 
-ADD_EXECUTABLE(vss-simulator ${SOURCES} ${UTILS} ${BULLET})
+ADD_EXECUTABLE(vss-simulator ${SRCS_CPP} ${UTILS_CPP} ${BULLET_CPP} ${INTERFACE_CPP})
 
 target_include_directories(vss-simulator PUBLIC ${ZeroMQ_INCLUDE_DIR})
 target_link_libraries(vss-simulator PUBLIC ${ZeroMQ_LIBRARY})
 
-TARGET_LINK_LIBRARIES(vss-simulator VSS-Interface ${PROTOBUF_LIBRARY} ${OPENGL_LIBRARIES} ${GLUT_LIBRARY})
+TARGET_LINK_LIBRARIES(vss-simulator VSS-Interface ${PROTOBUF_LIBRARY} ${OPENGL_LIBRARIES} ${GLUT_LIBRARY} ${BULLET_LIBRARIES})
 TARGET_LINK_LIBRARIES(vss-simulator LINK_PUBLIC ${Boost_LIBRARIES})
 
 INSTALL(TARGETS vss-simulator DESTINATION bin)
 
 SET(CPACK_GENERATOR "DEB")
 SET(CPACK_DEBIAN_PACKAGE_NAME "vss-simulator")
-SET(CPACK_DEBIAN_PACKAGE_DESCRIPTION "A 3D Software of visualization of states given by VSS-Simulator and VSS-Vision")
+SET(CPACK_DEBIAN_PACKAGE_DESCRIPTION "A Simulator for the competition of Robot Soccer IEEE Very Small Size")
 SET(CPACK_DEBIAN_PACKAGE_HOMEPAGE "https://sirlab.github.io/VSS-SDK/")
 SET(CPACK_DEBIAN_PACKAGE_ARCHITECTURE "all")
 SET(CPACK_DEBIAN_PACKAGE_MAINTAINER "Johnathan Fercher")

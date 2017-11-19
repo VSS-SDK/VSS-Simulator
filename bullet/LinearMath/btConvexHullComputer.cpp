@@ -17,7 +17,7 @@ subject to the following restrictions:
 #include "btConvexHullComputer.h"
 #include "btAlignedObjectArray.h"
 #include "btMinMax.h"
-#include "btVector3.h"
+#include "LinearMath/btVector3.h"
 
 #ifdef __GNUC__
 	#include <stdint.h>
@@ -2748,8 +2748,3 @@ btScalar btConvexHullComputer::compute(const void* coords, bool doubleCoords, in
 
 	return shift;
 }
-
-
-
-
-

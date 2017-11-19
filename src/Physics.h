@@ -18,7 +18,22 @@ copies or substantial portions of the Software.
 
 #include "Header.h"
 #include "RobotStrategy.h"
-#include "../utils/GLDebugDrawer.h"
+#include "BulletCollision/BroadphaseCollision/btDispatcher.h"
+#include "BulletCollision/CollisionDispatch/btCollisionConfiguration.h"
+#include "BulletCollision/BroadphaseCollision/btBroadphaseInterface.h"
+#include "BulletCollision/NarrowPhaseCollision/btManifoldPoint.h"
+#include "BulletDynamics/ConstraintSolver/btConstraintSolver.h"
+#include "BulletCollision/CollisionDispatch/btDefaultCollisionConfiguration.h"
+#include "BulletCollision/CollisionDispatch/btCollisionDispatcher.h"
+#include "BulletCollision/BroadphaseCollision/btDbvtBroadphase.h"
+#include "BulletDynamics/ConstraintSolver/btSequentialImpulseConstraintSolver.h"
+#include "BulletDynamics/Dynamics/btDiscreteDynamicsWorld.h"
+#include "LinearMath/btDefaultMotionState.h"
+#include "BulletCollision/CollisionShapes/btStaticPlaneShape.h"
+#include "BulletCollision/CollisionShapes/btSphereShape.h"
+#include "BulletCollision/CollisionShapes/btBoxShape.h"
+#include "BulletCollision/CollisionShapes/btCompoundShape.h"
+//#include "../utils/GLDebugDrawer.h"
 #include "RobotPhysics.h"
 
 const Color clrTeams[] = {Color(1.0,1.0,0),Color(0,0,1)};
@@ -34,7 +49,7 @@ private:
 	btCollisionConfiguration* collisionConfig;
 	btBroadphaseInterface* broadphase;
 	btConstraintSolver* solver;
-	GLDebugDrawer* glDebugDrawer;
+	//GLDebugDrawer* glDebugDrawer;
 
 	vector<BulletObject*> bodies;
 	vector<RobotPhysics*> genRobots;

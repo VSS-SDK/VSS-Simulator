@@ -106,7 +106,7 @@ void	btRigidBody::setupRigidBody(const btRigidBody::btRigidBodyConstructionInfo&
 	m_turnVelocity.setZero();
 }
 
-void btRigidBody::debugLocalProperties(btIDebugDraw* glDebugDrawer){
+/*void btRigidBody::debugLocalProperties(btIDebugDraw* glDebugDrawer){
     btTransform chassisTrans = getCenterOfMassTransform();
 
     btVector3 sideVector (
@@ -136,7 +136,12 @@ void btRigidBody::debugLocalProperties(btIDebugDraw* glDebugDrawer){
             //glDebugDrawer->drawLine(relativePosition,toRelativePosition,btVector3(0.2,0.7,0.5));
         }
     }
+}*/
+
+void btRigidBody::applyLinearVelocity(const btVector3& linVel){
+	m_linearVelocity += linVel;
 }
+
 
 void btRigidBody::predictIntegratedTransform(btScalar timeStep,btTransform& predictedTransform)
 {

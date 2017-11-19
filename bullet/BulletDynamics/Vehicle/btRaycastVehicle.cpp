@@ -11,7 +11,7 @@
 
 //Modified by Lucas Borsatto Simão lucasborsattosimao@hotmail.com
 
-#include "../../LinearMath/btVector3.h"
+#include "LinearMath/btVector3.h"
 #include "btRaycastVehicle.h"
 
 #include "../../BulletDynamics/ConstraintSolver/btSolve2LinearConstraint.h"
@@ -746,12 +746,12 @@ void btRaycastVehicle::updateTransformCentripetalForce(btScalar timeStep){
 }
 
 void	btRaycastVehicle::debugDraw(btIDebugDraw* debugDrawer){
-    int lenghtDebug = debugDrawer->getDebugMode().size();
+    int lenghtDebug = 0;//= debugDrawer->getDebugMode().size();
     for(int i = 0; i < lenghtDebug; i++){
-        if(debugDrawer->getDebugMode()[i] == btIDebugDraw::DBG_DrawLocalProperties){
+        //if(debugDrawer->getDebugMode()[i] == btIDebugDraw::DBG_DrawLocalProperties){
             debugDrawProperties();
-            m_chassisBody->debugLocalProperties(debugDrawer);
-        }
+            //m_chassisBody->debugLocalProperties(debugDrawer);
+        //}
     }
 
 	for (int v=0;v<this->getNumWheels();v++){
@@ -786,9 +786,9 @@ void btRaycastVehicle::debugDrawProperties()
 
     btVector3 angUnit = debugLinearVelocity[1].normalized();
 
-    glPushMatrix();
+    /*glPushMatrix();
         glTranslatef(centerMass.getX(),centerMass.getY(),centerMass.getZ());
-    glPopMatrix();
+    glPopMatrix();*/
 }
 
 

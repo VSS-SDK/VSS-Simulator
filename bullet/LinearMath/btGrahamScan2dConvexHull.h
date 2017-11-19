@@ -18,7 +18,7 @@ subject to the following restrictions:
 #define GRAHAM_SCAN_2D_CONVEX_HULL_H
 
 
-#include "btVector3.h"
+#include "LinearMath/btVector3.h"
 #include "btAlignedObjectArray.h"
 
 struct GrahambtVector3 : public btVector3

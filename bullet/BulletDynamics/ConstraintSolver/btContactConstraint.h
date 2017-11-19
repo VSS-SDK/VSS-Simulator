@@ -16,7 +16,7 @@ subject to the following restrictions:
 #ifndef BT_CONTACT_CONSTRAINT_H
 #define BT_CONTACT_CONSTRAINT_H
 
-#include "../../LinearMath/btVector3.h"
+#include "LinearMath/btVector3.h"
 #include "btJacobianEntry.h"
 #include "btTypedConstraint.h"
 #include "../../BulletCollision/NarrowPhaseCollision/btPersistentManifold.h"

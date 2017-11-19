@@ -3,7 +3,7 @@
 #define BT_INTERNAL_EDGE_UTILITY_H
 
 #include "../../LinearMath/btHashMap.h"
-#include "../../LinearMath/btVector3.h"
+#include "LinearMath/btVector3.h"
 
 #include "../../BulletCollision/CollisionShapes/btTriangleInfoMap.h"
 

@@ -32,7 +32,7 @@ subject to the following restrictions:
 #include "../../BulletCollision/CollisionDispatch/btCollisionWorld.h"
 #include "../../BulletCollision/CollisionShapes/btConcaveShape.h"
 #include "../../BulletCollision/CollisionShapes/btTetrahedronShape.h"
-#include "../../LinearMath/btVector3.h"
+#include "LinearMath/btVector3.h"
 #include "../../LinearMath/btTransform.h"
 #include "../../LinearMath/btMatrix3x3.h"
 #include "../../LinearMath/btAlignedObjectArray.h"

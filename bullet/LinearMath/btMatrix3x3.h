@@ -16,8 +16,8 @@ subject to the following restrictions:
 #ifndef	BT_MATRIX3x3_H
 #define BT_MATRIX3x3_H
 
-#include "btVector3.h"
-#include "btQuaternion.h"
+#include "LinearMath/btVector3.h"
+#include "LinearMath/btQuaternion.h"
 #include <stdio.h>
 
 #ifdef BT_USE_SSE
@@ -1364,4 +1364,3 @@ SIMD_FORCE_INLINE	void	btMatrix3x3::deSerializeDouble(const struct	btMatrix3x3Do
 }
 
 #endif //BT_MATRIX3x3_H
-

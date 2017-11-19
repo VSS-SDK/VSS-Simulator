@@ -18,7 +18,7 @@ subject to the following restrictions:
 #include "btConvexHull.h"
 #include "btAlignedObjectArray.h"
 #include "btMinMax.h"
-#include "btVector3.h"
+#include "LinearMath/btVector3.h"
 
 
 

@@ -17,6 +17,7 @@ copies or substantial portions of the Software.
 #define SIR_H_
 
 #include "Header.h"
+#include "../../bullet/BulletDynamics/Dynamics/btRigidBody.h"
 
 enum { NONE = 0, GOAL_TEAM1 = 1, GOAL_TEAM2 = 2, FAULT_TEAM1 = 3, FAULT_TEAM2 = 4, PENALTY_TEAM1 = 5, PENALTY_TEAM2 = 6 };
 
@@ -86,15 +87,15 @@ struct Report{
             cout << "---TEAM_" << h << "---" << endl;
             cout << "+total_of_goals_team=" << total_of_goals_team[h] << endl;
             cout << "+total_of_own_goals_team=" << total_of_own_goals_team[h] << endl;
-            cout << "+ball_possession" << "=" << ball_possession_team[h] << endl; 
+            cout << "+ball_possession" << "=" << ball_possession_team[h] << endl;
             for(int i = 0 ; i < 3 ; i++){
-                cout << "+collision_in_high_speed_" << i << "=" << collisions_in_high_speed_team[h][i] << endl; 
+                cout << "+collision_in_high_speed_" << i << "=" << collisions_in_high_speed_team[h][i] << endl;
             }
             for(int i = 0 ; i < 3 ; i++){
-                cout << "+travelled_distance_" << i << "=" << travelled_distance_team[h][i] << endl; 
+                cout << "+travelled_distance_" << i << "=" << travelled_distance_team[h][i] << endl;
             }
             for(int i = 0 ; i < 3 ; i++){
-                cout << "+time_lost_stuck" << i << "=" << time_lost_stuck_team[h][i] << endl; 
+                cout << "+time_lost_stuck" << i << "=" << time_lost_stuck_team[h][i] << endl;
             }
         }
     };

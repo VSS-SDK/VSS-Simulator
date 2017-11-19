@@ -16,7 +16,7 @@ subject to the following restrictions:
 
 #include "btContactConstraint.h"
 #include "../../BulletDynamics/Dynamics/btRigidBody.h"
-#include "../../LinearMath/btVector3.h"
+#include "LinearMath/btVector3.h"
 #include "btJacobianEntry.h"
 #include "btContactSolverInfo.h"
 #include "../../LinearMath/btMinMax.h"
@@ -62,7 +62,7 @@ void	btContactConstraint::buildJacobian()
 
 #include "btContactConstraint.h"
 #include "../../BulletDynamics/Dynamics/btRigidBody.h"
-#include "../../LinearMath/btVector3.h"
+#include "LinearMath/btVector3.h"
 #include "btJacobianEntry.h"
 #include "btContactSolverInfo.h"
 #include "../../LinearMath/btMinMax.h"

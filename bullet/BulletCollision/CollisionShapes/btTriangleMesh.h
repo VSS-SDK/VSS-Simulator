@@ -17,7 +17,7 @@ subject to the following restrictions:
 #define BT_TRIANGLE_MESH_H
 
 #include "btTriangleIndexVertexArray.h"
-#include "../../LinearMath/btVector3.h"
+#include "LinearMath/btVector3.h"
 #include "../../LinearMath/btAlignedObjectArray.h"
 
 ///The btTriangleMesh class is a convenience class derived from btTriangleIndexVertexArray, that provides storage for a concave triangle mesh. It can be used as data for the btBvhTriangleMeshShape.

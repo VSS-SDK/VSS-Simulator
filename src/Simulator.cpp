@@ -75,7 +75,7 @@ void Simulator::runSimulator(int argc, char *argv[], ModelStrategy *stratBlueTea
 		cout << "You must set a strategy to run the simulator!" << endl;
 		exit(1);
 	}
-
+  
 	physics = new Physics(numTeams);
 
     vector<RobotPhysics*> gRobots = physics->getAllRobots();

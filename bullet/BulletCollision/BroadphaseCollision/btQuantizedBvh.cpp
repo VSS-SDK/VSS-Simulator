@@ -13,11 +13,10 @@ subject to the following restrictions:
 3. This notice may not be removed or altered from any source distribution.
 */
 
-#include "btQuantizedBvh.h"
-
-#include "../../LinearMath/btAabbUtil2.h"
-#include "../../LinearMath/btIDebugDraw.h"
-#include "../../LinearMath/btSerializer.h"
+#include "BulletCollision/BroadphaseCollision/btQuantizedBvh.h"
+#include "LinearMath/btAabbUtil2.h"
+#include "LinearMath/btIDebugDraw.h"
+#include "LinearMath/btSerializer.h"
 
 #define RAYAABB2
 
@@ -884,9 +883,9 @@ bool btQuantizedBvh::serialize(void *o_alignedDataBuffer, unsigned /*i_dataBuffe
 		targetBvh->m_curNodeIndex = static_cast<int>(btSwapEndian(m_curNodeIndex));
 
 
-		btSwapbtVector3Endian(m_bvhAabbMin,targetBvh->m_bvhAabbMin);
-		btSwapbtVector3Endian(m_bvhAabbMax,targetBvh->m_bvhAabbMax);
-		btSwapbtVector3Endian(m_bvhQuantization,targetBvh->m_bvhQuantization);
+		btSwapVector3Endian(m_bvhAabbMin,targetBvh->m_bvhAabbMin);
+		btSwapVector3Endian(m_bvhAabbMax,targetBvh->m_bvhAabbMax);
+		btSwapVector3Endian(m_bvhQuantization,targetBvh->m_bvhQuantization);
 
 		targetBvh->m_traversalMode = (btTraversalMode)btSwapEndian(m_traversalMode);
 		targetBvh->m_subtreeHeaderCount = static_cast<int>(btSwapEndian(m_subtreeHeaderCount));
@@ -963,8 +962,8 @@ bool btQuantizedBvh::serialize(void *o_alignedDataBuffer, unsigned /*i_dataBuffe
 		{
 			for (int nodeIndex = 0; nodeIndex < nodeCount; nodeIndex++)
 			{
-				btSwapbtVector3Endian(m_contiguousNodes[nodeIndex].m_aabbMinOrg, targetBvh->m_contiguousNodes[nodeIndex].m_aabbMinOrg);
-				btSwapbtVector3Endian(m_contiguousNodes[nodeIndex].m_aabbMaxOrg, targetBvh->m_contiguousNodes[nodeIndex].m_aabbMaxOrg);
+				btSwapVector3Endian(m_contiguousNodes[nodeIndex].m_aabbMinOrg, targetBvh->m_contiguousNodes[nodeIndex].m_aabbMinOrg);
+				btSwapVector3Endian(m_contiguousNodes[nodeIndex].m_aabbMaxOrg, targetBvh->m_contiguousNodes[nodeIndex].m_aabbMaxOrg);
 
 				targetBvh->m_contiguousNodes[nodeIndex].m_escapeIndex = static_cast<int>(btSwapEndian(m_contiguousNodes[nodeIndex].m_escapeIndex));
 				targetBvh->m_contiguousNodes[nodeIndex].m_subPart = static_cast<int>(btSwapEndian(m_contiguousNodes[nodeIndex].m_subPart));
@@ -1059,9 +1058,9 @@ btQuantizedBvh *btQuantizedBvh::deSerializeInPlace(void *i_alignedDataBuffer, un
 	{
 		bvh->m_curNodeIndex = static_cast<int>(btSwapEndian(bvh->m_curNodeIndex));
 
-		btUnSwapbtVector3Endian(bvh->m_bvhAabbMin);
-		btUnSwapbtVector3Endian(bvh->m_bvhAabbMax);
-		btUnSwapbtVector3Endian(bvh->m_bvhQuantization);
+		btUnSwapVector3Endian(bvh->m_bvhAabbMin);
+		btUnSwapVector3Endian(bvh->m_bvhAabbMax);
+		btUnSwapVector3Endian(bvh->m_bvhQuantization);
 
 		bvh->m_traversalMode = (btTraversalMode)btSwapEndian(bvh->m_traversalMode);
 		bvh->m_subtreeHeaderCount = static_cast<int>(btSwapEndian(bvh->m_subtreeHeaderCount));
@@ -1116,8 +1115,8 @@ btQuantizedBvh *btQuantizedBvh::deSerializeInPlace(void *i_alignedDataBuffer, un
 		{
 			for (int nodeIndex = 0; nodeIndex < nodeCount; nodeIndex++)
 			{
-				btUnSwapbtVector3Endian(bvh->m_contiguousNodes[nodeIndex].m_aabbMinOrg);
-				btUnSwapbtVector3Endian(bvh->m_contiguousNodes[nodeIndex].m_aabbMaxOrg);
+				btUnSwapVector3Endian(bvh->m_contiguousNodes[nodeIndex].m_aabbMinOrg);
+				btUnSwapVector3Endian(bvh->m_contiguousNodes[nodeIndex].m_aabbMaxOrg);
 
 				bvh->m_contiguousNodes[nodeIndex].m_escapeIndex = static_cast<int>(btSwapEndian(bvh->m_contiguousNodes[nodeIndex].m_escapeIndex));
 				bvh->m_contiguousNodes[nodeIndex].m_subPart = static_cast<int>(btSwapEndian(bvh->m_contiguousNodes[nodeIndex].m_subPart));

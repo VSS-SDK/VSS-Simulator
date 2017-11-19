@@ -17,7 +17,7 @@ subject to the following restrictions:
 #define BT_PERSISTENT_MANIFOLD_H
 
 
-#include "../../LinearMath/btVector3.h"
+#include "LinearMath/btVector3.h"
 #include "../../LinearMath/btTransform.h"
 #include "btManifoldPoint.h"
 class btCollisionObject;

@@ -15,8 +15,8 @@ subject to the following restrictions:
 
 #include "btMultiSapBroadphase.h"
 
-#include "btSimpleBroadphase.h"
-#include "../../LinearMath/btAabbUtil2.h"
+#include "BulletCollision/BroadphaseCollision/btSimpleBroadphase.h"
+#include "LinearMath/btAabbUtil2.h"
 #include "btQuantizedBvh.h"
 
 ///	btSapBroadphaseArray	m_sapBroadphases;

@@ -19,7 +19,8 @@ copies or substantial portions of the Software.
 //Classes from lib
 
 #include "../utils/Constants.h"
-#include "../bullet/btBulletDynamicsCommon.h"
+#include "../bullet/LinearMath/btStraight.h"
+#include "../VSS-Interface/interface.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <iostream>
@@ -34,7 +35,7 @@ using namespace std;
 
 //Base classes for system
 
-//#include "btVector3.h"
+#include "LinearMath/btVector3.h"
 #define NUM_ROBOTS_TEAM 3;
 #include "Sir.h"
 

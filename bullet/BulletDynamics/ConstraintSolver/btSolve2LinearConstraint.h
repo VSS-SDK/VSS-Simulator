@@ -17,7 +17,7 @@ subject to the following restrictions:
 #define BT_SOLVE_2LINEAR_CONSTRAINT_H
 
 #include "../../LinearMath/btMatrix3x3.h"
-#include "../../LinearMath/btVector3.h"
+#include "LinearMath/btVector3.h"
 
 
 class btRigidBody;

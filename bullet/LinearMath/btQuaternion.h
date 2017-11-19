@@ -18,7 +18,7 @@ subject to the following restrictions:
 #define BT_SIMD__QUATERNION_H_
 
 
-#include "btVector3.h"
+#include "LinearMath/btVector3.h"
 #include "btQuadWord.h"
 
 
@@ -904,6 +904,3 @@ shortestArcQuatNormalize2(btVector3& v0,btVector3& v1)
 }
 
 #endif //BT_SIMD__QUATERNION_H_
-
-
-

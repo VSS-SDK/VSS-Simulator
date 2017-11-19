@@ -17,7 +17,7 @@ subject to the following restrictions:
 #define BT_SOLVER_CONSTRAINT_H
 
 class	btRigidBody;
-#include "../../LinearMath/btVector3.h"
+#include "LinearMath/btVector3.h"
 #include "../../LinearMath/btMatrix3x3.h"
 #include "btJacobianEntry.h"
 #include "../../LinearMath/btAlignedObjectArray.h"
