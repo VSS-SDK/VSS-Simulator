@@ -11,18 +11,18 @@
 
 //Modified by Lucas Borsatto Simão lucasborsattosimao@hotmail.com
 
-#include "LinearMath/btVector3.h"
+#include "../../LinearMath/btVector3.h"
 #include "btRaycastVehicle.h"
 
-#include "BulletDynamics/ConstraintSolver/btSolve2LinearConstraint.h"
-#include "BulletDynamics/ConstraintSolver/btJacobianEntry.h"
-#include "LinearMath/btQuaternion.h"
-#include "BulletDynamics/Dynamics/btDynamicsWorld.h"
+#include "../../BulletDynamics/ConstraintSolver/btSolve2LinearConstraint.h"
+#include "../../BulletDynamics/ConstraintSolver/btJacobianEntry.h"
+#include "../../LinearMath/btQuaternion.h"
+#include "../../BulletDynamics/Dynamics/btDynamicsWorld.h"
 #include "btVehicleRaycaster.h"
 #include "btWheelInfo.h"
-#include "LinearMath/btMinMax.h"
-#include "LinearMath/btIDebugDraw.h"
-#include "BulletDynamics/ConstraintSolver/btContactConstraint.h"
+#include "../../LinearMath/btMinMax.h"
+#include "../../LinearMath/btIDebugDraw.h"
+#include "../../BulletDynamics/ConstraintSolver/btContactConstraint.h"
 
 #define ROLLING_INFLUENCE_FIX
 
@@ -815,4 +815,3 @@ void* btDefaultVehicleRaycaster::castRay(const btVector3& from,const btVector3& 
 	}
 	return 0;
 }
-

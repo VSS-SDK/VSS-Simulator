@@ -1,6 +1,6 @@
 PROJECT(vss-simulator)
 CMAKE_MINIMUM_REQUIRED (VERSION 2.6)
-SET(CMAKE_CXX_FLAGS "-g -Wall -std=c++11")
+SET(CMAKE_CXX_FLAGS "-g -std=c++11")
 
 ADD_SUBDIRECTORY(VSS-Interface)
 

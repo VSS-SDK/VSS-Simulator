@@ -1,4 +1,4 @@
-#include "LinearMath/btStraight.h"
+#include "../LinearMath/btStraight.h"
 
 btStraight::btStraight(btVector3 from, btVector3 to){
     calculateStraight(from,to);
@@ -21,4 +21,3 @@ btVector3 btStraight::getNormalVector(){
 
     return btVector3(xComp,0,zComp);
 }
-

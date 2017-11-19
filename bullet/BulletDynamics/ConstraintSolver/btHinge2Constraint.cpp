@@ -16,8 +16,8 @@ subject to the following restrictions:
 
 
 #include "btHinge2Constraint.h"
-#include "BulletDynamics/Dynamics/btRigidBody.h"
-#include "LinearMath/btTransformUtil.h"
+#include "../../BulletDynamics/Dynamics/btRigidBody.h"
+#include "../../LinearMath/btTransformUtil.h"
 
 
 
@@ -63,4 +63,3 @@ btHinge2Constraint::btHinge2Constraint(btRigidBody& rbA, btRigidBody& rbB, btVec
 	setDamping(2, 0.01f);
 	setEquilibriumPoint();
 }
-

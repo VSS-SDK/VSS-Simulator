@@ -20,29 +20,29 @@ subject to the following restrictions:
 	If possible, use the richer Bullet C++ API, by including <src/btBulletDynamicsCommon.h>
 */
 
-#include "Bullet-C-Api.h"
-#include "btBulletDynamicsCommon.h"
-#include "LinearMath/btAlignedAllocator.h"
+//#include "Bullet-C-Api.h"
+//#include "btBulletDynamicsCommon.h"
+#include "../../LinearMath/btAlignedAllocator.h"
 
 
 
-#include "LinearMath/btVector3.h"
-#include "LinearMath/btScalar.h"
-#include "LinearMath/btMatrix3x3.h"
-#include "LinearMath/btTransform.h"
-#include "BulletCollision/NarrowPhaseCollision/btVoronoiSimplexSolver.h"
-#include "BulletCollision/CollisionShapes/btTriangleShape.h"
+#include "../../LinearMath/btVector3.h"
+#include "../../LinearMath/btScalar.h"
+#include "../../LinearMath/btMatrix3x3.h"
+#include "../../LinearMath/btTransform.h"
+#include "../../BulletCollision/NarrowPhaseCollision/btVoronoiSimplexSolver.h"
+#include "../../BulletCollision/CollisionShapes/btTriangleShape.h"
 
-#include "BulletCollision/NarrowPhaseCollision/btGjkPairDetector.h"
-#include "BulletCollision/NarrowPhaseCollision/btPointCollector.h"
-#include "BulletCollision/NarrowPhaseCollision/btVoronoiSimplexSolver.h"
-#include "BulletCollision/NarrowPhaseCollision/btSubSimplexConvexCast.h"
-#include "BulletCollision/NarrowPhaseCollision/btGjkEpaPenetrationDepthSolver.h"
-#include "BulletCollision/NarrowPhaseCollision/btGjkEpa2.h"
-#include "BulletCollision/CollisionShapes/btMinkowskiSumShape.h"
-#include "BulletCollision/NarrowPhaseCollision/btDiscreteCollisionDetectorInterface.h"
-#include "BulletCollision/NarrowPhaseCollision/btSimplexSolverInterface.h"
-#include "BulletCollision/NarrowPhaseCollision/btMinkowskiPenetrationDepthSolver.h"
+#include "../../BulletCollision/NarrowPhaseCollision/btGjkPairDetector.h"
+#include "../../BulletCollision/NarrowPhaseCollision/btPointCollector.h"
+#include "../../BulletCollision/NarrowPhaseCollision/btVoronoiSimplexSolver.h"
+#include "../../BulletCollision/NarrowPhaseCollision/btSubSimplexConvexCast.h"
+#include "../../BulletCollision/NarrowPhaseCollision/btGjkEpaPenetrationDepthSolver.h"
+#include "../../BulletCollision/NarrowPhaseCollision/btGjkEpa2.h"
+#include "../../BulletCollision/CollisionShapes/btMinkowskiSumShape.h"
+#include "../../BulletCollision/NarrowPhaseCollision/btDiscreteCollisionDetectorInterface.h"
+#include "../../BulletCollision/NarrowPhaseCollision/btSimplexSolverInterface.h"
+#include "../../BulletCollision/NarrowPhaseCollision/btMinkowskiPenetrationDepthSolver.h"
 
 
 /*
@@ -402,4 +402,3 @@ double plNearestPoints(float p1[3], float p2[3], float p3[3], float q1[3], float
 	}
 	return -1.0f;
 }
-

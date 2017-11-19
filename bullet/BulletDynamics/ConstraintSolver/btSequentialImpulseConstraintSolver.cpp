@@ -19,23 +19,23 @@ subject to the following restrictions:
 //It is not necessary (redundant) to refresh contact manifolds, this refresh has been moved to the collision algorithms.
 
 #include "btSequentialImpulseConstraintSolver.h"
-#include "BulletCollision/NarrowPhaseCollision/btPersistentManifold.h"
+#include "../../BulletCollision/NarrowPhaseCollision/btPersistentManifold.h"
 
-#include "LinearMath/btIDebugDraw.h"
+#include "../../LinearMath/btIDebugDraw.h"
 //#include "btJacobianEntry.h"
-#include "LinearMath/btMinMax.h"
-#include "BulletDynamics/ConstraintSolver/btTypedConstraint.h"
+#include "../../LinearMath/btMinMax.h"
+#include "../../BulletDynamics/ConstraintSolver/btTypedConstraint.h"
 #include <new>
-#include "LinearMath/btStackAlloc.h"
-#include "LinearMath/btQuickprof.h"
+#include "../../LinearMath/btStackAlloc.h"
+#include "../../LinearMath/btQuickprof.h"
 //#include "btSolverBody.h"
 //#include "btSolverConstraint.h"
-#include "LinearMath/btAlignedObjectArray.h"
+#include "../../LinearMath/btAlignedObjectArray.h"
 #include <string.h> //for memset
 
 int		gNumSplitImpulseRecoveries = 0;
 
-#include "BulletDynamics/Dynamics/btRigidBody.h"
+#include "../../BulletDynamics/Dynamics/btRigidBody.h"
 
 btSequentialImpulseConstraintSolver::btSequentialImpulseConstraintSolver()
 :m_btSeed2(0)
@@ -1736,5 +1736,3 @@ void	btSequentialImpulseConstraintSolver::reset()
 {
 	m_btSeed2 = 0;
 }
-
-

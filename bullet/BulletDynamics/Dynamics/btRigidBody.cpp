@@ -14,12 +14,12 @@ subject to the following restrictions:
 */
 
 #include "btRigidBody.h"
-#include "BulletCollision/CollisionShapes/btConvexShape.h"
-#include "LinearMath/btMinMax.h"
-#include "LinearMath/btTransformUtil.h"
-#include "LinearMath/btMotionState.h"
-#include "BulletDynamics/ConstraintSolver/btTypedConstraint.h"
-#include "LinearMath/btSerializer.h"
+#include "../../BulletCollision/CollisionShapes/btConvexShape.h"
+#include "../../LinearMath/btMinMax.h"
+#include "../../LinearMath/btTransformUtil.h"
+#include "../../LinearMath/btMotionState.h"
+#include "../../BulletDynamics/ConstraintSolver/btTypedConstraint.h"
+#include "../../LinearMath/btSerializer.h"
 
 //'temporarily' global variables
 btScalar	gDeactivationTime = btScalar(2.);
@@ -428,5 +428,3 @@ void btRigidBody::serializeSingleObject(class btSerializer* serializer) const
 	const char* structType = serialize(chunk->m_oldPtr, serializer);
 	serializer->finalizeChunk(chunk,structType,BT_RIGIDBODY_CODE,(void*)this);
 }
-
-

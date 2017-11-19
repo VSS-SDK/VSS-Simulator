@@ -15,9 +15,9 @@ subject to the following restrictions:
 
 
 #include "btHingeConstraint.h"
-#include "BulletDynamics/Dynamics/btRigidBody.h"
-#include "LinearMath/btTransformUtil.h"
-#include "LinearMath/btMinMax.h"
+#include "../../BulletDynamics/Dynamics/btRigidBody.h"
+#include "../../LinearMath/btTransformUtil.h"
+#include "../../LinearMath/btMinMax.h"
 #include <new>
 #include "btSolverBody.h"
 
@@ -1042,5 +1042,3 @@ btScalar btHingeConstraint::getParam(int num, int axis) const
 	}
 	return retVal;
 }
-
-

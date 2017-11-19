@@ -12,6 +12,8 @@ furnished to do so, subject to the following conditions:
 The above copyright notice and this permission notice shall be included in all
 copies or substantial portions of the Software.
 */
+#ifndef _CONSTANTS_H_
+#define _CONSTANTS_H_
 
 #define PI 3.141592653589793238462643383279502884
 #define C_MASSA_ROBO 0.200
@@ -20,3 +22,5 @@ copies or substantial portions of the Software.
 #define SIZE_WIDTH 150
 #define GOAL_WIDTH 10
 #define SIZE_DEPTH 130
+
+#endif
