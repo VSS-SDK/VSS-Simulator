@@ -50,7 +50,7 @@ INSTALL_UBUNTU_17_10 () {
 INSTALL_DEBIAN_9_2 () {
   sudo apt-get update && apt-get upgrade
   sudo apt-get install pkgconf
-  sudo apt-get install g++ cmake libzmq5 libzmq3-dev protobuf-compiler libprotobuf-dev libboost-all-dev
+  sudo apt-get install g++ cmake libzmq5 libzmq3-dev protobuf-compiler libprotobuf-dev libboost-all-dev libbullet-dev
   INSTALLED=1
 }
 
