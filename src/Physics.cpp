@@ -261,9 +261,7 @@ void Physics::setBallVelocity(btVector3 newVel){
         if(bodies[i]->name.compare("ball") == 0){
             btTransform t;
 
-            //bodies[i]->body->applyLinearVelocity(newVel); TODO: ver isso aqui
-            btVector3 teste = bodies[i]->body->getLinearVelocity();
-            teste += newVel;
+            bodies[i]->body->applyLinearVelocity(newVel);
 
             break;
         }
