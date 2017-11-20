@@ -19,7 +19,7 @@ copies or substantial portions of the Software.
 //Classes from lib
 
 #include "../utils/Constants.h"
-#include "../bullet/LinearMath/btStraight.h"
+#include "../bullet/btBulletDynamicsCommon.h"
 #include "../VSS-Interface/interface.h"
 #include <stdio.h>
 #include <stdlib.h>

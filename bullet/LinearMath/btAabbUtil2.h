@@ -17,9 +17,9 @@ subject to the following restrictions:
 #ifndef BT_AABB_UTIL2
 #define BT_AABB_UTIL2
 
-#include "LinearMath/btTransform.h"
+#include "btTransform.h"
 #include "LinearMath/btVector3.h"
-#include "LinearMath/btMinMax.h"
+#include "btMinMax.h"
 
 
 

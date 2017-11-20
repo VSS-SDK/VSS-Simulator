@@ -17,7 +17,7 @@ subject to the following restrictions:
 #define BT_MATRIX3x3_H
 
 #include "LinearMath/btVector3.h"
-#include "LinearMath/btQuaternion.h"
+#include "btQuaternion.h"
 #include <stdio.h>
 
 #ifdef BT_USE_SSE

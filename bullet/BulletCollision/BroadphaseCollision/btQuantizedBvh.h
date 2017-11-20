@@ -29,7 +29,7 @@ class btSerializer;
 #endif //DEBUG_CHECK_DEQUANTIZATION
 
 #include "LinearMath/btVector3.h"
-#include "LinearMath/btAlignedAllocator.h"
+#include "../../LinearMath/btAlignedAllocator.h"
 
 #ifdef BT_USE_DOUBLE_PRECISION
 #define btQuantizedBvhData btQuantizedBvhDoubleData

@@ -18,7 +18,7 @@ subject to the following restrictions:
 #define BT_IDEBUG_DRAW__H
 
 #include "LinearMath/btVector3.h"
-#include "LinearMath/btTransform.h"
+#include "btTransform.h"
 #include <vector>
 
 using namespace std;

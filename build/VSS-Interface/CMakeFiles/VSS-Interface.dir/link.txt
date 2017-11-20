@@ -1,0 +1,2 @@
+/usr/bin/ar qc libVSS-Interface.a  CMakeFiles/VSS-Interface.dir/command.pb.cc.o CMakeFiles/VSS-Interface.dir/state.pb.cc.o CMakeFiles/VSS-Interface.dir/debug.pb.cc.o
+/usr/bin/ranlib libVSS-Interface.a

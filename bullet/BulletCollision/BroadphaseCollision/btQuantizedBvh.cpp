@@ -13,10 +13,10 @@ subject to the following restrictions:
 3. This notice may not be removed or altered from any source distribution.
 */
 
-#include "BulletCollision/BroadphaseCollision/btQuantizedBvh.h"
-#include "LinearMath/btAabbUtil2.h"
-#include "LinearMath/btIDebugDraw.h"
-#include "LinearMath/btSerializer.h"
+#include "btQuantizedBvh.h"
+#include "../../LinearMath/btAabbUtil2.h"
+#include "../../LinearMath/btIDebugDraw.h"
+#include "../../LinearMath/btSerializer.h"
 
 #define RAYAABB2
 
