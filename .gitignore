@@ -33,3 +33,5 @@
 *.app
 VSS-Simulator
 VSS-Simulator-Debug
+
+build/

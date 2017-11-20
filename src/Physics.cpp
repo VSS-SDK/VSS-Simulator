@@ -26,9 +26,7 @@ Physics::Physics(int numTeams){
     collisionConfig = new btDefaultCollisionConfiguration();
     dispatcher = new btCollisionDispatcher(collisionConfig);
     solver = new btSequentialImpulseConstraintSolver;
-    cout << "asd" << endl;
     world = new btDiscreteDynamicsWorld(dispatcher,broadphase,solver,collisionConfig);
-    cout << "asd" << endl;
     world->setGravity(btVector3(0,-9.81*SCALE_WORLD,0));
 
     //glDebugDrawer = new GLDebugDrawer();
