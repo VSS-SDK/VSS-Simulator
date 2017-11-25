@@ -28,7 +28,7 @@
 #include "../../BulletCollision/CollisionShapes/btTriangleShape.h"
 #include "BulletCollision/Gimpact/btBoxCollision.h"
 #include "BulletCollision/Gimpact/btClipPolygon.h"
-#include "btGeometryOperations.h"
+#include "BulletCollision/Gimpact/btGeometryOperations.h"
 
 #define MAX_TRI_CLIPPING 16
 
