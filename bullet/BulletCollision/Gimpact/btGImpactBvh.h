@@ -26,7 +26,7 @@
 
 #include "LinearMath/btAlignedObjectArray.h"
 
-#include "btBoxCollision.h"
+#include "BulletCollision/Gimpact/btBoxCollision.h"
 #include "btTriangleShapeEx.h"
 
 //! Overlapping pair
