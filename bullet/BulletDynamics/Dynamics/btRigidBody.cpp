@@ -19,7 +19,7 @@
 #include "../../LinearMath/btTransformUtil.h"
 #include "LinearMath/btMotionState.h"
 #include "../../BulletDynamics/ConstraintSolver/btTypedConstraint.h"
-#include "../../LinearMath/btSerializer.h"
+#include "LinearMath/btSerializer.h"
 
 //'temporarily' global variables
 btScalar gDeactivationTime = btScalar( 2. );

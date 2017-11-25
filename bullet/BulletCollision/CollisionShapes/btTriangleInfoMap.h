@@ -17,7 +17,7 @@
 #define _BT_TRIANGLE_INFO_MAP_H
 
 #include "LinearMath/btHashMap.h"
-#include "../../LinearMath/btSerializer.h"
+#include "LinearMath/btSerializer.h"
 
 ///for btTriangleInfo m_flags
 #define TRI_INFO_V0V1_CONVEX 1

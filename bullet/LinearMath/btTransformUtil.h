@@ -12,6 +12,8 @@
    3. This notice may not be removed or altered from any source distribution.
  */
 
+// TODO: REQUERIDO o robo fica arrastando sem esse arquivo
+
 #ifndef BT_TRANSFORM_UTIL_H
 #define BT_TRANSFORM_UTIL_H
 

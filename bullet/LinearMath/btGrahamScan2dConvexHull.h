@@ -13,7 +13,7 @@
    3. This notice may not be removed or altered from any source distribution.
  */
 
-// TODO: REQUERIDO
+// TODO: REQUERIDO comeca a dar um monte de erro de compilação
 
 #ifndef GRAHAM_SCAN_2D_CONVEX_HULL_H
 #define GRAHAM_SCAN_2D_CONVEX_HULL_H

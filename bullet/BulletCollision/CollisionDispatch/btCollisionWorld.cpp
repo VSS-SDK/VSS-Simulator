@@ -31,7 +31,7 @@
 #include "../../BulletCollision/BroadphaseCollision/btDbvt.h"
 #include "LinearMath/btAabbUtil2.h"
 #include "LinearMath/btQuickprof.h"
-#include "../../LinearMath/btSerializer.h"
+#include "LinearMath/btSerializer.h"
 #include "../../BulletCollision/CollisionShapes/btConvexPolyhedron.h"
 #include "../../BulletCollision/CollisionDispatch/btCollisionObjectWrapper.h"
 #include "../../BulletCollision/Gimpact/btGImpactShape.h"

@@ -21,7 +21,7 @@
 #include "../../BulletCollision/CollisionShapes/btCollisionMargin.h"
 
 #include "LinearMath/btQuaternion.h"
-#include "../../LinearMath/btSerializer.h"
+#include "LinearMath/btSerializer.h"
 
 btConvexHullShape ::btConvexHullShape ( const btScalar* points, int numPoints, int stride ) : btPolyhedralConvexAabbCachingShape ()
 {

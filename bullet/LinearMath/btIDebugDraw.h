@@ -13,7 +13,7 @@
    3. This notice may not be removed or altered from any source distribution.
  */
 
-// TODO: REQUERIDO
+// TODO: REQUERIDO comeca a dar um monte de erro compilacao
 #ifndef BT_IDEBUG_DRAW__H
 #define BT_IDEBUG_DRAW__H
 
