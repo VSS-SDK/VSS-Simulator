@@ -13,6 +13,8 @@
    3. This notice may not be removed or altered from any source distribution.
  */
 
+// TODO: REQUERIDO
+
 #ifndef GRAHAM_SCAN_2D_CONVEX_HULL_H
 #define GRAHAM_SCAN_2D_CONVEX_HULL_H
 
