@@ -35,7 +35,7 @@
 
 #include "BulletCollision/Gimpact/gim_array.h"
 #include "BulletCollision/Gimpact/gim_radixsort.h"
-#include "gim_box_collision.h"
+#include "BulletCollision/Gimpact/gim_box_collision.h"
 #include "gim_tri_collision.h"
 
 //! Overlapping pair

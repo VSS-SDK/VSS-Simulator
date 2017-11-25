@@ -32,7 +32,7 @@
 #include "LinearMath/btAabbUtil2.h"
 #include "LinearMath/btQuickprof.h"
 #include "LinearMath/btSerializer.h"
-#include "../../BulletCollision/CollisionShapes/btConvexPolyhedron.h"
+#include "BulletCollision/CollisionShapes/btConvexPolyhedron.h"
 #include "../../BulletCollision/CollisionDispatch/btCollisionObjectWrapper.h"
 #include "../../BulletCollision/Gimpact/btGImpactShape.h"
 //#define DISABLE_DBVT_COMPOUNDSHAPE_RAYCAST_ACCELERATION
@@ -58,7 +58,7 @@
 #include "../../BulletCollision/CollisionShapes/btMultiSphereShape.h"
 #include "../../BulletCollision/CollisionShapes/btPolyhedralConvexShape.h"
 #include "../../BulletCollision/CollisionShapes/btSphereShape.h"
-#include "../../BulletCollision/CollisionShapes/btTriangleCallback.h"
+#include "BulletCollision/CollisionShapes/btTriangleCallback.h"
 #include "../../BulletCollision/CollisionShapes/btTriangleMeshShape.h"
 #include "../../BulletCollision/CollisionShapes/btStaticPlaneShape.h"
 

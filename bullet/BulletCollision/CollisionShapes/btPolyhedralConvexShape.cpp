@@ -17,7 +17,7 @@
 #endif
 
 #include "../../BulletCollision/CollisionShapes/btPolyhedralConvexShape.h"
-#include "btConvexPolyhedron.h"
+#include "BulletCollision/CollisionShapes/btConvexPolyhedron.h"
 #include "LinearMath/btConvexHullComputer.h"
 #include <new>
 #include "LinearMath/btGeometryUtil.h"

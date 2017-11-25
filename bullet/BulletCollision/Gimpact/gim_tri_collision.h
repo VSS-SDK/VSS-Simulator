@@ -33,7 +33,7 @@
    -----------------------------------------------------------------------------
  */
 
-#include "gim_box_collision.h"
+#include "BulletCollision/Gimpact/gim_box_collision.h"
 #include "BulletCollision/Gimpact/gim_clip_polygon.h"
 
 #define MAX_TRI_CLIPPING 16

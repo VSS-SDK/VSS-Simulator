@@ -16,7 +16,7 @@
 #ifndef BT_TRIANGLE_BUFFER_H
 #define BT_TRIANGLE_BUFFER_H
 
-#include "btTriangleCallback.h"
+#include "BulletCollision/CollisionShapes/btTriangleCallback.h"
 #include "LinearMath/btAlignedObjectArray.h"
 
 struct btTriangle
