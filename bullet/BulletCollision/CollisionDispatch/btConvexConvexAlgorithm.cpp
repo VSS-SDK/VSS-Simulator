@@ -23,7 +23,7 @@
 
 //#include <stdio.h>
 #include "BulletCollision/NarrowPhaseCollision/btDiscreteCollisionDetectorInterface.h"
-#include "../../BulletCollision/BroadphaseCollision/btBroadphaseInterface.h"
+#include "BulletCollision/BroadphaseCollision/btBroadphaseInterface.h"
 #include "BulletCollision/CollisionDispatch/btCollisionObject.h"
 #include "../../BulletCollision/CollisionShapes/btConvexShape.h"
 #include "../../BulletCollision/CollisionShapes/btCapsuleShape.h"

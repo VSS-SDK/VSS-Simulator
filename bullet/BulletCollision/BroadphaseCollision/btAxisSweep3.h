@@ -21,9 +21,9 @@
 
 #include "LinearMath/btVector3.h"
 #include "btOverlappingPairCache.h"
-#include "btBroadphaseInterface.h"
+#include "BulletCollision/BroadphaseCollision/btBroadphaseInterface.h"
 #include "BulletCollision/BroadphaseCollision/btBroadphaseProxy.h"
-#include "btOverlappingPairCallback.h"
+#include "BulletCollision/BroadphaseCollision/btOverlappingPairCallback.h"
 #include "btDbvtBroadphase.h"
 
 //#define DEBUG_BROADPHASE 1

@@ -16,9 +16,9 @@
 #ifndef BT_OVERLAPPING_PAIR_CACHE_H
 #define BT_OVERLAPPING_PAIR_CACHE_H
 
-#include "btBroadphaseInterface.h"
+#include "BulletCollision/BroadphaseCollision/btBroadphaseInterface.h"
 #include "BulletCollision/BroadphaseCollision/btBroadphaseProxy.h"
-#include "btOverlappingPairCallback.h"
+#include "BulletCollision/BroadphaseCollision/btOverlappingPairCallback.h"
 
 #include "LinearMath/btAlignedObjectArray.h"
 class btDispatcher;
@@ -57,7 +57,7 @@ class btOverlappingPairCache : public btOverlappingPairCallback
 public:
 
 	virtual ~btOverlappingPairCache() {
-	}                      // this is needed so we can get to the derived class destructor
+	}        // this is needed so we can get to the derived class destructor
 
 	virtual btBroadphasePair* getOverlappingPairArrayPtr() = 0;
 

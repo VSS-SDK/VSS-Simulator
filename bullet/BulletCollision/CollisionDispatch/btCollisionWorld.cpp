@@ -22,12 +22,12 @@
 #include "../../BulletCollision/CollisionShapes/btSphereShape.h" //for raycasting
 #include "../../BulletCollision/CollisionShapes/btBvhTriangleMeshShape.h" //for raycasting
 #include "BulletCollision/NarrowPhaseCollision/btRaycastCallback.h"
-#include "../../BulletCollision/CollisionShapes/btCompoundShape.h"
+#include "BulletCollision/CollisionShapes/btCompoundShape.h"
 #include "../../BulletCollision/NarrowPhaseCollision/btSubSimplexConvexCast.h"
 #include "../../BulletCollision/NarrowPhaseCollision/btGjkConvexCast.h"
 #include "../../BulletCollision/NarrowPhaseCollision/btContinuousConvexCollision.h"
 #include "BulletCollision/BroadphaseCollision/btCollisionAlgorithm.h"
-#include "../../BulletCollision/BroadphaseCollision/btBroadphaseInterface.h"
+#include "BulletCollision/BroadphaseCollision/btBroadphaseInterface.h"
 #include "BulletCollision/BroadphaseCollision/btDbvt.h"
 #include "LinearMath/btAabbUtil2.h"
 #include "LinearMath/btQuickprof.h"
@@ -51,7 +51,7 @@
 //for debug rendering
 #include "../../BulletCollision/CollisionShapes/btBoxShape.h"
 #include "../../BulletCollision/CollisionShapes/btCapsuleShape.h"
-#include "../../BulletCollision/CollisionShapes/btCompoundShape.h"
+#include "BulletCollision/CollisionShapes/btCompoundShape.h"
 #include "../../BulletCollision/CollisionShapes/btConeShape.h"
 #include "../../BulletCollision/CollisionShapes/btConvexTriangleMeshShape.h"
 #include "../../BulletCollision/CollisionShapes/btCylinderShape.h"

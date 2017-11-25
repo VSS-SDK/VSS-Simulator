@@ -17,7 +17,7 @@
 
 #include "../../BulletDynamics/Dynamics/btRigidBody.h"
 #include "LinearMath/btVector3.h"
-#include "btJacobianEntry.h"
+#include "BulletDynamics/ConstraintSolver/btJacobianEntry.h"
 
 void btSolve2LinearConstraint::resolveUnilateralPairConstraint(
         btRigidBody* body1,

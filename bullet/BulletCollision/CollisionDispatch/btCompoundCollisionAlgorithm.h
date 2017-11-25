@@ -19,7 +19,7 @@
 
 #include "BulletCollision/CollisionDispatch/btActivatingCollisionAlgorithm.h"
 #include "BulletCollision/BroadphaseCollision/btDispatcher.h"
-#include "../../BulletCollision/BroadphaseCollision/btBroadphaseInterface.h"
+#include "BulletCollision/BroadphaseCollision/btBroadphaseInterface.h"
 
 #include "../../BulletCollision/NarrowPhaseCollision/btPersistentManifold.h"
 class btDispatcher;

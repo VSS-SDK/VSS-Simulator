@@ -19,7 +19,7 @@
 #include "BulletCollision/CollisionShapes/btCollisionShape.h"
 #include "../../BulletDynamics/Dynamics/btRigidBody.h"
 #include "../../BulletDynamics/ConstraintSolver/btSequentialImpulseConstraintSolver.h"
-#include "../../BulletDynamics/ConstraintSolver/btContactSolverInfo.h"
+#include "BulletDynamics/ConstraintSolver/btContactSolverInfo.h"
 
 /*
    Make sure this dummy function never changes so that it

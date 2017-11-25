@@ -16,7 +16,7 @@
 #ifndef BT_EMPTY_SHAPE_H
 #define BT_EMPTY_SHAPE_H
 
-#include "btConcaveShape.h"
+#include "BulletCollision/CollisionShapes/btConcaveShape.h"
 
 #include "LinearMath/btVector3.h"
 #include "LinearMath/btTransform.h"

@@ -19,7 +19,7 @@
 class btRigidBody;
 #include "LinearMath/btVector3.h"
 #include "LinearMath/btMatrix3x3.h"
-#include "btJacobianEntry.h"
+#include "BulletDynamics/ConstraintSolver/btJacobianEntry.h"
 #include "LinearMath/btAlignedObjectArray.h"
 
 //#define NO_FRICTION_TANGENTIALS 1

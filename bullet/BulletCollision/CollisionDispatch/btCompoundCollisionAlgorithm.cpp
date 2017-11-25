@@ -16,7 +16,7 @@
 
 #include "../../BulletCollision/CollisionDispatch/btCompoundCollisionAlgorithm.h"
 #include "BulletCollision/CollisionDispatch/btCollisionObject.h"
-#include "../../BulletCollision/CollisionShapes/btCompoundShape.h"
+#include "BulletCollision/CollisionShapes/btCompoundShape.h"
 #include "BulletCollision/BroadphaseCollision/btDbvt.h"
 #include "../../LinearMath/btIDebugDraw.h"
 #include "LinearMath/btAabbUtil2.h"

@@ -17,7 +17,7 @@
 #include "BulletCollision/CollisionDispatch/btCollisionObject.h"
 #include "../../BulletCollision/CollisionShapes/btMultiSphereShape.h"
 #include "BulletCollision/BroadphaseCollision/btBroadphaseProxy.h"
-#include "../../BulletCollision/CollisionShapes/btConcaveShape.h"
+#include "BulletCollision/CollisionShapes/btConcaveShape.h"
 #include "../../BulletCollision/CollisionDispatch/btManifoldResult.h"
 #include "BulletCollision/NarrowPhaseCollision/btRaycastCallback.h"
 #include "../../BulletCollision/CollisionShapes/btTriangleShape.h"

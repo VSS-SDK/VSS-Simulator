@@ -29,7 +29,7 @@
 #include "../../BulletCollision/CollisionShapes/btStridingMeshInterface.h"
 #include "BulletCollision/CollisionShapes/btCollisionMargin.h"
 #include "../../BulletCollision/CollisionDispatch/btCollisionWorld.h"
-#include "../../BulletCollision/CollisionShapes/btConcaveShape.h"
+#include "BulletCollision/CollisionShapes/btConcaveShape.h"
 #include "../../BulletCollision/CollisionShapes/btTetrahedronShape.h"
 #include "LinearMath/btVector3.h"
 #include "LinearMath/btTransform.h"

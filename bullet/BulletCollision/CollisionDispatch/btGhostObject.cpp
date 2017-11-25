@@ -13,7 +13,7 @@
    3. This notice may not be removed or altered from any source distribution.
  */
 
-#include "btGhostObject.h"
+#include "BulletCollision/CollisionDispatch/btGhostObject.h"
 #include "btCollisionWorld.h"
 #include "../../BulletCollision/CollisionShapes/btConvexShape.h"
 #include "LinearMath/btAabbUtil2.h"

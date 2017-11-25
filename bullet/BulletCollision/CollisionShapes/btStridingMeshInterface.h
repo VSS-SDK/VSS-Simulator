@@ -18,7 +18,7 @@
 
 #include "LinearMath/btVector3.h"
 #include "BulletCollision/CollisionShapes/btTriangleCallback.h"
-#include "btConcaveShape.h"
+#include "BulletCollision/CollisionShapes/btConcaveShape.h"
 
 ///	The btStridingMeshInterface is the interface class for high performance generic access to triangle meshes, used in combination with btBvhTriangleMeshShape and some other collision shapes.
 /// Using index striding of 3*sizeof(integer) it can use triangle arrays, using index striding of 1*sizeof(integer) it can handle triangle strips.
@@ -131,7 +131,7 @@ struct btMeshPartData
 
 	btShortIntIndexData   *m_indices16; //backwards compatibility
 
-	int m_numTriangles;             //length of m_indices = m_numTriangles
+	int m_numTriangles;      //length of m_indices = m_numTriangles
 	int m_numVertices;
 };
 
