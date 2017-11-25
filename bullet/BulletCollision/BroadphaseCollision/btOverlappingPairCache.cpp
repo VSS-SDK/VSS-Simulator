@@ -15,8 +15,8 @@
 
 #include "btOverlappingPairCache.h"
 
-#include "btDispatcher.h"
-#include "btCollisionAlgorithm.h"
+#include "BulletCollision/BroadphaseCollision/btDispatcher.h"
+#include "BulletCollision/BroadphaseCollision/btCollisionAlgorithm.h"
 #include "LinearMath/btAabbUtil2.h"
 
 #include <stdio.h>

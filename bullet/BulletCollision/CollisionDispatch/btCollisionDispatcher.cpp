@@ -15,7 +15,7 @@
 
 #include "btCollisionDispatcher.h"
 
-#include "../../BulletCollision/BroadphaseCollision/btCollisionAlgorithm.h"
+#include "BulletCollision/BroadphaseCollision/btCollisionAlgorithm.h"
 
 #include "../../BulletCollision/CollisionShapes/btCollisionShape.h"
 #include "../../BulletCollision/CollisionDispatch/btCollisionObject.h"

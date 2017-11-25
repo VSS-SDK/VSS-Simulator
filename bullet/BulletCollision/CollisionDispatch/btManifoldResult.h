@@ -22,7 +22,7 @@ struct btCollisionObjectWrapper;
 #include "../../BulletCollision/NarrowPhaseCollision/btPersistentManifold.h"
 class btManifoldPoint;
 
-#include "../../BulletCollision/NarrowPhaseCollision/btDiscreteCollisionDetectorInterface.h"
+#include "BulletCollision/NarrowPhaseCollision/btDiscreteCollisionDetectorInterface.h"
 
 #include "LinearMath/btTransform.h"
 #include "../../BulletCollision/CollisionDispatch/btCollisionObjectWrapper.h"

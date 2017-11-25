@@ -18,7 +18,7 @@
 
 #include "../../BulletCollision/CollisionShapes/btPolyhedralConvexShape.h"
 #include "../../BulletCollision/CollisionShapes/btCollisionMargin.h"
-#include "../../BulletCollision/BroadphaseCollision/btBroadphaseProxy.h"
+#include "BulletCollision/BroadphaseCollision/btBroadphaseProxy.h"
 #include "LinearMath/btVector3.h"
 #include "LinearMath/btMinMax.h"
 

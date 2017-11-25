@@ -20,7 +20,7 @@
 
 #include "LinearMath/btAlignedObjectArray.h"
 #include "LinearMath/btTransform.h"
-#include "btDiscreteCollisionDetectorInterface.h"
+#include "BulletCollision/NarrowPhaseCollision/btDiscreteCollisionDetectorInterface.h"
 
 class btConvexPolyhedron;
 

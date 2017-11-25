@@ -16,7 +16,7 @@
 
 #include "LinearMath/btScalar.h"
 #include "btSimulationIslandManager.h"
-#include "../../BulletCollision/BroadphaseCollision/btDispatcher.h"
+#include "BulletCollision/BroadphaseCollision/btDispatcher.h"
 #include "../../BulletCollision/NarrowPhaseCollision/btPersistentManifold.h"
 #include "../../BulletCollision/CollisionDispatch/btCollisionObject.h"
 #include "../../BulletCollision/CollisionDispatch/btCollisionWorld.h"

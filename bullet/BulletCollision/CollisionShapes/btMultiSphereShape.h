@@ -17,7 +17,7 @@
 #define BT_MULTI_SPHERE_MINKOWSKI_H
 
 #include "btConvexInternalShape.h"
-#include "../../BulletCollision/BroadphaseCollision/btBroadphaseProxy.h" // for the types
+#include "BulletCollision/BroadphaseCollision/btBroadphaseProxy.h" // for the types
 #include "LinearMath/btAlignedObjectArray.h"
 #include "LinearMath/btAabbUtil2.h"
 
