@@ -13,6 +13,7 @@
    3. This notice may not be removed or altered from any source distribution.
  */
 
+// TODO: REQUERIDO
 #ifndef BT_IDEBUG_DRAW__H
 #define BT_IDEBUG_DRAW__H
 
