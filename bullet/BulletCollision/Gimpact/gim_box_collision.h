@@ -32,7 +32,7 @@
 
    -----------------------------------------------------------------------------
  */
-#include "gim_basic_geometry_operations.h"
+#include "BulletCollision/Gimpact/gim_basic_geometry_operations.h"
 #include "LinearMath/btTransform.h"
 
 //SIMD_FORCE_INLINE bool test_cross_edge_box(
