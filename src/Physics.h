@@ -1,4 +1,5 @@
-/*The MIT License (MIT)
+/*
+The MIT License (MIT)
 
 Copyright (c) 2016 Lucas Borsatto Simão
 
@@ -54,11 +55,11 @@ private:
 	vector<BulletObject*> bodies;
 	vector<RobotPhysics*> genRobots;
 
-    void registBodies();
+	void registBodies();
 	void setupBodiesProp();
 
 	btRigidBody* addGenericBody(btCollisionShape* shape,string name, Color clr, btVector3 pos, float mass, btVector3 rotation = btVector3(0,0,0));
-    static bool callBackHitFunc(btManifoldPoint& cp,const btCollisionObjectWrapper* obj1,int id1,int index1,const btCollisionObjectWrapper* obj2,int id2,int index2);
+	static bool callBackHitFunc(btManifoldPoint& cp,const btCollisionObjectWrapper* obj1,int id1,int index1,const btCollisionObjectWrapper* obj2,int id2,int index2);
 public:
 	Physics(int numTeams);
 	~Physics();
@@ -77,7 +78,7 @@ public:
 
 	void resetRobotPositions();
 
-    int getNumTeams(){ return numTeams; }
+	int getNumTeams(){ return numTeams; }
 	btDynamicsWorld* getWorldPhysics() { return world; }
 	btVector3 getBallPosition();
 	btVector3 getBallVelocity();

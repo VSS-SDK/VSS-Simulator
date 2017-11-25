@@ -23,6 +23,16 @@ CMAKE_UBUNTU () {
   cd ..
 }
 
+CMAKE_MINT () {
+  sudo rm -R build
+  mkdir build
+  cd build
+  cmake ..
+  make package
+  sudo dpkg -i vss-simulator-0.1.1-Linux.deb
+  cd ..
+}
+
 CMAKE_DEBIAN () {
   rm -R build
   mkdir build
@@ -40,10 +50,10 @@ INSTALL_UBUNTU_16_04 () {
   INSTALLED=1
 }
 
-INSTALL_UBUNTU_17_10 () {
+INSTALL_MINT_18_2 () {
   sudo apt-get update && apt-get upgrade
   sudo apt-get install pkg-config
-  sudo apt-get install g++ cmake libzmq5 libzmqpp4 libzmqpp-dev protobuf-compiler libprotobuf-dev libboost-all-dev libbullet-dev
+  sudo apt-get install g++ cmake libzmqpp3 libzmqpp-dev protobuf-compiler libprotobuf-dev libboost-all-dev libbullet-dev
   INSTALLED=1
 }
 
@@ -56,12 +66,6 @@ INSTALL_DEBIAN_9_2 () {
 
 INSTALL () {
   # Ubuntu
-  if [[ "$DISTRO" == "Ubuntu" ]] && [[ "$RELEASE" == "17.10" ]]; then
-    INSTALL_UBUNTU_17_10;
-    if [ $INSTALLED == 1 ]; then
-      CMAKE_UBUNTU;
-    fi
-  fi
   if [[ "$DISTRO" == "Ubuntu" ]] && [[ "$RELEASE" == "16.04" ]]; then
     INSTALL_UBUNTU_16_04;
     if [ $INSTALLED == 1 ]; then
@@ -74,6 +78,14 @@ INSTALL () {
     INSTALL_DEBIAN_9_2;
     if [ $INSTALLED == 1 ]; then
       CMAKE_DEBIAN;
+    fi
+  fi
+
+  # LinuxMint
+  if [[ "$DISTRO" == "LinuxMint" ]] && [[ "$RELEASE" == "18.2" ]]; then
+    INSTALL_MINT_18_2;
+    if [ $INSTALLED == 1 ]; then
+      CMAKE_MINT;
     fi
   fi
 
