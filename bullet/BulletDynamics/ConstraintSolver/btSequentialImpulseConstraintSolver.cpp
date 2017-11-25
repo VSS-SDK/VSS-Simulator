@@ -26,7 +26,7 @@
 #include "LinearMath/btMinMax.h"
 #include "../../BulletDynamics/ConstraintSolver/btTypedConstraint.h"
 #include <new>
-#include "../../LinearMath/btStackAlloc.h"
+#include "LinearMath/btStackAlloc.h"
 #include "LinearMath/btQuickprof.h"
 //#include "btSolverBody.h"
 //#include "btSolverConstraint.h"
