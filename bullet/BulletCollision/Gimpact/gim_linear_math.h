@@ -36,7 +36,7 @@ email: projectileman@yahoo.com
 
 
 #include "BulletCollision/Gimpact/gim_math.h"
-#include "gim_geom_types.h"
+#include "BulletCollision/Gimpact/gim_geom_types.h"
 
 
 
