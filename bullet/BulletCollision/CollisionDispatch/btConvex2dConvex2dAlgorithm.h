@@ -16,12 +16,12 @@
 #ifndef BT_CONVEX_2D_CONVEX_2D_ALGORITHM_H
 #define BT_CONVEX_2D_CONVEX_2D_ALGORITHM_H
 
-#include "../../BulletCollision/CollisionDispatch/btActivatingCollisionAlgorithm.h"
+#include "BulletCollision/CollisionDispatch/btActivatingCollisionAlgorithm.h"
 #include "../../BulletCollision/NarrowPhaseCollision/btGjkPairDetector.h"
 #include "../../BulletCollision/NarrowPhaseCollision/btPersistentManifold.h"
 #include "BulletCollision/BroadphaseCollision/btBroadphaseProxy.h"
 #include "../../BulletCollision/NarrowPhaseCollision/btVoronoiSimplexSolver.h"
-#include "../../BulletCollision/CollisionDispatch/btCollisionCreateFunc.h"
+#include "BulletCollision/CollisionDispatch/btCollisionCreateFunc.h"
 #include "../../BulletCollision/CollisionDispatch/btCollisionDispatcher.h"
 #include "../../LinearMath/btTransformUtil.h" //for btConvexSeparatingDistanceUtil
 

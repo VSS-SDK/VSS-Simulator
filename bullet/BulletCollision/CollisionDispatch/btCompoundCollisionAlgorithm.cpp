@@ -15,13 +15,13 @@
  */
 
 #include "../../BulletCollision/CollisionDispatch/btCompoundCollisionAlgorithm.h"
-#include "../../BulletCollision/CollisionDispatch/btCollisionObject.h"
+#include "BulletCollision/CollisionDispatch/btCollisionObject.h"
 #include "../../BulletCollision/CollisionShapes/btCompoundShape.h"
 #include "BulletCollision/BroadphaseCollision/btDbvt.h"
 #include "../../LinearMath/btIDebugDraw.h"
 #include "LinearMath/btAabbUtil2.h"
 #include "btManifoldResult.h"
-#include "../../BulletCollision/CollisionDispatch/btCollisionObjectWrapper.h"
+#include "BulletCollision/CollisionDispatch/btCollisionObjectWrapper.h"
 
 btShapePairCallback gCompoundChildShapePairCallback = 0;
 

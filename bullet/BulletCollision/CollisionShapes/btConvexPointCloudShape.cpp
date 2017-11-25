@@ -14,7 +14,7 @@
  */
 
 #include "btConvexPointCloudShape.h"
-#include "../../BulletCollision/CollisionShapes/btCollisionMargin.h"
+#include "BulletCollision/CollisionShapes/btCollisionMargin.h"
 
 #include "LinearMath/btQuaternion.h"
 

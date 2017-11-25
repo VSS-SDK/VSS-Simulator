@@ -15,8 +15,8 @@
 
 #include "btCollisionWorld.h"
 #include "btCollisionDispatcher.h"
-#include "../../BulletCollision/CollisionDispatch/btCollisionObject.h"
-#include "../../BulletCollision/CollisionShapes/btCollisionShape.h"
+#include "BulletCollision/CollisionDispatch/btCollisionObject.h"
+#include "BulletCollision/CollisionShapes/btCollisionShape.h"
 #include "../../BulletCollision/CollisionShapes/btConvexShape.h"
 #include "../../BulletCollision/NarrowPhaseCollision/btGjkEpaPenetrationDepthSolver.h"
 #include "../../BulletCollision/CollisionShapes/btSphereShape.h" //for raycasting
@@ -33,7 +33,7 @@
 #include "LinearMath/btQuickprof.h"
 #include "LinearMath/btSerializer.h"
 #include "BulletCollision/CollisionShapes/btConvexPolyhedron.h"
-#include "../../BulletCollision/CollisionDispatch/btCollisionObjectWrapper.h"
+#include "BulletCollision/CollisionDispatch/btCollisionObjectWrapper.h"
 #include "../../BulletCollision/Gimpact/btGImpactShape.h"
 //#define DISABLE_DBVT_COMPOUNDSHAPE_RAYCAST_ACCELERATION
 
@@ -44,7 +44,7 @@
 //When the user doesn't provide dispatcher or broadphase, create basic versions (and delete them in destructor)
 #include "../../BulletCollision/CollisionDispatch/btCollisionDispatcher.h"
 #include "../../BulletCollision/BroadphaseCollision/btSimpleBroadphase.h"
-#include "../../BulletCollision/CollisionDispatch/btCollisionConfiguration.h"
+#include "BulletCollision/CollisionDispatch/btCollisionConfiguration.h"
 
 ///for debug drawing
 

@@ -16,7 +16,7 @@
 #ifndef BT_CONCAVE_SHAPE_H
 #define BT_CONCAVE_SHAPE_H
 
-#include "btCollisionShape.h"
+#include "BulletCollision/CollisionShapes/btCollisionShape.h"
 #include "BulletCollision/BroadphaseCollision/btBroadphaseProxy.h" // for the types
 #include "BulletCollision/CollisionShapes/btTriangleCallback.h"
 

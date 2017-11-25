@@ -17,9 +17,9 @@
 #define BT_SIMULATION_ISLAND_MANAGER_H
 
 #include "../../BulletCollision/CollisionDispatch/btUnionFind.h"
-#include "btCollisionCreateFunc.h"
+#include "BulletCollision/CollisionDispatch/btCollisionCreateFunc.h"
 #include "LinearMath/btAlignedObjectArray.h"
-#include "btCollisionObject.h"
+#include "BulletCollision/CollisionDispatch/btCollisionObject.h"
 
 class btCollisionObject;
 class btCollisionWorld;

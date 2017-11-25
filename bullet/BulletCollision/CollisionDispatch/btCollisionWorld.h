@@ -76,7 +76,7 @@ class btSerializer;
 
 #include "LinearMath/btVector3.h"
 #include "LinearMath/btTransform.h"
-#include "btCollisionObject.h"
+#include "BulletCollision/CollisionDispatch/btCollisionObject.h"
 #include "btCollisionDispatcher.h"
 #include "../../BulletCollision/BroadphaseCollision/btOverlappingPairCache.h"
 #include "LinearMath/btAlignedObjectArray.h"

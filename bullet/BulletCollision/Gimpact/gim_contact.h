@@ -32,7 +32,7 @@
 
    -----------------------------------------------------------------------------
  */
-#include "gim_geometry.h"
+#include "BulletCollision/Gimpact/gim_geometry.h"
 #include "BulletCollision/Gimpact/gim_radixsort.h"
 #include "BulletCollision/Gimpact/gim_array.h"
 

@@ -16,7 +16,7 @@
 #ifndef BT_EMPTY_ALGORITH
 #define BT_EMPTY_ALGORITH
 #include "BulletCollision/BroadphaseCollision/btCollisionAlgorithm.h"
-#include "btCollisionCreateFunc.h"
+#include "BulletCollision/CollisionDispatch/btCollisionCreateFunc.h"
 #include "btCollisionDispatcher.h"
 
 #define ATTRIBUTE_ALIGNED( a )

@@ -29,7 +29,7 @@ class btOverlappingPairCache;
 class btPoolAllocator;
 class btCollisionConfiguration;
 
-#include "btCollisionCreateFunc.h"
+#include "BulletCollision/CollisionDispatch/btCollisionCreateFunc.h"
 
 #define USE_DISPATCH_REGISTRY_ARRAY 1
 

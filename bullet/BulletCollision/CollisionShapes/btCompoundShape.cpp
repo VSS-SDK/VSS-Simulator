@@ -14,7 +14,7 @@
  */
 
 #include "btCompoundShape.h"
-#include "btCollisionShape.h"
+#include "BulletCollision/CollisionShapes/btCollisionShape.h"
 #include "BulletCollision/BroadphaseCollision/btDbvt.h"
 #include "LinearMath/btSerializer.h"
 

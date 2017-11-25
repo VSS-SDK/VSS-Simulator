@@ -14,7 +14,7 @@
  */
 
 #include "btConvexTriangleMeshShape.h"
-#include "../../BulletCollision/CollisionShapes/btCollisionMargin.h"
+#include "BulletCollision/CollisionShapes/btCollisionMargin.h"
 
 #include "LinearMath/btQuaternion.h"
 #include "../../BulletCollision/CollisionShapes/btStridingMeshInterface.h"

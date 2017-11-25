@@ -18,7 +18,7 @@
 #endif
 
 #include "btMultiSphereShape.h"
-#include "../../BulletCollision/CollisionShapes/btCollisionMargin.h"
+#include "BulletCollision/CollisionShapes/btCollisionMargin.h"
 #include "LinearMath/btQuaternion.h"
 #include "LinearMath/btSerializer.h"
 

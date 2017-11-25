@@ -16,12 +16,12 @@
 #ifndef BT_CONVEX_SHAPE_INTERFACE1
 #define BT_CONVEX_SHAPE_INTERFACE1
 
-#include "btCollisionShape.h"
+#include "BulletCollision/CollisionShapes/btCollisionShape.h"
 
 #include "LinearMath/btVector3.h"
 #include "LinearMath/btTransform.h"
 #include "LinearMath/btMatrix3x3.h"
-#include "btCollisionMargin.h"
+#include "BulletCollision/CollisionShapes/btCollisionMargin.h"
 #include "LinearMath/btAlignedAllocator.h"
 
 #define MAX_PREFERRED_PENETRATION_DIRECTIONS 10

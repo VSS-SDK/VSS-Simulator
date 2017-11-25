@@ -24,7 +24,7 @@
 #ifndef GIMPACT_TRIANGLE_SHAPE_EX_H
 #define GIMPACT_TRIANGLE_SHAPE_EX_H
 
-#include "../../BulletCollision/CollisionShapes/btCollisionShape.h"
+#include "BulletCollision/CollisionShapes/btCollisionShape.h"
 #include "../../BulletCollision/CollisionShapes/btTriangleShape.h"
 #include "BulletCollision/Gimpact/btBoxCollision.h"
 #include "BulletCollision/Gimpact/btClipPolygon.h"

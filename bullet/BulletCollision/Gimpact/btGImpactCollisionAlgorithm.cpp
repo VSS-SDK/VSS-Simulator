@@ -23,9 +23,9 @@
 
  */
 
-#include "../../BulletCollision/CollisionDispatch/btManifoldResult.h"
+#include "BulletCollision/CollisionDispatch/btManifoldResult.h"
 #include "../../LinearMath/btIDebugDraw.h"
-#include "../../BulletCollision/CollisionDispatch/btCollisionObject.h"
+#include "BulletCollision/CollisionDispatch/btCollisionObject.h"
 #include "../../BulletCollision/CollisionShapes/btBoxShape.h"
 #include "btGImpactCollisionAlgorithm.h"
 #include "btContactProcessing.h"

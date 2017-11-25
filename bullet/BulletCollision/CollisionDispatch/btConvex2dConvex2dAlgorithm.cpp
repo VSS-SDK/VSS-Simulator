@@ -18,7 +18,7 @@
 //#include <stdio.h>
 #include "BulletCollision/NarrowPhaseCollision/btDiscreteCollisionDetectorInterface.h"
 #include "../../BulletCollision/BroadphaseCollision/btBroadphaseInterface.h"
-#include "../../BulletCollision/CollisionDispatch/btCollisionObject.h"
+#include "BulletCollision/CollisionDispatch/btCollisionObject.h"
 #include "../../BulletCollision/CollisionShapes/btConvexShape.h"
 #include "../../BulletCollision/CollisionShapes/btCapsuleShape.h"
 
@@ -40,7 +40,7 @@
 
 #include "../../BulletCollision/NarrowPhaseCollision/btGjkEpa2.h"
 #include "../../BulletCollision/NarrowPhaseCollision/btGjkEpaPenetrationDepthSolver.h"
-#include "../../BulletCollision/CollisionDispatch/btCollisionObjectWrapper.h"
+#include "BulletCollision/CollisionDispatch/btCollisionObjectWrapper.h"
 
 btConvex2dConvex2dAlgorithm::CreateFunc::CreateFunc( btSimplexSolverInterface*   simplexSolver, btConvexPenetrationDepthSolver* pdSolver )
 {

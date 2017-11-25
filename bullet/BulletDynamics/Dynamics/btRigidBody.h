@@ -19,7 +19,7 @@
 #include "LinearMath/btAlignedObjectArray.h"
 #include "LinearMath/btTransform.h"
 #include "BulletCollision/BroadphaseCollision/btBroadphaseProxy.h"
-#include "../../BulletCollision/CollisionDispatch/btCollisionObject.h"
+#include "BulletCollision/CollisionDispatch/btCollisionObject.h"
 #include <iostream>
 #include <string.h>
 #include <GL/glut.h>

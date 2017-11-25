@@ -18,7 +18,7 @@
 
 #include "BulletCollision/BroadphaseCollision/btCollisionAlgorithm.h"
 #include "BulletCollision/BroadphaseCollision/btBroadphaseProxy.h"
-#include "../../BulletCollision/CollisionDispatch/btCollisionCreateFunc.h"
+#include "BulletCollision/CollisionDispatch/btCollisionCreateFunc.h"
 class btPersistentManifold;
 #include "btCollisionDispatcher.h"
 

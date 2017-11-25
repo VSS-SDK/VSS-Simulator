@@ -16,12 +16,12 @@
 #ifndef BT_COMPOUND_SHAPE_H
 #define BT_COMPOUND_SHAPE_H
 
-#include "btCollisionShape.h"
+#include "BulletCollision/CollisionShapes/btCollisionShape.h"
 
 #include "LinearMath/btVector3.h"
 #include "LinearMath/btTransform.h"
 #include "LinearMath/btMatrix3x3.h"
-#include "btCollisionMargin.h"
+#include "BulletCollision/CollisionShapes/btCollisionMargin.h"
 #include "LinearMath/btAlignedObjectArray.h"
 
 //class btOptimizedBvh;

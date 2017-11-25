@@ -17,7 +17,7 @@
 #define BT_OBB_BOX_MINKOWSKI_H
 
 #include "btPolyhedralConvexShape.h"
-#include "btCollisionMargin.h"
+#include "BulletCollision/CollisionShapes/btCollisionMargin.h"
 #include "BulletCollision/BroadphaseCollision/btBroadphaseProxy.h"
 #include "LinearMath/btVector3.h"
 #include "LinearMath/btMinMax.h"
