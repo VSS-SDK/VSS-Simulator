@@ -30,7 +30,7 @@
 #include "../../BulletCollision/CollisionDispatch/btSphereTriangleCollisionAlgorithm.h"
 #include "../../BulletCollision/NarrowPhaseCollision/btGjkEpaPenetrationDepthSolver.h"
 #include "../../BulletCollision/NarrowPhaseCollision/btMinkowskiPenetrationDepthSolver.h"
-#include "../../BulletCollision/NarrowPhaseCollision/btVoronoiSimplexSolver.h"
+#include "BulletCollision/NarrowPhaseCollision/btVoronoiSimplexSolver.h"
 
 #include "LinearMath/btPoolAllocator.h"
 

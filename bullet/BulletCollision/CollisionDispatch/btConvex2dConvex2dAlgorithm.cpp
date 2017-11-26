@@ -29,11 +29,11 @@
 #include "../../BulletCollision/CollisionDispatch/btManifoldResult.h"
 
 #include "../../BulletCollision/NarrowPhaseCollision/btConvexPenetrationDepthSolver.h"
-#include "../../BulletCollision/NarrowPhaseCollision/btContinuousConvexCollision.h"
+#include "BulletCollision/NarrowPhaseCollision/btContinuousConvexCollision.h"
 #include "../../BulletCollision/NarrowPhaseCollision/btSubSimplexConvexCast.h"
 #include "../../BulletCollision/NarrowPhaseCollision/btGjkConvexCast.h"
 
-#include "../../BulletCollision/NarrowPhaseCollision/btVoronoiSimplexSolver.h"
+#include "BulletCollision/NarrowPhaseCollision/btVoronoiSimplexSolver.h"
 #include "../../BulletCollision/CollisionShapes/btSphereShape.h"
 
 #include "../../BulletCollision/NarrowPhaseCollision/btMinkowskiPenetrationDepthSolver.h"

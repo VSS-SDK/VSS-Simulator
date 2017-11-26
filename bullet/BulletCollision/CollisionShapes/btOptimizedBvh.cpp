@@ -14,7 +14,7 @@
  */
 
 #include "btOptimizedBvh.h"
-#include "btStridingMeshInterface.h"
+#include "BulletCollision/CollisionShapes/btStridingMeshInterface.h"
 #include "LinearMath/btAabbUtil2.h"
 #include "LinearMath/btIDebugDraw.h"
 

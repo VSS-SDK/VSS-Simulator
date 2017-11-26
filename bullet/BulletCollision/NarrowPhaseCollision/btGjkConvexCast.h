@@ -19,10 +19,10 @@
 #include "BulletCollision/CollisionShapes/btCollisionMargin.h"
 
 #include "LinearMath/btVector3.h"
-#include "btConvexCast.h"
+#include "BulletCollision/NarrowPhaseCollision/btConvexCast.h"
 class btConvexShape;
 class btMinkowskiSumShape;
-#include "btSimplexSolverInterface.h"
+#include "BulletCollision/NarrowPhaseCollision/btSimplexSolverInterface.h"
 
 ///GjkConvexCast performs a raycast on a convex object using support mapping.
 class btGjkConvexCast : public btConvexCast

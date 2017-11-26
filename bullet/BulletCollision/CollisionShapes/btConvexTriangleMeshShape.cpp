@@ -17,7 +17,7 @@
 #include "BulletCollision/CollisionShapes/btCollisionMargin.h"
 
 #include "LinearMath/btQuaternion.h"
-#include "../../BulletCollision/CollisionShapes/btStridingMeshInterface.h"
+#include "BulletCollision/CollisionShapes/btStridingMeshInterface.h"
 
 btConvexTriangleMeshShape ::btConvexTriangleMeshShape ( btStridingMeshInterface* meshInterface, bool calcAabb )
 	: btPolyhedralConvexAabbCachingShape(), m_stridingMesh( meshInterface )

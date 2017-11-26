@@ -17,7 +17,7 @@
 #include "../../BulletCollision/CollisionShapes/btConvexShape.h"
 
 #include "../../BulletCollision/CollisionShapes/btMinkowskiSumShape.h"
-#include "../../BulletCollision/NarrowPhaseCollision/btSimplexSolverInterface.h"
+#include "BulletCollision/NarrowPhaseCollision/btSimplexSolverInterface.h"
 #include "BulletCollision/NarrowPhaseCollision/btPointCollector.h"
 #include "../../LinearMath/btTransformUtil.h"
 

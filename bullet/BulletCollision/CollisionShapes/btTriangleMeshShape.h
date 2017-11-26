@@ -17,7 +17,7 @@
 #define BT_TRIANGLE_MESH_SHAPE_H
 
 #include "BulletCollision/CollisionShapes/btConcaveShape.h"
-#include "btStridingMeshInterface.h"
+#include "BulletCollision/CollisionShapes/btStridingMeshInterface.h"
 
 ///The btTriangleMeshShape is an internal concave triangle mesh interface. Don't use this class directly, use btBvhTriangleMeshShape instead.
 ATTRIBUTE_ALIGNED16( class ) btTriangleMeshShape : public btConcaveShape

@@ -15,7 +15,7 @@
 
 #include "btContinuousConvexCollision.h"
 #include "../../BulletCollision/CollisionShapes/btConvexShape.h"
-#include "../../BulletCollision/NarrowPhaseCollision/btSimplexSolverInterface.h"
+#include "BulletCollision/NarrowPhaseCollision/btSimplexSolverInterface.h"
 #include "../../LinearMath/btTransformUtil.h"
 #include "../../BulletCollision/CollisionShapes/btSphereShape.h"
 
