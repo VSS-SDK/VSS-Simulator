@@ -17,7 +17,7 @@
 
 #include "BulletCollision/BroadphaseCollision/btBroadphaseInterface.h"
 #include "LinearMath/btAlignedObjectArray.h"
-#include "btOverlappingPairCache.h"
+#include "BulletCollision/BroadphaseCollision/btOverlappingPairCache.h"
 
 class btBroadphaseInterface;
 class btSimpleBroadphase;

@@ -78,7 +78,7 @@ class btSerializer;
 #include "LinearMath/btTransform.h"
 #include "BulletCollision/CollisionDispatch/btCollisionObject.h"
 #include "btCollisionDispatcher.h"
-#include "../../BulletCollision/BroadphaseCollision/btOverlappingPairCache.h"
+#include "BulletCollision/BroadphaseCollision/btOverlappingPairCache.h"
 #include "LinearMath/btAlignedObjectArray.h"
 
 ///CollisionWorld is interface and container for the collision detection

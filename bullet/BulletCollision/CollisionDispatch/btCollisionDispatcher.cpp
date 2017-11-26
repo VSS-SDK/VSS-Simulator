@@ -19,7 +19,7 @@
 
 #include "BulletCollision/CollisionShapes/btCollisionShape.h"
 #include "BulletCollision/CollisionDispatch/btCollisionObject.h"
-#include "../../BulletCollision/BroadphaseCollision/btOverlappingPairCache.h"
+#include "BulletCollision/BroadphaseCollision/btOverlappingPairCache.h"
 #include "LinearMath/btPoolAllocator.h"
 #include "BulletCollision/CollisionDispatch/btCollisionConfiguration.h"
 #include "BulletCollision/CollisionDispatch/btCollisionObjectWrapper.h"

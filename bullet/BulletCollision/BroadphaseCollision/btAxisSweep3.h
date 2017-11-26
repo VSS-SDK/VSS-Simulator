@@ -14,13 +14,13 @@
 //
 // 2. Altered source versions must be plainly marked as such, and must not be misrepresented as being the original software.
 //
-// 3. This notice may not be removed or altered from any source distribution.
+// 3. This notice may not be removedt or altered from any source distribution.
 
 #ifndef BT_AXIS_SWEEP_3_H
 #define BT_AXIS_SWEEP_3_H
 
 #include "LinearMath/btVector3.h"
-#include "btOverlappingPairCache.h"
+#include "BulletCollision/BroadphaseCollision/btOverlappingPairCache.h"
 #include "BulletCollision/BroadphaseCollision/btBroadphaseInterface.h"
 #include "BulletCollision/BroadphaseCollision/btBroadphaseProxy.h"
 #include "BulletCollision/BroadphaseCollision/btOverlappingPairCallback.h"

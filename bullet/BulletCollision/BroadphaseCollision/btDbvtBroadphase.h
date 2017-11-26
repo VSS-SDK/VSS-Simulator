@@ -18,7 +18,7 @@
 #define BT_DBVT_BROADPHASE_H
 
 #include "BulletCollision/BroadphaseCollision/btDbvt.h"
-#include "../../BulletCollision/BroadphaseCollision/btOverlappingPairCache.h"
+#include "BulletCollision/BroadphaseCollision/btOverlappingPairCache.h"
 
 //
 // Compile time config
@@ -68,22 +68,22 @@ struct btDbvtBroadphase : btBroadphaseInterface
 		STAGECOUNT   = 2 /* Number of stages		*/
 	};
 	/* Fields		*/
-	btDbvt m_sets[2];  // Dbvt sets
+	btDbvt m_sets[2]; // Dbvt sets
 	btDbvtProxy*   m_stageRoots[STAGECOUNT + 1]; // Stages list
 	btOverlappingPairCache* m_paircache; // Pair cache
 	btScalar m_prediction; // Velocity prediction
-	int m_stageCurrent;  // Current stage
-	int m_fupdates;   // % of fixed updates per frame
-	int m_dupdates;   // % of dynamic updates per frame
-	int m_cupdates;   // % of cleanup updates per frame
-	int m_newpairs;   // Number of pairs created
-	int m_fixedleft;  // Fixed optimization left
+	int m_stageCurrent; // Current stage
+	int m_fupdates; // % of fixed updates per frame
+	int m_dupdates; // % of dynamic updates per frame
+	int m_cupdates; // % of cleanup updates per frame
+	int m_newpairs; // Number of pairs created
+	int m_fixedleft; // Fixed optimization left
 	unsigned m_updates_call; // Number of updates call
 	unsigned m_updates_done; // Number of updates done
 	btScalar m_updates_ratio; // m_updates_done/m_updates_call
-	int m_pid;    // Parse id
-	int m_cid;    // Cleanup index
-	int m_gid;    // Gen id
+	int m_pid; // Parse id
+	int m_cid; // Cleanup index
+	int m_gid; // Gen id
 	bool m_releasepaircache; // Release pair cache on delete
 	bool m_deferedcollide; // Defere dynamic/static collision to collide call
 	bool m_needcleanup; // Need to run cleanup?
