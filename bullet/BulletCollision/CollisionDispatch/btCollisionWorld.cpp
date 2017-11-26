@@ -43,7 +43,7 @@
 
 //When the user doesn't provide dispatcher or broadphase, create basic versions (and delete them in destructor)
 #include "../../BulletCollision/CollisionDispatch/btCollisionDispatcher.h"
-#include "../../BulletCollision/BroadphaseCollision/btSimpleBroadphase.h"
+#include "BulletCollision/BroadphaseCollision/btSimpleBroadphase.h"
 #include "BulletCollision/CollisionDispatch/btCollisionConfiguration.h"
 
 ///for debug drawing
