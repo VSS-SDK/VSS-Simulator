@@ -35,7 +35,7 @@
 #include "../../BulletCollision/CollisionShapes/btBoxShape.h"
 #include "../../BulletCollision/CollisionDispatch/btManifoldResult.h"
 
-#include "../../BulletCollision/NarrowPhaseCollision/btConvexPenetrationDepthSolver.h"
+#include "BulletCollision/NarrowPhaseCollision/btConvexPenetrationDepthSolver.h"
 #include "../../BulletCollision/NarrowPhaseCollision/btContinuousConvexCollision.h"
 #include "../../BulletCollision/NarrowPhaseCollision/btSubSimplexConvexCast.h"
 #include "../../BulletCollision/NarrowPhaseCollision/btGjkConvexCast.h"

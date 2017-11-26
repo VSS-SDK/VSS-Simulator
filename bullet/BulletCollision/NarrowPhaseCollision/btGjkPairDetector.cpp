@@ -16,7 +16,7 @@
 #include "btGjkPairDetector.h"
 #include "../../BulletCollision/CollisionShapes/btConvexShape.h"
 #include "BulletCollision/NarrowPhaseCollision/btSimplexSolverInterface.h"
-#include "../../BulletCollision/NarrowPhaseCollision/btConvexPenetrationDepthSolver.h"
+#include "BulletCollision/NarrowPhaseCollision/btConvexPenetrationDepthSolver.h"
 
 #if defined(DEBUG) || defined (_DEBUG)
 //#define TEST_NON_VIRTUAL 1
