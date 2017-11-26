@@ -21,7 +21,7 @@
 #include "btSequentialImpulseConstraintSolver.h"
 #include "../../BulletCollision/NarrowPhaseCollision/btPersistentManifold.h"
 
-#include "../../LinearMath/btIDebugDraw.h"
+#include "LinearMath/btIDebugDraw.h"
 //#include "btJacobianEntry.h"
 #include "LinearMath/btMinMax.h"
 #include "../../BulletDynamics/ConstraintSolver/btTypedConstraint.h"

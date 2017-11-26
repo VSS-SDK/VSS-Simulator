@@ -22,7 +22,7 @@
 #include "BulletCollision/NarrowPhaseCollision/btRaycastCallback.h"
 #include "../../BulletCollision/CollisionShapes/btTriangleShape.h"
 #include "../../BulletCollision/CollisionShapes/btSphereShape.h"
-#include "../../LinearMath/btIDebugDraw.h"
+#include "LinearMath/btIDebugDraw.h"
 #include "../../BulletCollision/NarrowPhaseCollision/btSubSimplexConvexCast.h"
 #include "BulletCollision/CollisionDispatch/btCollisionObjectWrapper.h"
 

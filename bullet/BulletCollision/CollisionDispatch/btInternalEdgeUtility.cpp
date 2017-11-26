@@ -5,7 +5,7 @@
 #include "../../BulletCollision/CollisionShapes/btTriangleShape.h"
 #include "BulletCollision/CollisionDispatch/btCollisionObject.h"
 #include "../../BulletCollision/NarrowPhaseCollision/btManifoldPoint.h"
-#include "../../LinearMath/btIDebugDraw.h"
+#include "LinearMath/btIDebugDraw.h"
 #include "BulletCollision/CollisionDispatch/btCollisionObjectWrapper.h"
 
 //#define DEBUG_INTERNAL_EDGE

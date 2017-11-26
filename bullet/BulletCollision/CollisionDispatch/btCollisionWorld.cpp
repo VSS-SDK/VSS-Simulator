@@ -1178,10 +1178,10 @@ public:
 		wv2 = m_worldTrans * triangle[2];
 		btVector3 center = (wv0 + wv1 + wv2) * btScalar( 1. / 3. );
 
-		int lengthDebug = m_debugDrawer->getDebugMode().size();
+		int lengthDebug = 0; //= m_debugDrawer->getDebugMode().size();
 
 		for(int i = 0; i < lengthDebug; i++) {
-			if (m_debugDrawer->getDebugMode()[i] & btIDebugDraw::DBG_DrawNormals )
+			if (/*m_debugDrawer->getDebugMode()[i] & btIDebugDraw::DBG_DrawNormals*/ false)
 			{
 				btVector3 normal = (wv1 - wv0).cross( wv2 - wv0 );
 				normal.normalize();
@@ -1317,10 +1317,10 @@ void btCollisionWorld::debugDrawObject( const btTransform& worldTransform, const
 						}
 						centroid *= btScalar( 1.f ) / btScalar( numVerts );
 
-						int lengthDebug = getDebugDrawer()->getDebugMode().size();
+						int lengthDebug = 0; // getDebugDrawer()->getDebugMode().size();
 
 						for(int i = 0; i < lengthDebug; i++) {
-							if (getDebugDrawer()->getDebugMode()[i] & btIDebugDraw::DBG_DrawNormals)
+							if (/*getDebugDrawer()->getDebugMode()[i] & btIDebugDraw::DBG_DrawNormals*/ false)
 							{
 								btVector3 normalColor( 1, 1, 0 );
 								btVector3 faceNormal( poly->m_faces[i].m_plane[0], poly->m_faces[i].m_plane[1], poly->m_faces[i].m_plane[2] );
@@ -1375,10 +1375,10 @@ void btCollisionWorld::debugDrawObject( const btTransform& worldTransform, const
 
 void btCollisionWorld::debugDrawWorld()
 {
-	int lengthDebug = getDebugDrawer()->getDebugMode().size();
+	int lengthDebug = 0; //= getDebugDrawer()->getDebugMode().size();
 
 	for(int j = 0; j < lengthDebug; j++) {
-		if (getDebugDrawer() && getDebugDrawer()->getDebugMode()[j] & btIDebugDraw::DBG_DrawContactPoints)
+		if (false /*getDebugDrawer() && getDebugDrawer()->getDebugMode()[j] & btIDebugDraw::DBG_DrawContactPoints*/)
 		{
 			int numManifolds = getDispatcher()->getNumManifolds();
 			btVector3 color( 1, 1, 0 );
@@ -1397,7 +1397,7 @@ void btCollisionWorld::debugDrawWorld()
 			}
 		}
 
-		if (getDebugDrawer() && (getDebugDrawer()->getDebugMode()[j] & (btIDebugDraw::DBG_DrawWireframe | btIDebugDraw::DBG_DrawAabb)))
+		if (/*getDebugDrawer() && (getDebugDrawer()->getDebugMode()[j] & (btIDebugDraw::DBG_DrawWireframe | btIDebugDraw::DBG_DrawAabb))*/ false)
 		{
 			int i;
 
@@ -1406,7 +1406,7 @@ void btCollisionWorld::debugDrawWorld()
 				btCollisionObject* colObj = m_collisionObjects[i];
 				if ((colObj->getCollisionFlags() & btCollisionObject::CF_DISABLE_VISUALIZE_OBJECT) == 0)
 				{
-					if (getDebugDrawer() && (getDebugDrawer()->getDebugMode()[j] & btIDebugDraw::DBG_DrawWireframe))
+					if (/*getDebugDrawer() && (getDebugDrawer()->getDebugMode()[j] & btIDebugDraw::DBG_DrawWireframe)*/ false)
 					{
 						btVector3 color( btScalar( 1. ), btScalar( 1. ), btScalar( 1. ));
 						switch(colObj->getActivationState())
@@ -1429,7 +1429,7 @@ void btCollisionWorld::debugDrawWorld()
 
 						debugDrawObject( colObj->getWorldTransform(), colObj->getCollisionShape(), color );
 					}
-					if (m_debugDrawer && (m_debugDrawer->getDebugMode()[j] & btIDebugDraw::DBG_DrawAabb))
+					if (/*m_debugDrawer && (m_debugDrawer->getDebugMode()[j] & btIDebugDraw::DBG_DrawAabb)*/ false)
 					{
 						btVector3 minAabb, maxAabb;
 						btVector3 colorvec( 1, 0, 0 );

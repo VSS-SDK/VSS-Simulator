@@ -39,7 +39,7 @@ class btDispatcher;
 #include "../../BulletCollision/CollisionShapes/btStaticPlaneShape.h"
 #include "BulletCollision/CollisionShapes/btCompoundShape.h"
 #include "../../BulletCollision/CollisionDispatch/btConvexConvexAlgorithm.h"
-#include "../../LinearMath/btIDebugDraw.h"
+#include "LinearMath/btIDebugDraw.h"
 #include "BulletCollision/CollisionDispatch/btCollisionObjectWrapper.h"
 
 //! Collision Algorithm for GImpact Shapes

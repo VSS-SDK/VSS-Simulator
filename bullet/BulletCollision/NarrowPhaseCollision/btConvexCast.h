@@ -20,7 +20,7 @@
 #include "LinearMath/btVector3.h"
 #include "LinearMath/btScalar.h"
 class btMinkowskiSumShape;
-#include "../../LinearMath/btIDebugDraw.h"
+#include "LinearMath/btIDebugDraw.h"
 
 /// btConvexCast is an interface for Casting
 class btConvexCast
