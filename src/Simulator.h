@@ -25,9 +25,10 @@
 #include "strategies/Strategy.h"
 
 #include "strategies/ModelStrategy.h"
-#include "../VSS-Interface/interface.h"
+#include "interface.h"
 #include "Arbiter.h"
 
+// TODO: refatorar, viola pelo menos Single Responsability
 class Simulator {
 	struct GameState {
 		vector<RobotStrategy*> robotStrategiesTeam;
@@ -42,6 +43,7 @@ private:
 
 	Arbiter arbiter;
 	int contDebug;
+	bool paused;
 
 	bool fast_travel;
 	int qtd_of_goals;
@@ -50,10 +52,6 @@ private:
 	int status_team_2;
 	int goals_team_1;
 	int goals_team_2;
-	string name_team_1;
-	string name_team_2;
-	bool has_new_name_team_1;
-	bool has_new_name_team_2;
 
 	Report report;
 	bool finish_match;
@@ -65,6 +63,7 @@ private:
 
 	vss_state::Global_State global_state;
 	vss_command::Global_Commands global_commands_team_1, global_commands_team_2;
+	vss_control::User_Control user_control;
 	Interface interface_sender;
 
 	GameState* gameState;
@@ -80,6 +79,7 @@ private:
 	thread *thread_send;
 	thread *thread_receive_team1;
 	thread *thread_receive_team2;
+	thread *thread_receive_control;
 
 	int count_situation, situation_team1, situation_team2;
 
@@ -102,6 +102,7 @@ public:
 	void runSender();
 	void runReceiveTeam1();
 	void runReceiveTeam2();
+	void runReceiveControl();
 
 	btVector3 getBallPosition();
 };

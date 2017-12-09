@@ -1,37 +1,28 @@
 PROJECT(vss-simulator)
 CMAKE_MINIMUM_REQUIRED (VERSION 2.6)
-SET(CMAKE_CXX_FLAGS "-g -Wformat -ffast-math -lm -lc -std=c++11")
+SET(CMAKE_CXX_FLAGS "-g -Wformat -ffast-math -lm -lc -std=c++11 -pthread")
 
-ADD_SUBDIRECTORY(VSS-Interface)
 
 INCLUDE_DIRECTORIES(${CMAKE_CURRENT_BINARY_DIR})
 FIND_PACKAGE(PkgConfig)
 FIND_PACKAGE(Boost 1.40 COMPONENTS program_options REQUIRED)
 FIND_PACKAGE(Bullet)
+INCLUDE(FindProtobuf)
+FIND_PACKAGE(Protobuf REQUIRED)
 
-find_path(ZeroMQ_INCLUDE_DIR
-        NAMES zmq.hpp
-        PATHS ${PC_ZeroMQ_INCLUDE_DIRS}
-        )
-
-find_library(ZeroMQ_LIBRARY
-        NAMES zmq
-        PATHS ${PC_ZeroMQ_LIBRARY_DIRS}
-        )
-
-include_directories(${Boost_INCLUDE_DIR} ${BULLET_INCLUDE_DIR})
+include_directories(${PROTOBUF_INCLUDE_DIR} ${Boost_INCLUDE_DIR} ${BULLET_INCLUDE_DIR})
 
 file(GLOB_RECURSE SRCS_CPP src/*.cpp)
 file(GLOB_RECURSE UTILS_CPP utils/*.cpp)
-file(GLOB_RECURSE INTERFACE_CPP VSS-Interface/*.cpp)
 file(GLOB_RECURSE BULLET_CPP bullet/*.cpp)
 
-ADD_EXECUTABLE(vss-simulator ${SRCS_CPP} ${UTILS_CPP} ${BULLET_CPP} ${INTERFACE_CPP})
+set (VSS_INTERFACE libvss-interface.so)
+link_directories(usr/lib)
+include_directories(usr/local/include)
 
-target_include_directories(vss-simulator PUBLIC ${ZeroMQ_INCLUDE_DIR})
-target_link_libraries(vss-simulator PUBLIC ${ZeroMQ_LIBRARY})
+ADD_EXECUTABLE(vss-simulator ${SRCS_CPP} ${UTILS_CPP} ${BULLET_CPP})
 
-TARGET_LINK_LIBRARIES(vss-simulator VSS-Interface ${PROTOBUF_LIBRARY} ${OPENGL_LIBRARIES} ${GLUT_LIBRARY} ${BULLET_LIBRARIES})
+TARGET_LINK_LIBRARIES(vss-simulator ${VSS_INTERFACE} ${PROTOBUF_LIBRARY} ${OPENGL_LIBRARIES} ${GLUT_LIBRARY} ${BULLET_LIBRARIES})
 TARGET_LINK_LIBRARIES(vss-simulator LINK_PUBLIC ${Boost_LIBRARIES})
 
 INSTALL(TARGETS vss-simulator DESTINATION bin)

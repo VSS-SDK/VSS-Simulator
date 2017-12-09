@@ -13,6 +13,10 @@ void Arbiter::allocReport( Report *report ){
 	this->report = report;
 }
 
+void Arbiter::allocPaused( bool *paused ){
+	this->paused = paused;
+}
+
 int Arbiter::checkWorld(){
 	int situation = NONE;
 	btVector3 ball = physics->getBallPosition();

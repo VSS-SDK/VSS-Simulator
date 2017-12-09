@@ -44,8 +44,7 @@ Simulator::Simulator(){
 
 	goals_team_1 = 0;
 	goals_team_2 = 0;
-	has_new_name_team_1 = false;
-	has_new_name_team_2 = false;
+	paused = true;
 }
 
 void Simulator::runSimulator( int argc, char *argv[], ModelStrategy *stratBlueTeam, ModelStrategy *stratYellowTeam, bool fast_travel, int qtd_of_goals, bool develop_mode ){
@@ -96,14 +95,43 @@ void Simulator::runSimulator( int argc, char *argv[], ModelStrategy *stratBlueTe
 	//thread_send = new thread(bind(&Simulator::runSender, this));
 	thread_receive_team1 = new thread( bind( &Simulator::runReceiveTeam1, this ));
 	thread_receive_team2 = new thread( bind( &Simulator::runReceiveTeam2, this ));
+	thread_receive_control = new thread( bind( &Simulator::runReceiveControl, this ));
 
 	thread_physics->join();
 	thread_strategies->join();
 	//thread_send->join();
 	thread_receive_team1->join();
 	thread_receive_team2->join();
+	thread_receive_control->join();
 
 	report.show();
+}
+
+void Simulator::runReceiveControl(){
+	Interface interface;
+	interface.createReceiveControl( &user_control );
+
+	while(!finish_match) {
+		interface.receiveControl();
+		interface.printControl();
+		paused = user_control.paused();
+
+		if(!paused) {
+			vector<btVector3> robots;
+
+			for(int i = 0; i < 3; i++) {
+				robots.push_back( btVector3( user_control.new_robots_yellow_pose( i ).x(), 4, user_control.new_robots_yellow_pose( i ).y() ));
+			}
+
+			for(int i = 0; i < 3; i++) {
+				robots.push_back( btVector3( user_control.new_robots_blue_pose( i ).x(), 4, user_control.new_robots_blue_pose( i ).y() ));
+			}
+
+			physics->setRobotsPosition( robots );
+		}
+
+		std::cout << paused << std::endl;
+	}
 }
 
 void Simulator::runReceiveTeam1(){
@@ -120,14 +148,8 @@ void Simulator::runReceiveTeam1(){
 			cout << "---Time amarelo conectado---" << endl;
 		}
 
-		situation_team1 = global_commands_team_1.situation();
 		for(int i = 0; i < global_commands_team_1.robot_commands_size(); i++) {
 			commands.at( i ) = Command((float)global_commands_team_1.robot_commands( i ).left_vel() + 0.001, (float)global_commands_team_1.robot_commands( i ).right_vel() + 0.001 );
-		}
-
-		if(global_commands_team_1.has_name()) {
-			name_team_1 = global_commands_team_1.name();
-			has_new_name_team_1 = true;
 		}
 	}
 }
@@ -146,14 +168,8 @@ void Simulator::runReceiveTeam2(){
 			cout << "---Time azul conectado---" << endl;
 		}
 
-		situation_team2 = global_commands_team_2.situation();
 		for(int i = 0; i < global_commands_team_2.robot_commands_size(); i++) {
 			commands.at( i + 3 ) = Command((float)global_commands_team_2.robot_commands( i ).left_vel() + 0.001, (float)global_commands_team_2.robot_commands( i ).right_vel() + 0.001 );
-		}
-
-		if(global_commands_team_2.has_name()) {
-			name_team_2 = global_commands_team_2.name();
-			has_new_name_team_2 = true;
 		}
 	}
 }
@@ -161,27 +177,15 @@ void Simulator::runReceiveTeam2(){
 void Simulator::runSender(){
 	global_state = vss_state::Global_State();
 	global_state.set_id( 0 );
-	global_state.set_situation( caseWorld );
 	global_state.set_origin( false );
+	global_state.set_paused( paused );
 
 	if(report.total_of_goals_team[0] != goals_team_1) {
 		goals_team_1 = report.total_of_goals_team[0];
-		global_state.set_goals_yellow( goals_team_1 );
 	}
 
 	if(report.total_of_goals_team[1] != goals_team_2) {
 		goals_team_2 = report.total_of_goals_team[1];
-		global_state.set_goals_blue( goals_team_2 );
-	}
-
-	if(has_new_name_team_1) {
-		has_new_name_team_1 = false;
-		global_state.set_name_yellow( name_team_1 );
-	}
-
-	if(has_new_name_team_2) {
-		has_new_name_team_2 = false;
-		global_state.set_name_blue( name_team_2 );
 	}
 
 	vss_state::Ball_State *ball_s = global_state.add_balls();
@@ -253,33 +257,38 @@ void Simulator::runPhysics(){
 
 	arbiter.allocPhysics( physics );
 	arbiter.allocReport( &report );
+	arbiter.allocPaused( &paused );
 	interface_sender.createSocketSendState( &global_state );
 
 	while(!finish_match) {
-		usleep( 1000000.f * timeStep / handTime );
+		if(!paused) {
+			usleep( 1000000.f * timeStep / handTime );
 
-		//physics->setBallVelocity(btVector3(0.1, 0, 0));
-		loopBullet++;
-		//cout << "--------Ciclo Atual:\t" << loopBullet << "--------" << endl;
-		if(gameState->sameState) {
-			physics->stepSimulation( timeStep, subStep, standStep );
-			gameState->sameState = false;
+			//physics->setBallVelocity(btVector3(0.1, 0, 0));
+			loopBullet++;
+			//cout << "--------Ciclo Atual:\t" << loopBullet << "--------" << endl;
+			if(gameState->sameState) {
+				physics->stepSimulation( timeStep, subStep, standStep );
+				gameState->sameState = false;
 
-			report.qtd_of_steps++;
-		}
-
-		updateReport();
-		runningPhysics = true;
-
-		arbiter.checkWorld();
-
-		if(!develop_mode) {
-			if(report.total_of_goals_team[0] >= qtd_of_goals || report.total_of_goals_team[1] >= qtd_of_goals || report.qtd_of_steps > 3500 * qtd_of_goals) {
-				finish_match = true;
+				report.qtd_of_steps++;
 			}
-		}
 
-		runSender();
+			updateReport();
+			runningPhysics = true;
+
+			arbiter.checkWorld();
+
+			if(!develop_mode) {
+				if(report.total_of_goals_team[0] >= qtd_of_goals || report.total_of_goals_team[1] >= qtd_of_goals || report.qtd_of_steps > 3500 * qtd_of_goals) {
+					finish_match = true;
+				}
+			}
+
+			runSender();
+		}else{
+			usleep( 500000 );
+		}
 	}
 }
 
@@ -351,53 +360,57 @@ void Simulator::runStrategies(){
 	}
 
 	while(!finish_match) {
-		usleep( 1000000.f * timeStep / handTime );
+		if(!paused) {
+			usleep( 1000000.f * timeStep / handTime );
 
-		if(!gameState->sameState) {
-			updateWorld();
+			if(!gameState->sameState) {
+				updateWorld();
 
-			if(strategies.size() > 0) {
-				btVector3 ballPos = calcRelativePosition( physics->getBallPosition(), strategies[0]->getAttackDir());
-				calcRelativeWorld( gameState->robotStrategiesTeam, strategies[0]->getAttackDir());
-
-				strategies[0]->runStrategy( gameState->robotStrategiesTeam, gameState->robotStrategiesTeam, ballPos );
-				if(strategies.size() == 2) {
-					btVector3 ballPos = calcRelativePosition( physics->getBallPosition(), strategies[1]->getAttackDir());
-					calcRelativeWorld( gameState->robotStrategiesAdv, strategies[1]->getAttackDir());
+				if(strategies.size() > 0) {
+					btVector3 ballPos = calcRelativePosition( physics->getBallPosition(), strategies[0]->getAttackDir());
 					calcRelativeWorld( gameState->robotStrategiesTeam, strategies[0]->getAttackDir());
-					strategies[1]->runStrategy( gameState->robotStrategiesAdv, gameState->robotStrategiesTeam, ballPos );
-				}
-			}else{
-				cout << "You must set a strategy to run the simulator!\n" << endl;
-				exit( 0 );
-			}
 
-			for(int i = 0; i < physics->getNumTeams(); i++) {
-				for(int j = 0; j < numRobotsTeam; j++) {
-					int id = i * numRobotsTeam + j;
-					if(strategies[i]->getAttackDir() == 1) {
-						//cout << id << endl;
-						float command[2] = { commands.at( id ).left, commands.at( id ).right };
-						//if(id == 0)
-						//cout << command[0] << " - " << command[1] << endl;
-
-						//command[1] = strategies[i]->getRobotStrategiesTeam()[j]->getCommand()[1];
-						//command[0] = strategies[i]->getRobotStrategiesTeam()[j]->getCommand()[0];
-
-						physics->getAllRobots()[id]->updateRobot( command );
+					strategies[0]->runStrategy( gameState->robotStrategiesTeam, gameState->robotStrategiesTeam, ballPos );
+					if(strategies.size() == 2) {
+						btVector3 ballPos = calcRelativePosition( physics->getBallPosition(), strategies[1]->getAttackDir());
+						calcRelativeWorld( gameState->robotStrategiesAdv, strategies[1]->getAttackDir());
+						calcRelativeWorld( gameState->robotStrategiesTeam, strategies[0]->getAttackDir());
+						strategies[1]->runStrategy( gameState->robotStrategiesAdv, gameState->robotStrategiesTeam, ballPos );
 					}
-					else{
-						float invCommand[2] = { commands.at( id ).left, commands.at( id ).right };
+				}else{
+					cout << "You must set a strategy to run the simulator!\n" << endl;
+					exit( 0 );
+				}
 
-						//invCommand[0] = strategies[i]->getRobotStrategiesTeam()[j]->getCommand()[1];
-						//invCommand[1] = strategies[i]->getRobotStrategiesTeam()[j]->getCommand()[0];
+				for(int i = 0; i < physics->getNumTeams(); i++) {
+					for(int j = 0; j < numRobotsTeam; j++) {
+						int id = i * numRobotsTeam + j;
+						if(strategies[i]->getAttackDir() == 1) {
+							//cout << id << endl;
+							float command[2] = { commands.at( id ).left, commands.at( id ).right };
+							//if(id == 0)
+							//cout << command[0] << " - " << command[1] << endl;
 
-						physics->getAllRobots()[id]->updateRobot( invCommand );
+							//command[1] = strategies[i]->getRobotStrategiesTeam()[j]->getCommand()[1];
+							//command[0] = strategies[i]->getRobotStrategiesTeam()[j]->getCommand()[0];
+
+							physics->getAllRobots()[id]->updateRobot( command );
+						}
+						else{
+							float invCommand[2] = { commands.at( id ).left, commands.at( id ).right };
+
+							//invCommand[0] = strategies[i]->getRobotStrategiesTeam()[j]->getCommand()[1];
+							//invCommand[1] = strategies[i]->getRobotStrategiesTeam()[j]->getCommand()[0];
+
+							physics->getAllRobots()[id]->updateRobot( invCommand );
+						}
 					}
 				}
-			}
 
-			gameState->sameState = true;
+				gameState->sameState = true;
+			}
+		}else{
+			usleep( 500000 );
 		}
 	}
 }

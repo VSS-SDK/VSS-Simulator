@@ -21,7 +21,7 @@
 
 #include "../utils/Constants.h"
 #include "../bullet/btBulletDynamicsCommon.h"
-#include "../VSS-Interface/interface.h"
+#include "interface.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <iostream>
