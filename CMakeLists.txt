@@ -10,6 +10,16 @@ FIND_PACKAGE(Bullet)
 INCLUDE(FindProtobuf)
 FIND_PACKAGE(Protobuf REQUIRED)
 
+find_path(ZeroMQ_INCLUDE_DIR
+        NAMES zmq.hpp
+        PATHS ${PC_ZeroMQ_INCLUDE_DIRS}
+        )
+
+find_library(ZeroMQ_LIBRARY
+        NAMES zmq
+        PATHS ${PC_ZeroMQ_LIBRARY_DIRS}
+        )
+
 include_directories(${PROTOBUF_INCLUDE_DIR} ${Boost_INCLUDE_DIR} ${BULLET_INCLUDE_DIR})
 
 file(GLOB_RECURSE SRCS_CPP src/*.cpp)
@@ -24,6 +34,8 @@ ADD_EXECUTABLE(vss-simulator ${SRCS_CPP} ${UTILS_CPP} ${BULLET_CPP})
 
 TARGET_LINK_LIBRARIES(vss-simulator ${VSS_INTERFACE} ${PROTOBUF_LIBRARY} ${OPENGL_LIBRARIES} ${GLUT_LIBRARY} ${BULLET_LIBRARIES})
 TARGET_LINK_LIBRARIES(vss-simulator LINK_PUBLIC ${Boost_LIBRARIES})
+target_include_directories(vss-simulator PUBLIC ${ZeroMQ_INCLUDE_DIR})
+target_link_libraries(vss-simulator PUBLIC ${ZeroMQ_LIBRARY})
 
 INSTALL(TARGETS vss-simulator DESTINATION bin)
 
