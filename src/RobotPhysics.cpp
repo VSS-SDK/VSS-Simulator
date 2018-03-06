@@ -210,3 +210,7 @@ btVector3 RobotPhysics::getLocalUnitVecZ(){
 void RobotPhysics::setTimeStep( float timeStep ){
 	this->timeStep = timeStep;
 }
+
+bool RobotPhysics::isTrue() {
+  return false;
+}

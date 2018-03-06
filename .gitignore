@@ -35,3 +35,4 @@ VSS-Simulator
 VSS-Simulator-Debug
 
 build/
+cmake-build-debug/*

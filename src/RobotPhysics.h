@@ -97,6 +97,7 @@ public:
 	}
 
 	void setTimeStep( float timeStep );
+	bool isTrue();
 };
 
 #endif
