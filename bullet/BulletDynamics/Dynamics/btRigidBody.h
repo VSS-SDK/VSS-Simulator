@@ -22,7 +22,6 @@
 #include "BulletCollision/CollisionDispatch/btCollisionObject.h"
 #include <iostream>
 #include <string.h>
-#include <GL/glut.h>
 #include "../../../utils/Constants.h"
 //#include "../../../utils/GLDebugDrawer.h"
 
