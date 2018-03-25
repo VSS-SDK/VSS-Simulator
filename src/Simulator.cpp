@@ -113,7 +113,7 @@ void Simulator::runReceiveControl(){
 
   while(!finish_match) {
     interface.receiveControl();
-    interface.printControl();
+    //interface.printControl();
     paused = user_control.paused();
 
     if(!paused) {
@@ -122,12 +122,12 @@ void Simulator::runReceiveControl(){
 
       for(int i = 0; i < 3; i++) {
         positions.push_back( btVector3( user_control.new_robots_yellow_pose( i ).x(), 4, user_control.new_robots_yellow_pose( i ).y() ));
-        orientations.push_back(btScalar(user_control.new_robots_yellow_pose( i ).yaw()));
+        orientations.push_back(btScalar(degreeToRadian(user_control.new_robots_yellow_pose( i ).yaw())));
       }
 
       for(int i = 0; i < 3; i++) {
         positions.push_back( btVector3( user_control.new_robots_blue_pose( i ).x(), 4, user_control.new_robots_blue_pose( i ).y() ));
-        orientations.push_back(btScalar(user_control.new_robots_blue_pose( i ).yaw()));
+        orientations.push_back(btScalar(degreeToRadian(user_control.new_robots_blue_pose( i ).yaw())));
       }
 
       physics->setRobotsPose( positions, orientations );
@@ -213,7 +213,7 @@ void Simulator::runSender(){
     robot_s->mutable_pose()->set_x( posRobot.getX());
     robot_s->mutable_pose()->set_y( posRobot.getZ());
     float rads = atan2( getRobotOrientation( listRobots.at( i + 3 )).getZ(), getRobotOrientation( listRobots.at( i + 3 )).getX());
-    robot_s->mutable_pose()->set_yaw( rads );
+    robot_s->mutable_pose()->set_yaw( radianToDegree(rads) );
 
     robot_s->mutable_v_pose()->set_x( velRobot.getX());
     robot_s->mutable_v_pose()->set_y( velRobot.getZ());
@@ -236,7 +236,7 @@ void Simulator::runSender(){
     robot_s->mutable_pose()->set_x( posRobot.getX());
     robot_s->mutable_pose()->set_y( posRobot.getZ());
     float rads = atan2( getRobotOrientation( listRobots.at( i )).getZ(), getRobotOrientation( listRobots.at( i )).getX());
-    robot_s->mutable_pose()->set_yaw( rads );
+    robot_s->mutable_pose()->set_yaw( radianToDegree(rads) );
 
     robot_s->mutable_v_pose()->set_x( velRobot.getX());
     robot_s->mutable_v_pose()->set_y( velRobot.getZ());
@@ -481,4 +481,21 @@ btVector3 Simulator::getRobotOrientation( RobotPhysics* robot ){
 
 btVector3 Simulator::getRobotVelocity( RobotPhysics* robot ){
   return robot->getRigidBody()->getLinearVelocity();
+}
+
+float Simulator::radianToDegree(float radian) {
+  float degree = radian * 180.0 / M_PI;
+
+  if(degree < 0)
+    degree = 360 + degree;
+
+  return degree;
+}
+
+float Simulator::degreeToRadian(float degree) {
+  if(degree > 180)
+    degree = (360 - degree)*-1;
+
+  float radian = degree * M_PI / 180.0;
+  return radian;
 }

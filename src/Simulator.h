@@ -92,6 +92,9 @@ private:
 	btVector3 getRobotOrientation( RobotPhysics* robot );
 	btVector3 getRobotPosition( RobotPhysics* robot );
 	btVector3 getRobotVelocity( RobotPhysics* robot );
+
+	float radianToDegree(float);
+	float degreeToRadian(float);
 public:
 
 	Simulator();
