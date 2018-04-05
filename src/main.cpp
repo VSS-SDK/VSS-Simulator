@@ -43,15 +43,16 @@ public:
 	}
 };
 
-bool argParse( int argc, char** argv, bool *fast_travel, int *qtd_of_goals, bool *develop_mode );
+bool argParse( int argc, char** argv, bool *fast_travel, int *qtd_of_goals, bool *develop_mode, string* setup_path );
 
 int main( int argc, char *argv[] ){
 	bool fast_travel = false;
 	int qtd_of_goals = 10;
 	bool develop_mode = false;
+    string setup_path = "";
 
-	if(argParse( argc, argv, &fast_travel, &qtd_of_goals, &develop_mode )) {
-
+	if(argParse( argc, argv, &fast_travel, &qtd_of_goals, &develop_mode, &setup_path )) {
+        cout << setup_path << endl;
 		Strategy *stratYellowTeam = new Strategy(); //Original strategy
 		Strategy *stratBlueTeam = new Strategy(); //Strategy for tests
 
@@ -64,7 +65,7 @@ int main( int argc, char *argv[] ){
 	return 0;
 }
 
-bool argParse( int argc, char** argv, bool *fast_travel, int *qtd_of_goals, bool *develop_mode ){
+bool argParse( int argc, char** argv, bool *fast_travel, int *qtd_of_goals, bool *develop_mode, string* setup_path ){
 	namespace bpo = boost::program_options;
 
 	// Declare the supported options.
@@ -73,7 +74,9 @@ bool argParse( int argc, char** argv, bool *fast_travel, int *qtd_of_goals, bool
 	        ( "help,h", "(Optional) produce help message" )
 	        ( "fast,f", "(Optional) specify if the time must go 15x faster." )
 	        ( "develop,d", "(Optional) turn on the develop mode. the time doesn't count." )
-	        ( "qtd_of_goals,g", bpo::value<std::string>()->default_value( "10" ), "(Optional) specify the qtd of goals to end the game. 10 to 100" );
+	        ( "qtd_of_goals,g", bpo::value<std::string>()->default_value( "10" ), "(Optional) specify the qtd of goals to end the game. 10 to 100" )
+            ( "setup_path,s", bpo::value<string>(), "(Optional) specify a .csv setup file containing the initial robots position");
+
 	bpo::variables_map vm;
 	bpo::store( bpo::parse_command_line( argc, argv, desc ), vm );
 	bpo::notify( vm );
@@ -90,6 +93,10 @@ bool argParse( int argc, char** argv, bool *fast_travel, int *qtd_of_goals, bool
 	if (vm.count( "develop" )) {
 		*develop_mode = true;
 	}
+
+    if(vm.count( "setup_path" )) {
+        *setup_path = vm["setup_path"].as<string>();
+    }
 
 	stringstream ss;
 	ss << vm["qtd_of_goals"].as<string>();
