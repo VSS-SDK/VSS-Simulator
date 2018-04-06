@@ -16,6 +16,7 @@
 
 #include "Physics.h"
 #include "../../bullet/BulletDynamics/Dynamics/btRigidBody.h"
+#include "../utils/InputParser.hpp"
 
 Physics::Physics( int numTeams ){
 
@@ -59,23 +60,25 @@ void Physics::deleteWorldObj(){
 void Physics::registBodies(){
   addFloor();
 
-  addBall( 2.5, btVector3( 85, 0, 65 ), 0.08 );
+  addBall( 2.5, InputParser::positionBall, 0.08 );
 
   btVector3 posTeam1[] = {btVector3( 25, 4, SIZE_DEPTH - 55 ), btVector3( 35, 4, 30 ), btVector3( 55, 4, 45 )};
   btVector3 posTeam2[] = {btVector3( SIZE_WIDTH - 15, 4, 55 ), btVector3( SIZE_WIDTH - 25, 4, SIZE_DEPTH - SIZE_DEPTH / 2.5 + 20 ), btVector3( SIZE_WIDTH - 55, 4, 85 )};
-  //Create robots here
-  //Team 1
-  for(int i = 0; i < numRobotsTeam; i++) {
-    if(numTeams >= 1) {
-      addRobot( Color( 0.3, 0.3, 0.3 ), posTeam1[i], btVector3( 0, 90, 0 ), 8, 0.25, clrPlayers[i], clrTeams[0], i );
-    }
-  }
 
-  for(int i = 0; i < numRobotsTeam; i++) {
-    if(numTeams == 2) {
-      addRobot( Color( 0.3, 0.3, 0.3 ), posTeam2[i], btVector3( 0, -100, 0 ), 8, 0.25, clrPlayers[i], clrTeams[1], numRobotsTeam + i );
+    //Create robots here
+    //Team 1
+    if(numTeams >= 1) {
+        for(int i = 0; i < numRobotsTeam; i++) {
+            cout << InputParser::positions[i].x() << " " << InputParser::positions[i].z() << endl;
+            addRobot( Color( 0.3, 0.3, 0.3 ), InputParser::positions[i], InputParser::angulations[i], 8, 0.25, clrPlayers[i], clrTeams[0], i );
+        }
     }
-  }
+
+    if(numTeams == 2) {
+        for(int i = 0; i < numRobotsTeam; i++) {
+            addRobot( Color( 0.3, 0.3, 0.3 ), InputParser::positions[i+3], InputParser::angulations[i+3], 8, 0.25, clrPlayers[i], clrTeams[1], numRobotsTeam + i );
+        }
+    }
 
   // PAREDE DE CIMA
   addWall( Color( 0, 0, 0 ), btVector3((SIZE_WIDTH / 2.0) + GOAL_WIDTH, 0, 0 ), SIZE_WIDTH, 15, 2.5, 0 );
@@ -130,7 +133,7 @@ void Physics::resetRobotPositions(){
     genRobots[i]->getRigidBody()->getMotionState()->getWorldTransform( t );
 
     t.setIdentity();
-    t.setOrigin( posTeam1[i] );
+    t.setOrigin( InputParser::positions[i] );
 
     btMotionState* motion = new btDefaultMotionState( t );
 
@@ -144,7 +147,7 @@ void Physics::resetRobotPositions(){
     genRobots[i]->getRigidBody()->getMotionState()->getWorldTransform( t );
 
     t.setIdentity();
-    t.setOrigin( posTeam2[i - genRobots.size() / 2] );
+    t.setOrigin( InputParser::positions[i] );
 
     btMotionState* motion = new btDefaultMotionState( t );
 

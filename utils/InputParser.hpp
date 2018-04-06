@@ -16,9 +16,11 @@ public:
     static bool parse(string path);
 
     static vector<btVector3> positions;
-    static vector<float> angulations;
+    static vector<btVector3> angulations;
 
     static btVector3 positionBall;
+
+    static bool useFile;
 };
 
 #endif //VSS_SIMULATOR_INPUTPARSER_HPP

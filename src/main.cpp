@@ -21,6 +21,7 @@
 #include "strategies/Strategy.h"
 #include "strategies/StrategyBasic.h"
 #include "../utils/includes/boost.h"
+#include "../utils/InputParser.hpp"
 
 using namespace std;
 //Exemplo de estratégia
@@ -52,7 +53,6 @@ int main( int argc, char *argv[] ){
     string setup_path = "";
 
 	if(argParse( argc, argv, &fast_travel, &qtd_of_goals, &develop_mode, &setup_path )) {
-        cout << setup_path << endl;
 		Strategy *stratYellowTeam = new Strategy(); //Original strategy
 		Strategy *stratBlueTeam = new Strategy(); //Strategy for tests
 
@@ -96,6 +96,10 @@ bool argParse( int argc, char** argv, bool *fast_travel, int *qtd_of_goals, bool
 
     if(vm.count( "setup_path" )) {
         *setup_path = vm["setup_path"].as<string>();
+
+        if(!InputParser::parse(*setup_path)){
+            cout << "DEU MERDA" << endl;
+        }
     }
 
 	stringstream ss;
@@ -109,5 +113,5 @@ bool argParse( int argc, char** argv, bool *fast_travel, int *qtd_of_goals, bool
 		*qtd_of_goals = 100;
 	}
 
-	return true;
+    return true;
 }
