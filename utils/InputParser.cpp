@@ -25,6 +25,17 @@ bool InputParser::useFile = false;
 
 bool InputParser::parse(string path){
 
+    /**
+     * File should follow the template:
+     * x1 y1 th1
+     * x2 y2 th2
+     * ...
+     * xB yB
+     *
+     * Where, x1 corresponds to robot's 1 x coordinate and y1 to robot 1 y coordinate
+     * Should repeat for every robot and finish with ball's coordinates
+     */
+
     ifstream file(path);
     if(!file.is_open()) return false;
 
