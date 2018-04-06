@@ -118,22 +118,22 @@ void Simulator::runReceiveControl(){
     //interface.printControl();
     paused = user_control.paused();
 
-//    if(!paused) {
-//      vector<btVector3> positions;
-//      vector<btScalar> orientations;
-//
-//      for(int i = 0; i < 3; i++) {
-//        positions.push_back( btVector3( user_control.new_robots_yellow_pose( i ).x(), 4, user_control.new_robots_yellow_pose( i ).y() ));
-//        orientations.push_back(btScalar(degreeToRadian(user_control.new_robots_yellow_pose( i ).yaw())));
-//      }
-//
-//      for(int i = 0; i < 3; i++) {
-//        positions.push_back( btVector3( user_control.new_robots_blue_pose( i ).x(), 4, user_control.new_robots_blue_pose( i ).y() ));
-//        orientations.push_back(btScalar(degreeToRadian(user_control.new_robots_blue_pose( i ).yaw())));
-//      }
-//
-//      physics->setRobotsPose( positions, orientations );
-//    }
+    if(!paused && !InputParser::useFile) {
+      vector<btVector3> positions;
+      vector<btScalar> orientations;
+
+      for(int i = 0; i < 3; i++) {
+        positions.push_back( btVector3( user_control.new_robots_yellow_pose( i ).x(), 4, user_control.new_robots_yellow_pose( i ).y() ));
+        orientations.push_back(btScalar(degreeToRadian(user_control.new_robots_yellow_pose( i ).yaw())));
+      }
+
+      for(int i = 0; i < 3; i++) {
+        positions.push_back( btVector3( user_control.new_robots_blue_pose( i ).x(), 4, user_control.new_robots_blue_pose( i ).y() ));
+        orientations.push_back(btScalar(degreeToRadian(user_control.new_robots_blue_pose( i ).yaw())));
+      }
+
+      physics->setRobotsPose( positions, orientations );
+    }
   }
 }
 
