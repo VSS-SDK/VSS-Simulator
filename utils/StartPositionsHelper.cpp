@@ -2,9 +2,9 @@
 // Created by manoel on 04/04/18.
 //
 
-#include "InputParser.hpp"
+#include "StartPositionsHelper.hpp"
 
-vector<btVector3> InputParser::positions = {btVector3( 25, 4, SIZE_DEPTH - 55 ),
+vector<btVector3> StartPositionsHelper::positions = {btVector3( 25, 4, SIZE_DEPTH - 55 ),
                                             btVector3( 35, 4, 30 ),
                                             btVector3( 55, 4, 45 ),
 
@@ -12,18 +12,18 @@ vector<btVector3> InputParser::positions = {btVector3( 25, 4, SIZE_DEPTH - 55 ),
                                             btVector3( SIZE_WIDTH - 25, 4, SIZE_DEPTH - SIZE_DEPTH / 2.5 + 20 ),
                                             btVector3( SIZE_WIDTH - 55, 4, 85 )};
 
-vector<btVector3> InputParser::angulations = {btVector3( 0, 90, 0 ),
+vector<btVector3> StartPositionsHelper::angulations = {btVector3( 0, 90, 0 ),
                                               btVector3( 0, 90, 0 ),
                                               btVector3( 0, 90, 0 ),
                                               btVector3( 0, -140, 0 ),
                                               btVector3( 0, 90, 0 ),
                                               btVector3( 0, 90, 0 )};
 
-btVector3 InputParser::positionBall = btVector3( 85, 0, 65 );
+btVector3 StartPositionsHelper::positionBall = btVector3( 85, 0, 65 );
 
-bool InputParser::useFile = false;
+bool StartPositionsHelper::useFile = false;
 
-bool InputParser::parse(string path){
+bool StartPositionsHelper::parse(string path){
 
     /**
      * File should follow the template:

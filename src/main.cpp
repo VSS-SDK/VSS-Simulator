@@ -21,7 +21,7 @@
 #include "strategies/Strategy.h"
 #include "strategies/StrategyBasic.h"
 #include "../utils/includes/boost.h"
-#include "../utils/InputParser.hpp"
+#include "../utils/StartPositionsHelper.hpp"
 
 using namespace std;
 //Exemplo de estratégia
@@ -97,8 +97,8 @@ bool argParse( int argc, char** argv, bool *fast_travel, int *qtd_of_goals, bool
     if(vm.count( "setup_path" )) {
         *setup_path = vm["setup_path"].as<string>();
 
-        if(!InputParser::parse(*setup_path)){
-            cout << "DEU MERDA" << endl;
+        if(!StartPositionsHelper::parse(*setup_path)){
+            cerr << "FILE NOT FOUND" << endl;
         }
     }
 

@@ -9,7 +9,7 @@
 
 #include <fstream>
 
-class InputParser {
+class StartPositionsHelper {
 
 public:
 

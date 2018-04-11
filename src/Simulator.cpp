@@ -16,7 +16,7 @@
 
 #include "Simulator.h"
 #include "functional"
-#include "../utils/InputParser.hpp"
+#include "../utils/StartPositionsHelper.hpp"
 
 Simulator::Simulator(){
   contDebug = 0;
@@ -46,7 +46,7 @@ Simulator::Simulator(){
   goals_team_1 = 0;
   goals_team_2 = 0;
 
-  paused = !InputParser::useFile;
+  paused = !StartPositionsHelper::useFile;
 }
 
 void Simulator::runSimulator( int argc, char *argv[], ModelStrategy *stratBlueTeam, ModelStrategy *stratYellowTeam, bool fast_travel, int qtd_of_goals, bool develop_mode ){
@@ -118,7 +118,7 @@ void Simulator::runReceiveControl(){
     //interface.printControl();
     paused = user_control.paused();
 
-    if(!paused && !InputParser::useFile) {
+    if(!paused && !StartPositionsHelper::useFile) {
       vector<btVector3> positions;
       vector<btScalar> orientations;
 
