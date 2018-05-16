@@ -133,6 +133,7 @@ void Simulator::runReceiveControl(){
       }
 
       physics->setRobotsPose( positions, orientations );
+      physics->setBallPosition(btVector3(user_control.mutable_new_ball_pose()->x(), 4, user_control.mutable_new_ball_pose()->y()));
     }
   }
 }

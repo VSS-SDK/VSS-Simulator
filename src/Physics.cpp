@@ -80,6 +80,10 @@ void Physics::registBodies(){
         }
     }
 
+//    for(int i = 0; i < (numRobotsTeam * numTeams); i++) {
+//      addRobot( Color( 0.3, 0.3, 0.3 ), StartPositionsHelper::positions[i], StartPositionsHelper::angulations[i], 8, 0.25, clrPlayers[i % numRobotsTeam], clrTeams[i / numRobotsTeam], i );
+//    }
+
   // PAREDE DE CIMA
   addWall( Color( 0, 0, 0 ), btVector3((SIZE_WIDTH / 2.0) + GOAL_WIDTH, 0, 0 ), SIZE_WIDTH, 15, 2.5, 0 );
   // PAREDE DE BAIXO
@@ -271,20 +275,27 @@ void Physics::setBallVelocity( btVector3 newVel ){
   }
 }
 
-void Physics::setRobotsPosition( vector<btVector3> newPositions){
-  for(int i = 0; i < genRobots.size(); i++) {
-    btTransform t;
-    genRobots[i]->getRigidBody()->getMotionState()->getWorldTransform( t );
+void Physics::setRobotsPosition( vector<btVector3> newPositions, vector<btVector3> newOrientations){
+    for(int i = 0; i < newPositions.size(); i++) {
+        btTransform t;
+        genRobots.at(i)->getRigidBody()->getMotionState()->getWorldTransform( t );
 
-    t.setIdentity();
-    t.setOrigin( newPositions[i] );
+        t.setIdentity();
+        t.setOrigin( newPositions.at(i) );
+        if(newOrientations[i].length() != 0) {
+            newOrientations[i] *= PI / 180;
+            float rad = newOrientations[i].length();
+            btVector3 axis = newOrientations[i].normalize();
+            btQuaternion quat( axis, rad );
+            t.setRotation( quat );
+        }
 
-    btMotionState* motion = new btDefaultMotionState( t );
+        btMotionState* motion = new btDefaultMotionState( t );
 
-    genRobots[i]->getRigidBody()->setMotionState( motion );
-    genRobots[i]->getRigidBody()->setLinearVelocity( btVector3( 0, 0, 0 ));
-    genRobots[i]->getRigidBody()->setAngularVelocity( btVector3( 0, 0, 0 ));
-  }
+        genRobots.at(i)->getRigidBody()->setMotionState( motion );
+        genRobots.at(i)->getRigidBody()->setLinearVelocity( btVector3( 0, 0, 0 ));
+        genRobots.at(i)->getRigidBody()->setAngularVelocity( btVector3( 0, 0, 0 ));
+    }
 }
 
 void Physics::startDebug(){
@@ -388,6 +399,11 @@ RobotPhysics* Physics::addRobot( Color clr, btVector3 pos, btVector3 rotation, f
   st << "robot-";
   st << id;
   string nameRobot = st.str();
+  cout << endl;
+  cout << colorTeam.r << " " << colorTeam.g << " " << colorTeam.b << endl;
+  cout << nameRobot << endl;
+  cout << colorPlayer.r << " " << colorPlayer.g << " " << colorPlayer.b << endl;
+  cout << endl;
 
   bodies.push_back( new BulletObject( bdRobot, nameRobot, clr ));
   bodies[bodies.size() - 1]->halfExt = modelShape->getHalfExtentsWithMargin();

@@ -1,4 +1,5 @@
 #include "Arbiter.h"
+#include "../utils/StartPositionsHelper.hpp"
 
 Arbiter::Arbiter(){
 	refresh = false;
@@ -53,29 +54,27 @@ int Arbiter::checkWorld(){
 }
 
 void Arbiter::position_objects_after_goal_team_1(){
-	vector<btVector3> robots;
+	vector<btVector3> positions;
+	vector<btVector3> orientations;
 
-	robots.push_back( btVector3( 55, 4, 45 ));
-	robots.push_back( btVector3( 35, 4, 30 ));
-	robots.push_back( btVector3( 15, 4, SIZE_DEPTH - 55 ));
-	robots.push_back( btVector3( SIZE_WIDTH - 55, 4, 85 ));
-	robots.push_back( btVector3( SIZE_WIDTH - 25, 4, SIZE_DEPTH - SIZE_DEPTH / 2.5 + 20 ));
-	robots.push_back( btVector3( SIZE_WIDTH - 15, 4, 55 ));
+	for(int i = 0; i < StartPositionsHelper::positions.size(); i++) {
+		positions.push_back(StartPositionsHelper::positions[i]);
+		orientations.push_back(StartPositionsHelper::angulations[i]);
+	}
 
 	physics->setBallPosition( btVector3( (SIZE_WIDTH / 2.0) + 10, 2.0, SIZE_DEPTH / 2.0 ));
-	physics->setRobotsPosition( robots );
+	physics->setRobotsPosition( positions, orientations );
 }
 
 void Arbiter::position_objects_after_goal_team_2(){
-	vector<btVector3> robots;
+	vector<btVector3> positions;
+	vector<btVector3> orientations;
 
-	robots.push_back( btVector3( 55, 4, 45 ));
-	robots.push_back( btVector3( 35, 4, 30 ));
-	robots.push_back( btVector3( 15, 4, SIZE_DEPTH - 55 ));
-	robots.push_back( btVector3( SIZE_WIDTH - 55, 4, 85 ));
-	robots.push_back( btVector3( SIZE_WIDTH - 25, 4, SIZE_DEPTH - SIZE_DEPTH / 2.5 + 20 ));
-	robots.push_back( btVector3( SIZE_WIDTH - 15, 4, 55 ));
+	for(int i = 0; i < StartPositionsHelper::positions.size(); i++) {
+		positions.push_back(StartPositionsHelper::positions[i]);
+		orientations.push_back(StartPositionsHelper::angulations[i]);
+	}
 
 	physics->setBallPosition( btVector3( (SIZE_WIDTH / 2.0) + 10, 2.0, SIZE_DEPTH / 2.0 ));
-	physics->setRobotsPosition( robots );
+	physics->setRobotsPosition( positions, orientations );
 }

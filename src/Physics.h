@@ -88,7 +88,7 @@ public:
 	vector<BulletObject*> getAllBtObj() { return bodies; }
 	vector<RobotPhysics*> getAllRobots() { return genRobots; }
 	vector<BulletObject*> getAllBtRobots();
-	void setRobotsPosition(vector<btVector3> positions);
+	void setRobotsPosition(vector<btVector3> newPositions, vector<btVector3> newOrientations);
 	void setRobotsPose(vector<btVector3> newPositions, vector<btScalar> newOrientations);
 };
 
