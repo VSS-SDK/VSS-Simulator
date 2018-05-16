@@ -69,7 +69,6 @@ void Physics::registBodies(){
     //Team 1
     if(numTeams >= 1) {
         for(int i = 0; i < numRobotsTeam; i++) {
-            cout << StartPositionsHelper::positions[i].x() << " " << StartPositionsHelper::positions[i].z() << endl;
             addRobot( Color( 0.3, 0.3, 0.3 ), StartPositionsHelper::positions[i], StartPositionsHelper::angulations[i], 8, 0.25, clrPlayers[i], clrTeams[0], i );
         }
     }
@@ -399,11 +398,6 @@ RobotPhysics* Physics::addRobot( Color clr, btVector3 pos, btVector3 rotation, f
   st << "robot-";
   st << id;
   string nameRobot = st.str();
-  cout << endl;
-  cout << colorTeam.r << " " << colorTeam.g << " " << colorTeam.b << endl;
-  cout << nameRobot << endl;
-  cout << colorPlayer.r << " " << colorPlayer.g << " " << colorPlayer.b << endl;
-  cout << endl;
 
   bodies.push_back( new BulletObject( bdRobot, nameRobot, clr ));
   bodies[bodies.size() - 1]->halfExt = modelShape->getHalfExtentsWithMargin();
