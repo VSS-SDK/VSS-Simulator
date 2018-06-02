@@ -1,32 +1,34 @@
-/*The MIT License (MIT)
+/*
+   The MIT License (MIT)
 
-Copyright (c) 2016 Lucas Borsatto Simão
+   Copyright (c) 2016 Lucas Borsatto Simão
 
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
+   Permission is hereby granted, free of charge, to any person obtaining a copy
+   of this software and associated documentation files (the "Software"), to deal
+   in the Software without restriction, including without limitation the rights
+   to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+   copies of the Software, and to permit persons to whom the Software is
+   furnished to do so, subject to the following conditions:
 
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
-*/
+   The above copyright notice and this permission notice shall be included in all
+   copies or substantial portions of the Software.
+ */
 
 #ifndef ROBOT_PHYSICS_H_
 #define ROBOT_PHYSICS_H_
 
-#define MAX_ACCELERATION 5.5*SCALE_WORLD
-
 #include "Header.h"
-#include "BulletDynamics/Vehicle/btRaycastVehicle.h"
+#include "../bullet/BulletDynamics/Vehicle/btRaycastVehicle.h"
 
-class RobotPhysics{
+#define MAX_ACCELERATION 5.5 * simulator::SCALE_WORLD
+
+class RobotPhysics {
 private:
-    int contador;
+
+	int contador;
 
 	Color clrTeam;
-    Color clrPlayer;
+	Color clrPlayer;
 
 	float sizeRobot;
 	float mass;
@@ -56,29 +58,46 @@ private:
 	btRaycastVehicle* raycast;
 
 	void setRobotState();
-	void calcProportionalVelocity(float iniWheelVel[2], float endWheelVel[2]);
+	void calcProportionalVelocity( float iniWheelVel[2], float endWheelVel[2] );
 public:
-	RobotPhysics(){}
+
+	RobotPhysics(){
+	}
 	~RobotPhysics();
 
-	RobotPhysics(btVector3 point, float mass, btRigidBody* bdRobot,Color plrColor, Color teamColor,float wheelWidth = 0.6, float wheelStRadius = 2, float wheelFrWheel = 0.75 ,float sizeRobot = 8.0);
-	void buildRobot(btDynamicsWorld* world);
-	void updateRobot(float* speed);
+	RobotPhysics( btVector3 point, float mass, btRigidBody* bdRobot, Color plrColor, Color teamColor, float wheelWidth = 0.6, float wheelStRadius = 2, float wheelFrWheel = 0.75, float sizeRobot = 8.0 );
+	void buildRobot( btDynamicsWorld* world );
+	void updateRobot( float* speed );
 
 	btVector3 getLocalUnitVecX();
 	btVector3 getLocalUnitVecZ();
 	btVector3 getPosition();
-	Color getColorTeam() { return clrTeam; }
-	Color getColorPlayer() { return clrPlayer; }
+	Color getColorTeam() {
+		return clrTeam;
+	}
+	Color getColorPlayer() {
+		return clrPlayer;
+	}
 
-	float getSteeringWheelRadius() { return wheelStRadius; }
-	float getFreeWheelRadius() { return wheelFrRadius; }
-	float getWheelWidth() { return wheelWidth; }
+	float getSteeringWheelRadius() {
+		return wheelStRadius;
+	}
+	float getFreeWheelRadius() {
+		return wheelFrRadius;
+	}
+	float getWheelWidth() {
+		return wheelWidth;
+	}
 
-	btRaycastVehicle* getRaycast() { return raycast; }
-	btRigidBody* getRigidBody() { return bdRobot; }
+	btRaycastVehicle* getRaycast() {
+		return raycast;
+	}
+	btRigidBody* getRigidBody() {
+		return bdRobot;
+	}
 
-	void setTimeStep(float timeStep);
+	void setTimeStep( float timeStep );
+	bool isTrue();
 };
 
 #endif

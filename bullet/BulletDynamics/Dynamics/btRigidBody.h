@@ -24,7 +24,6 @@ subject to the following restrictions:
 #include <string.h>
 #include <GL/glut.h>
 #include "Constants.h"
-#include "GLDebugDrawer.h"
 
 using namespace std;
 
@@ -121,7 +120,6 @@ public:
 	int getIdDebug() { return idDebug; }
 	int setIdDebug(int idDebug) { this->idDebug = idDebug; }
 
-	void debugLocalProperties(btIDebugDraw* glDebugDrawer);
 
 	///The btRigidBodyConstructionInfo structure provides information to create a rigid body. Setting mass to zero creates a fixed (non-dynamic) rigid body.
 	///For dynamic objects, you can use the collision shape to approximate the local inertia tensor, otherwise use the zero vector (default argument)
