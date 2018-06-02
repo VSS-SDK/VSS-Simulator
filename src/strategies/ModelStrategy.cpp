@@ -56,7 +56,7 @@ void ModelStrategy::setFramesSec( int numFramesSec ){
 }
 
 void ModelStrategy::setAttackDir( int att ){
-	posGoalpost = btVector3( simulator::SIZE_WIDTH, 0, simulator::SIZE_DEPTH / 2 );
+	posGoalpost = btVector3( simulator::SIZE_WIDTH2, 0, simulator::SIZE_DEPTH / 2 );
 	this->attackDir = att;
 }
 

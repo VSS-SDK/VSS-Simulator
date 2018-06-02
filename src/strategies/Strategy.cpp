@@ -66,7 +66,7 @@ void Strategy::runStrategy( vector<RobotStrategy*> robotStrategiesTeam, vector<R
 void Strategy::calcBallTarget(){
 	btVector3 proj = 2 * ballPos - strategyHistory[numFramesPerSec / 2 - 1]->getBallPosition();
 
-	if(simulator::SIZE_WIDTH < proj.getX() || proj.getX() < 0 || proj.getZ() < 0 || proj.getZ() > simulator::SIZE_DEPTH) {
+	if(simulator::SIZE_WIDTH2 < proj.getX() || proj.getX() < 0 || proj.getZ() < 0 || proj.getZ() > simulator::SIZE_DEPTH) {
 		proj = ballPos;
 	}
 
@@ -157,7 +157,7 @@ void Strategy::updateGoalStrategyAction( RobotStrategy* robotStrategy ){
 	btStraight stProjGoal( ballPos, ballTarget );
 	float maxVelocity = robotStrategy->getMaxCommand();
 	float maxDistTwist = 8.15f * SIMULATOR_TO_VSS;
-	float actXPoint = 0.1 * simulator::SIZE_WIDTH;
+	float actXPoint = 0.1 * simulator::SIZE_WIDTH2;
 	float maxZtarget = simulator::SIZE_DEPTH / 3;
 	float minDsBall = 4 * SIMULATOR_TO_VSS;
 
@@ -220,8 +220,8 @@ void Strategy::updateGoalStrategyAction( RobotStrategy* robotStrategy ){
 
 void Strategy::updateDeffenseStrategyAction( RobotStrategy* robotStrategy ){
 	btStraight ballGoalSt( btVector3( 0, 0, posGoalpost.getZ()), ballPos );
-	float actXPoint = 0.4 * simulator::SIZE_WIDTH;
-	float actXArea = 0.5 * simulator::SIZE_WIDTH;
+	float actXPoint = 0.4 * simulator::SIZE_WIDTH2;
+	float actXArea = 0.5 * simulator::SIZE_WIDTH2;
 
 	float zTarget = actXPoint * ballGoalSt.getInclination() + ballGoalSt.getN();
 	btVector3 relTargetPos( actXPoint, 0, zTarget );
@@ -240,10 +240,10 @@ void Strategy::updateDeffenseStrategyAction( RobotStrategy* robotStrategy ){
 }
 
 void Strategy::updateAttackStrategyAction( RobotStrategy* robotStrategy ){
-	float actXArea = 0.5 * simulator::SIZE_WIDTH;
-	float actXPoint = 0.8 * simulator::SIZE_WIDTH;
+	float actXArea = 0.5 * simulator::SIZE_WIDTH2;
+	float actXPoint = 0.8 * simulator::SIZE_WIDTH2;
 	float actZPoint = (ballPos.getZ() > simulator::SIZE_DEPTH / 2) ? simulator::SIZE_DEPTH / 5 : 4 * simulator::SIZE_DEPTH / 5;
-	float noReflecArea = 0.8 * simulator::SIZE_WIDTH;
+	float noReflecArea = 0.8 * simulator::SIZE_WIDTH2;
 
 	if(actXArea < robotStrategy->getTargetPosition().getX()) {
 		if(ballPos.getX() > noReflecArea) {
@@ -461,7 +461,7 @@ bool Strategy::updateTwistAction( RobotStrategy* robotStrategy ){
 			}
 		}
 
-		if(ballPos.getX() > simulator::SIZE_WIDTH - areaTarget) {
+		if(ballPos.getX() > simulator::SIZE_WIDTH2 - areaTarget) {
 			if(distToBall.getZ() < 0 && robotStrategy->getPosition().getZ() > 2 * simulator::SIZE_DEPTH / 3) {
 				robotStrategy->updateCommand( -maxVelocity, maxVelocity );
 				twist = true;
@@ -491,7 +491,7 @@ bool Strategy::verifyDeffenseTarget( RobotStrategy* robotStrategy ){
 		zTarget = ballPos.getZ();
 		xTarget = ballPos.getX() - sizeRobot;
 	}else
-	if(zTarget > simulator::SIZE_DEPTH / 3 && zTarget < 2 * simulator::SIZE_DEPTH / 3 && xTarget > simulator::SIZE_WIDTH - 3 * sizeRobot) {
+	if(zTarget > simulator::SIZE_DEPTH / 3 && zTarget < 2 * simulator::SIZE_DEPTH / 3 && xTarget > simulator::SIZE_WIDTH2 - 3 * sizeRobot) {
 		xTarget = ballPos.getX() - sizeRobot;
 		zTarget = ballPos.getZ();
 	}

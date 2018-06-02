@@ -63,7 +63,7 @@ void Physics::registBodies(){
   addBall( 2.5, StartPositionsHelper::positionBall, 0.08 );
 
   btVector3 posTeam1[] = {btVector3( 25, 4, simulator::SIZE_DEPTH - 55 ), btVector3( 35, 4, 30 ), btVector3( 55, 4, 45 )};
-  btVector3 posTeam2[] = {btVector3( simulator::SIZE_WIDTH - 15, 4, 55 ), btVector3( simulator::SIZE_WIDTH - 25, 4, simulator::SIZE_DEPTH - simulator::SIZE_DEPTH / 2.5 + 20 ), btVector3( simulator::SIZE_WIDTH - 55, 4, 85 )};
+  btVector3 posTeam2[] = {btVector3( simulator::SIZE_WIDTH2 - 15, 4, 55 ), btVector3( simulator::SIZE_WIDTH2 - 25, 4, simulator::SIZE_DEPTH - simulator::SIZE_DEPTH / 2.5 + 20 ), btVector3( simulator::SIZE_WIDTH2 - 55, 4, 85 )};
 
     //Create robots here
     //Team 1
@@ -84,9 +84,9 @@ void Physics::registBodies(){
 //    }
 
   // PAREDE DE CIMA
-  addWall( Color( 0, 0, 0 ), btVector3((simulator::SIZE_WIDTH / 2.0) + simulator::GOAL_WIDTH, 0, 0 ), simulator::SIZE_WIDTH, 15, 2.5, 0 );
+  addWall( Color( 0, 0, 0 ), btVector3((simulator::SIZE_WIDTH2 / 2.0) + simulator::GOAL_WIDTH, 0, 0 ), simulator::SIZE_WIDTH2, 15, 2.5, 0 );
   // PAREDE DE BAIXO
-  addWall( Color( 0, 0, 0 ), btVector3((simulator::SIZE_WIDTH / 2.0) + simulator::GOAL_WIDTH, 0, simulator::SIZE_DEPTH ), simulator::SIZE_WIDTH, 15, 2.5, 0 );
+  addWall( Color( 0, 0, 0 ), btVector3((simulator::SIZE_WIDTH2 / 2.0) + simulator::GOAL_WIDTH, 0, simulator::SIZE_DEPTH ), simulator::SIZE_WIDTH2, 15, 2.5, 0 );
 
   // GOL ESQUERDO
   addWall( Color( 0, 0, 0 ), btVector3( 0, 0, simulator::SIZE_DEPTH / 2.0 ), 2.5, 15, 40.0, 0 );
@@ -100,31 +100,31 @@ void Physics::registBodies(){
   addWall( Color( 0, 0, 0 ), btVector3((simulator::GOAL_WIDTH / 2.0), 0, simulator::SIZE_DEPTH / 2.0 + (45 / 2.0) ), simulator::GOAL_WIDTH, 15, 2.5, 0 );
 
   // GOL DIREITO
-  addWall( Color( 0, 0, 0 ), btVector3( simulator::SIZE_WIDTH + (2.0 * simulator::GOAL_WIDTH), 0, simulator::SIZE_DEPTH / 2.0 ), 2.5, 15, 40.0, 0 );
+  addWall( Color( 0, 0, 0 ), btVector3( simulator::SIZE_WIDTH2 + (2.0 * simulator::GOAL_WIDTH), 0, simulator::SIZE_DEPTH / 2.0 ), 2.5, 15, 40.0, 0 );
   // PAREDE DE CIMA DO GOL DIREITO
-  addWall( Color( 0, 0, 0 ), btVector3( simulator::SIZE_WIDTH + simulator::GOAL_WIDTH, 0, (45 / 2.0) - 1.25 ), 2.5, 15, 45.0, 0 );
+  addWall( Color( 0, 0, 0 ), btVector3( simulator::SIZE_WIDTH2 + simulator::GOAL_WIDTH, 0, (45 / 2.0) - 1.25 ), 2.5, 15, 45.0, 0 );
   // PAREDE DE BAIXO DO GOL DIREITO
-  addWall( Color( 0, 0, 0 ), btVector3( simulator::SIZE_WIDTH + simulator::GOAL_WIDTH, 0, simulator::SIZE_DEPTH - (45 / 2.0) + 1.25 ), 2.5, 15, 45.0, 0 );
+  addWall( Color( 0, 0, 0 ), btVector3( simulator::SIZE_WIDTH2 + simulator::GOAL_WIDTH, 0, simulator::SIZE_DEPTH - (45 / 2.0) + 1.25 ), 2.5, 15, 45.0, 0 );
   // PAREDE DE CIMA DENTRO DO GOL DIREITO
-  addWall( Color( 0, 0, 0 ), btVector3( simulator::SIZE_WIDTH + (2.0 * simulator::GOAL_WIDTH) - (simulator::GOAL_WIDTH / 2.0), 0, simulator::SIZE_DEPTH / 2.0 - (45 / 2.0)), simulator::GOAL_WIDTH, 15, 2.5, 0 );
+  addWall( Color( 0, 0, 0 ), btVector3( simulator::SIZE_WIDTH2 + (2.0 * simulator::GOAL_WIDTH) - (simulator::GOAL_WIDTH / 2.0), 0, simulator::SIZE_DEPTH / 2.0 - (45 / 2.0)), simulator::GOAL_WIDTH, 15, 2.5, 0 );
   // PAREDE DE BAIXO DENTRO DO GOL DIREITO
-  addWall( Color( 0, 0, 0 ), btVector3( simulator::SIZE_WIDTH + (2.0 * simulator::GOAL_WIDTH) - (simulator::GOAL_WIDTH / 2.0), 0, simulator::SIZE_DEPTH / 2.0 + (45 / 2.0)), simulator::GOAL_WIDTH, 15, 2.5, 0 );
+  addWall( Color( 0, 0, 0 ), btVector3( simulator::SIZE_WIDTH2 + (2.0 * simulator::GOAL_WIDTH) - (simulator::GOAL_WIDTH / 2.0), 0, simulator::SIZE_DEPTH / 2.0 + (45 / 2.0)), simulator::GOAL_WIDTH, 15, 2.5, 0 );
 
   // TRIANGULO SUPERIOR ESQUERDO
-  addCorner( Color( 0, 0, 0 ), btVector3( simulator::SIZE_WIDTH + (simulator::GOAL_WIDTH), 0, simulator::GOAL_WIDTH + 1.25 ), 45, 15, btVector3( 0, -45, 0 ));
+  addCorner( Color( 0, 0, 0 ), btVector3( simulator::SIZE_WIDTH2 + (simulator::GOAL_WIDTH), 0, simulator::GOAL_WIDTH + 1.25 ), 45, 15, btVector3( 0, -45, 0 ));
   // TRIANGULO SUPERIOR DIREITO
   addCorner( Color( 0, 0, 0 ), btVector3( simulator::GOAL_WIDTH, 0, simulator::GOAL_WIDTH + 1.25 ), 45, 15, btVector3( 0, 45, 0 ));
 
   // TRIANGULO INFERIOR ESQUERDO
   addCorner( Color( 0, 0, 0 ), btVector3( simulator::GOAL_WIDTH + 1.25, 0, simulator::SIZE_DEPTH - simulator::GOAL_WIDTH + 1.25 ), 45, 15, btVector3( 0, -45, 0 ));
   // TRIANGULO INFERIOR DIREITO
-  addCorner( Color( 0, 0, 0 ), btVector3( simulator::SIZE_WIDTH + simulator::GOAL_WIDTH - 1.25, 0, simulator::SIZE_DEPTH - simulator::GOAL_WIDTH - 1.25 ), 45, 15, btVector3( 0, 45, 0 ));
+  addCorner( Color( 0, 0, 0 ), btVector3( simulator::SIZE_WIDTH2 + simulator::GOAL_WIDTH - 1.25, 0, simulator::SIZE_DEPTH - simulator::GOAL_WIDTH - 1.25 ), 45, 15, btVector3( 0, 45, 0 ));
 
 }
 
 void Physics::resetRobotPositions(){
   btVector3 posTeam1[] = {btVector3( 15, 4, simulator::SIZE_DEPTH - 55 ), btVector3( 35, 4, 30 ), btVector3( 55, 4, 45 )};
-  btVector3 posTeam2[] = {btVector3( simulator::SIZE_WIDTH - 15, 4, 55 ), btVector3( simulator::SIZE_WIDTH - 25, 4, simulator::SIZE_DEPTH - simulator::SIZE_DEPTH / 2.5 + 20 ), btVector3( simulator::SIZE_WIDTH - 55, 4, 85 )};
+  btVector3 posTeam2[] = {btVector3( simulator::SIZE_WIDTH2 - 15, 4, 55 ), btVector3( simulator::SIZE_WIDTH2 - 25, 4, simulator::SIZE_DEPTH - simulator::SIZE_DEPTH / 2.5 + 20 ), btVector3( simulator::SIZE_WIDTH2 - 55, 4, 85 )};
 
   /*
      btVector3 axis = rotation.normalize();
