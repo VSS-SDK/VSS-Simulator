@@ -318,7 +318,7 @@ void Simulator::updateReport(){
 }
 
 void Simulator::runStrategies(){
-    btVector3 posTargets[] = {btVector3( SIZE_WIDTH, 0, SIZE_DEPTH / 2 ), btVector3( 0, 0, SIZE_DEPTH / 2 )};
+    btVector3 posTargets[] = {btVector3( simulator::SIZE_WIDTH, 0, simulator::SIZE_DEPTH / 2 ), btVector3( 0, 0, simulator::SIZE_DEPTH / 2 )};
     int attackDir = 0;
     int framesSec = (int)(1 / timeStep);
 
@@ -435,8 +435,8 @@ btVector3 Simulator::calcRelativePosition( btVector3 absPos, int attackDir ){
     float relZ = absPos.getZ();
     if(attackDir == -1) {
 
-        relZ = SIZE_DEPTH - absPos.getZ();
-        relX = SIZE_WIDTH - absPos.getX();
+        relZ = simulator::SIZE_DEPTH - absPos.getZ();
+        relX = simulator::SIZE_WIDTH - absPos.getX();
     }
     return btVector3( relX, 0, relZ );
 }

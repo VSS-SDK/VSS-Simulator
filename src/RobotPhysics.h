@@ -17,10 +17,10 @@
 #ifndef ROBOT_PHYSICS_H_
 #define ROBOT_PHYSICS_H_
 
-#define MAX_ACCELERATION 5.5 * SCALE_WORLD
-
 #include "Header.h"
 #include "../bullet/BulletDynamics/Vehicle/btRaycastVehicle.h"
+
+#define MAX_ACCELERATION 5.5 * simulator::SCALE_WORLD
 
 class RobotPhysics {
 private:

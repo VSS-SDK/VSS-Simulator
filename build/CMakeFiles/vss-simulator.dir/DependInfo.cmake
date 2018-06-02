@@ -143,7 +143,12 @@ set(CMAKE_CXX_COMPILER_ID "GNU")
 # The include file search paths:
 set(CMAKE_CXX_TARGET_INCLUDE_PATH
   "."
-  "/usr/include/bullet"
+  "../src"
+  "../src/strategies"
+  "../utils"
+  "../utils/includes"
+  "../bullet"
+  "../bullet/LinearMath"
   "../usr/local/include"
   )
 

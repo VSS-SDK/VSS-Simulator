@@ -101,7 +101,7 @@ void RobotStrategy::setLocalFunction( int func ){
 }
 
 float RobotStrategy::getFieldAngle(){
-	float angle = atan2( localFront.getZ(), localFront.getX()) * 180 / PI;
+	float angle = atan2( localFront.getZ(), localFront.getX()) * 180 / simulator::PI;
 	if(fabs( angle ) > 360) angle = 0.00001f;
 	return angle;
 }
@@ -132,7 +132,7 @@ float RobotStrategy::getPointAngle( btVector3 targetPos ){
 	if(targetZrad > 1.f) targetZrad = 1.f;
 	if(targetZrad < -1.f) targetZrad = -1.f;
 	if(fabs( targetZrad ) < 0.0001 ) targetZrad = 0.0001;
-	float targetZAngle = 180 * acos( targetZrad ) / PI;
+	float targetZAngle = 180 * acos( targetZrad ) / simulator::PI;
 	if(targetZAngle == 0) targetZAngle = 0.00001;
 	if(targetZAngle == 90) targetZAngle = 89.99999;
 
@@ -141,7 +141,7 @@ float RobotStrategy::getPointAngle( btVector3 targetPos ){
 	if(targetXrad > 1.f) targetXrad = 1.f;
 	if(targetXrad < -1.f) targetXrad = -1.f;
 	if(fabs( targetXrad ) < 0.0001 ) targetXrad = 0.0001;
-	float targetXAngle = 180 * acos( targetXrad ) / PI;
+	float targetXAngle = 180 * acos( targetXrad ) / simulator::PI;
 
 	if(targetXAngle == 0) targetXAngle = 0.00001;
 	if(targetXAngle == 90) targetXAngle = 89.99999;

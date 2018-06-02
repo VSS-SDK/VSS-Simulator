@@ -6,5 +6,5 @@ CXX_FLAGS = -g -Wformat -ffast-math -lm -lc -std=c++11 -pthread
 
 CXX_DEFINES = 
 
-CXX_INCLUDES = -I/home/johnathan/Repositories/SDK/rollback/VSS-Simulator/build -I/usr/include/bullet -I/home/johnathan/Repositories/SDK/rollback/VSS-Simulator/usr/local/include 
+CXX_INCLUDES = -I/home/johnathan/Repositories/SDK/rollback/VSS-Simulator/build -I/home/johnathan/Repositories/SDK/rollback/VSS-Simulator/src -I/home/johnathan/Repositories/SDK/rollback/VSS-Simulator/src/strategies -I/home/johnathan/Repositories/SDK/rollback/VSS-Simulator/utils -I/home/johnathan/Repositories/SDK/rollback/VSS-Simulator/utils/includes -I/home/johnathan/Repositories/SDK/rollback/VSS-Simulator/bullet -I/home/johnathan/Repositories/SDK/rollback/VSS-Simulator/bullet/LinearMath -I/home/johnathan/Repositories/SDK/rollback/VSS-Simulator/usr/local/include 
 

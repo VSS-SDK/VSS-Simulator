@@ -3523,10 +3523,6 @@ vss-simulator: CMakeFiles/vss-simulator.dir/bullet/BulletCollision/Gimpact/btGIm
 vss-simulator: CMakeFiles/vss-simulator.dir/bullet/BulletCollision/Gimpact/gim_box_set.cpp.o
 vss-simulator: CMakeFiles/vss-simulator.dir/build.make
 vss-simulator: /usr/lib/x86_64-linux-gnu/libprotobuf.so
-vss-simulator: /usr/lib/x86_64-linux-gnu/libBulletDynamics.so
-vss-simulator: /usr/lib/x86_64-linux-gnu/libBulletCollision.so
-vss-simulator: /usr/lib/x86_64-linux-gnu/libLinearMath.so
-vss-simulator: /usr/lib/x86_64-linux-gnu/libBulletSoftBody.so
 vss-simulator: /usr/lib/x86_64-linux-gnu/libboost_program_options.so
 vss-simulator: /usr/lib/x86_64-linux-gnu/libzmq.so
 vss-simulator: CMakeFiles/vss-simulator.dir/link.txt

@@ -16,12 +16,13 @@
 #ifndef _CONSTANTS_H_
 #define _CONSTANTS_H_
 
-#define PI 3.141592653589793238462643383279502884
-#define C_MASSA_ROBO 0.200
-#define SCALE_WORLD 100 //Defines the centimeter as unit of measurement in the world. Used in non-linear equations to convert centimeter in meter (SI)
+namespace simulator {
+  const float PI = 3.141592653589793238462643383279502884;
+  const float C_MASSA_ROBO = 0.200;
+  const float SCALE_WORLD = 100; //Defines the centimeter as unit of measurement in the world. Used in non-linear equations to convert centimeter in meter (SI)
 
-#define SIZE_WIDTH 150
-#define GOAL_WIDTH 10
-#define SIZE_DEPTH 130
-
+  const float SIZE_WIDTH = 150;
+  const float GOAL_WIDTH = 10;
+  const float SIZE_DEPTH = 130;
+}
 #endif

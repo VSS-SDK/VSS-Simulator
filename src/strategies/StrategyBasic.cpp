@@ -150,7 +150,7 @@ void StrategyBasic::updateDeffenseStrategyAction( RobotStrategy* robotStrategy )
 void StrategyBasic::updateAttackStrategyAction( RobotStrategy* robotStrategy ){
 	float actXArea = 75.f;
 	float actXPoint = 120.f;
-	float actZPoint = (ballPos.getZ() > SIZE_DEPTH / 2) ? SIZE_DEPTH / 5 : 4 * SIZE_DEPTH / 5;
+	float actZPoint = (ballPos.getZ() > simulator::SIZE_DEPTH / 2) ? simulator::SIZE_DEPTH / 5 : 4 * simulator::SIZE_DEPTH / 5;
 
 	if(actXArea < robotStrategy->getTargetPosition().getX()) {
 		handleLocalActions( robotStrategy );
@@ -161,7 +161,7 @@ void StrategyBasic::updateAttackStrategyAction( RobotStrategy* robotStrategy ){
 }
 
 bool StrategyBasic::correctWallTargetPosition( RobotStrategy* robotStrategy ){
-	float ballMaxZ = SIZE_DEPTH - distProjBallWall;
+	float ballMaxZ = simulator::SIZE_DEPTH - distProjBallWall;
 	float xBall = robotStrategy->getTargetPosition().getX();
 	float zBall = robotStrategy->getTargetPosition().getZ();
 	bool correctTarget = false;
@@ -173,8 +173,8 @@ bool StrategyBasic::correctWallTargetPosition( RobotStrategy* robotStrategy ){
 	}
 
 	if(robotStrategy->getTargetPosition().getZ() > ballMaxZ) {
-		float dzBall = SIZE_DEPTH - ballPos.getZ();
-		stBallGoal = btStraight( posGoalpost, btVector3( ballPos.getX(), 0, SIZE_DEPTH + dzBall ));
+		float dzBall = simulator::SIZE_DEPTH - ballPos.getZ();
+		stBallGoal = btStraight( posGoalpost, btVector3( ballPos.getX(), 0, simulator::SIZE_DEPTH + dzBall ));
 		correctTarget = true;
 	}
 
@@ -198,40 +198,40 @@ void StrategyBasic::handleLocalActions( RobotStrategy* robotStrategy ){
 	btVector3 vecGoalLeft;
 	bool correctTarget = correctWallTargetPosition( robotStrategy );
 	if(!correctTarget) {
-		btStraight stGoalRightSd( btVector3( posGoalpost.getX(), 0, 2 * SIZE_DEPTH / 3 ), robotPos );
-		btStraight stGoalLeftSd( btVector3( posGoalpost.getX(), 0, SIZE_DEPTH / 3 ), robotPos );
+		btStraight stGoalRightSd( btVector3( posGoalpost.getX(), 0, 2 * simulator::SIZE_DEPTH / 3 ), robotPos );
+		btStraight stGoalLeftSd( btVector3( posGoalpost.getX(), 0, simulator::SIZE_DEPTH / 3 ), robotPos );
 
 		vecGoalRight = stGoalRightSd.getNormalVector();
 		vecGoalLeft = stGoalLeftSd.getNormalVector();
 	}else{
 		btStraight stGoalRightSd;
 		btStraight stGoalLeftSd;
-		if(ballPos.getZ() < SIZE_DEPTH / 2) {
-			stGoalRightSd = btStraight( btVector3( posGoalpost.getX(), 0, 2 * SIZE_DEPTH / 3 ),
+		if(ballPos.getZ() < simulator::SIZE_DEPTH / 2) {
+			stGoalRightSd = btStraight( btVector3( posGoalpost.getX(), 0, 2 * simulator::SIZE_DEPTH / 3 ),
 			                            btVector3( robotPos.getX(), 0, -robotPos.getZ()));
-			stGoalLeftSd = btStraight( btVector3( posGoalpost.getX(), 0, SIZE_DEPTH / 3 ),
+			stGoalLeftSd = btStraight( btVector3( posGoalpost.getX(), 0, simulator::SIZE_DEPTH / 3 ),
 			                           btVector3( robotPos.getX(), 0, -robotPos.getZ()));
 		}else
-		if(ballPos.getZ() > SIZE_DEPTH / 2) {
-			float dzRobot = SIZE_DEPTH - robotPos.getZ();
-			stGoalRightSd = btStraight( btVector3( posGoalpost.getX(), 0, 2 * SIZE_DEPTH / 3 ),
-			                            btVector3( robotPos.getX(), 0, SIZE_DEPTH + dzRobot ));
-			stGoalLeftSd = btStraight( btVector3( posGoalpost.getX(), 0, SIZE_DEPTH / 3 ),
-			                           btVector3( robotPos.getX(), 0, SIZE_DEPTH + dzRobot ));
+		if(ballPos.getZ() > simulator::SIZE_DEPTH / 2) {
+			float dzRobot = simulator::SIZE_DEPTH - robotPos.getZ();
+			stGoalRightSd = btStraight( btVector3( posGoalpost.getX(), 0, 2 * simulator::SIZE_DEPTH / 3 ),
+			                            btVector3( robotPos.getX(), 0, simulator::SIZE_DEPTH + dzRobot ));
+			stGoalLeftSd = btStraight( btVector3( posGoalpost.getX(), 0, simulator::SIZE_DEPTH / 3 ),
+			                           btVector3( robotPos.getX(), 0, simulator::SIZE_DEPTH + dzRobot ));
 		}
 
 		vecGoalRight = stGoalRightSd.getNormalVector();
 		vecGoalLeft = stGoalLeftSd.getNormalVector();
 	}
 
-	btVector3 perpLfGoal = -vecGoalLeft.rotate( btVector3( 0, 1, 0 ), PI + 2 * atan( vecGoalLeft.getZ() / vecGoalLeft.getX()));
-	btVector3 perpRtGoal = -vecGoalRight.rotate( btVector3( 0, 1, 0 ), PI + 2 * atan( vecGoalRight.getZ() / vecGoalRight.getX()));
-	float angBallPerpGoalLf = relPosRobotBall.angle( perpLfGoal ) * 180 / PI;
-	float angBallPerpGoalRt = relPosRobotBall.angle( perpRtGoal ) * 180 / PI;
+	btVector3 perpLfGoal = -vecGoalLeft.rotate( btVector3( 0, 1, 0 ), simulator::PI + 2 * atan( vecGoalLeft.getZ() / vecGoalLeft.getX()));
+	btVector3 perpRtGoal = -vecGoalRight.rotate( btVector3( 0, 1, 0 ), simulator::PI + 2 * atan( vecGoalRight.getZ() / vecGoalRight.getX()));
+	float angBallPerpGoalLf = relPosRobotBall.angle( perpLfGoal ) * 180 / simulator::PI;
+	float angBallPerpGoalRt = relPosRobotBall.angle( perpRtGoal ) * 180 / simulator::PI;
 
-	angGoalpost = vecGoalLeft.angle( vecGoalRight ) * 180 / PI;
-	angBallGoalRt = relPosRobotBall.angle( vecGoalRight ) * 180 / PI;
-	angBallGoalLf = relPosRobotBall.angle( vecGoalLeft ) * 180 / PI;
+	angGoalpost = vecGoalLeft.angle( vecGoalRight ) * 180 / simulator::PI;
+	angBallGoalRt = relPosRobotBall.angle( vecGoalRight ) * 180 / simulator::PI;
+	angBallGoalLf = relPosRobotBall.angle( vecGoalLeft ) * 180 / simulator::PI;
 
 	if(!updateActionStopped( robotStrategy )) {
 		if(correctTarget && angGoalpost > angBallPerpGoalLf && angGoalpost > angBallPerpGoalRt && relPosRobotBall.length() < areaTarget) {
@@ -282,7 +282,7 @@ void StrategyBasic::updateActionShoot( RobotStrategy* robotStrategy ){
 
 	float currAngToBall = robotStrategy->getTargetAngle();
 	float robotSize = 8.15f;
-	float shootAngle = atan( robotSize / relPosRobotBall.length()) * 180 / PI;
+	float shootAngle = atan( robotSize / relPosRobotBall.length()) * 180 / simulator::PI;
 	float maxVelocity = robotStrategy->getMaxCommand();
 
 	if(fabs( currAngToBall ) > shootAngle) {

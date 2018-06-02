@@ -14,33 +14,6 @@
 # EXTERNAL cache entries
 ########################
 
-//Path to a library.
-BULLET_COLLISION_LIBRARY:FILEPATH=/usr/lib/x86_64-linux-gnu/libBulletCollision.so
-
-//Path to a library.
-BULLET_COLLISION_LIBRARY_DEBUG:FILEPATH=BULLET_COLLISION_LIBRARY_DEBUG-NOTFOUND
-
-//Path to a library.
-BULLET_DYNAMICS_LIBRARY:FILEPATH=/usr/lib/x86_64-linux-gnu/libBulletDynamics.so
-
-//Path to a library.
-BULLET_DYNAMICS_LIBRARY_DEBUG:FILEPATH=BULLET_DYNAMICS_LIBRARY_DEBUG-NOTFOUND
-
-//Path to a file.
-BULLET_INCLUDE_DIR:PATH=/usr/include/bullet
-
-//Path to a library.
-BULLET_MATH_LIBRARY:FILEPATH=/usr/lib/x86_64-linux-gnu/libLinearMath.so
-
-//Path to a library.
-BULLET_MATH_LIBRARY_DEBUG:FILEPATH=BULLET_MATH_LIBRARY_DEBUG-NOTFOUND
-
-//Path to a library.
-BULLET_SOFTBODY_LIBRARY:FILEPATH=/usr/lib/x86_64-linux-gnu/libBulletSoftBody.so
-
-//Path to a library.
-BULLET_SOFTBODY_LIBRARY_DEBUG:FILEPATH=BULLET_SOFTBODY_LIBRARY_DEBUG-NOTFOUND
-
 //The directory containing a CMake configuration file for Boost.
 Boost_DIR:PATH=Boost_DIR-NOTFOUND
 
@@ -269,22 +242,6 @@ vss-simulator_SOURCE_DIR:STATIC=/home/johnathan/Repositories/SDK/rollback/VSS-Si
 # INTERNAL cache entries
 ########################
 
-//ADVANCED property for variable: BULLET_COLLISION_LIBRARY
-BULLET_COLLISION_LIBRARY-ADVANCED:INTERNAL=1
-//ADVANCED property for variable: BULLET_COLLISION_LIBRARY_DEBUG
-BULLET_COLLISION_LIBRARY_DEBUG-ADVANCED:INTERNAL=1
-//ADVANCED property for variable: BULLET_DYNAMICS_LIBRARY
-BULLET_DYNAMICS_LIBRARY-ADVANCED:INTERNAL=1
-//ADVANCED property for variable: BULLET_DYNAMICS_LIBRARY_DEBUG
-BULLET_DYNAMICS_LIBRARY_DEBUG-ADVANCED:INTERNAL=1
-//ADVANCED property for variable: BULLET_MATH_LIBRARY
-BULLET_MATH_LIBRARY-ADVANCED:INTERNAL=1
-//ADVANCED property for variable: BULLET_MATH_LIBRARY_DEBUG
-BULLET_MATH_LIBRARY_DEBUG-ADVANCED:INTERNAL=1
-//ADVANCED property for variable: BULLET_SOFTBODY_LIBRARY
-BULLET_SOFTBODY_LIBRARY-ADVANCED:INTERNAL=1
-//ADVANCED property for variable: BULLET_SOFTBODY_LIBRARY_DEBUG
-BULLET_SOFTBODY_LIBRARY_DEBUG-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: Boost_DIR
 Boost_DIR-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: Boost_INCLUDE_DIR
@@ -440,8 +397,6 @@ CPACK_SOURCE_TXZ-ADVANCED:INTERNAL=1
 CPACK_SOURCE_TZ-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: CPACK_SOURCE_ZIP
 CPACK_SOURCE_ZIP-ADVANCED:INTERNAL=1
-//Details about finding Bullet
-FIND_PACKAGE_MESSAGE_DETAILS_Bullet:INTERNAL=[/usr/lib/x86_64-linux-gnu/libBulletDynamics.so][/usr/lib/x86_64-linux-gnu/libBulletCollision.so][/usr/lib/x86_64-linux-gnu/libLinearMath.so][/usr/lib/x86_64-linux-gnu/libBulletSoftBody.so][/usr/include/bullet][v()]
 //Details about finding PkgConfig
 FIND_PACKAGE_MESSAGE_DETAILS_PkgConfig:INTERNAL=[/usr/bin/pkg-config][v0.29.1()]
 //Details about finding Protobuf
