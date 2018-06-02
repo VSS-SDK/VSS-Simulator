@@ -746,14 +746,6 @@ void btRaycastVehicle::updateTransformCentripetalForce(btScalar timeStep){
 }
 
 void	btRaycastVehicle::debugDraw(btIDebugDraw* debugDrawer){
-    int lenghtDebug = debugDrawer->getDebugMode().size();
-    for(int i = 0; i < lenghtDebug; i++){
-        if(debugDrawer->getDebugMode()[i] == btIDebugDraw::DBG_DrawLocalProperties){
-            debugDrawProperties();
-            m_chassisBody->debugLocalProperties(debugDrawer);
-        }
-    }
-
 	for (int v=0;v<this->getNumWheels();v++){
 		btVector3 wheelColor(0,1,1);
 		if (getWheelInfo(v).m_raycastInfo.m_isInContact)
@@ -785,10 +777,6 @@ void btRaycastVehicle::debugDrawProperties()
     btVector3 side = m_centripetalVelocity.normalized();
 
     btVector3 angUnit = debugLinearVelocity[1].normalized();
-
-    glPushMatrix();
-        glTranslatef(centerMass.getX(),centerMass.getY(),centerMass.getZ());
-    glPopMatrix();
 }
 
 

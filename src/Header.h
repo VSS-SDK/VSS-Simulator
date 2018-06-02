@@ -1,25 +1,27 @@
-/*The MIT License (MIT)
+/*
+   The MIT License (MIT)
 
-Copyright (c) 2016 Lucas Borsatto Simão
+   Copyright (c) 2016 Lucas Borsatto Simão
 
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
+   Permission is hereby granted, free of charge, to any person obtaining a copy
+   of this software and associated documentation files (the "Software"), to deal
+   in the Software without restriction, including without limitation the rights
+   to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+   copies of the Software, and to permit persons to whom the Software is
+   furnished to do so, subject to the following conditions:
 
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
-*/
+   The above copyright notice and this permission notice shall be included in all
+   copies or substantial portions of the Software.
+ */
 
 #ifndef HEADERS_H_
 #define HEADERS_H_
 
 //Classes from lib
 
-#include "Constants.h"
-#include "btBulletDynamicsCommon.h"
+#include "../utils/Constants.h"
+#include "../bullet/btBulletDynamicsCommon.h"
+#include "interface.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <iostream>
@@ -34,7 +36,7 @@ using namespace std;
 
 //Base classes for system
 
-//#include "btVector3.h"
+#include "LinearMath/btVector3.h"
 #define NUM_ROBOTS_TEAM 3;
 #include "Sir.h"
 

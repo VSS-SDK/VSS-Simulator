@@ -1,4 +1,5 @@
-/*The MIT License (MIT)
+/*
+The MIT License (MIT)
 
 Copyright (c) 2016 Lucas Borsatto Simão
 
@@ -18,7 +19,22 @@ copies or substantial portions of the Software.
 
 #include "Header.h"
 #include "RobotStrategy.h"
-#include "GLDebugDrawer.h"
+#include "../../bullet/BulletCollision/BroadphaseCollision/btDispatcher.h"
+#include "../../bullet/BulletCollision/CollisionDispatch/btCollisionConfiguration.h"
+#include "../../bullet/BulletCollision/BroadphaseCollision/btBroadphaseInterface.h"
+#include "../../bullet/BulletCollision/NarrowPhaseCollision/btManifoldPoint.h"
+#include "../../bullet/BulletDynamics/ConstraintSolver/btConstraintSolver.h"
+#include "../../bullet/BulletCollision/CollisionDispatch/btDefaultCollisionConfiguration.h"
+#include "../../bullet/BulletCollision/CollisionDispatch/btCollisionDispatcher.h"
+#include "../../bullet/BulletCollision/BroadphaseCollision/btDbvtBroadphase.h"
+#include "../../bullet/BulletDynamics/ConstraintSolver/btSequentialImpulseConstraintSolver.h"
+#include "../../bullet/BulletDynamics/Dynamics/btDiscreteDynamicsWorld.h"
+#include "../../bullet/LinearMath/btDefaultMotionState.h"
+#include "../../bullet/BulletCollision/CollisionShapes/btStaticPlaneShape.h"
+#include "../../bullet/BulletCollision/CollisionShapes/btSphereShape.h"
+#include "../../bullet/BulletCollision/CollisionShapes/btBoxShape.h"
+#include "../../bullet/BulletCollision/CollisionShapes/btCompoundShape.h"
+//#include "../utils/GLDebugDrawer.h"
 #include "RobotPhysics.h"
 
 const Color clrTeams[] = {Color(1.0,1.0,0),Color(0,0,1)};
@@ -29,21 +45,21 @@ private:
 	int numTeams;
 	int numRobotsTeam;
 
-	btDynamicsWorld* world;
-	btDispatcher* dispatcher;
-	btCollisionConfiguration* collisionConfig;
+	btDiscreteDynamicsWorld* world;
+	btCollisionDispatcher* dispatcher;
+	btDefaultCollisionConfiguration* collisionConfig;
 	btBroadphaseInterface* broadphase;
-	btConstraintSolver* solver;
-	GLDebugDrawer* glDebugDrawer;
+	btSequentialImpulseConstraintSolver* solver;
+	//GLDebugDrawer* glDebugDrawer;
 
 	vector<BulletObject*> bodies;
 	vector<RobotPhysics*> genRobots;
 
-    void registBodies();
+	void registBodies();
 	void setupBodiesProp();
 
 	btRigidBody* addGenericBody(btCollisionShape* shape,string name, Color clr, btVector3 pos, float mass, btVector3 rotation = btVector3(0,0,0));
-    static bool callBackHitFunc(btManifoldPoint& cp,const btCollisionObjectWrapper* obj1,int id1,int index1,const btCollisionObjectWrapper* obj2,int id2,int index2);
+	static bool callBackHitFunc(btManifoldPoint& cp,const btCollisionObjectWrapper* obj1,int id1,int index1,const btCollisionObjectWrapper* obj2,int id2,int index2);
 public:
 	Physics(int numTeams);
 	~Physics();
@@ -62,7 +78,7 @@ public:
 
 	void resetRobotPositions();
 
-    int getNumTeams(){ return numTeams; }
+	int getNumTeams(){ return numTeams; }
 	btDynamicsWorld* getWorldPhysics() { return world; }
 	btVector3 getBallPosition();
 	btVector3 getBallVelocity();
@@ -72,7 +88,8 @@ public:
 	vector<BulletObject*> getAllBtObj() { return bodies; }
 	vector<RobotPhysics*> getAllRobots() { return genRobots; }
 	vector<BulletObject*> getAllBtRobots();
-	void setRobotsPosition(vector<btVector3>);
+	void setRobotsPosition(vector<btVector3> newPositions, vector<btVector3> newOrientations);
+	void setRobotsPose(vector<btVector3> newPositions, vector<btScalar> newOrientations);
 };
 
 #endif

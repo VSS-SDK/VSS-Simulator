@@ -1,42 +1,37 @@
-VSS-Simulator
-=============
-[![MIT licensed](https://img.shields.io/badge/license-MIT-blue.svg)][mit]
-[![Build Status](https://travis-ci.org/SIRLab/VSS-Simulator.svg?branch=master)][travis]
+# VSS-Simulator [![MIT licensed](https://img.shields.io/badge/license-MIT-blue.svg)][mit] [![Build Status](https://travis-ci.org/SIRLab/VSS-Viewer.svg?branch=master)][travis]
 
-Mais informações podem ser encontradas em [VSS-SDK][vss-sdk].
+[![Trello Features](https://img.shields.io/badge/Trello-Features-blue.svg)][vss-sdk-features]
+[![Trello PBIs](https://img.shields.io/badge/Trello-PBIs-blue.svg)][vss-sdk-pbis]
+[![Slack](https://img.shields.io/badge/Slack-Channel-551a8b.svg)][slack]
 
-Installation
-------------
-[INSTALL][install]
+O VSS-Simulator é um simulador de futebol para a categoria IEEE VSS.
+Mais informações sobre o framework podem ser encontradas em [VSS-SDK][vss-sdk].
 
-Cloning
--------
+
+## Installation
 ```
-$ git clone --recursive https://github.com/SIRLab/VSS-Simulator.git
+$ sudo ./configure.sh
 ```
 
-Development and Use
--------------------
-```
-$ make
-$ make proto
-$ make run
-```
+## Samples
+C++ using the VSS-Interface: [SampleCpp][samplecpp]
 
+## License
 
-Gallery
--------
-![screenshot 1](https://raw.githubusercontent.com/SIRLab/VSS-Simulator/master/images/top.png)
+This code is licensed under the [GNU GENERAL PUBLIC LICENSE Version 3][gpl3], of which a textual copy is available at [LICENSE.txt](LICENSE.txt).
 
+You are allowed and encouraged to use this software on robotics competitions.  If you do, please let us know.
 
-License
--------
-
-This code is licensed under the MIT License, of which a textual copy is available at [LICENSE.txt](LICENSE).
-
-You are allowed and encouraged to use this software on the IEEE Very Small Size Soccer competitions.  If you do, please let us know.
 
 [vss-sdk]: http://sirlab.github.io/VSS-SDK
-[install]: https://github.com/SIRLab/VSS-Simulator/blob/master/INSTALL.md
-[travis]: https://travis-ci.org/SIRLab/VSS-Simulator
 [mit]: https://raw.githubusercontent.com/hyperium/hyper/master/LICENSE
+[travis]: https://travis-ci.org/SIRLab/VSS-Viewer
+[vss-sdk-features]: https://trello.com/b/b4dVV6ug/vss-sdk-features
+[vss-sdk-pbis]: https://trello.com/b/m0u389nR/vss-sdk-pbis
+[slack]: https://vss-sdk.slack.com
+
+
+
+
+
+
