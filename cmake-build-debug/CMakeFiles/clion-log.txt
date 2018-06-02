@@ -1,0 +1,37 @@
+/home/johnathan/clion-2017.3.2/bin/cmake/bin/cmake -DCMAKE_BUILD_TYPE=Debug -G "CodeBlocks - Unix Makefiles" /home/johnathan/Repositories/SDK/rollback/VSS-Simulator
+-- Boost version: 1.58.0
+-- Found the following Boost libraries:
+--   program_options
+-- Found Protobuf: /usr/lib/x86_64-linux-gnu/libprotobuf.so;-lpthread (found version "2.6.1") 
+-- Found Protobuf: /usr/lib/x86_64-linux-gnu/libprotobuf.so;-lpthread;-lpthread (found version "2.6.1") 
+CMake Warning (dev) at CMakeLists.txt:35 (link_directories):
+  This command specifies the relative path
+
+    usr/lib
+
+  as a link directory.
+
+  Policy CMP0015 is not set: link_directories() treats paths relative to the
+  source dir.  Run "cmake --help-policy CMP0015" for policy details.  Use the
+  cmake_policy command to set the policy and suppress this warning.
+This warning is for project developers.  Use -Wno-dev to suppress it.
+
+CMake Warning (dev) at CMakeLists.txt:41 (TARGET_LINK_LIBRARIES):
+  Policy CMP0023 is not set: Plain and keyword target_link_libraries
+  signatures cannot be mixed.  Run "cmake --help-policy CMP0023" for policy
+  details.  Use the cmake_policy command to set the policy and suppress this
+  warning.
+
+  The plain signature for target_link_libraries has already been used with
+  the target "vss-simulator".  All uses of target_link_libraries with a
+  target should be either all-keyword or all-plain.
+
+  The uses of the plain signature are here:
+
+   * CMakeLists.txt:40 (TARGET_LINK_LIBRARIES)
+
+This warning is for project developers.  Use -Wno-dev to suppress it.
+
+-- Configuring done
+-- Generating done
+-- Build files have been written to: /home/johnathan/Repositories/SDK/rollback/VSS-Simulator/cmake-build-debug

@@ -106,38 +106,6 @@ void	btRigidBody::setupRigidBody(const btRigidBody::btRigidBodyConstructionInfo&
 	m_turnVelocity.setZero();
 }
 
-void btRigidBody::debugLocalProperties(btIDebugDraw* glDebugDrawer){
-    btTransform chassisTrans = getCenterOfMassTransform();
-
-    btVector3 sideVector (
-          chassisTrans.getBasis()[0][0],
-          chassisTrans.getBasis()[1][0],
-          chassisTrans.getBasis()[2][0]);
-
-    btVector3 fwdVector (
-          chassisTrans.getBasis()[0][2],
-          chassisTrans.getBasis()[1][2],
-          chassisTrans.getBasis()[2][2]);
-
-    if(idDebug == 1){
-        for(int i = 0; i < 4;i++){
-            btVector3 angLinearVelocity = debugAngularVelocity[i].cross(debugRelVector[i]);
-            btVector3 relativePosition = debugRelVector[i] + getCenterOfMassPosition();
-            btVector3 toRelativePosition = relativePosition+angLinearVelocity*2;
-            //glDebugDrawer->drawLine(relativePosition,toRelativePosition,btVector3(0.2,0.7,0.5));
-
-            //angLinearVelocity = debugAngularVelocity.cross(4.9*-sideVector);
-            relativePosition = getCenterOfMassPosition()-sideVector*6;
-            toRelativePosition = relativePosition+angLinearVelocity*1000;
-            //glDebugDrawer->drawLine(relativePosition,toRelativePosition,btVector3(0.2,0.7,0.5));
-
-            relativePosition = getCenterOfMassPosition()+fwdVector*4+btVector3(0,3,0);
-            toRelativePosition = relativePosition+debugLinearVelocity*1000;
-            //glDebugDrawer->drawLine(relativePosition,toRelativePosition,btVector3(0.2,0.7,0.5));
-        }
-    }
-}
-
 void btRigidBody::predictIntegratedTransform(btScalar timeStep,btTransform& predictedTransform)
 {
 	btTransformUtil::integrateTransform(m_worldTransform,m_linearVelocity,m_angularVelocity,timeStep,predictedTransform);
