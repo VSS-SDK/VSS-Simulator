@@ -31,5 +31,6 @@
 *.exe
 *.out
 *.app
-VSS-Simulator
-VSS-Simulator-Debug
+build/
+cmake-build-debug/*
+.idea/*

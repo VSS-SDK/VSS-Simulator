@@ -150,7 +150,7 @@ void StrategyBasic::updateDeffenseStrategyAction( RobotStrategy* robotStrategy )
 void StrategyBasic::updateAttackStrategyAction( RobotStrategy* robotStrategy ){
 	float actXArea = 75.f;
 	float actXPoint = 120.f;
-	float actZPoint = (ballPos.getZ() > simulator::SIZE_DEPTH / 2) ? simulator::SIZE_DEPTH / 5 : 4 * simulator::SIZE_DEPTH / 5;
+	float actZPoint = (ballPos.getZ() > simulator::FIELD_HEIGHT / 2) ? simulator::FIELD_HEIGHT / 5 : 4 * simulator::FIELD_HEIGHT / 5;
 
 	if(actXArea < robotStrategy->getTargetPosition().getX()) {
 		handleLocalActions( robotStrategy );
@@ -161,7 +161,7 @@ void StrategyBasic::updateAttackStrategyAction( RobotStrategy* robotStrategy ){
 }
 
 bool StrategyBasic::correctWallTargetPosition( RobotStrategy* robotStrategy ){
-	float ballMaxZ = simulator::SIZE_DEPTH - distProjBallWall;
+	float ballMaxZ = simulator::FIELD_HEIGHT - distProjBallWall;
 	float xBall = robotStrategy->getTargetPosition().getX();
 	float zBall = robotStrategy->getTargetPosition().getZ();
 	bool correctTarget = false;
@@ -173,8 +173,8 @@ bool StrategyBasic::correctWallTargetPosition( RobotStrategy* robotStrategy ){
 	}
 
 	if(robotStrategy->getTargetPosition().getZ() > ballMaxZ) {
-		float dzBall = simulator::SIZE_DEPTH - ballPos.getZ();
-		stBallGoal = btStraight( posGoalpost, btVector3( ballPos.getX(), 0, simulator::SIZE_DEPTH + dzBall ));
+		float dzBall = simulator::FIELD_HEIGHT - ballPos.getZ();
+		stBallGoal = btStraight( posGoalpost, btVector3( ballPos.getX(), 0, simulator::FIELD_HEIGHT + dzBall ));
 		correctTarget = true;
 	}
 
@@ -198,26 +198,26 @@ void StrategyBasic::handleLocalActions( RobotStrategy* robotStrategy ){
 	btVector3 vecGoalLeft;
 	bool correctTarget = correctWallTargetPosition( robotStrategy );
 	if(!correctTarget) {
-		btStraight stGoalRightSd( btVector3( posGoalpost.getX(), 0, 2 * simulator::SIZE_DEPTH / 3 ), robotPos );
-		btStraight stGoalLeftSd( btVector3( posGoalpost.getX(), 0, simulator::SIZE_DEPTH / 3 ), robotPos );
+		btStraight stGoalRightSd( btVector3( posGoalpost.getX(), 0, 2 * simulator::FIELD_HEIGHT / 3 ), robotPos );
+		btStraight stGoalLeftSd( btVector3( posGoalpost.getX(), 0, simulator::FIELD_HEIGHT / 3 ), robotPos );
 
 		vecGoalRight = stGoalRightSd.getNormalVector();
 		vecGoalLeft = stGoalLeftSd.getNormalVector();
 	}else{
 		btStraight stGoalRightSd;
 		btStraight stGoalLeftSd;
-		if(ballPos.getZ() < simulator::SIZE_DEPTH / 2) {
-			stGoalRightSd = btStraight( btVector3( posGoalpost.getX(), 0, 2 * simulator::SIZE_DEPTH / 3 ),
+		if(ballPos.getZ() < simulator::FIELD_HEIGHT / 2) {
+			stGoalRightSd = btStraight( btVector3( posGoalpost.getX(), 0, 2 * simulator::FIELD_HEIGHT / 3 ),
 			                            btVector3( robotPos.getX(), 0, -robotPos.getZ()));
-			stGoalLeftSd = btStraight( btVector3( posGoalpost.getX(), 0, simulator::SIZE_DEPTH / 3 ),
+			stGoalLeftSd = btStraight( btVector3( posGoalpost.getX(), 0, simulator::FIELD_HEIGHT / 3 ),
 			                           btVector3( robotPos.getX(), 0, -robotPos.getZ()));
 		}else
-		if(ballPos.getZ() > simulator::SIZE_DEPTH / 2) {
-			float dzRobot = simulator::SIZE_DEPTH - robotPos.getZ();
-			stGoalRightSd = btStraight( btVector3( posGoalpost.getX(), 0, 2 * simulator::SIZE_DEPTH / 3 ),
-			                            btVector3( robotPos.getX(), 0, simulator::SIZE_DEPTH + dzRobot ));
-			stGoalLeftSd = btStraight( btVector3( posGoalpost.getX(), 0, simulator::SIZE_DEPTH / 3 ),
-			                           btVector3( robotPos.getX(), 0, simulator::SIZE_DEPTH + dzRobot ));
+		if(ballPos.getZ() > simulator::FIELD_HEIGHT / 2) {
+			float dzRobot = simulator::FIELD_HEIGHT - robotPos.getZ();
+			stGoalRightSd = btStraight( btVector3( posGoalpost.getX(), 0, 2 * simulator::FIELD_HEIGHT / 3 ),
+			                            btVector3( robotPos.getX(), 0, simulator::FIELD_HEIGHT + dzRobot ));
+			stGoalLeftSd = btStraight( btVector3( posGoalpost.getX(), 0, simulator::FIELD_HEIGHT / 3 ),
+			                           btVector3( robotPos.getX(), 0, simulator::FIELD_HEIGHT + dzRobot ));
 		}
 
 		vecGoalRight = stGoalRightSd.getNormalVector();

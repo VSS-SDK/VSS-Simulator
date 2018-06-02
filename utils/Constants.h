@@ -21,8 +21,8 @@ namespace simulator {
   const float C_MASSA_ROBO = 0.200;
   const float SCALE_WORLD = 100; //Defines the centimeter as unit of measurement in the world. Used in non-linear equations to convert centimeter in meter (SI)
 
-  const float SIZE_WIDTH2 = 150;
+  const float FIELD_WIDTH = 150;
   const float GOAL_WIDTH = 10;
-  const float SIZE_DEPTH = 130;
+  const float FIELD_HEIGHT = 130;
 }
 #endif

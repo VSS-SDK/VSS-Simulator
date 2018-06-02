@@ -62,7 +62,7 @@ void Arbiter::position_objects_after_goal_team_1(){
 		orientations.push_back(StartPositionsHelper::angulations[i]);
 	}
 
-	physics->setBallPosition( btVector3( (simulator::SIZE_WIDTH2 / 2.0) + 10, 2.0, simulator::SIZE_DEPTH / 2.0 ));
+	physics->setBallPosition( btVector3( (simulator::FIELD_WIDTH / 2.0) + 10, 2.0, simulator::FIELD_HEIGHT / 2.0 ));
 	physics->setRobotsPosition( positions, orientations );
 }
 
@@ -75,6 +75,6 @@ void Arbiter::position_objects_after_goal_team_2(){
 		orientations.push_back(StartPositionsHelper::angulations[i]);
 	}
 
-	physics->setBallPosition( btVector3( (simulator::SIZE_WIDTH2 / 2.0) + 10, 2.0, simulator::SIZE_DEPTH / 2.0 ));
+	physics->setBallPosition( btVector3( (simulator::FIELD_WIDTH / 2.0) + 10, 2.0, simulator::FIELD_HEIGHT / 2.0 ));
 	physics->setRobotsPosition( positions, orientations );
 }
