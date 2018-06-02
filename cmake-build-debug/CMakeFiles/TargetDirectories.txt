@@ -1,9 +1,0 @@
-/home/johnathan/Repositories/SDK/rollback/VSS-Simulator/cmake-build-debug/CMakeFiles/install/strip.dir
-/home/johnathan/Repositories/SDK/rollback/VSS-Simulator/cmake-build-debug/CMakeFiles/install/local.dir
-/home/johnathan/Repositories/SDK/rollback/VSS-Simulator/cmake-build-debug/CMakeFiles/install.dir
-/home/johnathan/Repositories/SDK/rollback/VSS-Simulator/cmake-build-debug/CMakeFiles/list_install_components.dir
-/home/johnathan/Repositories/SDK/rollback/VSS-Simulator/cmake-build-debug/CMakeFiles/rebuild_cache.dir
-/home/johnathan/Repositories/SDK/rollback/VSS-Simulator/cmake-build-debug/CMakeFiles/edit_cache.dir
-/home/johnathan/Repositories/SDK/rollback/VSS-Simulator/cmake-build-debug/CMakeFiles/package_source.dir
-/home/johnathan/Repositories/SDK/rollback/VSS-Simulator/cmake-build-debug/CMakeFiles/package.dir
-/home/johnathan/Repositories/SDK/rollback/VSS-Simulator/cmake-build-debug/CMakeFiles/vss-simulator.dir

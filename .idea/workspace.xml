@@ -14,54 +14,6 @@
     <list default="true" id="cbaf9d14-b6ee-4cd2-8fa2-f662a421399a" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.gitignore" afterPath="$PROJECT_DIR$/.gitignore" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/build/CMakeCache.txt" afterPath="$PROJECT_DIR$/build/CMakeCache.txt" />
-      <change beforePath="$PROJECT_DIR$/build/CMakeFiles/CMakeDirectoryInformation.cmake" afterPath="$PROJECT_DIR$/build/CMakeFiles/CMakeDirectoryInformation.cmake" />
-      <change beforePath="$PROJECT_DIR$/build/CMakeFiles/CMakeError.log" afterPath="$PROJECT_DIR$/build/CMakeFiles/CMakeError.log" />
-      <change beforePath="$PROJECT_DIR$/build/CMakeFiles/CMakeOutput.log" afterPath="$PROJECT_DIR$/build/CMakeFiles/CMakeOutput.log" />
-      <change beforePath="$PROJECT_DIR$/build/CMakeFiles/Makefile.cmake" afterPath="$PROJECT_DIR$/build/CMakeFiles/Makefile.cmake" />
-      <change beforePath="$PROJECT_DIR$/build/CMakeFiles/Makefile2" afterPath="$PROJECT_DIR$/build/CMakeFiles/Makefile2" />
-      <change beforePath="$PROJECT_DIR$/build/CMakeFiles/TargetDirectories.txt" afterPath="$PROJECT_DIR$/build/CMakeFiles/TargetDirectories.txt" />
-      <change beforePath="$PROJECT_DIR$/build/CMakeFiles/feature_tests.bin" afterPath="$PROJECT_DIR$/build/CMakeFiles/feature_tests.bin" />
-      <change beforePath="$PROJECT_DIR$/build/CMakeFiles/feature_tests.c" afterPath="$PROJECT_DIR$/build/CMakeFiles/feature_tests.c" />
-      <change beforePath="$PROJECT_DIR$/build/CMakeFiles/vss-simulator.dir/CXX.includecache" afterPath="$PROJECT_DIR$/build/CMakeFiles/vss-simulator.dir/CXX.includecache" />
-      <change beforePath="$PROJECT_DIR$/build/CMakeFiles/vss-simulator.dir/DependInfo.cmake" afterPath="$PROJECT_DIR$/build/CMakeFiles/vss-simulator.dir/DependInfo.cmake" />
-      <change beforePath="$PROJECT_DIR$/build/CMakeFiles/vss-simulator.dir/build.make" afterPath="$PROJECT_DIR$/build/CMakeFiles/vss-simulator.dir/build.make" />
-      <change beforePath="$PROJECT_DIR$/build/CMakeFiles/vss-simulator.dir/cmake_clean.cmake" afterPath="$PROJECT_DIR$/build/CMakeFiles/vss-simulator.dir/cmake_clean.cmake" />
-      <change beforePath="$PROJECT_DIR$/build/CMakeFiles/vss-simulator.dir/depend.internal" afterPath="$PROJECT_DIR$/build/CMakeFiles/vss-simulator.dir/depend.internal" />
-      <change beforePath="$PROJECT_DIR$/build/CMakeFiles/vss-simulator.dir/depend.make" afterPath="$PROJECT_DIR$/build/CMakeFiles/vss-simulator.dir/depend.make" />
-      <change beforePath="$PROJECT_DIR$/build/CMakeFiles/vss-simulator.dir/flags.make" afterPath="$PROJECT_DIR$/build/CMakeFiles/vss-simulator.dir/flags.make" />
-      <change beforePath="$PROJECT_DIR$/build/CMakeFiles/vss-simulator.dir/link.txt" afterPath="$PROJECT_DIR$/build/CMakeFiles/vss-simulator.dir/link.txt" />
-      <change beforePath="$PROJECT_DIR$/build/CPackConfig.cmake" afterPath="$PROJECT_DIR$/build/CPackConfig.cmake" />
-      <change beforePath="$PROJECT_DIR$/build/CPackSourceConfig.cmake" afterPath="$PROJECT_DIR$/build/CPackSourceConfig.cmake" />
-      <change beforePath="$PROJECT_DIR$/build/Makefile" afterPath="$PROJECT_DIR$/build/Makefile" />
-      <change beforePath="$PROJECT_DIR$/build/cmake_install.cmake" afterPath="$PROJECT_DIR$/build/cmake_install.cmake" />
-      <change beforePath="$PROJECT_DIR$/build/vss-simulator" afterPath="$PROJECT_DIR$/build/vss-simulator" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeCache.txt" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeCache.txt" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/CMakeDirectoryInformation.cmake" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/CMakeDirectoryInformation.cmake" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/CMakeError.log" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/CMakeError.log" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/CMakeOutput.log" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/CMakeOutput.log" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Makefile.cmake" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Makefile.cmake" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Makefile2" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Makefile2" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/TargetDirectories.txt" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/TargetDirectories.txt" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/clion-environment.txt" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/clion-environment.txt" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/clion-log.txt" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/clion-log.txt" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/feature_tests.bin" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/feature_tests.bin" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/vss-simulator.dir/DependInfo.cmake" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/vss-simulator.dir/DependInfo.cmake" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/vss-simulator.dir/build.make" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/vss-simulator.dir/build.make" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/vss-simulator.dir/flags.make" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/vss-simulator.dir/flags.make" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/vss-simulator.dir/link.txt" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/vss-simulator.dir/link.txt" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CPackConfig.cmake" afterPath="$PROJECT_DIR$/cmake-build-debug/CPackConfig.cmake" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CPackSourceConfig.cmake" afterPath="$PROJECT_DIR$/cmake-build-debug/CPackSourceConfig.cmake" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/Makefile" afterPath="$PROJECT_DIR$/cmake-build-debug/Makefile" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/cmake_install.cmake" afterPath="$PROJECT_DIR$/cmake-build-debug/cmake_install.cmake" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/vss-simulator.cbp" afterPath="$PROJECT_DIR$/cmake-build-debug/vss-simulator.cbp" />
-      <change beforePath="$PROJECT_DIR$/src/Arbiter.cpp" afterPath="$PROJECT_DIR$/src/Arbiter.cpp" />
-      <change beforePath="$PROJECT_DIR$/src/Physics.cpp" afterPath="$PROJECT_DIR$/src/Physics.cpp" />
-      <change beforePath="$PROJECT_DIR$/src/Simulator.cpp" afterPath="$PROJECT_DIR$/src/Simulator.cpp" />
-      <change beforePath="$PROJECT_DIR$/src/strategies/ModelStrategy.cpp" afterPath="$PROJECT_DIR$/src/strategies/ModelStrategy.cpp" />
-      <change beforePath="$PROJECT_DIR$/src/strategies/Strategy.cpp" afterPath="$PROJECT_DIR$/src/strategies/Strategy.cpp" />
-      <change beforePath="$PROJECT_DIR$/src/strategies/StrategyBasic.cpp" afterPath="$PROJECT_DIR$/src/strategies/StrategyBasic.cpp" />
-      <change beforePath="$PROJECT_DIR$/utils/Constants.h" afterPath="$PROJECT_DIR$/utils/Constants.h" />
     </list>
     <ignored path="$PROJECT_DIR$/cmake-build-debug/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -77,18 +29,28 @@
       <file leaf-file-name="CMakeLists.txt" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/CMakeLists.txt">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-415">
+            <state relative-caret-position="-262">
               <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Constants.h" pinned="false" current-in-tab="true">
+      <file leaf-file-name=".gitignore" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/.gitignore">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="503">
+              <caret line="35" column="18" lean-forward="false" selection-start-line="35" selection-start-column="18" selection-end-line="35" selection-end-column="18" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Constants.h" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/utils/Constants.h">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="476">
-              <caret line="28" column="0" lean-forward="true" selection-start-line="28" selection-start-column="0" selection-end-line="28" selection-end-column="0" />
+              <caret line="28" column="0" lean-forward="false" selection-start-line="28" selection-start-column="0" selection-end-line="28" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -103,6 +65,7 @@
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/utils/Constants.h" />
+        <option value="$PROJECT_DIR$/.gitignore" />
       </list>
     </option>
   </component>
@@ -197,12 +160,12 @@
       <option name="presentableId" value="Default" />
       <updated>1527915732714</updated>
       <workItem from="1527915733838" duration="22000" />
-      <workItem from="1527915813308" duration="92000" />
+      <workItem from="1527915813308" duration="255000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="114000" />
+    <option name="totallyTimeSpent" value="277000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="132" width="1922" height="1054" extended-state="6" />
@@ -240,18 +203,26 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/utils/Constants.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="476">
+          <caret line="28" column="0" lean-forward="false" selection-start-line="28" selection-start-column="0" selection-end-line="28" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/CMakeLists.txt">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-415">
+        <state relative-caret-position="-262">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/utils/Constants.h">
+    <entry file="file://$PROJECT_DIR$/.gitignore">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="476">
-          <caret line="28" column="0" lean-forward="true" selection-start-line="28" selection-start-column="0" selection-end-line="28" selection-end-column="0" />
+        <state relative-caret-position="503">
+          <caret line="35" column="18" lean-forward="false" selection-start-line="35" selection-start-column="18" selection-end-line="35" selection-end-column="18" />
           <folding />
         </state>
       </provider>
