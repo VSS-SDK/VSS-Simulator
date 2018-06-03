@@ -1,4 +1,4 @@
-# VSS-Simulator [![MIT licensed](https://img.shields.io/badge/license-MIT-blue.svg)][mit] [![Build Status](https://travis-ci.org/SIRLab/VSS-Viewer.svg?branch=master)][travis]
+# VSS-Simulator [![MIT licensed](https://img.shields.io/badge/license-MIT-blue.svg)][mit] [![Build Status](https://travis-ci.org/SIRLab/VSS-Simulator.svg?branch=master)][travis]
 
 [![Trello](https://img.shields.io/badge/Trello-SDK-blue.svg)][vss-sdk-trello]
 [![Slack](https://img.shields.io/badge/Slack-Channel-551a8b.svg)][slack]
@@ -30,7 +30,7 @@ Você pode utilizar esse código. Caso o faça, nos informe.
 
 [vss-sdk]: http://sirlab.github.io/VSS-SDK
 [mit]: https://raw.githubusercontent.com/SIRLab/VSS-Simulator/master/LICENSE.txt
-[travis]: https://travis-ci.org/SIRLab/VSS-Viewer
+[travis]: https://travis-ci.org/SIRLab/VSS-Simulator
 [vss-sdk-trello]: https://trello.com/b/b4dVV6ug/vss-sdk
 [slack]: https://vss-sdk.slack.com
 [samplecpp]: https://github.com/SIRLab/VSS-SampleCpp
