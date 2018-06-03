@@ -10,4 +10,4 @@ script:
   - sudo docker run vss-simulator test
 
 notifications:
-  slack: vss-sdk:X0iosKxIV2sbIubyJ2WrTrK
+  slack: vss-sdk:X0iosKxIV2sbIubyJ2WrTrKT
