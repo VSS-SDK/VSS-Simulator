@@ -1,37 +1,37 @@
 # VSS-Simulator [![MIT licensed](https://img.shields.io/badge/license-MIT-blue.svg)][mit] [![Build Status](https://travis-ci.org/SIRLab/VSS-Viewer.svg?branch=master)][travis]
 
-[![Trello Features](https://img.shields.io/badge/Trello-Features-blue.svg)][vss-sdk-features]
-[![Trello PBIs](https://img.shields.io/badge/Trello-PBIs-blue.svg)][vss-sdk-pbis]
+[![Trello](https://img.shields.io/badge/Trello-SDK-blue.svg)][vss-sdk-trello]
 [![Slack](https://img.shields.io/badge/Slack-Channel-551a8b.svg)][slack]
 
-O VSS-Simulator é um simulador de futebol para a categoria IEEE VSS.
-Mais informações sobre o framework podem ser encontradas em [VSS-SDK][vss-sdk].
+O VSS-Simulator é um simulador de partidas de futebol que faz parte do VSS-SDK.
+Esse projeto utiliza o [VSS-Core][vss-core] como interface
+de comunicação.
 
+Mais informações podem ser encontradas em [VSS-SDK][vss-sdk].
 
-## Installation
+## Instalação
 ```
 $ sudo ./configure.sh
 ```
 
-## Samples
-C++ using the VSS-Interface: [SampleCpp][samplecpp]
+## Desenvolvimento
+```
+$ sudo ./configure.sh development
+```
 
-## License
+## Exemplos
+Exemplo em C++: [VSS-SampleCpp][samplecpp]
 
-This code is licensed under the [GNU GENERAL PUBLIC LICENSE Version 3][gpl3], of which a textual copy is available at [LICENSE.txt](LICENSE.txt).
+# Licença
 
-You are allowed and encouraged to use this software on robotics competitions.  If you do, please let us know.
+Esse código está sob licença [MIT License][mit], cujo uma cópia em texto pode ser encontrada em [LICENSE.txt](LICENSE.txt).
 
+Você pode utilizar esse código. Caso o faça, nos informe.
 
 [vss-sdk]: http://sirlab.github.io/VSS-SDK
-[mit]: https://raw.githubusercontent.com/hyperium/hyper/master/LICENSE
+[mit]: https://raw.githubusercontent.com/SIRLab/VSS-Simulator/master/LICENSE.txt
 [travis]: https://travis-ci.org/SIRLab/VSS-Viewer
-[vss-sdk-features]: https://trello.com/b/b4dVV6ug/vss-sdk-features
-[vss-sdk-pbis]: https://trello.com/b/m0u389nR/vss-sdk-pbis
+[vss-sdk-trello]: https://trello.com/b/b4dVV6ug/vss-sdk
 [slack]: https://vss-sdk.slack.com
-
-
-
-
-
-
+[samplecpp]: https://github.com/SIRLab/VSS-SampleCpp
+[vss-core]: https://github.com/SIRLab/VSS-Core
