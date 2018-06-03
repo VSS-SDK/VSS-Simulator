@@ -26,7 +26,6 @@ class btDynamicsWorld;
 #include "LinearMath/btStraight.h"
 #include "Sir.h"
 
-#include <GL/glut.h>
 #include <math.h>
 
 using namespace std;

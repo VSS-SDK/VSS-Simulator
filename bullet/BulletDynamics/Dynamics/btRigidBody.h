@@ -22,7 +22,6 @@ subject to the following restrictions:
 #include "BulletCollision/CollisionDispatch/btCollisionObject.h"
 #include <iostream>
 #include <string.h>
-#include <GL/glut.h>
 #include "Constants.h"
 
 using namespace std;
