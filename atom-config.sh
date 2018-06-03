@@ -1,9 +1,0 @@
-apm install linter
-apm install linter-ui-default
-apm install intentions
-apm install busy-signal
-apm install glacier-syntax
-apm install brogrammer-syntax
-apm install file-icons
-apm install autocomplete-atom-api
-apm install atom-beautify
