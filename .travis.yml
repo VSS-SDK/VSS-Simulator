@@ -6,8 +6,8 @@ services:
   - docker
 
 script:
-  - sudo docker build -t vss-joystick .
-  - sudo docker run vss-joystick test
+  - sudo docker build -t vss-simulator .
+  - sudo docker run vss-simulator test
 
 notifications:
   slack: vss-sdk:X0iosKxIV2sbIubyJ2WrTrK
