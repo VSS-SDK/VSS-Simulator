@@ -27,7 +27,6 @@
 #include "strategies/Strategy.h"
 
 #include "strategies/ModelStrategy.h"
-#include "interface.h"
 #include "Arbiter.h"
 
 // TODO: refatorar, viola pelo menos Single Responsability
