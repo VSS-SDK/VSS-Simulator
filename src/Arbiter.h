@@ -2,7 +2,6 @@
 #define _ARBITER_H_
 
 #include "iostream"
-#include "interface.h"
 #include "Sir.h"
 #include "Physics.h"
 
