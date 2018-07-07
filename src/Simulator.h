@@ -18,6 +18,7 @@
 #define SIMULATOR_H_
 
 #include <Communications/StateSender.h>
+#include <Domain/ExecutionConfig.h>
 #include "Communications/CommandReceiver.h"
 #include "Header.h"
 
@@ -45,8 +46,8 @@ private:
 	Arbiter arbiter;
 	bool paused;
 
-	int qtd_of_goals;
-	bool develop_mode;
+	int qtdOfGoals;
+    vss::ExecutionConfig executionConfig;
 	int status_team_1;
 	int status_team_2;
 	int goals_team_1;
@@ -88,7 +89,7 @@ private:
 public:
 
 	Simulator();
-	void runSimulator( int argc, char *argv[], ModelStrategy * strategyTeam, ModelStrategy * strategyAdv, bool fast_travel, int qtd_goal, bool develop_mode );
+	void runSimulator( int argc, char *argv[], ModelStrategy * strategyTeam, ModelStrategy * strategyAdv, vss::ExecutionConfig executionConfig );
 
 	void runPhysics();
 	void runStrategies();

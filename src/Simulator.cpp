@@ -14,6 +14,7 @@
    copies or substantial portions of the Software.
  */
 
+#include <Domain/ExecutionConfig.h>
 #include "Simulator.h"
 #include "functional"
 #include "Interfaces/IControlReceiver.h"
@@ -33,7 +34,7 @@ Simulator::Simulator(){
 
     status_team_1 = status_team_2 = -1;
 
-    qtd_of_goals = 10;
+    qtdOfGoals = 10;
 
     finish_match = false;
 
@@ -44,11 +45,11 @@ Simulator::Simulator(){
     stateSender = new vss::StateSender();
 }
 
-void Simulator::runSimulator( int argc, char *argv[], ModelStrategy *stratBlueTeam, ModelStrategy *stratYellowTeam, bool fast_travel, int qtd_of_goals, bool develop_mode ){
-    this->qtd_of_goals = qtd_of_goals;
-    this->develop_mode = develop_mode;
+void Simulator::runSimulator( int argc, char *argv[], ModelStrategy *stratBlueTeam, ModelStrategy *stratYellowTeam, vss::ExecutionConfig executionConfig ){
+    this->qtdOfGoals = qtdOfGoals;
+    this->executionConfig = executionConfig;
 
-    if(!fast_travel) {
+    if(executionConfig.timeExecutionType == vss::TimeExecutionType::Normal) {
         timeStep = 1.f / 60.f;
         handTime = 1.f;
     }else{
@@ -255,11 +256,13 @@ void Simulator::runPhysics(){
 
             arbiter.checkWorld();
 
-            if(!develop_mode) {
-                if(report.total_of_goals_team[0] >= qtd_of_goals || report.total_of_goals_team[1] >= qtd_of_goals || report.qtd_of_steps > 3500 * qtd_of_goals) {
+            if(executionConfig.matchFinishType == vss::MatchFinishType::TenGoalsDifference)
+                if(abs(report.total_of_goals_team[0] - report.total_of_goals_team[1]) >= qtdOfGoals)
                     finish_match = true;
-                }
-            }
+
+            if(executionConfig.durationType == vss::DurationType::TenMinutes)
+                if(report.qtd_of_steps > 3500 * qtdOfGoals)
+                    finish_match = true;
 
             runSender();
         }else{
