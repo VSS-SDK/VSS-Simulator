@@ -14,7 +14,7 @@
    copies or substantial portions of the Software.
  */
 
-#include "StrategyBasic.h"
+#include "../../include/strategies/StrategyBasic.h"
 
 StrategyBasic::StrategyBasic() : framesStopped( 0 ), framesBackward( 0 ){
 	attackDir = 1;

@@ -14,9 +14,9 @@
    copies or substantial portions of the Software.
  */
 
-#include <strategies/Strategy.h>
+#include "../include/strategies/Strategy.h"
 #include "Builders/StdinInterpreterBuilder.h"
-#include "Simulator.h"
+#include "../include/Simulator.h"
 
 vss::ExecutionConfig loadExecutionConfig(int argc, char** argv){
     auto stdinInterpreterBuilder = new vss::StdinInterpreterBuilder();
@@ -45,8 +45,8 @@ int main( int argc, char **argv ){
     if(!executionConfiguration.isValidConfiguration)
         return 0;
 
-    Strategy *stratYellowTeam = new Strategy(); //Original strategy
-    Strategy *stratBlueTeam = new Strategy(); //Strategy for tests
+    Strategy *stratYellowTeam = new Strategy();
+    Strategy *stratBlueTeam = new Strategy();
 
     Simulator* simulator = new Simulator();
     simulator->runSimulator( argc, argv, stratBlueTeam, stratYellowTeam, executionConfiguration );

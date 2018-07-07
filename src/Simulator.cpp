@@ -15,11 +15,13 @@
  */
 
 #include <Domain/ExecutionConfig.h>
-#include "Simulator.h"
+#include <Helpers/Math.h>
+#include <Communications/ControlReceiverAdapter.h>
+#include "../include/Simulator.h"
 #include "functional"
 #include "Interfaces/IControlReceiver.h"
 #include "Communications/ControlReceiver.h"
-#include "../utils/StartPositionsHelper.hpp"
+#include "../include/StartPositionsHelper.h"
 
 Simulator::Simulator(){
     loopBullet = 0;
@@ -89,14 +91,12 @@ void Simulator::runSimulator( int argc, char *argv[], ModelStrategy *stratBlueTe
 
     thread_physics = new thread( bind( &Simulator::runPhysics, this ));
     thread_strategies = new thread( bind( &Simulator::runStrategies, this ));
-    //thread_send = new thread(bind(&Simulator::runSender, this));
     thread_receive_team1 = new thread( bind( &Simulator::runReceiveTeam1, this ));
     thread_receive_team2 = new thread( bind( &Simulator::runReceiveTeam2, this ));
     thread_receive_control = new thread( bind( &Simulator::runReceiveControl, this ));
 
     thread_physics->join();
     thread_strategies->join();
-    //thread_send->join();
     thread_receive_team1->join();
     thread_receive_team2->join();
     thread_receive_control->join();
@@ -105,33 +105,8 @@ void Simulator::runSimulator( int argc, char *argv[], ModelStrategy *stratBlueTe
 }
 
 void Simulator::runReceiveControl(){
-    vss::IControlReceiver *controlReceiver;
-    controlReceiver = new vss::ControlReceiver();
-    controlReceiver->createSocket();
-
-    while(!finish_match) {
-        auto control = controlReceiver->receiveControl();
-
-        paused = control.paused;
-
-        if(!paused && !StartPositionsHelper::useFile) {
-            vector<btVector3> positions;
-            vector<btScalar> orientations;
-
-            for(int i = 0; i < control.teamYellow.size(); i++) {
-                positions.push_back( btVector3( control.teamYellow[i].x, 4, control.teamYellow[i].y ));
-                orientations.push_back(btScalar(degreeToRadian(control.teamYellow[i].angle)));
-            }
-
-            for(int i = 0; i < control.teamBlue.size(); i++) {
-                positions.push_back( btVector3( control.teamBlue[i].x, 4, control.teamBlue[i].y ));
-                orientations.push_back(btScalar(degreeToRadian(control.teamBlue[i].angle)));
-            }
-
-            physics->setRobotsPose( positions, orientations );
-            physics->setBallPosition(btVector3(control.ball.x, 4, control.ball.y));
-        }
-    }
+    controlReceiverAdapter = new ControlReceiverAdapter(&executionConfig, physics, &paused);
+    controlReceiverAdapter->loop();
 }
 
 void Simulator::runReceiveTeam1(){
@@ -200,7 +175,7 @@ void Simulator::runSender(){
 
         robot.x = posRobot.getX();
         robot.y = posRobot.getZ();
-        robot.angle = radianToDegree(rads);
+        robot.angle = Math::radianToDegree(rads);
         robot.speedX = velRobot.getX();
         robot.speedY = velRobot.getZ();
         robot.speedAngle = 0;
@@ -217,7 +192,7 @@ void Simulator::runSender(){
 
         robot.x = posRobot.getX();
         robot.y = posRobot.getZ();
-        robot.angle = radianToDegree(rads);
+        robot.angle = Math::radianToDegree(rads);
         robot.speedX = velRobot.getX();
         robot.speedY = velRobot.getZ();
         robot.speedAngle = 0;
@@ -457,21 +432,4 @@ btVector3 Simulator::getRobotOrientation( RobotPhysics* robot ){
 
 btVector3 Simulator::getRobotVelocity( RobotPhysics* robot ){
     return robot->getRigidBody()->getLinearVelocity();
-}
-
-float Simulator::radianToDegree(float radian) {
-    float degree = radian * 180.0 / M_PI;
-
-    if(degree < 0)
-        degree = 360 + degree;
-
-    return degree;
-}
-
-float Simulator::degreeToRadian(float degree) {
-    if(degree > 180)
-        degree = (360 - degree)*-1;
-
-    float radian = degree * M_PI / 180.0;
-    return radian;
 }

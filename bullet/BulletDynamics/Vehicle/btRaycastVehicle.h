@@ -24,7 +24,7 @@ class btDynamicsWorld;
 #include <iostream>
 #include <sstream>
 #include "LinearMath/btStraight.h"
-#include "Sir.h"
+#include "../../../include/Sir.h"
 
 #include <math.h>
 

@@ -3,7 +3,7 @@
 //
 
 #include <googletest/googletest/include/gtest/gtest.h>
-#include <Sir.h>
+#include "../include/Sir.h"
 
 TEST(Command_Constructor, WhenDefaultBuilded_ShouldBeZero) {
     Command command;

@@ -19,8 +19,8 @@
 
 //Classes from lib
 
-#include "../utils/Constants.h"
-#include "../bullet/btBulletDynamicsCommon.h"
+#include "Domain/SimulationConstants.h"
+#include "btBulletDynamicsCommon.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <iostream>

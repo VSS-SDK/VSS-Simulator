@@ -22,7 +22,7 @@ subject to the following restrictions:
 #include "BulletCollision/CollisionDispatch/btCollisionObject.h"
 #include <iostream>
 #include <string.h>
-#include "Constants.h"
+#include "Domain/SimulationConstants.h"
 
 using namespace std;
 

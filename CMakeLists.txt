@@ -18,14 +18,12 @@ find_library(ZeroMQ_LIBRARY
         )
 
 include_directories(${PROTOBUF_INCLUDE_DIR} ${Boost_INCLUDE_DIR})
-include_directories(src src/strategies)
-include_directories(utils utils/includes)
+include_directories(src src/strategies src/Communications src/Helpers)
+include_directories(include include/Interfaces include/Domain include/Communications include/Helpers)
 include_directories(bullet bullet/LinearMath)
 
 file(GLOB_RECURSE SRCS_CPP src/*.cpp)
-file(GLOB_RECURSE SRCS_H src/*.h)
-file(GLOB_RECURSE UTILS_CPP utils/*.cpp)
-file(GLOB_RECURSE UTILS_H utils/*.h)
+file(GLOB_RECURSE INCLUDE_H include/*.h)
 file(GLOB_RECURSE BULLET_CPP bullet/*.cpp)
 file(GLOB_RECURSE BULLET_H bullet/*.h)
 
@@ -33,7 +31,7 @@ set (VSS_CORE libvss-core.so)
 link_directories(usr/lib)
 include_directories(usr/local/include)
 
-ADD_LIBRARY(vss-simulator-core ${SRCS_CPP} ${SRCS_H} ${UTILS_CPP} ${UTILS_H} ${BULLET_CPP} ${BULLET_H})
+ADD_LIBRARY(vss-simulator-core ${SRCS_CPP} ${INCLUDE_H} ${UTILS_CPP} ${UTILS_H} ${BULLET_CPP} ${BULLET_H})
 TARGET_LINK_LIBRARIES(vss-simulator-core ${VSS_CORE} ${PROTOBUF_LIBRARY} ${OPENGL_LIBRARIES} ${GLUT_LIBRARY})
 TARGET_LINK_LIBRARIES(vss-simulator-core LINK_PUBLIC ${Boost_LIBRARIES})
 target_include_directories(vss-simulator-core PUBLIC ${ZeroMQ_INCLUDE_DIR})

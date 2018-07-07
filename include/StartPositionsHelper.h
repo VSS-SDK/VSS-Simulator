@@ -5,7 +5,7 @@
 #ifndef VSS_SIMULATOR_INPUTPARSER_HPP
 #define VSS_SIMULATOR_INPUTPARSER_HPP
 
-#include "../src/Header.h"
+#include "../include/Header.h"
 
 #include <fstream>
 

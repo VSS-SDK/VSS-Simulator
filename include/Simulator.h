@@ -19,6 +19,7 @@
 
 #include <Communications/StateSender.h>
 #include <Domain/ExecutionConfig.h>
+#include <Interfaces/IControlReceiverAdapter.h>
 #include "Communications/CommandReceiver.h"
 #include "Header.h"
 
@@ -44,6 +45,7 @@ class Simulator {
 private:
 
 	Arbiter arbiter;
+	IControlReceiverAdapter *controlReceiverAdapter;
 	bool paused;
 
 	int qtdOfGoals;
@@ -84,8 +86,6 @@ private:
 	btVector3 getRobotPosition( RobotPhysics* robot );
 	btVector3 getRobotVelocity( RobotPhysics* robot );
 
-	float radianToDegree(float);
-	float degreeToRadian(float);
 public:
 
 	Simulator();
