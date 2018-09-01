@@ -18,7 +18,7 @@
 #define ROBOT_PHYSICS_H_
 
 #include "Header.h"
-#include "../bullet/BulletDynamics/Vehicle/btRaycastVehicle.h"
+#include "BulletDynamics/Vehicle/btRaycastVehicle.h"
 
 #define MAX_ACCELERATION 5.5 * simulator::SCALE_WORLD
 

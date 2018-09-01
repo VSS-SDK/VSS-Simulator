@@ -17,7 +17,7 @@
 #ifndef ModelStrategy_CPP_
 #define ModelStrategy_CPP_
 
-#include "ModelStrategy.h"
+#include "../../include/strategies/ModelStrategy.h"
 
 ModelStrategy::ModelStrategy(){
 	this->ballVel = btVector3( 0, 0, 0 );

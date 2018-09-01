@@ -14,7 +14,7 @@
    copies or substantial portions of the Software.
  */
 
-#include "RobotStrategy.h"
+#include "../include/RobotStrategy.h"
 
 RobotStrategy::RobotStrategy( int id, float maxCommand, float maxTargetAngle, float actDistToTarget ){
 	this->id = id;

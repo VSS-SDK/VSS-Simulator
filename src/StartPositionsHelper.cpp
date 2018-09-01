@@ -2,7 +2,7 @@
 // Created by manoel on 04/04/18.
 //
 
-#include "StartPositionsHelper.hpp"
+#include "../include/StartPositionsHelper.h"
 
 vector<btVector3> StartPositionsHelper::positions = {btVector3(155, 4, 65),
                                                       btVector3(95, 4, 55),

@@ -14,9 +14,9 @@
    copies or substantial portions of the Software.
  */
 
-#include "Physics.h"
+#include "../include/Physics.h"
 #include "../../bullet/BulletDynamics/Dynamics/btRigidBody.h"
-#include "../utils/StartPositionsHelper.hpp"
+#include "../include/StartPositionsHelper.h"
 
 Physics::Physics( int numTeams ){
 

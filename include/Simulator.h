@@ -18,6 +18,10 @@
 #define SIMULATOR_H_
 
 #include <Communications/StateSender.h>
+#include <Domain/ExecutionConfig.h>
+#include <Interfaces/IControlReceiverAdapter.h>
+#include <Interfaces/ICommandReceiverAdapter.h>
+#include <Interfaces/IStateSenderAdapter.h>
 #include "Communications/CommandReceiver.h"
 #include "Header.h"
 
@@ -43,10 +47,15 @@ class Simulator {
 private:
 
 	Arbiter arbiter;
+	IStateSenderAdapter *stateSenderAdapter;
+	IControlReceiverAdapter *controlReceiverAdapter;
+	ICommandReceiverAdapter *commandBlueReceiverAdapter;
+	ICommandReceiverAdapter *commandYellowReceiverAdapter;
+
 	bool paused;
 
-	int qtd_of_goals;
-	bool develop_mode;
+	int qtdOfGoals;
+    vss::ExecutionConfig executionConfig;
 	int status_team_1;
 	int status_team_2;
 	int goals_team_1;
@@ -58,8 +67,6 @@ private:
 	float handTime;
 	int numRobotsTeam;
 	vector<Command> commands;
-
-	vss::IStateSender *stateSender;
 
 	GameState* gameState;
 	int loopBullet;
@@ -79,16 +86,10 @@ private:
 	void calcRelativeWorld( vector<RobotStrategy*> robotStrategiesTeam, int attackDir );
 	RobotStrategy* updateLocalPhysics( int id, RobotPhysics* bdRobot );
 
-	btVector3 getRobotOrientation( RobotPhysics* robot );
-	btVector3 getRobotPosition( RobotPhysics* robot );
-	btVector3 getRobotVelocity( RobotPhysics* robot );
-
-	float radianToDegree(float);
-	float degreeToRadian(float);
 public:
 
 	Simulator();
-	void runSimulator( int argc, char *argv[], ModelStrategy * strategyTeam, ModelStrategy * strategyAdv, bool fast_travel, int qtd_goal, bool develop_mode );
+	void runSimulator( int argc, char *argv[], vss::ExecutionConfig executionConfig );
 
 	void runPhysics();
 	void runStrategies();
@@ -96,8 +97,6 @@ public:
 	void runReceiveTeam1();
 	void runReceiveTeam2();
 	void runReceiveControl();
-
-	btVector3 getBallPosition();
 };
 
 #endif

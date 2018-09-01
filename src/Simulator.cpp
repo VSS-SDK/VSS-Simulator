@@ -14,11 +14,16 @@
    copies or substantial portions of the Software.
  */
 
-#include "Simulator.h"
+#include <Domain/ExecutionConfig.h>
+#include <Helpers/Math.h>
+#include <Communications/ControlReceiverAdapter.h>
+#include <Communications/CommandReceiverAdapter.h>
+#include <Communications/StateSenderAdapter.h>
+#include "../include/Simulator.h"
 #include "functional"
 #include "Interfaces/IControlReceiver.h"
 #include "Communications/ControlReceiver.h"
-#include "../utils/StartPositionsHelper.hpp"
+#include "../include/StartPositionsHelper.h"
 
 Simulator::Simulator(){
     loopBullet = 0;
@@ -33,7 +38,7 @@ Simulator::Simulator(){
 
     status_team_1 = status_team_2 = -1;
 
-    qtd_of_goals = 10;
+    qtdOfGoals = 10;
 
     finish_match = false;
 
@@ -41,14 +46,16 @@ Simulator::Simulator(){
     goals_team_2 = 0;
 
     paused = !StartPositionsHelper::useFile;
-    stateSender = new vss::StateSender();
 }
 
-void Simulator::runSimulator( int argc, char *argv[], ModelStrategy *stratBlueTeam, ModelStrategy *stratYellowTeam, bool fast_travel, int qtd_of_goals, bool develop_mode ){
-    this->qtd_of_goals = qtd_of_goals;
-    this->develop_mode = develop_mode;
+void Simulator::runSimulator( int argc, char *argv[], vss::ExecutionConfig executionConfig ){
+    this->qtdOfGoals = qtdOfGoals;
+    this->executionConfig = executionConfig;
 
-    if(!fast_travel) {
+    Strategy *stratYellowTeam = new Strategy();
+    Strategy *stratBlueTeam = new Strategy();
+
+    if(executionConfig.timeExecutionType == vss::TimeExecutionType::Normal) {
         timeStep = 1.f / 60.f;
         handTime = 1.f;
     }else{
@@ -86,16 +93,16 @@ void Simulator::runSimulator( int argc, char *argv[], ModelStrategy *stratBlueTe
         gameState->robotStrategiesAdv = robotStrategiesTeam;
     }
 
+    stateSenderAdapter = new StateSenderAdapter(&executionConfig, physics);
+
     thread_physics = new thread( bind( &Simulator::runPhysics, this ));
     thread_strategies = new thread( bind( &Simulator::runStrategies, this ));
-    //thread_send = new thread(bind(&Simulator::runSender, this));
     thread_receive_team1 = new thread( bind( &Simulator::runReceiveTeam1, this ));
     thread_receive_team2 = new thread( bind( &Simulator::runReceiveTeam2, this ));
     thread_receive_control = new thread( bind( &Simulator::runReceiveControl, this ));
 
     thread_physics->join();
     thread_strategies->join();
-    //thread_send->join();
     thread_receive_team1->join();
     thread_receive_team2->join();
     thread_receive_control->join();
@@ -104,79 +111,21 @@ void Simulator::runSimulator( int argc, char *argv[], ModelStrategy *stratBlueTe
 }
 
 void Simulator::runReceiveControl(){
-    vss::IControlReceiver *controlReceiver;
-    controlReceiver = new vss::ControlReceiver();
-    controlReceiver->createSocket();
-
-    while(!finish_match) {
-        auto control = controlReceiver->receiveControl();
-
-        paused = control.paused;
-
-        if(!paused && !StartPositionsHelper::useFile) {
-            vector<btVector3> positions;
-            vector<btScalar> orientations;
-
-            for(int i = 0; i < control.teamYellow.size(); i++) {
-                positions.push_back( btVector3( control.teamYellow[i].x, 4, control.teamYellow[i].y ));
-                orientations.push_back(btScalar(degreeToRadian(control.teamYellow[i].angle)));
-            }
-
-            for(int i = 0; i < control.teamBlue.size(); i++) {
-                positions.push_back( btVector3( control.teamBlue[i].x, 4, control.teamBlue[i].y ));
-                orientations.push_back(btScalar(degreeToRadian(control.teamBlue[i].angle)));
-            }
-
-            physics->setRobotsPose( positions, orientations );
-            physics->setBallPosition(btVector3(control.ball.x, 4, control.ball.y));
-        }
-    }
+    controlReceiverAdapter = new ControlReceiverAdapter(&executionConfig, physics, &paused);
+    controlReceiverAdapter->loop();
 }
 
 void Simulator::runReceiveTeam1(){
-    vss::ICommandReceiver *commandReceiver;
-    commandReceiver = new vss::CommandReceiver();
-    commandReceiver->createSocket(vss::TeamType::Yellow);
-
-    while(!finish_match) {
-        auto command = commandReceiver->receiveCommand();
-
-        if(status_team_1 == -1) {
-            status_team_1 = 0;
-            cout << "---Time amarelo conectado---" << endl;
-        }
-
-        for(unsigned int i = 0; i < command.commands.size() && i < 3; i++) {
-            commands.at( i ) = Command(static_cast<float>(command.commands[i].leftVel + 0.001),
-                                       static_cast<float>(command.commands[i].rightVel + 0.001));
-        }
-    }
+    commandYellowReceiverAdapter = new CommandReceiverAdapter(&executionConfig, &commands, &paused);
+    commandYellowReceiverAdapter->loop(vss::TeamType::Yellow);
 }
 
 void Simulator::runReceiveTeam2(){
-    vss::ICommandReceiver *commandReceiver;
-    commandReceiver = new vss::CommandReceiver();
-    commandReceiver->createSocket(vss::TeamType::Blue);
-
-    while(!finish_match) {
-        auto command = commandReceiver->receiveCommand();
-
-        if(status_team_2 == -1) {
-            status_team_2 = 0;
-            cout << "---Time azul conectado---" << endl;
-        }
-
-        for(unsigned int i = 0; i < command.commands.size() && i < 3; i++) {
-            commands.at( i + 3 ) = Command(static_cast<float>(command.commands[i].leftVel + 0.001),
-                                           static_cast<float>(command.commands[i].rightVel + 0.001));
-        }
-    }
+    commandYellowReceiverAdapter = new CommandReceiverAdapter(&executionConfig, &commands, &paused);
+    commandYellowReceiverAdapter->loop(vss::TeamType::Blue);
 }
 
 void Simulator::runSender(){
-    vss::State state;
-    vector<RobotPhysics*> listRobots = physics->getAllRobots();
-
     if(report.total_of_goals_team[0] != goals_team_1) {
         goals_team_1 = report.total_of_goals_team[0];
     }
@@ -185,46 +134,7 @@ void Simulator::runSender(){
         goals_team_2 = report.total_of_goals_team[1];
     }
 
-    state.ball.x = physics->getBallPosition().getX();
-    state.ball.y = physics->getBallPosition().getZ();
-    state.ball.speedX = physics->getBallVelocity().getX();
-    state.ball.speedY = physics->getBallVelocity().getZ();
-
-    for(int i = 0; i < 3; i++) {
-        btVector3 posRobot = getRobotPosition( listRobots.at( i ));
-        btVector3 velRobot = getRobotVelocity( listRobots.at( i ));
-        float rads = atan2( getRobotOrientation( listRobots.at( i )).getZ(), getRobotOrientation( listRobots.at( i )).getX());
-
-        vss::Robot robot;
-
-        robot.x = posRobot.getX();
-        robot.y = posRobot.getZ();
-        robot.angle = radianToDegree(rads);
-        robot.speedX = velRobot.getX();
-        robot.speedY = velRobot.getZ();
-        robot.speedAngle = 0;
-
-        state.teamYellow.push_back(robot);
-    }
-
-    for(int i = 0; i < 3; i++) {
-        btVector3 posRobot = getRobotPosition( listRobots.at( i + 3 ));
-        btVector3 velRobot = getRobotVelocity( listRobots.at( i + 3 ));
-        float rads = atan2( getRobotOrientation( listRobots.at( i + 3 )).getZ(), getRobotOrientation( listRobots.at( i + 3 )).getX());
-
-        vss::Robot robot;
-
-        robot.x = posRobot.getX();
-        robot.y = posRobot.getZ();
-        robot.angle = radianToDegree(rads);
-        robot.speedX = velRobot.getX();
-        robot.speedY = velRobot.getZ();
-        robot.speedAngle = 0;
-
-        state.teamBlue.push_back(robot);
-    }
-
-    stateSender->sendState(state);
+    stateSenderAdapter->send();
 }
 
 void Simulator::runPhysics(){
@@ -234,8 +144,6 @@ void Simulator::runPhysics(){
     arbiter.allocPhysics( physics );
     arbiter.allocReport( &report );
     arbiter.allocPaused( &paused );
-
-    stateSender->createSocket();
 
     while(!finish_match) {
         if(!paused) {
@@ -255,11 +163,13 @@ void Simulator::runPhysics(){
 
             arbiter.checkWorld();
 
-            if(!develop_mode) {
-                if(report.total_of_goals_team[0] >= qtd_of_goals || report.total_of_goals_team[1] >= qtd_of_goals || report.qtd_of_steps > 3500 * qtd_of_goals) {
+            if(executionConfig.matchFinishType == vss::MatchFinishType::TenGoalsDifference)
+                if(abs(report.total_of_goals_team[0] - report.total_of_goals_team[1]) >= qtdOfGoals)
                     finish_match = true;
-                }
-            }
+
+            if(executionConfig.durationType == vss::DurationType::TenMinutes)
+                if(report.qtd_of_steps > 3500 * qtdOfGoals)
+                    finish_match = true;
 
             runSender();
         }else{
@@ -439,36 +349,4 @@ btVector3 Simulator::calcRelativePosition( btVector3 absPos, int attackDir ){
         relX = simulator::FIELD_WIDTH - absPos.getX();
     }
     return btVector3( relX, 0, relZ );
-}
-
-btVector3 Simulator::getRobotPosition( RobotPhysics* robot ){
-    btTransform transTemp;
-    robot->getRigidBody()->getMotionState()->getWorldTransform( transTemp );
-    return transTemp.getOrigin();
-}
-
-btVector3 Simulator::getRobotOrientation( RobotPhysics* robot ){
-    btVector3 forwardVec = robot->getRaycast()->getForwardVector();
-    return forwardVec;
-}
-
-btVector3 Simulator::getRobotVelocity( RobotPhysics* robot ){
-    return robot->getRigidBody()->getLinearVelocity();
-}
-
-float Simulator::radianToDegree(float radian) {
-    float degree = radian * 180.0 / M_PI;
-
-    if(degree < 0)
-        degree = 360 + degree;
-
-    return degree;
-}
-
-float Simulator::degreeToRadian(float degree) {
-    if(degree > 180)
-        degree = (360 - degree)*-1;
-
-    float radian = degree * M_PI / 180.0;
-    return radian;
 }

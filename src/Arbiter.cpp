@@ -1,5 +1,5 @@
-#include "Arbiter.h"
-#include "../utils/StartPositionsHelper.hpp"
+#include "../include/Arbiter.h"
+#include "../include/StartPositionsHelper.h"
 
 Arbiter::Arbiter(){
 	refresh = false;

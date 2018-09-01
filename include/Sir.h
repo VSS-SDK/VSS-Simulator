@@ -18,7 +18,7 @@
 #define SIR_H_
 
 #include "Header.h"
-#include "../../bullet/BulletDynamics/Dynamics/btRigidBody.h"
+#include "BulletDynamics/Dynamics/btRigidBody.h"
 
 enum { NONE = 0, GOAL_TEAM1 = 1, GOAL_TEAM2 = 2, FAULT_TEAM1 = 3, FAULT_TEAM2 = 4, PENALTY_TEAM1 = 5, PENALTY_TEAM2 = 6 };
 
