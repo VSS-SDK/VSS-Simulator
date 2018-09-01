@@ -33,7 +33,7 @@ CMAKE_INSTALL () {
     cd ..
 }
 
-INSTALL_UBUNTU_14_04 () {
+INSTALL_UBUNTU_18_04 () {
     apt-get update && apt-get upgrade
     apt-get -y install pkg-config
     apt-get -y install g++ cmake libzmqpp3 libzmqpp-dev protobuf-compiler libprotobuf-dev libboost-all-dev libbullet-dev
@@ -41,6 +41,13 @@ INSTALL_UBUNTU_14_04 () {
 }
 
 INSTALL_UBUNTU_16_04 () {
+    apt-get update && apt-get upgrade
+    apt-get -y install pkg-config
+    apt-get -y install g++ cmake libzmqpp3 libzmqpp-dev protobuf-compiler libprotobuf-dev libboost-all-dev libbullet-dev
+    INSTALLED=1
+}
+
+INSTALL_UBUNTU_14_04 () {
     apt-get update && apt-get upgrade
     apt-get -y install pkg-config
     apt-get -y install g++ cmake libzmqpp3 libzmqpp-dev protobuf-compiler libprotobuf-dev libboost-all-dev libbullet-dev
@@ -80,6 +87,10 @@ INSTALL () {
     INSTALL_BASE;
 
     # Ubuntu
+    if [[ "$DISTRO" == "Ubuntu" ]] && [[ "$RELEASE" == "18.04" ]]; then
+        INSTALL_UBUNTU_18_04;
+    fi
+
     if [[ "$DISTRO" == "Ubuntu" ]] && [[ "$RELEASE" == "16.04" ]]; then
         INSTALL_UBUNTU_16_04;
     fi

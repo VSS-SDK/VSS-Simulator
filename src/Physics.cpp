@@ -445,13 +445,12 @@ void Physics::setRobotsPose(vector<btVector3> newPositions, vector<btScalar> new
   for(int i = 0; i < genRobots.size(); i++) {
     btTransform t;
     genRobots[i]->getRigidBody()->getMotionState()->getWorldTransform( t );
-
-    auto rotation = t.getRotation();
-
     t.setIdentity();
-    t.setRotation(rotation);
 
     t.setOrigin( newPositions[i] );
+
+    auto rotation = btQuaternion(btVector3(0, 1, 0), newOrientations[i]);
+    t.setRotation(rotation);
 
     btMotionState* motion = new btDefaultMotionState( t );
 
