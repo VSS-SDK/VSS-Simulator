@@ -45,11 +45,8 @@ int main( int argc, char **argv ){
     if(!executionConfiguration.isValidConfiguration)
         return 0;
 
-    Strategy *stratYellowTeam = new Strategy();
-    Strategy *stratBlueTeam = new Strategy();
-
     Simulator* simulator = new Simulator();
-    simulator->runSimulator( argc, argv, stratBlueTeam, stratYellowTeam, executionConfiguration );
+    simulator->runSimulator( argc, argv, executionConfiguration );
 
     return 0;
 }

@@ -89,7 +89,7 @@ private:
 public:
 
 	Simulator();
-	void runSimulator( int argc, char *argv[], ModelStrategy * strategyTeam, ModelStrategy * strategyAdv, vss::ExecutionConfig executionConfig );
+	void runSimulator( int argc, char *argv[], vss::ExecutionConfig executionConfig );
 
 	void runPhysics();
 	void runStrategies();

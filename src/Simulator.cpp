@@ -48,9 +48,12 @@ Simulator::Simulator(){
     paused = !StartPositionsHelper::useFile;
 }
 
-void Simulator::runSimulator( int argc, char *argv[], ModelStrategy *stratBlueTeam, ModelStrategy *stratYellowTeam, vss::ExecutionConfig executionConfig ){
+void Simulator::runSimulator( int argc, char *argv[], vss::ExecutionConfig executionConfig ){
     this->qtdOfGoals = qtdOfGoals;
     this->executionConfig = executionConfig;
+
+    Strategy *stratYellowTeam = new Strategy();
+    Strategy *stratBlueTeam = new Strategy();
 
     if(executionConfig.timeExecutionType == vss::TimeExecutionType::Normal) {
         timeStep = 1.f / 60.f;
