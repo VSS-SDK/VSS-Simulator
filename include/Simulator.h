@@ -20,6 +20,7 @@
 #include <Communications/StateSender.h>
 #include <Domain/ExecutionConfig.h>
 #include <Interfaces/IControlReceiverAdapter.h>
+#include <Interfaces/ICommandReceiverAdapter.h>
 #include "Communications/CommandReceiver.h"
 #include "Header.h"
 
@@ -46,6 +47,9 @@ private:
 
 	Arbiter arbiter;
 	IControlReceiverAdapter *controlReceiverAdapter;
+	ICommandReceiverAdapter *commandBlueReceiverAdapter;
+	ICommandReceiverAdapter *commandYellowReceiverAdapter;
+
 	bool paused;
 
 	int qtdOfGoals;

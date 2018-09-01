@@ -13,14 +13,14 @@
 
 class ControlReceiverAdapter : public IControlReceiverAdapter {
 public:
+    ControlReceiverAdapter(vss::ExecutionConfig*, Physics*, bool*);
+
+    void loop() override;
 
     vss::IControlReceiver *controlReceiver;
     vss::ExecutionConfig *executionConfig;
     Physics* physics;
     bool *paused;
-
-    ControlReceiverAdapter(vss::ExecutionConfig*, Physics*, bool*);
-    void loop() override;
 
 protected:
     bool hasACustomAddress();

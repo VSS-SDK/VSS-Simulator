@@ -17,6 +17,7 @@
 #include <Domain/ExecutionConfig.h>
 #include <Helpers/Math.h>
 #include <Communications/ControlReceiverAdapter.h>
+#include <Communications/CommandReceiverAdapter.h>
 #include "../include/Simulator.h"
 #include "functional"
 #include "Interfaces/IControlReceiver.h"
@@ -110,43 +111,13 @@ void Simulator::runReceiveControl(){
 }
 
 void Simulator::runReceiveTeam1(){
-    vss::ICommandReceiver *commandReceiver;
-    commandReceiver = new vss::CommandReceiver();
-    commandReceiver->createSocket(vss::TeamType::Yellow);
-
-    while(!finish_match) {
-        auto command = commandReceiver->receiveCommand();
-
-        if(status_team_1 == -1) {
-            status_team_1 = 0;
-            cout << "---Time amarelo conectado---" << endl;
-        }
-
-        for(unsigned int i = 0; i < command.commands.size() && i < 3; i++) {
-            commands.at( i ) = Command(static_cast<float>(command.commands[i].leftVel + 0.001),
-                                       static_cast<float>(command.commands[i].rightVel + 0.001));
-        }
-    }
+    commandYellowReceiverAdapter = new CommandReceiverAdapter(&executionConfig, &commands, &paused);
+    commandYellowReceiverAdapter->loop(vss::TeamType::Yellow);
 }
 
 void Simulator::runReceiveTeam2(){
-    vss::ICommandReceiver *commandReceiver;
-    commandReceiver = new vss::CommandReceiver();
-    commandReceiver->createSocket(vss::TeamType::Blue);
-
-    while(!finish_match) {
-        auto command = commandReceiver->receiveCommand();
-
-        if(status_team_2 == -1) {
-            status_team_2 = 0;
-            cout << "---Time azul conectado---" << endl;
-        }
-
-        for(unsigned int i = 0; i < command.commands.size() && i < 3; i++) {
-            commands.at( i + 3 ) = Command(static_cast<float>(command.commands[i].leftVel + 0.001),
-                                           static_cast<float>(command.commands[i].rightVel + 0.001));
-        }
-    }
+    commandYellowReceiverAdapter = new CommandReceiverAdapter(&executionConfig, &commands, &paused);
+    commandYellowReceiverAdapter->loop(vss::TeamType::Blue);
 }
 
 void Simulator::runSender(){
