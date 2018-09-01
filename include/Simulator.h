@@ -21,6 +21,7 @@
 #include <Domain/ExecutionConfig.h>
 #include <Interfaces/IControlReceiverAdapter.h>
 #include <Interfaces/ICommandReceiverAdapter.h>
+#include <Interfaces/IStateSenderAdapter.h>
 #include "Communications/CommandReceiver.h"
 #include "Header.h"
 
@@ -46,6 +47,7 @@ class Simulator {
 private:
 
 	Arbiter arbiter;
+	IStateSenderAdapter *stateSenderAdapter;
 	IControlReceiverAdapter *controlReceiverAdapter;
 	ICommandReceiverAdapter *commandBlueReceiverAdapter;
 	ICommandReceiverAdapter *commandYellowReceiverAdapter;
@@ -66,8 +68,6 @@ private:
 	int numRobotsTeam;
 	vector<Command> commands;
 
-	vss::IStateSender *stateSender;
-
 	GameState* gameState;
 	int loopBullet;
 
@@ -86,10 +86,6 @@ private:
 	void calcRelativeWorld( vector<RobotStrategy*> robotStrategiesTeam, int attackDir );
 	RobotStrategy* updateLocalPhysics( int id, RobotPhysics* bdRobot );
 
-	btVector3 getRobotOrientation( RobotPhysics* robot );
-	btVector3 getRobotPosition( RobotPhysics* robot );
-	btVector3 getRobotVelocity( RobotPhysics* robot );
-
 public:
 
 	Simulator();
@@ -101,8 +97,6 @@ public:
 	void runReceiveTeam1();
 	void runReceiveTeam2();
 	void runReceiveControl();
-
-	btVector3 getBallPosition();
 };
 
 #endif

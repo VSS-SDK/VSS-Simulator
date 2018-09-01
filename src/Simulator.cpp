@@ -18,6 +18,7 @@
 #include <Helpers/Math.h>
 #include <Communications/ControlReceiverAdapter.h>
 #include <Communications/CommandReceiverAdapter.h>
+#include <Communications/StateSenderAdapter.h>
 #include "../include/Simulator.h"
 #include "functional"
 #include "Interfaces/IControlReceiver.h"
@@ -45,7 +46,6 @@ Simulator::Simulator(){
     goals_team_2 = 0;
 
     paused = !StartPositionsHelper::useFile;
-    stateSender = new vss::StateSender();
 }
 
 void Simulator::runSimulator( int argc, char *argv[], ModelStrategy *stratBlueTeam, ModelStrategy *stratYellowTeam, vss::ExecutionConfig executionConfig ){
@@ -90,6 +90,8 @@ void Simulator::runSimulator( int argc, char *argv[], ModelStrategy *stratBlueTe
         gameState->robotStrategiesAdv = robotStrategiesTeam;
     }
 
+    stateSenderAdapter = new StateSenderAdapter(&executionConfig, physics);
+
     thread_physics = new thread( bind( &Simulator::runPhysics, this ));
     thread_strategies = new thread( bind( &Simulator::runStrategies, this ));
     thread_receive_team1 = new thread( bind( &Simulator::runReceiveTeam1, this ));
@@ -121,9 +123,6 @@ void Simulator::runReceiveTeam2(){
 }
 
 void Simulator::runSender(){
-    vss::State state;
-    vector<RobotPhysics*> listRobots = physics->getAllRobots();
-
     if(report.total_of_goals_team[0] != goals_team_1) {
         goals_team_1 = report.total_of_goals_team[0];
     }
@@ -132,46 +131,7 @@ void Simulator::runSender(){
         goals_team_2 = report.total_of_goals_team[1];
     }
 
-    state.ball.x = physics->getBallPosition().getX();
-    state.ball.y = physics->getBallPosition().getZ();
-    state.ball.speedX = physics->getBallVelocity().getX();
-    state.ball.speedY = physics->getBallVelocity().getZ();
-
-    for(int i = 0; i < 3; i++) {
-        btVector3 posRobot = getRobotPosition( listRobots.at( i ));
-        btVector3 velRobot = getRobotVelocity( listRobots.at( i ));
-        float rads = atan2( getRobotOrientation( listRobots.at( i )).getZ(), getRobotOrientation( listRobots.at( i )).getX());
-
-        vss::Robot robot;
-
-        robot.x = posRobot.getX();
-        robot.y = posRobot.getZ();
-        robot.angle = Math::radianToDegree(rads);
-        robot.speedX = velRobot.getX();
-        robot.speedY = velRobot.getZ();
-        robot.speedAngle = 0;
-
-        state.teamYellow.push_back(robot);
-    }
-
-    for(int i = 0; i < 3; i++) {
-        btVector3 posRobot = getRobotPosition( listRobots.at( i + 3 ));
-        btVector3 velRobot = getRobotVelocity( listRobots.at( i + 3 ));
-        float rads = atan2( getRobotOrientation( listRobots.at( i + 3 )).getZ(), getRobotOrientation( listRobots.at( i + 3 )).getX());
-
-        vss::Robot robot;
-
-        robot.x = posRobot.getX();
-        robot.y = posRobot.getZ();
-        robot.angle = Math::radianToDegree(rads);
-        robot.speedX = velRobot.getX();
-        robot.speedY = velRobot.getZ();
-        robot.speedAngle = 0;
-
-        state.teamBlue.push_back(robot);
-    }
-
-    stateSender->sendState(state);
+    stateSenderAdapter->send();
 }
 
 void Simulator::runPhysics(){
@@ -181,8 +141,6 @@ void Simulator::runPhysics(){
     arbiter.allocPhysics( physics );
     arbiter.allocReport( &report );
     arbiter.allocPaused( &paused );
-
-    stateSender->createSocket();
 
     while(!finish_match) {
         if(!paused) {
@@ -388,19 +346,4 @@ btVector3 Simulator::calcRelativePosition( btVector3 absPos, int attackDir ){
         relX = simulator::FIELD_WIDTH - absPos.getX();
     }
     return btVector3( relX, 0, relZ );
-}
-
-btVector3 Simulator::getRobotPosition( RobotPhysics* robot ){
-    btTransform transTemp;
-    robot->getRigidBody()->getMotionState()->getWorldTransform( transTemp );
-    return transTemp.getOrigin();
-}
-
-btVector3 Simulator::getRobotOrientation( RobotPhysics* robot ){
-    btVector3 forwardVec = robot->getRaycast()->getForwardVector();
-    return forwardVec;
-}
-
-btVector3 Simulator::getRobotVelocity( RobotPhysics* robot ){
-    return robot->getRigidBody()->getLinearVelocity();
 }
