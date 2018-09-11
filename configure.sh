@@ -36,35 +36,35 @@ CMAKE_INSTALL () {
 INSTALL_UBUNTU_18_04 () {
     apt-get update && apt-get upgrade
     apt-get -y install pkg-config
-    apt-get -y install g++ cmake libzmqpp3 libzmqpp-dev protobuf-compiler libprotobuf-dev libboost-all-dev libbullet-dev
+    apt-get -y install libbullet-dev
     INSTALLED=1
 }
 
 INSTALL_UBUNTU_16_04 () {
     apt-get update && apt-get upgrade
     apt-get -y install pkg-config
-    apt-get -y install g++ cmake libzmqpp3 libzmqpp-dev protobuf-compiler libprotobuf-dev libboost-all-dev libbullet-dev
+    apt-get -y install libbullet-dev
     INSTALLED=1
 }
 
 INSTALL_UBUNTU_14_04 () {
     apt-get update && apt-get upgrade
     apt-get -y install pkg-config
-    apt-get -y install g++ cmake libzmqpp3 libzmqpp-dev protobuf-compiler libprotobuf-dev libboost-all-dev libbullet-dev
+    apt-get -y install libbullet-dev
     INSTALLED=1
 }
 
 INSTALL_MINT_18_2 () {
     apt-get update && apt-get upgrade
     apt-get -y install pkg-config
-    apt-get -y install g++ cmake libzmqpp3 libzmqpp-dev protobuf-compiler libprotobuf-dev libboost-all-dev libbullet-dev
+    apt-get -y install libbullet-dev
     INSTALLED=1
 }
 
 INSTALL_DEBIAN_9 () {
     apt-get update && apt-get upgrade
     apt-get -y install pkgconf
-    apt-get -y install g++ cmake libzmq5 libzmq3-dev protobuf-compiler libprotobuf-dev libboost-all-dev libbullet-dev
+    apt-get -y install libbullet-dev
     INSTALLED=1
 }
 
