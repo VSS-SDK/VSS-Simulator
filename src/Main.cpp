@@ -22,13 +22,10 @@ vss::ExecutionConfig loadExecutionConfig(int argc, char** argv){
     auto stdinInterpreterBuilder = new vss::StdinInterpreterBuilder();
 
     stdinInterpreterBuilder
-            ->onStateSendAddr()
             ->onStatePort()
             ->onCtrlRecvAddr()
             ->onCtrlPort()
-            ->onYellowCmdRecvAddr()
             ->onYellowCmdPort()
-            ->onBlueCmdRecvAddr()
             ->onBlueCmdPort()
             ->onTimeExecutionType()
             ->onMatchFinishType()
